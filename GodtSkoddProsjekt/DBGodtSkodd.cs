@@ -15,7 +15,7 @@ namespace GodtSkoddProsjekt
 
             }
         }
-
+//------------------------------------------- USERS ------------------------------------------
         public bool createUser(User user)
         {
             // Adding a new row in the database table Users for this User:
@@ -58,8 +58,10 @@ namespace GodtSkoddProsjekt
                 return false;
             }
         }
+
         private static byte[] createHash(string inPassword)
         {
+            //Hash function to hash a password and return the hash
             byte[] input, output;
             var algorythm = System.Security.Cryptography.SHA256.Create();
             input = System.Text.Encoding.ASCII.GetBytes(inPassword);
@@ -68,6 +70,7 @@ namespace GodtSkoddProsjekt
         }
         private static bool userInDB(User inputUser)
         {
+            //Function for checking if its the correct input for logging in (?)
             using (var db = new DBContext())
             {
                 byte[] passordDB = createHash(inputUser.password);
@@ -82,6 +85,60 @@ namespace GodtSkoddProsjekt
                     return true;
                 }
             }
+        }
+
+        public bool editUser(User user)
+        {
+            //code to edit user
+            return false;
+        }
+    
+        public bool deleteUser(User user) //or id?
+        {
+            //Code to delete user
+            return false;
+        }
+        
+//------------------------------------------ PRODUCTS ---------------------------------
+        
+        public bool createProduct(Product product)
+        {
+            // Adding a new row in the database table Product for this Product:
+            var newProduct = new Products()
+            {
+                Name = product.name,
+                Price = product.price,
+                Size = product.size,
+                Color = product.color,
+                Material = product.material,
+                Brand = product.brand
+            };
+
+            var db = new DBContext();
+
+            try
+            {
+                // Adding the new Product-row in the database:
+                db.Products.Add(newProduct);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool editProduct(Product product)
+        {
+            //code to edit user
+            return false;
+        }
+
+        public bool deleteProduct(Product product) //or id?
+        {
+            //Code to delete user
+            return false;
         }
     }
 }

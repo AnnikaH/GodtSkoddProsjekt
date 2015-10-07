@@ -35,13 +35,18 @@ namespace GodtSkoddProsjekt.Controllers
             try
             {
                 // TODO: Add insert logic here
-
+                //create user from form
+                //createUser(NewUser) (from DBGodtSkodd)
+                var DBGodtSkodd = new DBGodtSkodd();
+                //create new user from data
+                User test = new User();
+                DBGodtSkodd.createUser(test); //This returns a boolean value?
                 return RedirectToAction("Index");
             }
             catch
             {
                 return View();
-            }
+            }     
         }
 
         // GET: User/Edit/5
