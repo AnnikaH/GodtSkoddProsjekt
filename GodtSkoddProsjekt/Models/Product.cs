@@ -14,5 +14,8 @@ namespace GodtSkoddProsjekt.Models
         public String color { get; set; }
         public String material { get; set; }
         public String brand { get; set; }
+        public String url { get; set; }
+        public String gender { get; set; }  // Women, Men, Boys, Girls
+        public String type { get; set; }    // Boots, DressShoes, Sandals, Sneakers, WinterShoes
     }
 }

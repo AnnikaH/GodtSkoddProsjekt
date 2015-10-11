@@ -28,6 +28,9 @@ namespace GodtSkoddProsjekt.Models
         public String Color { get; set; }
         public String Material { get; set; }
         public String Brand { get; set; }
+        public String Url { get; set; }
+        public String Gender { get; set; }  // Women, Men, Boys, Girls
+        public String Type { get; set; }    // Boots, DressShoes, Sandals, Sneakers, WinterShoes
 
         public virtual List<Orderlines> Orderlines { get; set; }
     }

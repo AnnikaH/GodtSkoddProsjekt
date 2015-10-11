@@ -111,7 +111,9 @@ namespace GodtSkoddProsjekt
                 Size = product.size,
                 Color = product.color,
                 Material = product.material,
-                Brand = product.brand
+                Brand = product.brand,
+                Url = product.url,
+                Gender = product.gender // Women, Men, Girls, Boys
             };
 
             var db = new DBContext();
