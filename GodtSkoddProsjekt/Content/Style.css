@@ -21,11 +21,24 @@ footer
 
 /*______________ CSS for User/Create.cshtml page______________*/
 
-.col-md-4
+h2.registrer
 {
+
+	text-align: center;
+	font-size: 1em;
+}
+
+.btn-default
+{
+    float:right;
+    margin-right:15px;
    
 }
 
+.col-md-2
+{
+  
+}
 .previousStep
 {
     background-color:#A9A5A5;
@@ -34,6 +47,7 @@ footer
 .currentStep
 {
     background-color:#550452;
+    color:#FFFFFF;
 }
 
 .nextStep
