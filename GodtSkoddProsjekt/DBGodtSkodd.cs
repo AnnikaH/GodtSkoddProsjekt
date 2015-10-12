@@ -16,7 +16,7 @@ namespace GodtSkoddProsjekt
             }
         }
 //------------------------------------------- USERS ------------------------------------------
-        public bool createUser(User user)
+        public bool CreateUser(User user)
         {
             // Adding a new row in the database table Users for this User:
             var newUser = new Users()
@@ -28,7 +28,7 @@ namespace GodtSkoddProsjekt
                 PhoneNumber = user.phoneNumber,
                 PostalCode = user.postalCode,
                 UserName = user.userName,
-                Password = createHash(user.password)
+                Password = CreateHash(user.password)
             };
 
             var db = new DBContext();
@@ -59,7 +59,7 @@ namespace GodtSkoddProsjekt
             }
         }
 
-        private static byte[] createHash(string inPassword)
+        private static byte[] CreateHash(string inPassword)
         {
             //Hash function to hash a password and return the hash
             byte[] input, output;
@@ -68,12 +68,12 @@ namespace GodtSkoddProsjekt
             output = algorythm.ComputeHash(input);
             return output;
         }
-        private static bool userInDb(LoginUser inputUser)
+        private static bool UserInDb(LoginUser inputUser)
         {
             //Function for checking if its the correct input for logging in (?)
             using (var db = new DBContext())
             {
-                byte[] passwordDB = createHash(inputUser.password);
+                byte[] passwordDB = CreateHash(inputUser.password);
                 Users foundUser = db.Users.FirstOrDefault(
                     b => b.Password == passwordDB && b.UserName == inputUser.userName);
                 if (foundUser == null)
@@ -87,7 +87,7 @@ namespace GodtSkoddProsjekt
             }
         }
 
-        public bool editUser(User inputUser)
+        public bool EditUser(User inputUser)
         {
             //code to edit user
             //Function for checking if its the correct input for logging in (?)
@@ -114,7 +114,7 @@ namespace GodtSkoddProsjekt
             }
         }
     
-        public bool deleteUser(User inputUser) //or id?
+        public bool DeleteUser(User inputUser) //or id?
         {
             using (var db = new DBContext())
             {
@@ -142,7 +142,7 @@ namespace GodtSkoddProsjekt
         
 //------------------------------------------ PRODUCTS ---------------------------------
         
-        public bool createProduct(Product product)
+        public bool CreateProduct(Product product)
         {
             // Adding a new row in the database table Product for this Product:
             var newProduct = new Products()
@@ -173,19 +173,19 @@ namespace GodtSkoddProsjekt
             }
         }
 
-        public bool editProduct(Product product)
+        public bool EditProduct(Product product)
         {
             //code to edit Product
             return false;
         }
 
-        public bool deleteProduct(Product product) //or id?
+        public bool DeleteProduct(Product product) //or id?
         {
             //Code to delete PRoduct
             return false;
         }
 
-        public List<Product> listAllProducts()
+        public List<Product> ListAllProducts()
         {
             using (var db = new DBContext())
             {
@@ -216,7 +216,7 @@ namespace GodtSkoddProsjekt
             }
         }
 
-        public List<Product> listProductsOfType(String type)
+        public List<Product> ListProductsOfType(String type)
         {
             using (var db = new DBContext())
             {
