@@ -7,6 +7,7 @@
 .col-sm-9
 {
     width:90%;
+    height:100%;
     margin-left:5%;
     margin-right:5%;
     background-color:#FFFFFF;
@@ -18,7 +19,36 @@ footer
     margin-left:5%;
 }
 
+/*_________________ CSS for showing products__________________*/
 
+.caption{
+      
+    background-color:#550452;
+   
+   
+}
+
+
+.thumbnail{
+    padding:0px;
+    margin-top:50px;
+}
+
+.productDescription
+{
+    color:#FFFFFF;
+}
+
+.productName
+{
+    color:#FFFFFF;   
+}
+
+.productPrice
+{
+    color:#FFFFFF;
+    font-weight:bold;
+}
 /*______________ CSS for User/Create.cshtml page______________*/
 
 h2.registrer
@@ -32,6 +62,7 @@ h2.registrer
 .btn-default
 {
     float:right;
+
   
    
 }
