@@ -98,17 +98,67 @@ namespace GodtSkoddProsjekt.Controllers
         public bool CreateProductBackend(Product product)
         {
             var dbGodtSkodd = new DBGodtSkodd();
-            return dbGodtSkodd.CreateProduct(product);
+            return true;
         }
+
+
+        int produktTeller = 0;
+        String[] name = new String[103];
+        double[] price = new double[103];
+        int[] size = new int[103];
+        String[] Color = new String[103];
+        String[] Material = new String[103];
+        String[] Brand = new String[103];
+        String[] URL = new String[103];
+        String[] Gender = new String[103];
+        String[] TYPE = new String[103];
+        public static int teller = 0;
 
         public void CreateAllProducts()
         {
-            //String[] brandsarray = { "", "", ""; "", "", "" };
+            teller = 0;
+            InsertNewProduct("test", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
+            InsertNewProduct("test2", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
+            InsertNewProduct("test3", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
+            InsertNewProduct("test4", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
+            InsertNewProduct("test5", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
+            InsertNewProduct("test6", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
+            InsertNewProduct("test7", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
+            InsertNewProduct("test8", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
 
+            LagOgSettInn();
+        }
 
-            //string[][] products = new String[9][]();
+        public void InsertNewProduct(String N, double P, int S, String C, String M, String B, String U, String G, String T, int i)
+        {
+            name[i] = N;
+            price[i] = P;
+            size[i] = S;
+            Color[i] = C;
+            Material[i] = M;
+            Brand[i] = B;
+            URL[i] = U;
+            Gender[i] = G;
+        }
 
+        public void LagOgSettInn()
+        {
 
+            DBGodtSkodd db = new DBGodtSkodd();
+            for (int i = 0; i < teller; i++)
+            {
+                Product temp = new Product();
+                temp.name = name[i];
+                temp.price = price[i];
+                temp.size = size[i];
+                temp.color = Color[i];
+                temp.material = Material[i];
+                temp.brand = Brand[i];
+                temp.url = URL[i];
+                temp.gender = Gender[i];
+                temp.type = TYPE[i];
+                db.CreateProduct(temp);
+            }
         }
     }
 }
