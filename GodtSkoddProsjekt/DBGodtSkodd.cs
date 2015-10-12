@@ -258,7 +258,7 @@ namespace GodtSkoddProsjekt
                     var temp = db.Products.ToList();
                     List<Product> output = new List<Product>();
 
-                    for(int i = 0; i < 5; i++)
+                    for(int i = 0; i < 3; i++)
                     {
                         var oneProduct = new Product();
 
