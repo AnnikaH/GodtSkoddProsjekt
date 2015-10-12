@@ -17,3 +17,26 @@ footer
 {
     margin-left:5%;
 }
+
+
+/*______________ CSS for User/Create.cshtml page______________*/
+
+.col-md-4
+{
+   
+}
+
+.previousStep
+{
+    background-color:#A9A5A5;
+}
+
+.currentStep
+{
+    background-color:#550452;
+}
+
+.nextStep
+{
+    background-color:#E7E7E7;
+}
