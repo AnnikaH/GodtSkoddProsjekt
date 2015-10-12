@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GodtSkoddProsjekt.Models;
+
+// Use this for adding products (shoes) among other things?
 
 namespace GodtSkoddProsjekt.Controllers
 {
     public class AdminController : Controller
     {
-        // Use this to add products (shoes) to the database?
-
         // GET: Admin
         public ActionResult Index()
         {
@@ -30,62 +31,84 @@ namespace GodtSkoddProsjekt.Controllers
 
         // POST: Admin/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Product product)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                var dbGodtSkodd = new DBGodtSkodd();
+                bool insertOK = dbGodtSkodd.CreateProduct(product);
 
-                return RedirectToAction("Index");
+                if (insertOK)
+                    return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View();
         }
 
         // GET: Admin/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var dbGodtSkodd = new DBGodtSkodd();
+            Product product = dbGodtSkodd.GetProduct(id);
+            return View(product);
         }
 
         // POST: Admin/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Product product)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                var dbGodtSkodd = new DBGodtSkodd();
+                bool changeOK = dbGodtSkodd.EditProduct(id, product);
 
-                return RedirectToAction("Index");
+                if (changeOK)
+                    return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View();
         }
 
         // GET: Admin/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var dbGodtSkodd = new DBGodtSkodd();
+            Product product = dbGodtSkodd.GetProduct(id);
+            return View(product);
         }
 
         // POST: Admin/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, Product product)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var dbGodtSkodd = new DBGodtSkodd();
+            bool deleteOK = dbGodtSkodd.DeleteProduct(id);
 
+            if (deleteOK)
                 return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+
+            return View();
+        }
+
+        // CREATE PRODUCTS BACKEND:
+
+        public bool CreateProductBackend(Product product)
+        {
+            var dbGodtSkodd = new DBGodtSkodd();
+            return dbGodtSkodd.CreateProduct(product);
+        }
+
+        public void CreateAllProducts()
+        {
+            //String[] brandsarray = { "", "", ""; "", "", "" };
+
+
+            //string[][] products = new String[9][]();
+
+
         }
     }
 }

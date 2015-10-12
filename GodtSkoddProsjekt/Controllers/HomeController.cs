@@ -64,7 +64,9 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: Home/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var dbGodtSkodd = new DBGodtSkodd();
+            Product product = dbGodtSkodd.GetProduct(id);
+            return View(product);
         }
     }
 }
