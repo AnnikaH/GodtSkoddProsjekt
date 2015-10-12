@@ -26,31 +26,31 @@ h2.registrer
 
 	text-align: center;
 	font-size: 1em;
+    font-weight:bold;
 }
 
 .btn-default
 {
     float:right;
-    margin-right:15px;
+  
    
 }
 
-.col-md-2
+.col-md-6
 {
-  
-}
-.previousStep
-{
-    background-color:#A9A5A5;
+  margin-top:50px;
+  padding-bottom:15px;
 }
 
 .currentStep
 {
     background-color:#550452;
     color:#FFFFFF;
+     padding-top:15px;
 }
 
 .nextStep
 {
     background-color:#E7E7E7;
+      padding-top:15px;
 }
