@@ -88,7 +88,7 @@ namespace GodtSkoddProsjekt.Controllers
             bool deleteOK = dbGodtSkodd.DeleteUser(id, user);
 
             if (deleteOK)
-                return RedirectToAction("Liste");
+                return RedirectToAction("Index");
 
             return View();
         }
