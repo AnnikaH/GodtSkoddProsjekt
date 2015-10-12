@@ -1,0 +1,96 @@
+﻿@model GodtSkoddProsjekt.Models.User
+
+<!DOCTYPE html>
+
+<!-- MY ACCOUNT -->
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h4>User</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.firstName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.firstName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.lastName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.lastName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.address)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.address)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.email)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.email)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.phoneNumber)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.phoneNumber)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.postalCode)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.postalCode)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.city)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.city)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.userName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.userName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.password)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.password)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

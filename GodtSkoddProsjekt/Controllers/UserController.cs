@@ -32,7 +32,7 @@ namespace GodtSkoddProsjekt.Controllers
         // POST: User/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(User user)   // istedenfor User: FormCollection collection ?
+        public ActionResult Create(User user)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +56,7 @@ namespace GodtSkoddProsjekt.Controllers
 
         // POST: User/Edit/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, User user)
         {
             if (ModelState.IsValid)
@@ -73,23 +74,23 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: User/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var dbGodtSkodd = new DBGodtSkodd();
+            User user = dbGodtSkodd.GetUser(id);
+            return View(user);
         }
 
         // POST: User/Delete/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, User user)   // istedenfor User: FormCollection collection ?
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var dbGodtSkodd = new DBGodtSkodd();
+            bool deleteOK = dbGodtSkodd.DeleteUser(id, user);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            if (deleteOK)
+                return RedirectToAction("Liste");
+
+            return View();
         }
     }
 }
