@@ -68,7 +68,7 @@ namespace GodtSkoddProsjekt
             output = algorythm.ComputeHash(input);
             return output;
         }
-        private static bool userInDB(User inputUser)
+        private static bool userInDB(LoginUser inputUser)
         {
             //Function for checking if its the correct input for logging in (?)
             using (var db = new DBContext())
@@ -93,7 +93,24 @@ namespace GodtSkoddProsjekt
             //Function for checking if its the correct input for logging in (?)
             using (var db = new DBContext())
             {
-
+                Users foundUser = db.Users.FirstOrDefault(b => b.UserName == inputUser.userName);
+                if (foundUser != null)
+                {
+                    try
+                    {
+                        //edit user
+                        db.SaveChanges();
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
             }
             return false;
         }
@@ -105,8 +122,16 @@ namespace GodtSkoddProsjekt
                 Users foundUser = db.Users.FirstOrDefault(b => b.UserName == inputUser.userName);
                 if (foundUser != null)
                 {
-                    db.Users.Remove(foundUser);
-                    return true;
+                    try
+                    {
+                        db.Users.Remove(foundUser);
+                        db.SaveChanges();
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
@@ -159,6 +184,31 @@ namespace GodtSkoddProsjekt
         {
             //Code to delete user
             return false;
+        }
+
+        public List<Products> listAllProducts()
+        {
+            using (var db = new DBContext())
+            {
+                
+                    try
+                    {
+                        var output = db.Products.ToList();
+                        return output;
+                    }
+                    catch (Exception)
+                    {
+                        var output = new List<Products>();
+                        return output;
+                    }
+                
+            }
+        }
+
+        public List<Product> listProductsOfType(String type)
+        {
+            var output = new List<Product>();
+            return output;
         }
     }
 }
