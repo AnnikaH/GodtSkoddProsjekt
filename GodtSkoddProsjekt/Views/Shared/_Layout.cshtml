@@ -12,6 +12,9 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
     <script src="~/Scripts/bootstrap.js"></script>
+
+    <!--- Our stylesheet-->
+    <link href="~/Content/Style.css" rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -23,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand">@Html.ActionLink("Godt Skodd", "Index", "Home") 
+                @Html.ActionLink("Godt Skodd", "Index","Home", new { @class = "navbar-brand"}) 
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -43,7 +46,7 @@
                                     <input type="password" class="form-control" id="logginnpassord" placeholder="Passord">
                                 </div><!-- /.form-group-->
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-default">Logg Inn</button> <a href="#"> Registrer deg</a>
+                                    <button type="submit" class="btn btn-default">Logg Inn</button>@Html.ActionLink("Registrer deg", "Create", "User")
                                 </div>
                             </form>
                         </div>
