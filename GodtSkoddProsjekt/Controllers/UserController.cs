@@ -18,7 +18,9 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var dbGodtSkodd = new DBGodtSkodd();
+            User user = dbGodtSkodd.GetUser(id);
+            return View(user);
         }
 
         // GET: User/Create
@@ -32,10 +34,14 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(User user)   // istedenfor User: FormCollection collection ?
         {
-            var dbGodtSkodd = new DBGodtSkodd();
+            if (ModelState.IsValid)
+            {
+                var dbGodtSkodd = new DBGodtSkodd();
+                bool insertOK = dbGodtSkodd.CreateUser(user);
 
-            if(dbGodtSkodd.CreateUser(user))
-                return RedirectToAction("Index");
+                if (insertOK)
+                    return RedirectToAction("Index");
+            }
 
             return View();
         }
@@ -43,23 +49,25 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: User/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var dbGodtSkodd = new DBGodtSkodd();
+            User user = dbGodtSkodd.GetUser(id);
+            return View(user);
         }
 
         // POST: User/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, User user)     // istedenfor User: FormCollection collection ?
+        public ActionResult Edit(int id, User user)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                var dbGodtSkodd = new DBGodtSkodd();
+                bool changeOK = dbGodtSkodd.EditUser(id, user);
 
-                return RedirectToAction("Index");
+                if (changeOK)
+                    return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View();
         }
 
         // GET: User/Delete/5
