@@ -117,14 +117,9 @@ namespace GodtSkoddProsjekt.Controllers
         public void CreateAllProducts()
         {
             teller = 0;
-            InsertNewProduct("test", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
-            InsertNewProduct("test2", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
-            InsertNewProduct("test3", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
-            InsertNewProduct("test4", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
-            InsertNewProduct("test5", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
-            InsertNewProduct("test6", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
-            InsertNewProduct("test7", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
-            InsertNewProduct("test8", 1.0, 1, "test", "test", "test", "test", "test", "test", teller++);
+            InsertNewProduct("Woman Rain Boots", 79, 9001, "Black", "Rubber", "OwnShoe", "~/Content/Images/Women/Boots/1.jpg", "Women", "Boots", teller++);
+            InsertNewProduct("Ownshoe Women Rubber Polka Dots Mid Calf Wellies Color Dots Rainboots", 50, 9002, "Black/White", "Rubber", "OwnShoe", "~/Content/Images/Women/Boots/2.jpg", "Women", "Boots", teller++);
+            InsertNewProduct("Salvatore Ferragamo Black rubber gancio clasp rain boots", 360, 9003, "Black", "Rubber", "Salvatore Ferragamo", "~/Content/Images/Women/Boots/3.jpg", "Women", "Boots", teller++);
 
             LagOgSettInn();
         }
@@ -139,6 +134,7 @@ namespace GodtSkoddProsjekt.Controllers
             Brand[i] = B;
             URL[i] = U;
             Gender[i] = G;
+            TYPE[i] = T;
         }
 
         public void LagOgSettInn()
