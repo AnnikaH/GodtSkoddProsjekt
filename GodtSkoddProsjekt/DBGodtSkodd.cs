@@ -176,39 +176,81 @@ namespace GodtSkoddProsjekt
 
         public bool editProduct(Product product)
         {
-            //code to edit user
+            //code to edit Product
             return false;
         }
 
         public bool deleteProduct(Product product) //or id?
         {
-            //Code to delete user
+            //Code to delete PRoduct
             return false;
         }
 
-        public List<Products> listAllProducts()
+        public List<Product> listAllProducts()
         {
             using (var db = new DBContext())
             {
-                
-                    try
+                try
+                {
+                    var temp = db.Products.ToList();
+                    List<Product> output = new List<Product>();
+                    foreach (var product in temp)
                     {
-                        var output = db.Products.ToList();
-                        return output;
+                        var oneProduct = new Product();
+                        product.Name = oneProduct.name;
+                        product.Price = oneProduct.price;
+                        product.Color = oneProduct.color;
+                        product.Material = oneProduct.material;
+                        product.Brand = oneProduct.brand;
+                        product.Url = oneProduct.url;
+                        product.Gender = oneProduct.gender;
+                        product.Type = oneProduct.type;
+                        output.Add(oneProduct);
                     }
-                    catch (Exception)
-                    {
-                        var output = new List<Products>();
-                        return output;
-                    }
-                
+                    return output;
+                }
+                catch (Exception)
+                {
+                    var output = new List<Product>();
+                    return output;
+                }
             }
         }
 
         public List<Product> listProductsOfType(String type)
         {
-            var output = new List<Product>();
-            return output;
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    var temp = db.Products.ToList();
+                    List<Product> output = new List<Product>();
+                    foreach (var product in temp)
+                    {
+                        if(product.Type == type)
+                        {
+                            var oneProduct = new Product();
+                            product.Name = oneProduct.name;
+                            product.Price = oneProduct.price;
+                            product.Color = oneProduct.color;
+                            product.Material = oneProduct.material;
+                            product.Brand = oneProduct.brand;
+                            product.Url = oneProduct.url;
+                            product.Gender = oneProduct.gender;
+                            product.Type = oneProduct.type;
+                            output.Add(oneProduct);
+                        }
+                    }
+                    return output;
+                }
+                catch (Exception)
+                {
+                    var output = new List<Product>();
+                    return output;
+                }
+
+            }
+
         }
     }
 }
