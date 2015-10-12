@@ -32,21 +32,12 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(User user)   // istedenfor User: FormCollection collection ?
         {
-            try
-            {
-                // TODO: Add insert logic here
-                //create user from form
-                //createUser(NewUser) (from DBGodtSkodd)
-                var DBGodtSkodd = new DBGodtSkodd();
-                //create new user from data
-                User test = new User();
-                DBGodtSkodd.CreateUser(test); //This returns a boolean value?
+            var dbGodtSkodd = new DBGodtSkodd();
+
+            if(dbGodtSkodd.CreateUser(user))
                 return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }     
+
+            return View();
         }
 
         // GET: User/Edit/5
