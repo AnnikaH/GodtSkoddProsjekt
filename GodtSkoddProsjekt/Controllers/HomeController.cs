@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GodtSkoddProsjekt.Models;
 
 namespace GodtSkoddProsjekt.Controllers
 {
@@ -16,6 +17,19 @@ namespace GodtSkoddProsjekt.Controllers
             // dbGodtSkodd.test();
             // tester til hit
 
+            // Checking login:
+            if (Session["LoggedIn"] == null)
+            {
+                // da definerer vi den og setter den til false
+                Session["LoggedIn"] = false;
+                ViewBag.LoggedIn = false; // oppdaterer denne også!
+            }
+            else
+            {
+                // vil så hente ut statusen til session'en og legge denne over i ViewBag'en:
+                ViewBag.LoggedIn = (bool) Session["LoggedIn"]; // HUSK: DEN MÅ CASTES
+            }
+
             return View();
         }
 
@@ -23,7 +37,7 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogIn(LoginUser user)
         {
-            // checking log in
+            // checking login
 
             var dbGodtSkodd = new DBGodtSkodd();
 
@@ -31,14 +45,14 @@ namespace GodtSkoddProsjekt.Controllers
             {
                 // yes username and password is OK
                 Session["LoggedIn"] = true;
-                ViewBag.Innlogget = true;
+                ViewBag.LoggedIn = true;
                 // return RedirectToAction("Index");
             }
             else
             {
                 // no
                 Session["LoggedIn"] = false;
-                ViewBag.Innlogget = false;
+                ViewBag.LoggedIn = false;
                 // return RedirectToAction("Index");
             }
 

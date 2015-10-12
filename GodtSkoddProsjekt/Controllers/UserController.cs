@@ -40,7 +40,7 @@ namespace GodtSkoddProsjekt.Controllers
                 var DBGodtSkodd = new DBGodtSkodd();
                 //create new user from data
                 User test = new User();
-                DBGodtSkodd.createUser(test); //This returns a boolean value?
+                DBGodtSkodd.CreateUser(test); //This returns a boolean value?
                 return RedirectToAction("Index");
             }
             catch
