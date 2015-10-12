@@ -16,7 +16,6 @@
 
             <div class="form-horizontal">
 
-                <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                 <div class="col-md-6 currentStep">
@@ -37,9 +36,7 @@
                         </div>
                     </div>
                 
-                <div class="form-group">
-                <button type="submit" class="btn btn-default">Neste trinn</button>
-            </div>
+           
 
                     <h2 class="registrer">Personinfo</h2>
                     <div class="form-group">
@@ -102,19 +99,19 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Create" class="btn btn-default" />
+                            <input type="submit" value="Registrer" class="btn btn-default" />
                         </div>
                     </div>
                 </div>
 
-            </div><!--- /.col-md-2, step two -->
+            </div><!--- /.col-md-6, step two -->
         }
 
         <div class="col-sm-6 nextStep">
         <h2 class="registrer">Registrer ny bruker <br /> Trinn 2: Bekreftelse</h2>
 
             Her kommer bekreftelse
-        </div>
+        </div><!-- /. col-sm-6 step 2-->
         </div><!--- /.col-sm-9  aka wrapper-->
         <!--
         <div>
