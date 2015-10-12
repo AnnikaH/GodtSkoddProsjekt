@@ -70,7 +70,7 @@ namespace GodtSkoddProsjekt
         }
         public bool UserInDb(LoginUser inputUser)
         {
-            //Function for checking if its the correct input for logging in (?)
+            //Function for checking if its the correct input for logging in
             using (var db = new DBContext())
             {
                 byte[] passwordDB = CreateHash(inputUser.password);
@@ -132,7 +132,7 @@ namespace GodtSkoddProsjekt
             }
         }
     
-        public bool DeleteUser(User inputUser) //or id?
+        public bool DeleteUser(int id, User inputUser)
         {
             using (var db = new DBContext())
             {
@@ -215,10 +215,29 @@ namespace GodtSkoddProsjekt
             }
         }
 
-        public bool EditProduct(Product product)
+        public bool EditProduct(int id, Product inputProduct)
         {
-            //code to edit Product
-            return false;
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    Products editProduct = db.Products.Find(id);
+                    editProduct.Name = inputProduct.name;
+                    editProduct.Price = inputProduct.price;
+                    editProduct.Material = inputProduct.material;
+                    editProduct.Brand = inputProduct.brand;
+                    editProduct.Gender = inputProduct.gender;
+                    editProduct.Size = inputProduct.size;
+                    editProduct.Type = inputProduct.type;
+                    editProduct.Url = inputProduct.url;
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
         }
 
         public bool DeleteProduct(Product product) //or id?
