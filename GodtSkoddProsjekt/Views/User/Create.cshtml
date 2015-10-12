@@ -19,7 +19,7 @@
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <div class="col-md-4 currentStep">
+                <div class="col-md-6 currentStep">
                     <h2 class="registrer">Registrer ny bruker <br>Trinn 1</h2>
                     <div class="form-group">
                         @Html.LabelFor(model => model.userName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -41,10 +41,7 @@
                 <button type="submit" class="btn btn-default">Neste trinn</button>
             </div>
 
-                </div> <!-- /.col-md-4, step one.-->
-
-                <div class="col-md-4 nextStep">
-                    <h2 class="registrer">Registrer ny bruker <br /> Trinn 2</h2>
+                    <h2 class="registrer">Personinfo</h2>
                     <div class="form-group">
                         @Html.LabelFor(model => model.firstName, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
@@ -113,8 +110,8 @@
             </div><!--- /.col-md-2, step two -->
         }
 
-        <div class="col-sm-4 nextStep">
-        <h2 class="registrer">Registrer ny bruker <br /> Trinn 3: Bekreftelse</h2>
+        <div class="col-sm-6 nextStep">
+        <h2 class="registrer">Registrer ny bruker <br /> Trinn 2: Bekreftelse</h2>
 
             Her kommer bekreftelse
         </div>
