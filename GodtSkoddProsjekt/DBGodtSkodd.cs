@@ -134,28 +134,19 @@ namespace GodtSkoddProsjekt
     
         public bool DeleteUser(int id, User inputUser)
         {
-            using (var db = new DBContext())
+            var db = new DBContext();
+            try
             {
-                Users foundUser = db.Users.FirstOrDefault(b => b.UserName == inputUser.userName);
-                if (foundUser != null)
-                {
-                    try
-                    {
-                        db.Users.Remove(foundUser);
-                        db.SaveChanges();
-                        return true;
-                    }
-                    catch (Exception)
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
+                Users delUser = db.Users.Find(id);
+                db.Users.Remove(delUser);
+                db.SaveChanges();
+                return true;
             }
-           
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
         public User GetUser(int id)
         {
@@ -240,10 +231,20 @@ namespace GodtSkoddProsjekt
             }
         }
 
-        public bool DeleteProduct(Product product) //or id?
+        public bool DeleteProduct(int id) 
         {
-            //Code to delete PRoduct
-            return false;
+            var db = new DBContext();
+            try
+            {
+                Products delProduct = db.Products.Find(id);
+                db.Products.Remove(delProduct);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public List<Product> ListAllProducts()
@@ -311,6 +312,35 @@ namespace GodtSkoddProsjekt
 
             }
 
+        }
+        public Product GetProduct(int id)
+        {
+            var db = new DBContext();
+
+            var oneProducts = db.Products.Find(id);
+
+            if (oneProducts == null)
+            {
+                return null;
+            }
+            else
+            {
+                var output = new Product()
+                {
+                    id = oneProducts.ID,
+                    name = oneProducts.Name,
+                    price = oneProducts.Price,
+                    material = oneProducts.Material,
+                    brand = oneProducts.Brand,
+                    type = oneProducts.Type,
+                    gender = oneProducts.Gender,
+                    size = oneProducts.Size,
+                    color = oneProducts.Color,
+                    url = oneProducts.Url
+
+                };
+                return output;
+            }
         }
     }
 }
