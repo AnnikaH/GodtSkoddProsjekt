@@ -73,9 +73,9 @@ namespace GodtSkoddProsjekt
             //Function for checking if its the correct input for logging in (?)
             using (var db = new DBContext())
             {
-                byte[] passordDB = createHash(inputUser.password);
+                byte[] passwordDB = createHash(inputUser.password);
                 Users foundUser = db.Users.FirstOrDefault(
-                    b => b.Password == passordDB && b.UserName == inputUser.userName);
+                    b => b.Password == passwordDB && b.UserName == inputUser.userName);
                 if (foundUser == null)
                 {
                     return false;
@@ -87,16 +87,33 @@ namespace GodtSkoddProsjekt
             }
         }
 
-        public bool editUser(User user)
+        public bool editUser(User inputUser)
         {
             //code to edit user
+            //Function for checking if its the correct input for logging in (?)
+            using (var db = new DBContext())
+            {
+
+            }
             return false;
         }
     
-        public bool deleteUser(User user) //or id?
+        public bool deleteUser(User inputUser) //or id?
         {
-            //Code to delete user
-            return false;
+            using (var db = new DBContext())
+            {
+                Users foundUser = db.Users.FirstOrDefault(b => b.UserName == inputUser.userName);
+                if (foundUser != null)
+                {
+                    db.Users.Remove(foundUser);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+           
         }
         
 //------------------------------------------ PRODUCTS ---------------------------------
