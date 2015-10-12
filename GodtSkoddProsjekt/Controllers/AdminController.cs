@@ -117,9 +117,9 @@ namespace GodtSkoddProsjekt.Controllers
         public void CreateAllProducts()
         {
             teller = 0;
-            InsertNewProduct("Woman Rain Boots", 79, 9001, "Black", "Rubber", "OwnShoe", "~/Content/Images/Women/Boots/1.jpg", "Women", "Boots", teller++);
-            InsertNewProduct("Ownshoe Women Rubber Polka Dots Mid Calf Wellies Color Dots Rainboots", 50, 9002, "Black/White", "Rubber", "OwnShoe", "~/Content/Images/Women/Boots/2.jpg", "Women", "Boots", teller++);
-            InsertNewProduct("Salvatore Ferragamo Black rubber gancio clasp rain boots", 360, 9003, "Black", "Rubber", "Salvatore Ferragamo", "~/Content/Images/Women/Boots/3.jpg", "Women", "Boots", teller++);
+            InsertNewProduct("Woman Rain Boots", 79, 9001, "Black", "Rubber", "OwnShoe", "/Content/Images/Women/Boots/1.jpg", "Women", "Boots", teller++);
+            InsertNewProduct("Ownshoe Women Rubber Polka Dots Mid Calf Wellies Color Dots Rainboots", 50, 9002, "Black/White", "Rubber", "OwnShoe", "/Content/Images/Women/Boots/2.jpg", "Women", "Boots", teller++);
+            InsertNewProduct("Salvatore Ferragamo Black rubber gancio clasp rain boots", 360, 9003, "Black", "Rubber", "Salvatore Ferragamo", "/Content/Images/Women/Boots/3.jpg", "Women", "Boots", teller++);
 
             LagOgSettInn();
         }

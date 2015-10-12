@@ -30,9 +30,11 @@
                 </div>-->
 
                 <div class="thumbnail">
-                    <img src=@Html.DisplayFor(modelItem => item.url) />
+                    <img src="@Html.DisplayFor(modelItem => item.url)"/>
                     <div class="caption">
-                        <h3 class="productName">@Html.DisplayFor(modelItem => item.name)</h3>
+                        <h3 class="productName">
+                            @Html.DisplayFor(modelItem => item.name)
+                        </h3>
                         <p class="productDescription"><br />
                         Material: @Html.DisplayFor(modelItem => item.material)<br />
                         Color: @Html.DisplayFor(modelItem => item.color)<br />
@@ -46,12 +48,12 @@
                 </div><!-- /. col-sm-6, col-md-4  END PRODUCT -->
     
     <!--    <td>
-                @Html.DisplayFor(modelItem => item.poststed)
+                Html.DisplayFor(modelItem => item.poststed)
             </td>
             <td>
-                @Html.ActionLink("Endre", "Endre", new { id = item.id }, new { @class = "btn btn-success" })
-                @Html.ActionLink("Detalj", "Detaljer", new { id = item.id }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Slette", "Slett", new { id = item.id }, new { @class = "btn btn-danger" })
+                Html.ActionLink("Endre", "Endre", new { id = item.id }, new { class = "btn btn-success" })
+                Html.ActionLink("Detalj", "Detaljer", new { id = item.id }, new { class = "btn btn-primary" })
+                Html.ActionLink("Slette", "Slett", new { id = item.id }, new { class = "btn btn-danger" })
             </td>
     -->
 

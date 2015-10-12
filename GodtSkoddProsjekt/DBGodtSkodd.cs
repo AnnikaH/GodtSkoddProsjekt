@@ -264,14 +264,14 @@ namespace GodtSkoddProsjekt
 
                         if(temp[i] != null)
                         {
-                            temp[i].Name = oneProduct.name;
-                            temp[i].Price = oneProduct.price;
-                            temp[i].Color = oneProduct.color;
-                            temp[i].Material = oneProduct.material;
-                            temp[i].Brand = oneProduct.brand;
-                            temp[i].Url = oneProduct.url;
-                            temp[i].Gender = oneProduct.gender;
-                            temp[i].Type = oneProduct.type;
+                            oneProduct.name = temp[i].Name;
+                            oneProduct.price = temp[i].Price;
+                            oneProduct.color = temp[i].Color;
+                            oneProduct.material = temp[i].Material;
+                            oneProduct.brand = temp[i].Brand;
+                            oneProduct.url = temp[i].Url;
+                            oneProduct.gender = temp[i].Gender;
+                            oneProduct.type = temp[i].Type;
                             output.Add(oneProduct);
                         }
                         else
