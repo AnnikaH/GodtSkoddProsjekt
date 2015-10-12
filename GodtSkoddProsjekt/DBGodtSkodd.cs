@@ -87,27 +87,45 @@ namespace GodtSkoddProsjekt
             }
         }
 
-        public bool EditUser(User inputUser)
+        public bool EditUser(int id, User inputUser)
         {
-            //code to edit user
-            //Function for checking if its the correct input for logging in (?)
             using (var db = new DBContext())
             {
-                Users foundUser = db.Users.FirstOrDefault(b => b.UserName == inputUser.userName);
-                if (foundUser != null)
+                try
                 {
-                    try
+                    Users changeUser = db.Users.Find(id);
+                    changeUser.FirstName = inputUser.firstName;
+                    changeUser.LastName = inputUser.lastName;
+                    changeUser.Address = inputUser.address;
+                    changeUser.Email = inputUser.email;
+                    changeUser.PhoneNumber = inputUser.phoneNumber;
+                    changeUser.PostalCode = inputUser.postalCode;
+                    changeUser.UserName = inputUser.userName;
+                    changeUser.Password = CreateHash(inputUser.password);
+                    
+                    if (changeUser.PostalCode != inputUser.postalCode)
                     {
-                        //edit user
+                        Cities postalCodeExists = db.Cities.FirstOrDefault(p => p.PostalCode == inputUser.postalCode);
+                        if (postalCodeExists == null)
+                        {
+                            var newCity = new Cities()
+                            {
+                                PostalCode = inputUser.postalCode,
+                                City = inputUser.city
+                            };
+                            db.Cities.Add(newCity);
+                        }
+                        else
+                        {   
+                            changeUser.PostalCode = inputUser.postalCode;
+                        }
                         db.SaveChanges();
                         return true;
-                    }
-                    catch (Exception)
-                    {
-                        return false;
-                    }
+                    };
+                    db.SaveChanges();
+                    return true;
                 }
-                else
+                catch
                 {
                     return false;
                 }
@@ -139,9 +157,33 @@ namespace GodtSkoddProsjekt
             }
            
         }
-        
-//------------------------------------------ PRODUCTS ---------------------------------
-        
+        public User GetUser(int id)
+        {
+            var db = new DBContext();
+
+            var oneUsers = db.Users.Find(id);
+
+            if (oneUsers == null)
+            {
+                return null;
+            }
+            else
+            {
+                var output = new User()
+                {
+                    id = oneUsers.ID,
+                    firstName = oneUsers.FirstName,
+                    lastName = oneUsers.LastName,
+                    address = oneUsers.Address,
+                    postalCode = oneUsers.PostalCode,
+                    city = oneUsers.City.PostalCode
+                };
+                return output;
+            }
+        }
+
+        //------------------------------------------ PRODUCTS ---------------------------------
+
         public bool CreateProduct(Product product)
         {
             // Adding a new row in the database table Product for this Product:
