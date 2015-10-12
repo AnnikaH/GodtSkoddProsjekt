@@ -68,7 +68,7 @@ namespace GodtSkoddProsjekt
             output = algorythm.ComputeHash(input);
             return output;
         }
-        public static bool UserInDb(LoginUser inputUser)
+        public bool UserInDb(LoginUser inputUser)
         {
             //Function for checking if its the correct input for logging in (?)
             using (var db = new DBContext())
