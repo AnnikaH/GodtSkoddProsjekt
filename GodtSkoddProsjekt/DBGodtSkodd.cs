@@ -247,6 +247,48 @@ namespace GodtSkoddProsjekt
             }
         }
 
+        public List<Product> ListTopProducts()
+        {
+            // For now: just listing the first 5 products
+
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    var temp = db.Products.ToList();
+                    List<Product> output = new List<Product>();
+
+                    for(int i = 0; i < 5; i++)
+                    {
+                        var oneProduct = new Product();
+
+                        if(temp[i] != null)
+                        {
+                            temp[i].Name = oneProduct.name;
+                            temp[i].Price = oneProduct.price;
+                            temp[i].Color = oneProduct.color;
+                            temp[i].Material = oneProduct.material;
+                            temp[i].Brand = oneProduct.brand;
+                            temp[i].Url = oneProduct.url;
+                            temp[i].Gender = oneProduct.gender;
+                            temp[i].Type = oneProduct.type;
+                            output.Add(oneProduct);
+                        }
+                        else
+                        {
+                            return output;
+                        }
+                    }
+                    return output;
+                }
+                catch (Exception)
+                {
+                    var output = new List<Product>();
+                    return output;
+                }
+            }
+        }
+
         public List<Product> ListAllProducts()
         {
             using (var db = new DBContext())
