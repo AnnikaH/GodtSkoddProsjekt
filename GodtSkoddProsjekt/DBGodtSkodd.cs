@@ -68,7 +68,7 @@ namespace GodtSkoddProsjekt
             output = algorythm.ComputeHash(input);
             return output;
         }
-        private static bool userInDB(LoginUser inputUser)
+        private static bool userInDb(LoginUser inputUser)
         {
             //Function for checking if its the correct input for logging in (?)
             using (var db = new DBContext())
@@ -112,7 +112,6 @@ namespace GodtSkoddProsjekt
                     return false;
                 }
             }
-            return false;
         }
     
         public bool deleteUser(User inputUser) //or id?
