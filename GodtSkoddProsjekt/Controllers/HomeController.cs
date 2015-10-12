@@ -30,12 +30,18 @@ namespace GodtSkoddProsjekt.Controllers
                 ViewBag.LoggedIn = (bool) Session["LoggedIn"]; // HUSK: DEN MÅ CASTES
             }
 
-            return View();
+            // Return 9 "top" products:
+
+            var dbGodtSkodd = new DBGodtSkodd();
+
+            List<Product> products = dbGodtSkodd.ListTopProducts();
+
+            return View(products);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LogIn(LoginUser user)
+        public ActionResult Login(LoginUser user)
         {
             // checking login
 
@@ -67,6 +73,21 @@ namespace GodtSkoddProsjekt.Controllers
             var dbGodtSkodd = new DBGodtSkodd();
             Product product = dbGodtSkodd.GetProduct(id);
             return View(product);
+        }
+
+        public ActionResult ListProductsOfType(String type)
+        {
+            if(type == "Women" || type == "Men" || type == "Girls" || type == "Men") {
+                var dbGodtSkodd = new DBGodtSkodd();
+
+                List<Product> products = dbGodtSkodd.ListProductsOfType(type);
+
+                return View(products);
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }
