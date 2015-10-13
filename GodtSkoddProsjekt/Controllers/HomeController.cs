@@ -12,11 +12,6 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            // tester:
-            // var dbGodtSkodd = new DBGodtSkodd();
-            // dbGodtSkodd.test();
-            // tester til hit
-
             // Checking login:
             if (Session["LoggedIn"] == null)
             {
@@ -30,7 +25,7 @@ namespace GodtSkoddProsjekt.Controllers
                 ViewBag.LoggedIn = (bool) Session["LoggedIn"]; // HUSK: DEN MÅ CASTES
             }
 
-            // Return 9 "top" products:
+            // Return 9 "top" products?:
 
             var dbGodtSkodd = new DBGodtSkodd();
 

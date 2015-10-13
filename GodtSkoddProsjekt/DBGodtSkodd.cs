@@ -8,13 +8,6 @@ namespace GodtSkoddProsjekt
 {
     public class DBGodtSkodd
     {
-        public void test()
-        {
-            using (var db = new DBContext())
-            {
-
-            }
-        }
 //------------------------------------------- USERS ------------------------------------------
         public bool CreateUser(User user)
         {

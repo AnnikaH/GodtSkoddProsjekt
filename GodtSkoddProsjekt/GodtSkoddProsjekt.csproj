@@ -135,12 +135,12 @@
     <Content Include="Content\Images\Girls\Boots\3.jpg" />
     <Content Include="Content\Images\Girls\Boots\4.jpg" />
     <Content Include="Content\Images\Girls\Boots\5.jpg" />
-    <Content Include="Content\Images\Girls\DressShoes\1.JPG" />
+    <Content Include="Content\Images\Girls\DressShoes\1.jpg" />
     <Content Include="Content\Images\Girls\DressShoes\2.jpg" />
     <Content Include="Content\Images\Girls\DressShoes\3.jpg" />
     <Content Include="Content\Images\Girls\DressShoes\4.jpg" />
     <Content Include="Content\Images\Girls\DressShoes\5.jpg" />
-    <Content Include="Content\Images\Girls\Sandals\1.JPG" />
+    <Content Include="Content\Images\Girls\Sandals\1.jpg" />
     <Content Include="Content\Images\Girls\Sandals\2.jpg" />
     <Content Include="Content\Images\Girls\Sandals\3.jpg" />
     <Content Include="Content\Images\Girls\Sandals\4.jpg" />
@@ -162,10 +162,9 @@
     <Content Include="Content\Images\Men\Boots\5.jpg" />
     <Content Include="Content\Images\Men\DressShoes\1.jpg" />
     <Content Include="Content\Images\Men\DressShoes\2.jpg" />
-    <Content Include="Content\Images\Men\DressShoes\3.jpeg" />
+    <Content Include="Content\Images\Men\DressShoes\3.jpg" />
     <Content Include="Content\Images\Men\DressShoes\4.jpg" />
     <Content Include="Content\Images\Men\DressShoes\5.jpg" />
-    <Content Include="Content\Images\Men\DressShoes\6.jpg" />
     <Content Include="Content\Images\Men\Sandals\1.jpg" />
     <Content Include="Content\Images\Men\Sandals\2.jpg" />
     <Content Include="Content\Images\Men\Sandals\3.jpg" />
@@ -182,7 +181,6 @@
     <Content Include="Content\Images\Men\WinterShoes\3.jpg" />
     <Content Include="Content\Images\Men\WinterShoes\4.jpg" />
     <Content Include="Content\Images\Men\WinterShoes\5.jpg" />
-    <Content Include="Content\Images\Men\WinterShoes\6.jpg" />
     <Content Include="Content\Images\Women\Boots\1.jpg" />
     <Content Include="Content\Images\Women\Boots\2.jpg" />
     <Content Include="Content\Images\Women\Boots\3.jpg" />
@@ -202,7 +200,7 @@
     <Content Include="Content\Images\Women\Sneakers\1.jpg" />
     <Content Include="Content\Images\Women\Sneakers\2.jpg" />
     <Content Include="Content\Images\Women\Sneakers\3.jpg" />
-    <Content Include="Content\Images\Women\Sneakers\4.jpeg" />
+    <Content Include="Content\Images\Women\Sneakers\4.jpg" />
     <Content Include="Content\Images\Women\Sneakers\5.jpg" />
     <Content Include="Content\Images\Women\Sneakers\6.jpg" />
     <Content Include="Content\Images\Women\WinterShoes\1.jpg" />
