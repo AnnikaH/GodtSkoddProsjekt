@@ -300,14 +300,14 @@ namespace GodtSkoddProsjekt
                     foreach (var product in temp)
                     {
                         var oneProduct = new Product();
-                        product.Name = oneProduct.name;
-                        product.Price = oneProduct.price;
-                        product.Color = oneProduct.color;
-                        product.Material = oneProduct.material;
-                        product.Brand = oneProduct.brand;
-                        product.Url = oneProduct.url;
-                        product.Gender = oneProduct.gender;
-                        product.Type = oneProduct.type;
+                        oneProduct.name= product.Name;
+                        oneProduct.price= product.Price;
+                        oneProduct.color= product.Color;
+                        oneProduct.material= product.Material;
+                        oneProduct.brand=product.Brand;
+                        oneProduct.url= product.Url;
+                        oneProduct.gender= product.Gender;
+                        oneProduct.type=product.Type;
                         output.Add(oneProduct);
                     }
                     return output;

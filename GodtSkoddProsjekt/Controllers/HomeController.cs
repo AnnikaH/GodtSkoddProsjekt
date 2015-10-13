@@ -34,7 +34,7 @@ namespace GodtSkoddProsjekt.Controllers
 
             var dbGodtSkodd = new DBGodtSkodd();
 
-            List<Product> products = dbGodtSkodd.ListTopProducts();
+            List<Product> products = dbGodtSkodd.ListAllProducts();
 
             return View(products);
         }
