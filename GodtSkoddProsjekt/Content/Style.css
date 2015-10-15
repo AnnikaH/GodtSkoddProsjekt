@@ -11,6 +11,7 @@
     margin-left:5%;
     margin-right:5%;
     background-color:#FFFFFF;
+    padding-top:50px;
     
 }
 
@@ -58,14 +59,14 @@ left: 45%;
 
 .thumbnail{
     padding:0px;
-    margin-top:50px;
+   
    
   
 }
 
 
 .col-md-4 .productBox{
-    float:left;
+   
      margin-left: 2px;
     margin-right:2px;
 }
