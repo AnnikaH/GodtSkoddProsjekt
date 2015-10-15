@@ -221,6 +221,8 @@ namespace GodtSkoddProsjekt.Controllers
             dbGodtSkodd.CreateProduct(CreateNewProduct("Vinterstøvler", 1250,1, "Hvit", "Skinn", "Fashionells", "/Content/Images/Women/Sneakers/3.jpg", "Women", "WinterShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Classic Short", 2300, 1,"Brun", "Skinn", "Uggs", "/Content/Images/Women/Sneakers/4.jpg", "Women", "WinterShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Vintersko", 790, 1,"Brun", "Skinn", "FriendSkorner", "/Content/Images/Women/Sneakers/5.jpg", "Women", "WinterShoes"));
+
+            RedirectToAction("Index");
         }
 
         private Product CreateNewProduct(String n, double p, int s, String c, String m, String b, String u, String g, String t)

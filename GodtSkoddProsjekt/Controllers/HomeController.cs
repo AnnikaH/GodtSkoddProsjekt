@@ -35,6 +35,23 @@ namespace GodtSkoddProsjekt.Controllers
         }
 
         [HttpPost]
+        public ActionResult Index(String type)  // ListProductsOfType
+        {
+            if (type == "Women" || type == "Men" || type == "Girls" || type == "Men")
+            {
+                var dbGodtSkodd = new DBGodtSkodd();
+
+                List<Product> products = dbGodtSkodd.ListProductsOfType(type);
+
+                return View(products);
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginUser user)
         {
@@ -68,21 +85,6 @@ namespace GodtSkoddProsjekt.Controllers
             var dbGodtSkodd = new DBGodtSkodd();
             Product product = dbGodtSkodd.GetProduct(id);
             return View(product);
-        }
-
-        public ActionResult ListProductsOfType(String type)
-        {
-            if(type == "Women" || type == "Men" || type == "Girls" || type == "Men") {
-                var dbGodtSkodd = new DBGodtSkodd();
-
-                List<Product> products = dbGodtSkodd.ListProductsOfType(type);
-
-                return View(products);
-            }
-            else
-            {
-                return View();
-            }
         }
     }
 }
