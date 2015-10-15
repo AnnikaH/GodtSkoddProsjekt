@@ -11,7 +11,7 @@
     <
     <div class="col-sm-9">
        
-            <div class="col-sm-6 col-md-4">
+    
 
             @foreach (var item in Model)
             {
@@ -28,9 +28,9 @@
                         <h4 class="productPrice">240,-</h4> 
                     </div>
                 </div>-->
-
+                <div class="col-md-4 productBox">
                 <div class="thumbnail">
-                    <img src="@Html.DisplayFor(modelItem => item.url)"/>
+               <img src="@Html.DisplayFor(modelItem => item.url)" />
                     <div class="caption">
                         <h3 class="productName">
                             @Html.DisplayFor(modelItem => item.name)
@@ -38,14 +38,14 @@
                         <p class="productDescription"><br />
                         Material: @Html.DisplayFor(modelItem => item.material)<br />
                         Color: @Html.DisplayFor(modelItem => item.color)<br />
-                        Brand: @Html.DisplayFor(modelItem => item.brand)</p>--><!-- /. p.productDescription -->
+                        Brand: @Html.DisplayFor(modelItem => item.brand)</p><!-- /. p.productDescription -->
                         <a href="#" class="btn btn-default" role="button">Kjøp</a>
                         <h4 class="productPrice">@Html.DisplayFor(modelItem => item.price),-</h4> 
                     </div>
-                </div>
+                </div></div>
                     }
 
-                </div><!-- /. col-sm-6, col-md-4  END PRODUCT -->
+             
     
     <!--    <td>
                 Html.DisplayFor(modelItem => item.poststed)

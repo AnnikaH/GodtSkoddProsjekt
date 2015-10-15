@@ -32,8 +32,8 @@ footer
     background-color:#550452;
     position: relative;
 
-        padding: 0px;
-
+  padding: 0px;
+  height:100%;
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
 border-radius: 10px;
@@ -59,6 +59,15 @@ left: 45%;
 .thumbnail{
     padding:0px;
     margin-top:50px;
+   
+  
+}
+
+
+.col-md-4 .productBox{
+    float:left;
+     margin-left: 2px;
+    margin-right:2px;
 }
 
 .productDescription
