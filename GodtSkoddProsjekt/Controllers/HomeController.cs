@@ -34,11 +34,23 @@ namespace GodtSkoddProsjekt.Controllers
             return View(products);
         }
 
-        [HttpPost]
-        public ActionResult Index(String type)  // ListProductsOfType
+        public ActionResult ListProductsOfType(int id)
         {
-            if (type == "Women" || type == "Men" || type == "Girls" || type == "Men")
+            // 1 == Women, 2 == Men, 3 == Girls, 4 == Boys
+
+            if(id == 1 || id == 2 || id == 3 || id == 4)
             {
+                String type = "";
+
+                if (id == 1)
+                    type = "Women";
+                else if (id == 2)
+                    type = "Men";
+                else if (id == 3)
+                    type = "Girls";
+                else // id == 4
+                    type = "Boys";
+
                 var dbGodtSkodd = new DBGodtSkodd();
 
                 List<Product> products = dbGodtSkodd.ListProductsOfType(type);
@@ -80,11 +92,11 @@ namespace GodtSkoddProsjekt.Controllers
         }
 
         // GET: Home/Details/5
-        public ActionResult Details(int id)
+        /*public ActionResult Details(int id)
         {
             var dbGodtSkodd = new DBGodtSkodd();
             Product product = dbGodtSkodd.GetProduct(id);
             return View(product);
-        }
+        }*/
     }
 }
