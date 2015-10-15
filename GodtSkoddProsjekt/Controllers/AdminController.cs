@@ -138,7 +138,7 @@ namespace GodtSkoddProsjekt.Controllers
             dbGodtSkodd.CreateProduct(CreateNewProduct("Formelle sko", 600, 1,"Rosa", "Skinn", "The Bay", "/Content/Images/Girls/DressShoes/1.jpg", "Girls", "DressShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Pensko", 150, 1, "Gull", "Syntetisk Skinn", "LM83", "/Content/Images/Girls/DressShoes/2.jpg", "Girls", "DressShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Blomstersko", 590,1, "Hvit", "Skinn", "LM83", "/Content/Images/Girls/DressShoes/3.jpg", "Girls", "DressShoes"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Baby Pensko", 100, 1, "Sølv", "Syntetisk Skinn", "LM83", "/Content/Images/Girls/DressShoes/5.jpg", "Girls", "DressShoes"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Baby Pensko", 100, 1, "Sølv", "Syntetisk Skinn", "LM83", "/Content/Images/Girls/DressShoes/4.jpg", "Girls", "DressShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Pensko", 450, 1,"Svart", "Skinn", "JoyLand", "/Content/Images/Girls/DressShoes/5.jpg", "Girls", "DressShoes"));
 
             dbGodtSkodd.CreateProduct(CreateNewProduct("Blomstersandaler", 390,1, "Rød", "Skinn", "The Bay", "/Content/Images/Girls/Sandals/1.jpg", "Girls", "Sandals"));
