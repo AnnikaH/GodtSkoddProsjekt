@@ -26,11 +26,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Godt Skodd", "Index","Home", new { tom = ""}, new { @class = "navbar-brand"}) 
+                @Html.ActionLink("Godt Skodd", "Index", "Home", new { tom = "" }, new { @class = "navbar-brand"}) 
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#about">Damesko</a></li>
+                    <!--<li><a href="#about">Damesko</a></li>-->
+                    <li>
+                        @Html.ActionLink("Damesko", "ListProductsOfType", "Home", new { type = "Women" }, new { @class = "" })
+                    </li>
                     <li><a href="#contact">Herresko</a></li>
                     <li><a href="#contact">Barnesko</a></li>
                 </ul>
