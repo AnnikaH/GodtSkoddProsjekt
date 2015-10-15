@@ -147,11 +147,11 @@ namespace GodtSkoddProsjekt.Controllers
             dbGodtSkodd.CreateProduct(CreateNewProduct("Barnesandaler", 550, 1,"Grå", "Mesh", "Gzzhl", "/Content/Images/Girls/Sandals/4.jpg", "Girls", "Sandals"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Jewelled sandaler", 290, 1,"Rosa", "Syntetisk Skinn", "AliCDN", "/Content/Images/Girls/Sandals/5.jpg", "Girls", "Sandals"));
 
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Dansesko", 500, 1,"Lilla", "Mesh", "Uovo", "/Content/Images/Girls/Joggesko/1.jpg", "Girls", "Sneakers"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Originals ZX", 700,1, "Lilla", "Mesh", "Adidas", "/Content/Images/Girls/Joggesko/2.jpg", "Girls", "Sneakers"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Eclipse løpesko", 490, 1,"Rosa", "Mesh", "Eclipse", "/Content/Images/Girls/Joggesko/3.jpg", "Girls", "Sneakers"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Outdoor Sport", 250, 1,"Rosa", "Mesh", "AliExpress", "/Content/Images/Girls/Joggesko/4.jpg", "Girls", "Sneakers"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("GT 1000-4", 550, 1,"Rosa", "Mesh", "Asics", "/Content/Images/Girls/Joggesko/5.jpg", "Girls", "Sneakers"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Dansesko", 500, 1,"Lilla", "Mesh", "Uovo", "/Content/Images/Girls/Sneakers/1.jpg", "Girls", "Sneakers"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Originals ZX", 700,1, "Lilla", "Mesh", "Adidas", "/Content/Images/Girls/Sneakers/2.jpg", "Girls", "Sneakers"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Eclipse løpesko", 490, 1,"Rosa", "Mesh", "Eclipse", "/Content/Images/Girls/Sneakers/3.jpg", "Girls", "Sneakers"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Outdoor Sport", 250, 1,"Rosa", "Mesh", "AliExpress", "/Content/Images/Girls/Sneakers/4.jpg", "Girls", "Sneakers"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("GT 1000-4", 550, 1,"Rosa", "Mesh", "Asics", "/Content/Images/Girls/Sneakers/5.jpg", "Girls", "Sneakers"));
             
             dbGodtSkodd.CreateProduct(CreateNewProduct("Lobbing Ball", 100,1, "Rosa", "Plush", "AliExpress", "/Content/Images/Girls/WinterShoes/1.jpg", "Girls", "WinterShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Candy Thermal", 300, 1,"Lilla", "Plush", "Coga", "/Content/Images/Girls/WinterShoes/2.jpg", "Girls", "WinterShoes"));
