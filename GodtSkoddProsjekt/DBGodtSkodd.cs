@@ -317,23 +317,27 @@ namespace GodtSkoddProsjekt
         {
             using (var db = new DBContext())
             {
+                throw new SystemException("Produkt 1: ");
                 try
                 {
+                    
+
                     var temp = db.Products.ToList();
+
                     List<Product> output = new List<Product>();
                     foreach (var product in temp)
                     {
-                        if(product.Type == type)
+                        if (product.Type.Equals(type))
                         {
                             var oneProduct = new Product();
-                            product.Name = oneProduct.name;
-                            product.Price = oneProduct.price;
-                            product.Color = oneProduct.color;
-                            product.Material = oneProduct.material;
-                            product.Brand = oneProduct.brand;
-                            product.Url = oneProduct.url;
-                            product.Gender = oneProduct.gender;
-                            product.Type = oneProduct.type;
+                            oneProduct.name = product.Name;
+                            oneProduct.price = product.Price;
+                            oneProduct.color = product.Color;
+                            oneProduct.material = product.Material;
+                            oneProduct.brand = product.Brand;
+                            oneProduct.url = product.Url;
+                            oneProduct.gender = product.Gender;
+                            oneProduct.type = product.Type;
                             output.Add(oneProduct);
                         }
                     }
