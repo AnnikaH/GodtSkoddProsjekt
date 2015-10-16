@@ -11,20 +11,19 @@ namespace GodtSkoddProsjekt.Models
         // Dette er både en domenemodell og en view-modell
         public int id { get; set; }
 
-// FÅR FEILMELDING PÅ REGEX'ENE NÅR KJØRER Create.cshtml: ÆØÅ?
         [Display(Name = "Fornavn")]
         [Required(ErrorMessage = "Fornavn må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå]{1,30}", ErrorMessage = "Fornavn kan bare inneholde bokstaver fra A-Å")]
+        [RegularExpression(@"[A-ZÆØÅa-zæøå]{2,30}", ErrorMessage = "Fornavn kan bare inneholde bokstaver fra A-Å")]
         public String firstName { get; set; }
 
         [Display(Name = "Etternavn")]
         [Required(ErrorMessage = "Etternavn må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå]{1,30}", ErrorMessage = "Etternavn kan bare inneholde bokstaver fra A-Å.")]
+        [RegularExpression(@"[A-ZÆØÅa-zæøå]{2,30}", ErrorMessage = "Etternavn kan bare inneholde bokstaver fra A-Å.")]
         public String lastName { get; set; }
 
         [Display(Name = "Adresse")]
         [Required(ErrorMessage = "Adressen må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå0-9\s]{1,30}", ErrorMessage = "Adresse kan bare inneholde bokstaver fra A-Å og tall.")]
+        [RegularExpression(@"[A-ZÆØÅa-zæøå0-9\s]{2,30}", ErrorMessage = "Adresse kan bare inneholde bokstaver fra A-Å og tall.")]
         public String address { get; set; }
 
         [Display(Name = "E-post")]
@@ -46,15 +45,17 @@ namespace GodtSkoddProsjekt.Models
 
         [Display(Name = "Poststed")]
         [Required(ErrorMessage = "Poststed må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå]{1,30}", ErrorMessage = "Poststed kan bare inneholde bokstaver fra A-Å.")]
+        [RegularExpression(@"[A-ZÆØÅa-zæøå]{2,30}", ErrorMessage = "Poststed kan bare inneholde bokstaver fra A-Å")]
         public String city { get; set; }
 
         [Display(Name = "Brukernavn")]
         [Required(ErrorMessage = "Brukernavn må oppgis")]
+        [RegularExpression(@"[A-ZÆØÅa-zæøå0-9]{2,30}", ErrorMessage = "Brukernavn kan bare inneholde bokstaver fra A-Å og siffer")]
         public String userName { get; set; }
 
         [Display(Name = "Passord")]
         [Required(ErrorMessage = "Passord må oppgis")]
+        [RegularExpression(@"[A-ZÆØÅa-zæøå0-9!#$%&'*+\-/=?\^_`{|}~+(\.]{8,30}", ErrorMessage = "Passord må inneholde minst 8 tegn")]
         public String password { get; set; }
     }
 }

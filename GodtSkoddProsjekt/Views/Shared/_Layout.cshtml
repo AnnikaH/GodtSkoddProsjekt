@@ -1,4 +1,6 @@
-﻿<!-- model GodtSkoddProsjekt.Models.LoginUser -->
+﻿<!-- IKKE MULIG SIDEN ALLE SIDENE TRENGER Å FÅ INN EN LOGINUSER DA..?: model GodtSkoddProsjekt.Models.LoginUser -->
+
+<!-- Check if a user is logged in -->
 
 <!DOCTYPE html>
 <html>
@@ -76,6 +78,12 @@
                                 </div>
                             </form>
                         </div>
+                    </li>
+                    <li>
+                        <!-- Not show if user not logged in? -->
+
+                        @Html.ActionLink("Min side", "Index", "User", new { brukernavn = "" }, new { @class = "" })
+                    
                     </li>
                 </ul>
             </div><!--/.nav-collapse -->

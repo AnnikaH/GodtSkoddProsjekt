@@ -313,7 +313,7 @@ namespace GodtSkoddProsjekt
             }
         }
 
-        public List<Product> ListProductsOfGender(String gender)
+        public List<Product> ListProductsOfGender(String gender)    // F.ex. Men
         {
             using (var db = new DBContext())
             {
@@ -347,7 +347,7 @@ namespace GodtSkoddProsjekt
             }
         }
 
-        public List<Product> ListProductsOfType(String type)
+        public List<Product> ListProductsOfType(String type)    // f.ex. Boots
         {
             using (var db = new DBContext())
             {
@@ -409,6 +409,17 @@ namespace GodtSkoddProsjekt
                 };
                 return output;
             }
+        }
+
+        // --------------------------------------------- ORDERS -------------------------------
+
+        public List<Order> GetOrders(int userId)
+        {
+            // IN GetOrders-method: INCLUDING FILLING THE LIST IN EACH Order WITH Orderline
+            // Can get to the list of Orderline in the View then?
+
+
+            return null;
         }
     }
 }

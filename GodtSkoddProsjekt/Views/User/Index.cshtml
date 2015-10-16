@@ -10,8 +10,7 @@
     <title>Min Side</title>
 </head>
 <body>
-       
-        <div class="col-sm-9">
+    <div class="col-sm-9">
             <h2 class="header">Min Side</h2>
             <dl class="dl-horizontal">
                 <dt>
@@ -77,30 +76,16 @@
                 <dd>
                     @Html.DisplayFor(model => model.userName)
                 </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.password)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.password)
-                </dd>
-
             </dl>
 
+        @Html.ActionLink("Rediger", "Edit", "User", new { id = Model.id }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Se ordrehistorikk", "OrderDetails", "User", new { id = Model.id }, new { @class = "btn btn-default" })
+    
+    <!--<h2 class="header">Ordrehistorikk</h2>
+        <table class="table table-hover">
+            <tr><td>Ordre 1</td><td>Navn</td><td>Produktnavn</td></tr>
+        </table>-->
 
-
-
-          
-
-                <h2 class="header">Ordrehistorikk</h2>
-            <table class="table table-hover">
-                <tr><td>Ordre 1 </td> <td>Navn</td><td>Produktnavn</td></tr>
-            </table>
-            <!--<p>
-            Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-            Html.ActionLink("Back to List", "Index")
-        </p> -->
-        </div><!-- /. col-sm-9 aka wrapper-->
+    </div><!-- /. col-sm-9 aka wrapper-->
 </body>
 </html>

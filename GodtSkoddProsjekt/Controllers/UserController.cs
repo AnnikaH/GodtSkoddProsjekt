@@ -10,9 +10,20 @@ namespace GodtSkoddProsjekt.Controllers
     public class UserController : Controller
     {
         // GET: User
-        public ActionResult Index()
+        public ActionResult Index()  // int? id > i metoden: sende med id.Value til dbGodtSkodd, best å ikke ta inn en id her (sikkerhet)
         {
-            return View();
+            // sjekk om bruker innlogget (og få tak i id?)
+
+            // tester:
+
+            var dbGodtSkodd = new DBGodtSkodd();
+
+            User user = dbGodtSkodd.GetUser(1);
+
+            if(user != null)
+                return View(user);
+            else
+                return Redirect("Home/Index");
         }
 
         // GET: User/Details/5
@@ -21,6 +32,21 @@ namespace GodtSkoddProsjekt.Controllers
             var dbGodtSkodd = new DBGodtSkodd();
             User user = dbGodtSkodd.GetUser(id);
             return View(user);
+        }
+
+        public ActionResult OrderDetails(int id)
+        {
+            // get user id
+            var dbGodtSkodd = new DBGodtSkodd();
+
+            List<Order> orders = null; // = dbGodtSkodd.GetOrders(userId);
+            // IN GetOrders-method: INCLUDING FILLING THE LIST IN EACH Order WITH Orderline
+            // Can get to the list of Orderline in the View then?
+
+            if (orders != null)
+                return View(orders);
+            else
+                return RedirectToAction("Index");
         }
 
         // GET: User/Create
