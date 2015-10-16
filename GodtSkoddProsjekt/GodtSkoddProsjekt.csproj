@@ -208,6 +208,7 @@
     <Content Include="Content\Images\Women\WinterShoes\3.jpg" />
     <Content Include="Content\Images\Women\WinterShoes\4.jpg" />
     <Content Include="Content\Images\Women\WinterShoes\5.jpg" />
+    <Content Include="Content\Images\shoppingCartWhite.png" />
     <Content Include="Content\Style.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
