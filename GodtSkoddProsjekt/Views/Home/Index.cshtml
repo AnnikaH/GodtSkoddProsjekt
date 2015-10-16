@@ -11,8 +11,6 @@
     <
     <div class="col-sm-9">
        
-    
-
             @foreach (var item in Model)
             {
                 <!--<div class="thumbnail">
@@ -35,30 +33,61 @@
                         <h3 class="productName">
                             @Html.DisplayFor(modelItem => item.name)
                         </h3>
-                        <p class="productDescription"><br />
-                        Material: @Html.DisplayFor(modelItem => item.material)<br />
-                        Color: @Html.DisplayFor(modelItem => item.color)<br />
-                        Brand: @Html.DisplayFor(modelItem => item.brand)</p><!-- /. p.productDescription -->
-                        <a href="#" class="btn btn-default" role="button">Kjøp</a>
-                        <h4 class="productPrice">@Html.DisplayFor(modelItem => item.price),-</h4> 
+                        <p class="productDescription">
+                            <br />
+                            Materiale: @Html.DisplayFor(modelItem => item.material)<br />
+                            Farge: @Html.DisplayFor(modelItem => item.color)<br />
+                            Merke: @Html.DisplayFor(modelItem => item.brand)<br />
+                            Størrelse:
+                            <select class="form-control" id="sizes">
+                                @if (item.gender.Equals("Women"))
+                                {
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                }
+                                else if (item.gender.Equals("Men"))
+                                {
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                }
+                                else
+                                {
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                }
+                            </select>
+                        </p><!-- /. p.productDescription -->
+                        <a id=@item.id href="#" class="btn btn-default" role="button">Kjøp</a>
+                        <h4 class="productPrice">@Html.DisplayFor(modelItem => item.price),-</h4>
                     </div>
                 </div></div>
                     }
 
-             
-    
-    <!--    <td>
-                Html.DisplayFor(modelItem => item.poststed)
-            </td>
-            <td>
-                Html.ActionLink("Endre", "Endre", new { id = item.id }, new { class = "btn btn-success" })
-                Html.ActionLink("Detalj", "Detaljer", new { id = item.id }, new { class = "btn btn-primary" })
-                Html.ActionLink("Slette", "Slett", new { id = item.id }, new { class = "btn btn-danger" })
-            </td>
-    -->
-
     </div><!-- /.col-sm-9 aka Wrapper -->
-  
-      
 </body>
 </html>

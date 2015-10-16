@@ -320,8 +320,6 @@ namespace GodtSkoddProsjekt
                 throw new SystemException("Produkt 1: ");
                 try
                 {
-                    
-
                     var temp = db.Products.ToList();
 
                     List<Product> output = new List<Product>();

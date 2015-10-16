@@ -33,8 +33,8 @@ footer
     background-color:#550452;
     position: relative;
 
-  padding: 0px;
-  height:100%;
+    padding: 0px;
+    height:100%;
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
 border-radius: 10px;
@@ -58,34 +58,36 @@ left: 45%;
 
 
 .thumbnail{
-    padding:0px;
-    
-   
-   
-  
+    padding: 0px;
 }
 
 
 .col-md-4 .productBox{
    
     margin-left: 2px;
-    margin-right:2px;
+    margin-right: 2px;
 }
 
 .productDescription
 {
     color:#FFFFFF;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .productName
 {
-    color:#FFFFFF;   
+    color:#FFFFFF;
+    padding-left: 10px;
 }
 
 .productPrice
 {
     color:#FFFFFF;
     font-weight:bold;
+    padding-left: 12px;
+    padding-bottom: 10px;
+    padding-top: 7px;
 }
 /*______________ CSS for User/Create.cshtml page______________*/
 
@@ -100,9 +102,9 @@ h2.registrer
 .btn-default
 {
     float:right;
-
-  
-   
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .col-md-6
