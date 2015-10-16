@@ -22,7 +22,7 @@ namespace GodtSkoddProsjekt.Controllers
             else
             {
                 // vil så hente ut statusen til session'en og legge denne over i ViewBag'en:
-                ViewBag.LoggedIn = (bool)Session["LoggedIn"]; // HUSK: DEN MÅ CASTES
+                ViewBag.LoggedIn = (bool) Session["LoggedIn"]; // Husk: Må castes!
             }
 
             // Return 9 "top" products on home page?
@@ -34,18 +34,18 @@ namespace GodtSkoddProsjekt.Controllers
 
             if (id == 1 || id == 2 || id == 3 || id == 4)
             {
-                String type = "";
+                String gender = "";
 
                 if (id == 1)
-                    type = "Women";
+                    gender = "Women";
                 else if (id == 2)
-                    type = "Men";
+                    gender = "Men";
                 else if (id == 3)
-                    type = "Girls";
+                    gender = "Girls";
                 else // id == 4
-                    type = "Boys";
+                    gender = "Boys";
 
-                products = dbGodtSkodd.ListProductsOfType(type);
+                products = dbGodtSkodd.ListProductsOfGender(gender);
             }
             else
             {

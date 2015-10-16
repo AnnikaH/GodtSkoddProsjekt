@@ -313,20 +313,17 @@ namespace GodtSkoddProsjekt
             }
         }
 
-        public List<Product> ListProductsOfType(String type)
+        public List<Product> ListProductsOfGender(String gender)
         {
             using (var db = new DBContext())
             {
                 try
                 {
-                    throw new SystemException();
-
                     var dbProducts = db.Products.ToList();
-
                     List<Product> outputProducts = new List<Product>();
                     foreach (var product in dbProducts)
                     {
-                        if (product.Type.Equals(type))
+                        if (product.Gender.Equals(gender))
                         {
                             var oneProduct = new Product();
                             oneProduct.name = product.Name;
@@ -344,8 +341,42 @@ namespace GodtSkoddProsjekt
                 }
                 catch (Exception)
                 {
-                    var outputProducts = new List<Product>();
+                    var output = new List<Product>();
+                    return output;
+                }
+            }
+        }
+
+        public List<Product> ListProductsOfType(String type)
+        {
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    var dbProducts = db.Products.ToList();
+                    List<Product> outputProducts = new List<Product>();
+                    foreach (var product in dbProducts)
+                    {
+                        if(product.Type.Equals(type))
+                        {
+                            var oneProduct = new Product();
+                            oneProduct.name = product.Name;
+                            oneProduct.price = product.Price;
+                            oneProduct.color = product.Color;
+                            oneProduct.material = product.Material;
+                            oneProduct.brand = product.Brand;
+                            oneProduct.url = product.Url;
+                            oneProduct.gender = product.Gender;
+                            oneProduct.type = product.Type;
+                            outputProducts.Add(oneProduct);
+                        }
+                    }
                     return outputProducts;
+                }
+                catch (Exception)
+                {
+                    var output = new List<Product>();
+                    return output;
                 }
             }
         }
