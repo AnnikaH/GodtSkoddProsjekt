@@ -28,19 +28,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Godt Skodd", "Index", "Home", new { tom = "" }, new { @class = "navbar-brand"}) 
+                @Html.ActionLink("Godt Skodd", "Index", "Home", new { id = "" }, new { @class = "navbar-brand"}) 
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <!--<li><a href="">Damesko</a></li>-->
                     <li>
-                        @Html.ActionLink("Damesko", "ListProductsOfType", "Home", new { id = 1 }, new { @class = "" })
+                        @Html.ActionLink("Damesko", "Index", "Home", new { id = 1 }, new { @class = "" })
                     </li>
                     <li>
-                        <a href="">Herresko</a>
+                        @Html.ActionLink("Herresko", "Index", "Home", new { id = 2 }, new { @class = "" })
                     </li>
                     <li>
-                        <a href="">Barnesko</a>
+                        @Html.ActionLink("Jentesko", "Index", "Home", new { id = 3 }, new { @class = "" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Guttesko", "Index", "Home", new { id = 4 }, new { @class = "" })
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -66,7 +68,7 @@
                         <div class="dropdown-menu">
                             <form>
                                 <div class="form-group">
-                                    Din handlekurv:
+                                    Din handlekurv
                                 </div><!-- /.form-group-->
                                 <div class="form-group">
                                     <button type="submit" id="btntilkasse" class="btn btn-default">Til kasse</button><br /><br />

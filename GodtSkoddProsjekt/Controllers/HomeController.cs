@@ -10,7 +10,7 @@ namespace GodtSkoddProsjekt.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
             // Checking login:
             if (Session["LoggedIn"] == null)
@@ -22,23 +22,17 @@ namespace GodtSkoddProsjekt.Controllers
             else
             {
                 // vil så hente ut statusen til session'en og legge denne over i ViewBag'en:
-                ViewBag.LoggedIn = (bool) Session["LoggedIn"]; // HUSK: DEN MÅ CASTES
+                ViewBag.LoggedIn = (bool)Session["LoggedIn"]; // HUSK: DEN MÅ CASTES
             }
 
-            // Return 9 "top" products?:
+            // Return 9 "top" products on home page?
+
+            // id 1 == Women, 2 == Men, 3 == Girls, 4 == Boys
 
             var dbGodtSkodd = new DBGodtSkodd();
+            List<Product> products;
 
-            List<Product> products = dbGodtSkodd.ListAllProducts();
-
-            return View(products);
-        }
-
-        public ActionResult ListProductsOfType(int id)
-        {
-            // 1 == Women, 2 == Men, 3 == Girls, 4 == Boys
-
-            if(id == 1 || id == 2 || id == 3 || id == 4)
+            if (id == 1 || id == 2 || id == 3 || id == 4)
             {
                 String type = "";
 
@@ -51,16 +45,14 @@ namespace GodtSkoddProsjekt.Controllers
                 else // id == 4
                     type = "Boys";
 
-                var dbGodtSkodd = new DBGodtSkodd();
-
-                List<Product> products = dbGodtSkodd.ListProductsOfType(type);
-
-                return View(products);
+                products = dbGodtSkodd.ListProductsOfType(type);
             }
             else
             {
-                return View();
+                products = dbGodtSkodd.ListAllProducts();
             }
+
+            return View(products);
         }
 
         [HttpPost]
