@@ -8,6 +8,9 @@ namespace GodtSkoddProsjekt
 {
     public class DBGodtSkodd
     {
+
+        //DBGodtSkodd fungerer som både BLL og DAL
+
 //------------------------------------------- USERS ------------------------------------------
         public bool CreateUser(User user)
         {
@@ -413,13 +416,48 @@ namespace GodtSkoddProsjekt
 
         // --------------------------------------------- ORDERS -------------------------------
 
-        public List<Order> GetOrders(int userId)
+        public List<Order> GetOrders()
         {
-            // IN GetOrders-method: INCLUDING FILLING THE LIST IN EACH Order WITH Orderline
-            // Can get to the list of Orderline in the View then?
-
+            //Returns all orders. (for statistics?)
 
             return null;
+        }
+
+        public List<Order> GetOrdersForUser(int userId)
+        {
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    var dbOrders = db.Orders.ToList();
+                    List<Order> outputOrder = new List<Order>();
+                    foreach (var order in dbOrders)
+                    {
+                        if (order.UserID.Equals(userId))
+                        {
+                            var oneOrder = new Order();
+                            oneOrder.id = order.ID;
+                            oneOrder.userID = order.UserID;
+                            oneOrder.date = order.Date;
+
+                            foreach(var orderline in order.Orderlines)
+                            {
+                                var NewOrderLine = new Orderline();
+                                NewOrderLine.id = orderline.ID;
+                                NewOrderLine.productId = orderline.ProductID;
+                                NewOrderLine.quantity = orderline.Quantity;
+                                oneOrder.orderlines.Add(NewOrderLine);
+                            }
+                        }
+                    }
+                    return outputOrder;
+                }
+                catch (Exception)
+                {
+                    var output = new List<Order>();
+                    return output;
+                }
+            }
         }
     }
 }
