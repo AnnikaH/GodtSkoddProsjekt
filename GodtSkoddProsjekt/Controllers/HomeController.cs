@@ -12,6 +12,7 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: Home
         public ActionResult Index(int? id)
         {
+            /*
             // Checking login:
             if (Session["LoggedIn"] == null)
             {
@@ -23,7 +24,7 @@ namespace GodtSkoddProsjekt.Controllers
             {
                 // vil så hente ut statusen til session'en og legge denne over i ViewBag'en:
                 ViewBag.LoggedIn = (bool) Session["LoggedIn"]; // Husk: Må castes!
-            }
+            }*/
 
             // Return 9 "top" products on home page?
 

@@ -16,6 +16,19 @@ namespace GodtSkoddProsjekt.Controllers
 
             // tester:
 
+            // Checking login:
+            if (Session["LoggedIn"] == null)
+            {
+                // da definerer vi den og setter den til false
+                Session["LoggedIn"] = false;
+                ViewBag.LoggedIn = false; // oppdaterer denne også!
+            }
+            else
+            {
+                // vil så hente ut statusen til session'en og legge denne over i ViewBag'en:
+                ViewBag.LoggedIn = (bool) Session["LoggedIn"]; // Husk: Må castes!
+            }
+
             var dbGodtSkodd = new DBGodtSkodd();
 
             User user = dbGodtSkodd.GetUser(1);
@@ -110,11 +123,14 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, User user)   // istedenfor User: FormCollection collection ?
         {
-            var dbGodtSkodd = new DBGodtSkodd();
-            bool deleteOK = dbGodtSkodd.DeleteUser(id, user);
+            if (!ModelState.IsValid)
+            {
+                var dbGodtSkodd = new DBGodtSkodd();
+                bool deleteOK = dbGodtSkodd.DeleteUser(id, user);
 
-            if (deleteOK)
-                return RedirectToAction("Index");
+                if (deleteOK)
+                    return RedirectToAction("Index");
+            }
 
             return View();
         }

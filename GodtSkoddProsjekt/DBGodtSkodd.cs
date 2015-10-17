@@ -139,8 +139,8 @@ namespace GodtSkoddProsjekt
             {
                 return false;
             }
-
         }
+
         public User GetUser(int id)
         {
             var db = new DBContext();
@@ -159,8 +159,11 @@ namespace GodtSkoddProsjekt
                     firstName = oneUsers.FirstName,
                     lastName = oneUsers.LastName,
                     address = oneUsers.Address,
+                    email = oneUsers.Email,
+                    phoneNumber = oneUsers.PhoneNumber,
                     postalCode = oneUsers.PostalCode,
-                    city = oneUsers.City.PostalCode
+                    city = oneUsers.City.PostalCode,
+                    userName = oneUsers.UserName
                 };
                 return output;
             }
