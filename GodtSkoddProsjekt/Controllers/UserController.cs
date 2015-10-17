@@ -77,14 +77,13 @@ namespace GodtSkoddProsjekt.Controllers
             // get user id
             var dbGodtSkodd = new DBGodtSkodd();
 
-            List<Order> orders = null; // = dbGodtSkodd.GetOrders(userId);
-            // IN GetOrders-method: INCLUDING FILLING THE LIST IN EACH Order WITH Orderline
-            // Can get to the list of Orderline in the View then?
+            List<Order> orders = dbGodtSkodd.GetOrdersForUser(id);
 
             if (orders != null)
                 return View(orders);
             else
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return View();
         }
 
         // GET: User/Create
