@@ -227,8 +227,13 @@ namespace GodtSkoddProsjekt.Controllers
             newOrder.userID = 1;
             newOrder.date = DateTime.Now;
             newOrder.orderlines = new List<Orderline>();
-            
 
+            var newOrderLine = new Orderline();
+            newOrderLine.orderID = newOrder.id;
+            newOrderLine.productId = 5;
+            newOrderLine.quantity = 9001;
+
+            newOrder.orderlines.Add(newOrderLine);
             
             dbGodtSkodd.CreateOrder(newOrder);
 
