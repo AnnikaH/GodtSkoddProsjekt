@@ -18,6 +18,8 @@
     <script src="~/Scripts/bootstrap.js"></script>
     <!--- Our stylesheet-->
     <link href="~/Content/Style.css" rel="stylesheet" />
+    <!-- Ajax: -->
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script type="text/javascript">
         function checkLogin() {
             var username = $('#logginnbrukernavn').val();
@@ -25,20 +27,40 @@
 
             $('#logginntilbakemelding').html(username + " " + password);
 
-            $.Ajax({
-                url: '@Url.Action("Login", "Home")',
+            $.getJSON("/Home/Login", { username: username, password: password }, function (loginUser) {
+                /*var ut = "";
+                for (var i in bok) {
+                    ut += bok[i].id + " " + bok[i].Tittel + " " + bok[i].Sjanger + "<br/>";
+                }
+                $("#BokerListe").html(ut);*/
+
+                $('#logginntilbakemelding').html(username + " " + password);
+
+                if (loginUser == null) {
+                    $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
+                    return false;
+                }
+                else {
+                    $('#logginntilbakemelding').html("Riktig!");
+                    return true;
+                }
+            });
+
+
+            /*$.Ajax({
+                url: 'Url.Action("Login", "Home")',
                 data: { username: username, password: password },
                 success: function () {
                     // vil da kalle list-funksjonen igjen (kalle listekontrolleren for å refreshe viewet
                     // vil at boksen skal forsvinne og reloade viewet slik at vi ser med en gang at denne
                     // som vi ønsker fjernet har blitt fjernet
                     // Må ta et ajax-kall til altså:
-                    /*$.Ajax({
+                    $.Ajax({
                         url: 'Url.Action("Liste", "Kunde")',
                         success: function () {
                             window.location.reload();
                         }
-                    });*/
+                    });
                     //window.location.reload();
                     return true;
                 },
@@ -46,7 +68,7 @@
                     $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
                     return false;
                 }
-            });
+            });*/
         }
     </script>
 </head>
@@ -81,7 +103,8 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="">Logg inn | Registrer deg</a>
                         <div class="dropdown-menu">
-                            <form onsubmit="JavaScript:checkLogin()">
+                            <!--<form action="JavaScript:checkLogin()">-->
+                            <form action="/Home/Login">
                                 <div class="form-group">
                                     <label for="logginnbrukernavn" class="labellogginn">Brukernavn</label>
                                     <input type="text" class="form-control" id="logginnbrukernavn" placeholder="Brukernavn">
@@ -89,7 +112,7 @@
                                     <input type="password" class="form-control" id="logginnpassord" placeholder="Passord">
                                 </div><!-- /.form-group-->
                                 <div class="form-group">
-                                    <button type="submit" id="btnlogginn" class="btn btn-default" onclick="JavaScript:return checkLogin()">Logg Inn</button>
+                                    <button type="submit" id="btnlogginn" class="btn btn-default" onsubmit="return checkLogin()">Logg Inn</button>
                                     <div id="logginntilbakemelding"></div>
                                     <br /><br />
                                     @Html.ActionLink("Registrer deg", "Create", "User")
