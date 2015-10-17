@@ -23,34 +23,30 @@
             var username = $('#logginnbrukernavn').val();
             var password = $('#logginnpassord').val();
 
+            $('#logginntilbakemelding').html(username + " " + password);
+
             $.Ajax({
                 url: '@Url.Action("Login", "Home")',
                 data: { username: username, password: password },
-                success: function() {
+                success: function () {
                     // vil da kalle list-funksjonen igjen (kalle listekontrolleren for å refreshe viewet
                     // vil at boksen skal forsvinne og reloade viewet slik at vi ser med en gang at denne
                     // som vi ønsker fjernet har blitt fjernet
                     // Må ta et ajax-kall til altså:
-                    $.Ajax({
-                        url: '@Url.Action("Liste", "Kunde")',
+                    /*$.Ajax({
+                        url: 'Url.Action("Liste", "Kunde")',
                         success: function () {
                             window.location.reload();
                         }
-                    });
+                    });*/
+                    //window.location.reload();
+                    return true;
+                },
+                error: function () {
+                    $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
+                    return false;
                 }
             });
-
-
-
-            $.getJSON("/Home/Login", { sjanger: $("#idListe").val() }, function (bok) {
-                var ut = "";
-                for (var i in bok) {
-                    ut += bok[i].id + " " + bok[i].Tittel + " " + bok[i].Sjanger + "<br/>";
-                }
-                $("#BokerListe").html(ut);
-            });
-
-            //$("#BokerListe").load("/Ajax/HentBoker", { sjanger: $("#idListe").val() });
         }
     </script>
 </head>
@@ -85,7 +81,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="">Logg inn | Registrer deg</a>
                         <div class="dropdown-menu">
-                            <form>
+                            <form onsubmit="JavaScript:checkLogin()">
                                 <div class="form-group">
                                     <label for="logginnbrukernavn" class="labellogginn">Brukernavn</label>
                                     <input type="text" class="form-control" id="logginnbrukernavn" placeholder="Brukernavn">
@@ -93,7 +89,9 @@
                                     <input type="password" class="form-control" id="logginnpassord" placeholder="Passord">
                                 </div><!-- /.form-group-->
                                 <div class="form-group">
-                                    <button type="submit" id="btnlogginn" class="btn btn-default" onsubmit="checkLogin()">Logg Inn</button><br /><br />
+                                    <button type="submit" id="btnlogginn" class="btn btn-default" onclick="JavaScript:return checkLogin()">Logg Inn</button>
+                                    <div id="logginntilbakemelding"></div>
+                                    <br /><br />
                                     @Html.ActionLink("Registrer deg", "Create", "User")
                                 </div>
                             </form>

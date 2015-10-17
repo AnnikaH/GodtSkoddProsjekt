@@ -73,19 +73,20 @@ namespace GodtSkoddProsjekt.Controllers
                 // yes username and password is OK
                 Session["LoggedIn"] = true;
                 ViewBag.LoggedIn = true;
-                // return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             else
             {
                 // no
                 Session["LoggedIn"] = false;
                 ViewBag.LoggedIn = false;
+                throw new Exception();
                 // return RedirectToAction("Index");
             }
 
             // Can use ViewBag in the view!
 
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
         }
 
         // GET: Home/Details/5
