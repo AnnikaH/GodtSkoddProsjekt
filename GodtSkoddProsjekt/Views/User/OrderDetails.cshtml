@@ -1,5 +1,6 @@
 ﻿@model List<GodtSkoddProsjekt.Models.Order>
 
+
 <!DOCTYPE html>
 
 <html>
@@ -35,7 +36,7 @@
             </dd>
 
             <dd>
-                @Html.DisplayFor(modelItem => order.orderlines)
+                @Html.DisplayFor(modelItem => order.orderlines[0])
             </dd>
     
         </dl>

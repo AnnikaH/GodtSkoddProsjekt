@@ -474,7 +474,6 @@ namespace GodtSkoddProsjekt
                 try
                 {
                     var dbOrders = db.Orders.ToList();
-                    
                     List<Order> outputOrder = new List<Order>();
                     foreach (var order in dbOrders)
                     {
@@ -484,13 +483,14 @@ namespace GodtSkoddProsjekt
                             oneOrder.id = order.ID;
                             oneOrder.userID = order.UserID;
                             oneOrder.date = order.Date;
+                            oneOrder.orderlines = new List<Orderline>();
 
                             foreach(var orderline in order.Orderlines)
                             {
                                 var NewOrderLine = new Orderline();
-                                NewOrderLine.id = orderline.ID;
                                 NewOrderLine.productId = orderline.ProductID;
                                 NewOrderLine.quantity = orderline.Quantity;
+                                NewOrderLine.orderID = oneOrder.id;
                                 oneOrder.orderlines.Add(NewOrderLine);
                             }
                             outputOrder.Add(oneOrder);
@@ -502,6 +502,9 @@ namespace GodtSkoddProsjekt
                 catch (Exception)
                 {
                     var output = new List<Order>();
+                    var errorOrder = new Order();
+                    errorOrder.id = 1337;
+                    output.Add(errorOrder);
                     return output;
                 }
             }
