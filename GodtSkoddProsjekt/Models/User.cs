@@ -53,7 +53,7 @@ namespace GodtSkoddProsjekt.Models
 
         [Display(Name = "Passord")]
         [Required(ErrorMessage = "Passord må oppgis")]
-        [DataType(DataType.Password)]
+        [DataType(DataType.Password)] 
         [RegularExpression(@"[A-ZÆØÅa-zæøå0-9!#$%&'*+\-/=?\^_`{|}~+(\.]{8,30}", ErrorMessage = "Passord må inneholde minst 8 tegn")]
         public String password { get; set; }
     }
