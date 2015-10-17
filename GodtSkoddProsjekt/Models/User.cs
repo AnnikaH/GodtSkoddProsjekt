@@ -13,12 +13,12 @@ namespace GodtSkoddProsjekt.Models
 
         [Display(Name = "Fornavn")]
         [Required(ErrorMessage = "Fornavn må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå]{2,30}", ErrorMessage = "Fornavn kan bare inneholde bokstaver fra A-Å")]
+        [RegularExpression(@"[A-ZÆØÅa-zæøå\s]{2,30}", ErrorMessage = "Fornavn kan bare inneholde bokstaver fra A-Å")]
         public String firstName { get; set; }
 
         [Display(Name = "Etternavn")]
         [Required(ErrorMessage = "Etternavn må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå]{2,30}", ErrorMessage = "Etternavn kan bare inneholde bokstaver fra A-Å.")]
+        [RegularExpression(@"[A-ZÆØÅa-zæøå\s]{2,30}", ErrorMessage = "Etternavn kan bare inneholde bokstaver fra A-Å.")]
         public String lastName { get; set; }
 
         [Display(Name = "Adresse")]
