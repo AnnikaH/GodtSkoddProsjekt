@@ -58,7 +58,7 @@ namespace GodtSkoddProsjekt.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(String username, String password)
+        public LoginUser Login(String username, String password)
         {
             // checking login
 
@@ -73,15 +73,17 @@ namespace GodtSkoddProsjekt.Controllers
                 // yes username and password is OK
                 Session["LoggedIn"] = true;
                 ViewBag.LoggedIn = true;
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return loginUser;
             }
             else
             {
                 // no
                 Session["LoggedIn"] = false;
                 ViewBag.LoggedIn = false;
-                throw new Exception();
+                //throw new Exception();
                 // return RedirectToAction("Index");
+                return null;
             }
 
             // Can use ViewBag in the view!
