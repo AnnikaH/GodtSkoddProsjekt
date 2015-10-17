@@ -56,16 +56,19 @@ namespace GodtSkoddProsjekt.Controllers
             return View(products);
         }
 
-        // HELLER GJØRE DETTE MED AJAX
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginUser user)
+        public ActionResult Login(String username, String password)
         {
             // checking login
 
+            LoginUser loginUser = new LoginUser();
+            loginUser.userName = username;
+            loginUser.password = password;
+
             var dbGodtSkodd = new DBGodtSkodd();
 
-            if (dbGodtSkodd.UserInDb(user))
+            if (dbGodtSkodd.UserInDb(loginUser))
             {
                 // yes username and password is OK
                 Session["LoggedIn"] = true;
