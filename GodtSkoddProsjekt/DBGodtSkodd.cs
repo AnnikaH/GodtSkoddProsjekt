@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using GodtSkoddProsjekt.Models;
 
+using System.Diagnostics;
+
 namespace GodtSkoddProsjekt
 {
     public class DBGodtSkodd
@@ -326,6 +328,7 @@ namespace GodtSkoddProsjekt
                 try
                 {
                     var dbProducts = db.Products.ToList();
+
                     List<Product> outputProducts = new List<Product>();
                     foreach (var product in dbProducts)
                     {
@@ -471,10 +474,11 @@ namespace GodtSkoddProsjekt
                 try
                 {
                     var dbOrders = db.Orders.ToList();
+                    
                     List<Order> outputOrder = new List<Order>();
                     foreach (var order in dbOrders)
                     {
-                        if (order.UserID.Equals(userId))
+                        if (order.UserID == userId)
                         {
                             var oneOrder = new Order();
                             oneOrder.id = order.ID;
@@ -489,8 +493,10 @@ namespace GodtSkoddProsjekt
                                 NewOrderLine.quantity = orderline.Quantity;
                                 oneOrder.orderlines.Add(NewOrderLine);
                             }
+                            outputOrder.Add(oneOrder);
                         }
                     }
+
                     return outputOrder;
                 }
                 catch (Exception)
