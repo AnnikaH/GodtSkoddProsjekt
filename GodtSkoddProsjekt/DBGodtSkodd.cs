@@ -165,7 +165,7 @@ namespace GodtSkoddProsjekt
                     email = oneUsers.Email,
                     phoneNumber = oneUsers.PhoneNumber,
                     postalCode = oneUsers.PostalCode,
-                    city = oneUsers.City.PostalCode,
+                    city = oneUsers.City.City,
                     userName = oneUsers.UserName
                 };
                 return output;

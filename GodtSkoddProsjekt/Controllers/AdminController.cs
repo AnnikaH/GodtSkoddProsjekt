@@ -95,7 +95,7 @@ namespace GodtSkoddProsjekt.Controllers
 
         // CREATE PRODUCTS BACKEND:
 
-        public void CreateAllProducts()
+        public ActionResult CreateAllProducts()
         {
             DBGodtSkodd dbGodtSkodd = new DBGodtSkodd();
 
@@ -222,7 +222,7 @@ namespace GodtSkoddProsjekt.Controllers
             dbGodtSkodd.CreateProduct(CreateNewProduct("Classic Short", 2300, 1,"Brun", "Skinn", "Uggs", "/Content/Images/Women/Sneakers/4.jpg", "Women", "WinterShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Vintersko", 790, 1,"Brun", "Skinn", "FriendSkorner", "/Content/Images/Women/Sneakers/5.jpg", "Women", "WinterShoes"));
 
-            RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
 
         private Product CreateNewProduct(String n, double p, int s, String c, String m, String b, String u, String g, String t)
