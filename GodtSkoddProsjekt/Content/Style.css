@@ -57,12 +57,10 @@ left: 45%;
 }
 
 
+
 .thumbnail{
     padding:0px;
     
-   
-   
-  
 }
 
 
@@ -87,6 +85,12 @@ left: 45%;
     color:#FFFFFF;
     font-weight:bold;
 }
+
+.amountSelect
+{
+    width:40%;
+    margin-bottom:20px;
+}
 /*______________ CSS for User/Create.cshtml page______________*/
 
 h2.registrer
@@ -107,8 +111,9 @@ h2.registrer
 
 .col-md-6
 {
-  margin-top:50px;
+  margin-top:0px;
   padding-bottom:15px;
+
 }
 
 .currentStep
@@ -116,6 +121,9 @@ h2.registrer
     background-color:#550452;
     color:#FFFFFF;
      padding-top:15px;
+    width:80%;
+    margin-left:10%;
+    margin-right:10%;
 }
 
 .nextStep
