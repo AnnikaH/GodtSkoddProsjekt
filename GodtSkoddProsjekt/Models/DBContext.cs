@@ -69,7 +69,7 @@ namespace GodtSkoddProsjekt.Models
         public int ID { get; set; }
         public int OrderID { get; set; }    // foreign key from Orders
         public int ProductID { get; set; }  // foreign key from Products
-        public double Quantity { get; set; }
+        public int Quantity { get; set; }
  
         public virtual Orders Order { get; set; }
         public virtual Products Product { get; set; }

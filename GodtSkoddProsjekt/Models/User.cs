@@ -31,8 +31,6 @@ namespace GodtSkoddProsjekt.Models
         [RegularExpression(@"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"+ "@"+ @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$", ErrorMessage = "E-post")]
         public String email { get; set; }
 
-//@"[A-ZÆØÅa-zæøå0-9_-@.]{1,30}"
-
         [Display(Name = "Telefonnr")]
         [Required(ErrorMessage = "Telefonnr må oppgis")]
         [RegularExpression(@"[0-9]{8}", ErrorMessage = "Telefonnummer kan bare inneholde 8 tall")]
@@ -55,6 +53,7 @@ namespace GodtSkoddProsjekt.Models
 
         [Display(Name = "Passord")]
         [Required(ErrorMessage = "Passord må oppgis")]
+        [DataType(DataType.Password)] 
         [RegularExpression(@"[A-ZÆØÅa-zæøå0-9!#$%&'*+\-/=?\^_`{|}~+(\.]{8,30}", ErrorMessage = "Passord må inneholde minst 8 tegn")]
         public String password { get; set; }
     }
