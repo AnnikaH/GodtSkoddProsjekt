@@ -419,6 +419,44 @@ namespace GodtSkoddProsjekt
 
         // --------------------------------------------- ORDERS -------------------------------
 
+        public bool CreateOrder(Order order)
+        {
+
+            var db = new DBContext();
+
+            var newOrder = new Orders()
+            {
+                User = db.Users.Find(order.userID),
+                UserID = order.userID,
+                Date = order.date,
+                Orderlines = new List<Orderlines>()
+            };
+
+            foreach (var orderLine in order.orderlines)
+            {
+                var newOrderLine = new Orderlines()
+                {
+                    ProductID = orderLine.productId,
+                    OrderID = newOrder.ID,
+                    Quantity = orderLine.quantity
+                };
+                newOrder.Orderlines.Add(newOrderLine);
+            }
+
+
+            try
+            {
+                db.Orders.Add(newOrder);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
         public List<Order> GetOrders()
         {
             //Returns all orders. (for statistics?)

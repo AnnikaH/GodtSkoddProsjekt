@@ -222,6 +222,17 @@ namespace GodtSkoddProsjekt.Controllers
             dbGodtSkodd.CreateProduct(CreateNewProduct("Classic Short", 2300, 1,"Brun", "Skinn", "Uggs", "/Content/Images/Women/Sneakers/4.jpg", "Women", "WinterShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Vintersko", 790, 1,"Brun", "Skinn", "FriendSkorner", "/Content/Images/Women/Sneakers/5.jpg", "Women", "WinterShoes"));
 
+            var newOrder = new Order();
+            newOrder.id = 1;
+            newOrder.userID = 1;
+            newOrder.date = DateTime.Now;
+            newOrder.orderlines = new List<Orderline>();
+            
+
+            
+            dbGodtSkodd.CreateOrder(newOrder);
+
+
             return RedirectToAction("Index");
         }
 
