@@ -56,6 +56,7 @@ namespace GodtSkoddProsjekt.Controllers
             return View(products);
         }
 
+        // HELLER GJØRE DETTE MED AJAX
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginUser user)

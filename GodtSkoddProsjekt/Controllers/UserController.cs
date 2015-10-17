@@ -15,7 +15,7 @@ namespace GodtSkoddProsjekt.Controllers
             // sjekk om bruker innlogget (og få tak i id?)
 
             // tester:
-
+            /*
             // Checking login:
             if (Session["LoggedIn"] == null)
             {
@@ -27,16 +27,41 @@ namespace GodtSkoddProsjekt.Controllers
             {
                 // vil så hente ut statusen til session'en og legge denne over i ViewBag'en:
                 ViewBag.LoggedIn = (bool) Session["LoggedIn"]; // Husk: Må castes!
+            }*/
+
+            if (Session["LoggedIn"] != null)   // må teste på om den er satt eller ikke!
+            {
+                bool loggedIn = (bool)Session["LoggedIn"];
+
+                if (loggedIn)
+                {
+                    var dbGodtSkodd = new DBGodtSkodd();
+                    User user = dbGodtSkodd.GetUser(1);
+
+                    if (user != null)
+                        return View(user);
+                    else
+                    {
+                        // (since no user was found):
+                        Session["LoggedIn"] = false;
+                        ViewBag.LoggedIn = false;
+                        return Redirect("Home/Index");
+                    }
+                }
+                else
+                {
+                    // just in case:
+                    Session["LoggedIn"] = false;
+                    ViewBag.LoggedIn = false;
+                    return Redirect("Home/Index");
+                }
             }
-
-            var dbGodtSkodd = new DBGodtSkodd();
-
-            User user = dbGodtSkodd.GetUser(1);
-
-            if(user != null)
-                return View(user);
             else
+            {
+                Session["LoggedIn"] = false;
+                ViewBag.LoggedIn = false;
                 return Redirect("Home/Index");
+            }
         }
 
         // GET: User/Details/5
@@ -123,7 +148,7 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, User user)   // istedenfor User: FormCollection collection ?
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var dbGodtSkodd = new DBGodtSkodd();
                 bool deleteOK = dbGodtSkodd.DeleteUser(id, user);
