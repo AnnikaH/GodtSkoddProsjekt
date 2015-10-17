@@ -104,7 +104,11 @@ namespace GodtSkoddProsjekt.Controllers
                 bool insertOK = dbGodtSkodd.CreateUser(user);
 
                 if (insertOK)
-                    return RedirectToAction("Index");
+                {
+                    Session["LoggedIn"] = true;
+                    ViewBag.LoggedIn = true;
+                    return RedirectToAction("Index");   // Går til Min side
+                }
             }
 
             return View();
