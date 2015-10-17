@@ -18,6 +18,8 @@
     <script src="~/Scripts/bootstrap.js"></script>
     <!--- Our stylesheet-->
     <link href="~/Content/Style.css" rel="stylesheet" />
+    <!-- Ajax: -->
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script type="text/javascript">
         function checkLogin() {
             var username = $('#logginnbrukernavn').val();
@@ -81,7 +83,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="">Logg inn | Registrer deg</a>
                         <div class="dropdown-menu">
-                            <form onsubmit="JavaScript:checkLogin()">
+                            <form action="JavaScript:checkLogin()">
                                 <div class="form-group">
                                     <label for="logginnbrukernavn" class="labellogginn">Brukernavn</label>
                                     <input type="text" class="form-control" id="logginnbrukernavn" placeholder="Brukernavn">
@@ -89,7 +91,7 @@
                                     <input type="password" class="form-control" id="logginnpassord" placeholder="Passord">
                                 </div><!-- /.form-group-->
                                 <div class="form-group">
-                                    <button type="submit" id="btnlogginn" class="btn btn-default" onclick="JavaScript:return checkLogin()">Logg Inn</button>
+                                    <button type="submit" id="btnlogginn" class="btn btn-default" onclick="return checkLogin()">Logg Inn</button>
                                     <div id="logginntilbakemelding"></div>
                                     <br /><br />
                                     @Html.ActionLink("Registrer deg", "Create", "User")
