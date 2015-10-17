@@ -4,10 +4,15 @@ using System.Linq;
 using System.Web;
 using GodtSkoddProsjekt.Models;
 
+using System.Diagnostics;
+
 namespace GodtSkoddProsjekt
 {
     public class DBGodtSkodd
     {
+
+        //DBGodtSkodd fungerer som både BLL og DAL
+
 //------------------------------------------- USERS ------------------------------------------
         public bool CreateUser(User user)
         {
@@ -139,8 +144,8 @@ namespace GodtSkoddProsjekt
             {
                 return false;
             }
-
         }
+
         public User GetUser(int id)
         {
             var db = new DBContext();
@@ -159,8 +164,11 @@ namespace GodtSkoddProsjekt
                     firstName = oneUsers.FirstName,
                     lastName = oneUsers.LastName,
                     address = oneUsers.Address,
+                    email = oneUsers.Email,
+                    phoneNumber = oneUsers.PhoneNumber,
                     postalCode = oneUsers.PostalCode,
-                    city = oneUsers.City.PostalCode
+                    city = oneUsers.City.City,
+                    userName = oneUsers.UserName
                 };
                 return output;
             }
@@ -242,42 +250,42 @@ namespace GodtSkoddProsjekt
 
         public List<Product> ListTopProducts()
         {
-            // For now: just listing the first 5 products
+            // For now: just listing the first 9 products
 
             using (var db = new DBContext())
             {
                 try
                 {
-                    var temp = db.Products.ToList();
-                    List<Product> output = new List<Product>();
+                    var dbProducts = db.Products.ToList();
+                    List<Product> outputProducts = new List<Product>();
 
-                    for(int i = 0; i < 3; i++)
+                    for(int i = 0; i < 9; i++)
                     {
                         var oneProduct = new Product();
 
-                        if(temp[i] != null)
+                        if(dbProducts[i] != null)
                         {
-                            oneProduct.name = temp[i].Name;
-                            oneProduct.price = temp[i].Price;
-                            oneProduct.color = temp[i].Color;
-                            oneProduct.material = temp[i].Material;
-                            oneProduct.brand = temp[i].Brand;
-                            oneProduct.url = temp[i].Url;
-                            oneProduct.gender = temp[i].Gender;
-                            oneProduct.type = temp[i].Type;
-                            output.Add(oneProduct);
+                            oneProduct.name = dbProducts[i].Name;
+                            oneProduct.price = dbProducts[i].Price;
+                            oneProduct.color = dbProducts[i].Color;
+                            oneProduct.material = dbProducts[i].Material;
+                            oneProduct.brand = dbProducts[i].Brand;
+                            oneProduct.url = dbProducts[i].Url;
+                            oneProduct.gender = dbProducts[i].Gender;
+                            oneProduct.type = dbProducts[i].Type;
+                            outputProducts.Add(oneProduct);
                         }
                         else
                         {
-                            return output;
+                            return outputProducts;
                         }
                     }
-                    return output;
+                    return outputProducts;
                 }
                 catch (Exception)
                 {
-                    var output = new List<Product>();
-                    return output;
+                    var outputProducts = new List<Product>();
+                    return outputProducts;
                 }
             }
         }
@@ -288,9 +296,9 @@ namespace GodtSkoddProsjekt
             {
                 try
                 {
-                    var temp = db.Products.ToList();
+                    var dbProducts = db.Products.ToList();
                     List<Product> output = new List<Product>();
-                    foreach (var product in temp)
+                    foreach (var product in dbProducts)
                     {
                         var oneProduct = new Product();
                         oneProduct.name= product.Name;
@@ -313,41 +321,75 @@ namespace GodtSkoddProsjekt
             }
         }
 
-        public List<Product> ListProductsOfType(String type)
+        public List<Product> ListProductsOfGender(String gender)    // F.ex. Men
         {
             using (var db = new DBContext())
             {
                 try
                 {
-                    var temp = db.Products.ToList();
-                    List<Product> output = new List<Product>();
-                    foreach (var product in temp)
+                    var dbProducts = db.Products.ToList();
+
+                    List<Product> outputProducts = new List<Product>();
+                    foreach (var product in dbProducts)
                     {
-                        if(product.Type == type)
+                        if (product.Gender.Equals(gender))
                         {
                             var oneProduct = new Product();
-                            product.Name = oneProduct.name;
-                            product.Price = oneProduct.price;
-                            product.Color = oneProduct.color;
-                            product.Material = oneProduct.material;
-                            product.Brand = oneProduct.brand;
-                            product.Url = oneProduct.url;
-                            product.Gender = oneProduct.gender;
-                            product.Type = oneProduct.type;
-                            output.Add(oneProduct);
+                            oneProduct.name = product.Name;
+                            oneProduct.price = product.Price;
+                            oneProduct.color = product.Color;
+                            oneProduct.material = product.Material;
+                            oneProduct.brand = product.Brand;
+                            oneProduct.url = product.Url;
+                            oneProduct.gender = product.Gender;
+                            oneProduct.type = product.Type;
+                            outputProducts.Add(oneProduct);
                         }
                     }
-                    return output;
+                    return outputProducts;
                 }
                 catch (Exception)
                 {
                     var output = new List<Product>();
                     return output;
                 }
-
             }
-
         }
+
+        public List<Product> ListProductsOfType(String type)    // f.ex. Boots
+        {
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    var dbProducts = db.Products.ToList();
+                    List<Product> outputProducts = new List<Product>();
+                    foreach (var product in dbProducts)
+                    {
+                        if(product.Type.Equals(type))
+                        {
+                            var oneProduct = new Product();
+                            oneProduct.name = product.Name;
+                            oneProduct.price = product.Price;
+                            oneProduct.color = product.Color;
+                            oneProduct.material = product.Material;
+                            oneProduct.brand = product.Brand;
+                            oneProduct.url = product.Url;
+                            oneProduct.gender = product.Gender;
+                            oneProduct.type = product.Type;
+                            outputProducts.Add(oneProduct);
+                        }
+                    }
+                    return outputProducts;
+                }
+                catch (Exception)
+                {
+                    var output = new List<Product>();
+                    return output;
+                }
+            }
+        }
+
         public Product GetProduct(int id)
         {
             var db = new DBContext();
@@ -375,6 +417,96 @@ namespace GodtSkoddProsjekt
 
                 };
                 return output;
+            }
+        }
+
+        // --------------------------------------------- ORDERS -------------------------------
+
+        public bool CreateOrder(Order order)
+        {
+
+            var db = new DBContext();
+
+            var newOrder = new Orders()
+            {
+                User = db.Users.Find(order.userID),
+                UserID = order.userID,
+                Date = order.date,
+                Orderlines = new List<Orderlines>()
+            };
+
+            foreach (var orderLine in order.orderlines)
+            {
+                var newOrderLine = new Orderlines()
+                {
+                    ProductID = orderLine.productId,
+                    OrderID = newOrder.ID,
+                    Quantity = orderLine.quantity
+                };
+                newOrder.Orderlines.Add(newOrderLine);
+            }
+
+
+            try
+            {
+                db.Orders.Add(newOrder);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
+        public List<Order> GetOrders()
+        {
+            //Returns all orders. (for statistics?)
+
+            return null;
+        }
+
+        public List<Order> GetOrdersForUser(int userId)
+        {
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    var dbOrders = db.Orders.ToList();
+                    List<Order> outputOrder = new List<Order>();
+                    foreach (var order in dbOrders)
+                    {
+                        if (order.UserID == userId)
+                        {
+                            var oneOrder = new Order();
+                            oneOrder.id = order.ID;
+                            oneOrder.userID = order.UserID;
+                            oneOrder.date = order.Date;
+                            oneOrder.orderlines = new List<Orderline>();
+
+                            foreach(var orderline in order.Orderlines)
+                            {
+                                var NewOrderLine = new Orderline();
+                                NewOrderLine.productId = orderline.ProductID;
+                                NewOrderLine.quantity = orderline.Quantity;
+                                NewOrderLine.orderID = oneOrder.id;
+                                oneOrder.orderlines.Add(NewOrderLine);
+                            }
+                            outputOrder.Add(oneOrder);
+                        }
+                    }
+
+                    return outputOrder;
+                }
+                catch (Exception)
+                {
+                    var output = new List<Order>();
+                    var errorOrder = new Order();
+                    errorOrder.id = 1337;
+                    output.Add(errorOrder);
+                    return output;
+                }
             }
         }
     }

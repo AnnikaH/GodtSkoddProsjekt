@@ -1,0 +1,47 @@
+﻿@model List<GodtSkoddProsjekt.Models.Order>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>OrderDetails</title>
+</head>
+<body>
+    <div>
+        <h4>Ordrehistorikk</h4>
+        <hr />
+
+        @foreach (var order in Model)
+        {
+
+        <h3>Ordre nr. @order.id</h3>
+
+        <dl class="dl-horizontal">
+            <!--<dt>
+                Html.DisplayNameFor(model => model.userID)
+            </dt>
+    
+            <dd>
+                Html.DisplayFor(model => model.userID)
+            </dd>-->
+    
+            <dt>
+                @Html.DisplayNameFor(modelItem => order.date)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(modelItem => order.date)
+            </dd>
+
+            <dd>
+                @Html.DisplayFor(modelItem => order.orderlines[0])
+            </dd>
+    
+        </dl>
+
+        }
+    </div>
+</body>
+</html>

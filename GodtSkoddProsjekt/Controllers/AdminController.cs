@@ -95,39 +95,39 @@ namespace GodtSkoddProsjekt.Controllers
 
         // CREATE PRODUCTS BACKEND:
 
-        public void CreateAllProducts()
+        public ActionResult CreateAllProducts()
         {
             DBGodtSkodd dbGodtSkodd = new DBGodtSkodd();
 
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Traktor Regnstøvel", 200, 25, "Rød", "Gummi", "Amazon", "/Content/Images/Boys/Boots/1.jpg", "Boys", "Boots"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Frosk Regnstøvel", 290, 25, "Grønn", "Gummi", "Amazon", "/Content/Images/Boys/Boots/2.jpg", "Boys", "Boots"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Viking Regnstøvel", 230, 25, "Blå", "Gummi", "Viking", "/Content/Images/Boys/Boots/3.jpg", "Boys", "Boots"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Hunter Regnstøvel", 800, 25, "Blå/Grå", "Gummi", "Hunter", "/Content/Images/Boys/Boots/4.jpg", "Boys", "Boots"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Byggmester Bob", 450, 25, "Blå", "Gummi", "BobBuilder", "/Content/Images/Boys/Boots/5.jpg", "Boys", "Boots"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Traktor regnstøvler", 200, 1, "Rød", "Gummi", "Amazon", "/Content/Images/Boys/Boots/1.jpg", "Boys", "Boots"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Frosk regnstøvler", 290, 1, "Grønn", "Gummi", "Amazon", "/Content/Images/Boys/Boots/2.jpg", "Boys", "Boots"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Viking regnstøvler", 230, 1, "Blå", "Gummi", "Viking", "/Content/Images/Boys/Boots/3.jpg", "Boys", "Boots"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Hunter regnstøvler", 800, 1, "Blå/Grå", "Gummi", "Hunter", "/Content/Images/Boys/Boots/4.jpg", "Boys", "Boots"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Byggmester Bob", 450, 1, "Blå", "Gummi", "BobBuilder", "/Content/Images/Boys/Boots/5.jpg", "Boys", "Boots"));
 
             dbGodtSkodd.CreateProduct(CreateNewProduct("Pensko", 370, 1,"Hvit/Svart", "Skinn", "AliExpress", "/Content/Images/Boys/DressShoes/1.jpg", "Boys", "DressShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Pensko", 350, 1,"Svart/Sølv", "Skinn", "LM83", "/Content/Images/Boys/DressShoes/2.jpg", "Boys", "DressShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Formelle sko", 500, 1,"Svart", "Skinn", "LM83", "/Content/Images/Boys/DressShoes/3.jpg", "Boys", "DressShoes"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Formelle Sko", 500, 1,"Svart", "Skinn", "Japanned", "/Content/Images/Boys/DressShoes/4.jpg", "Boys", "DressShoes"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Formelle Sko", 390, 1,"Svart", "Skinn", "ToysRUs", "/Content/Images/Boys/DressShoes/5.jpg", "Boys", "DressShoes"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Formelle sko", 500, 1,"Svart", "Skinn", "Japanned", "/Content/Images/Boys/DressShoes/4.jpg", "Boys", "DressShoes"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Formelle sko", 390, 1,"Svart", "Skinn", "ToysRUs", "/Content/Images/Boys/DressShoes/5.jpg", "Boys", "DressShoes"));
 
             dbGodtSkodd.CreateProduct(CreateNewProduct("Sommersandaler", 390,1, "Hvit", "Mesh", "Uovo", "/Content/Images/Boys/Sandals/1.jpg", "Boys", "Sandals"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Baby Gå", 550, 1,"Hvit/Blå", "Skinn", "Caroch", "/Content/Images/Boys/Sandals/2.jpg", "Boys", "Sandals"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Baby gåsko", 550, 1,"Hvit/Blå", "Skinn", "Caroch", "/Content/Images/Boys/Sandals/2.jpg", "Boys", "Sandals"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Mikke Mus", 150, 1,"Blå", "Mesh", "Disney", "/Content/Images/Boys/Sandals/3.jpg", "Boys", "Sandals"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Relix Sandaler", 590, 1,"Svart", "Mesh", "Skechers", "/Content/Images/Boys/Sandals/4.jpg", "Boys", "Sandals"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Relix sandaler", 590, 1,"Svart", "Mesh", "Skechers", "/Content/Images/Boys/Sandals/4.jpg", "Boys", "Sandals"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Coga Sport", 350, 1,"Blå", "Mesh", "Coga", "/Content/Images/Boys/Sandals/5.jpg", "Boys", "Sandals"));
 
             dbGodtSkodd.CreateProduct(CreateNewProduct("Joggesko", 350, 1,"Blå", "Mesh", "Jtengda", "/Content/Images/Boys/Sneakers/1.jpg", "Boys", "Sneakers"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Air Cushion", 390, 1,"Blå", "Mesh", "KanlBear", "/Content/Images/Boys/Sneakers/2.jpg", "Boys", "Sneakers"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Totoho Lite", 300, 1,"Svart", "Mesh", "Totoho", "/Content/Images/Boys/Sneakers/3.jpg", "Boys", "Sneakers"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Y-8 Joggesko", 490, 1,"Svart", "Mesh", "Miqixz", "/Content/Images/Boys/Sneakers/4.jpg", "Boys", "Sneakers"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Panther Fotball", 500, 1,"Grønn/Gul", "Mesh", "TieBao", "/Content/Images/Boys/Sneakers/5.jpg", "Boys", "Sneakers"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Y-8 joggesko", 490, 1,"Svart", "Mesh", "Miqixz", "/Content/Images/Boys/Sneakers/4.jpg", "Boys", "Sneakers"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Panther fotballsko", 500, 1,"Grønn/Gul", "Mesh", "TieBao", "/Content/Images/Boys/Sneakers/5.jpg", "Boys", "Sneakers"));
 
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Vinter Brand", 450, 1,"Svart", "Skinn", "AliExpress", "/Content/Images/Boys/WinterShoes/1.jpg", "Boys", "WinterShoes"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Vintersko", 500, 1,"Svart", "Skinn", "AliExpress", "/Content/Images/Boys/WinterShoes/2.jpg", "Boys", "WinterShoes"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("PU Skinnstøvel", 130, 1,"Grønn", "Skinn", "AliExpress", "/Content/Images/Boys/WinterShoes/3.jpg", "Boys", "WinterShoes"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Vintersko", 450, 1, "Svart", "Skinn", "AliExpress", "/Content/Images/Boys/WinterShoes/1.jpg", "Boys", "WinterShoes"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Vintersko", 500, 1, "Svart", "Skinn", "AliExpress", "/Content/Images/Boys/WinterShoes/2.jpg", "Boys", "WinterShoes"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("PU skinnstøvler", 130, 1,"Grønn", "Skinn", "AliExpress", "/Content/Images/Boys/WinterShoes/3.jpg", "Boys", "WinterShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Hongda CowHide", 380, 1,"Grønn", "Skinn", "Hongda", "/Content/Images/Boys/WinterShoes/4.jpg", "Boys", "WinterShoes"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Vinter Utesko", 150, 1,"Grønn", "Gummi", "AliExpress", "/Content/Images/Boys/WinterShoes/5.jpg", "Boys", "WinterShoes"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Vinter utesko", 150, 1,"Grønn", "Gummi", "AliExpress", "/Content/Images/Boys/WinterShoes/5.jpg", "Boys", "WinterShoes"));
 
             dbGodtSkodd.CreateProduct(CreateNewProduct("Dora støvler", 500, 1,"Rosa", "Gummi", "Dora The Explorer", "/Content/Images/Girls/Boots/1.jpg", "Girls", "Boots"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Minni Mus", 390, 1,"Rød", "Gummi", "Disney", "/Content/Images/Girls/Boots/2.jpg", "Girls", "Boots"));
@@ -138,7 +138,7 @@ namespace GodtSkoddProsjekt.Controllers
             dbGodtSkodd.CreateProduct(CreateNewProduct("Formelle sko", 600, 1,"Rosa", "Skinn", "The Bay", "/Content/Images/Girls/DressShoes/1.jpg", "Girls", "DressShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Pensko", 150, 1, "Gull", "Syntetisk Skinn", "LM83", "/Content/Images/Girls/DressShoes/2.jpg", "Girls", "DressShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Blomstersko", 590,1, "Hvit", "Skinn", "LM83", "/Content/Images/Girls/DressShoes/3.jpg", "Girls", "DressShoes"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Baby Pensko", 100, 1, "Sølv", "Syntetisk Skinn", "LM83", "/Content/Images/Girls/DressShoes/5.jpg", "Girls", "DressShoes"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Baby pensko", 100, 1, "Sølv", "Syntetisk Skinn", "LM83", "/Content/Images/Girls/DressShoes/4.jpg", "Girls", "DressShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Pensko", 450, 1,"Svart", "Skinn", "JoyLand", "/Content/Images/Girls/DressShoes/5.jpg", "Girls", "DressShoes"));
 
             dbGodtSkodd.CreateProduct(CreateNewProduct("Blomstersandaler", 390,1, "Rød", "Skinn", "The Bay", "/Content/Images/Girls/Sandals/1.jpg", "Girls", "Sandals"));
@@ -147,11 +147,11 @@ namespace GodtSkoddProsjekt.Controllers
             dbGodtSkodd.CreateProduct(CreateNewProduct("Barnesandaler", 550, 1,"Grå", "Mesh", "Gzzhl", "/Content/Images/Girls/Sandals/4.jpg", "Girls", "Sandals"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Jewelled sandaler", 290, 1,"Rosa", "Syntetisk Skinn", "AliCDN", "/Content/Images/Girls/Sandals/5.jpg", "Girls", "Sandals"));
 
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Dansesko", 500, 1,"Lilla", "Mesh", "Uovo", "/Content/Images/Girls/Joggesko/1.jpg", "Girls", "Sneakers"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Originals ZX", 700,1, "Lilla", "Mesh", "Adidas", "/Content/Images/Girls/Joggesko/2.jpg", "Girls", "Sneakers"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Eclipse løpesko", 490, 1,"Rosa", "Mesh", "Eclipse", "/Content/Images/Girls/Joggesko/3.jpg", "Girls", "Sneakers"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Outdoor Sport", 250, 1,"Rosa", "Mesh", "AliExpress", "/Content/Images/Girls/Joggesko/4.jpg", "Girls", "Sneakers"));
-            dbGodtSkodd.CreateProduct(CreateNewProduct("GT 1000-4", 550, 1,"Rosa", "Mesh", "Asics", "/Content/Images/Girls/Joggesko/5.jpg", "Girls", "Sneakers"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Dansesko", 500, 1,"Lilla", "Mesh", "Uovo", "/Content/Images/Girls/Sneakers/1.jpg", "Girls", "Sneakers"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Originals ZX", 700,1, "Lilla", "Mesh", "Adidas", "/Content/Images/Girls/Sneakers/2.jpg", "Girls", "Sneakers"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Eclipse løpesko", 490, 1,"Rosa", "Mesh", "Eclipse", "/Content/Images/Girls/Sneakers/3.jpg", "Girls", "Sneakers"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Outdoor Sport", 250, 1,"Rosa", "Mesh", "AliExpress", "/Content/Images/Girls/Sneakers/4.jpg", "Girls", "Sneakers"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("GT 1000-4", 550, 1,"Rosa", "Mesh", "Asics", "/Content/Images/Girls/Sneakers/5.jpg", "Girls", "Sneakers"));
             
             dbGodtSkodd.CreateProduct(CreateNewProduct("Lobbing Ball", 100,1, "Rosa", "Plush", "AliExpress", "/Content/Images/Girls/WinterShoes/1.jpg", "Girls", "WinterShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Candy Thermal", 300, 1,"Lilla", "Plush", "Coga", "/Content/Images/Girls/WinterShoes/2.jpg", "Girls", "WinterShoes"));
@@ -222,7 +222,23 @@ namespace GodtSkoddProsjekt.Controllers
             dbGodtSkodd.CreateProduct(CreateNewProduct("Classic Short", 2300, 1,"Brun", "Skinn", "Uggs", "/Content/Images/Women/Sneakers/4.jpg", "Women", "WinterShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Vintersko", 790, 1,"Brun", "Skinn", "FriendSkorner", "/Content/Images/Women/Sneakers/5.jpg", "Women", "WinterShoes"));
 
-            RedirectToAction("Index");
+            var newOrder = new Order();
+            newOrder.id = 1;
+            newOrder.userID = 1;
+            newOrder.date = DateTime.Now;
+            newOrder.orderlines = new List<Orderline>();
+
+            var newOrderLine = new Orderline();
+            newOrderLine.orderID = newOrder.id;
+            newOrderLine.productId = 5;
+            newOrderLine.quantity = 9001;
+
+            newOrder.orderlines.Add(newOrderLine);
+            
+            dbGodtSkodd.CreateOrder(newOrder);
+
+
+            return RedirectToAction("Index");
         }
 
         private Product CreateNewProduct(String n, double p, int s, String c, String m, String b, String u, String g, String t)

@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿<!-- IKKE MULIG SIDEN ALLE SIDENE TRENGER Å FÅ INN EN LOGINUSER DA..?: model GodtSkoddProsjekt.Models.LoginUser -->
+
+<!-- Check if a user is logged in -->
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -12,9 +16,61 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
     <script src="~/Scripts/bootstrap.js"></script>
-
     <!--- Our stylesheet-->
     <link href="~/Content/Style.css" rel="stylesheet" />
+    <!-- Ajax: -->
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+        function checkLogin() {
+            var username = $('#logginnbrukernavn').val();
+            var password = $('#logginnpassord').val();
+
+            $('#logginntilbakemelding').html(username + " " + password);
+
+            $.getJSON("/Home/Login", { username: username, password: password }, function (loginUser) {
+                /*var ut = "";
+                for (var i in bok) {
+                    ut += bok[i].id + " " + bok[i].Tittel + " " + bok[i].Sjanger + "<br/>";
+                }
+                $("#BokerListe").html(ut);*/
+
+                $('#logginntilbakemelding').html(username + " " + password);
+
+                if (loginUser == null) {
+                    $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
+                    return false;
+                }
+                else {
+                    $('#logginntilbakemelding').html("Riktig!");
+                    return true;
+                }
+            });
+
+
+            /*$.Ajax({
+                url: 'Url.Action("Login", "Home")',
+                data: { username: username, password: password },
+                success: function () {
+                    // vil da kalle list-funksjonen igjen (kalle listekontrolleren for å refreshe viewet
+                    // vil at boksen skal forsvinne og reloade viewet slik at vi ser med en gang at denne
+                    // som vi ønsker fjernet har blitt fjernet
+                    // Må ta et ajax-kall til altså:
+                    $.Ajax({
+                        url: 'Url.Action("Liste", "Kunde")',
+                        success: function () {
+                            window.location.reload();
+                        }
+                    });
+                    //window.location.reload();
+                    return true;
+                },
+                error: function () {
+                    $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
+                    return false;
+                }
+            });*/
+        }
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -26,22 +82,29 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Godt Skodd", "Index", "Home", new { tom = "" }, new { @class = "navbar-brand"}) 
+                @Html.ActionLink("Godt Skodd", "Index", "Home", new { id = "" }, new { @class = "navbar-brand"}) 
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <!--<li><a href="#about">Damesko</a></li>-->
                     <li>
-                        @Html.ActionLink("Damesko", "ListProductsOfType", "Home", new { type = "Women" }, new { @class = "" })
+                        @Html.ActionLink("Damesko", "Index", "Home", new { id = 1 }, new { @class = "" })
                     </li>
-                    <li><a href="#contact">Herresko</a></li>
-                    <li><a href="#contact">Barnesko</a></li>
+                    <li>
+                        @Html.ActionLink("Herresko", "Index", "Home", new { id = 2 }, new { @class = "" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Jentesko", "Index", "Home", new { id = 3 }, new { @class = "" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Guttesko", "Index", "Home", new { id = 4 }, new { @class = "" })
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#about">Login | Registrer deg</a>
-                        <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-                            <form>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="">Logg inn | Registrer deg</a>
+                        <div class="dropdown-menu">
+                            <!--<form action="JavaScript:checkLogin()">-->
+                            <form action="/Home/Login">
                                 <div class="form-group">
                                     <label for="logginnbrukernavn" class="labellogginn">Brukernavn</label>
                                     <input type="text" class="form-control" id="logginnbrukernavn" placeholder="Brukernavn">
@@ -49,12 +112,34 @@
                                     <input type="password" class="form-control" id="logginnpassord" placeholder="Passord">
                                 </div><!-- /.form-group-->
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-default">Logg Inn</button>@Html.ActionLink("Registrer deg", "Create", "User")
+                                    <button type="submit" id="btnlogginn" class="btn btn-default" onsubmit="return checkLogin()">Logg Inn</button>
+                                    <div id="logginntilbakemelding"></div>
+                                    <br /><br />
+                                    @Html.ActionLink("Registrer deg", "Create", "User")
                                 </div>
                             </form>
                         </div>
                     </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href=""><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
+                        <div class="dropdown-menu">
+                            <form>
+                                <div class="form-group">
+                                    Din handlekurv
+                                </div><!-- /.form-group-->
+                                <div class="form-group">
+                                    <button type="submit" id="btntilkasse" class="btn btn-default">Til kasse</button><br /><br />
+                                    <!--Html.ActionLink("Registrer deg", "Create", "User")-->
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- Not show if user not logged in? -->
 
+                        @Html.ActionLink("Min side", "Index", "User", new { brukernavn = "" }, new { @class = "" })
+                    
+                    </li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

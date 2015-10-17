@@ -21,10 +21,38 @@ h2.header
     text-align:center;
 
 }
+
 footer
 {
     margin-left:5%;
 }
+
+/*_________________ CSS for menubar __________________*/
+
+.dropdown-menu {
+    padding: 15px;
+    padding-bottom: 0px;
+}
+
+.labellogginn {
+    padding-top: 5px;
+}
+
+#btnlogginn {
+    margin-right: 0px;
+}
+
+#shoppingCartImg {
+    width: 5%;
+}
+/*
+.navbar-right {
+    width: 50%;
+}
+
+.dropdown {
+    width: 50%;
+}*/
 
 /*_________________ CSS for showing products__________________*/
 
@@ -33,13 +61,11 @@ footer
     background-color:#550452;
     position: relative;
 
-  padding: 0px;
-  height:100%;
+    padding: 0px;
+    height:100%;
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
-border-radius: 10px;
-   
-   
+border-radius: 10px;  
 }
 
 .caption:after 
@@ -57,45 +83,49 @@ left: 45%;
 }
 
 
-
 .thumbnail{
-    padding:0px;
-    
+    padding: 0px;
 }
 
 
 .col-md-4 .productBox{
    
     margin-left: 2px;
-    margin-right:2px;
+    margin-right: 2px;
 }
 
 .productDescription
 {
     color:#FFFFFF;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .productName
 {
-    color:#FFFFFF;   
+    color:#FFFFFF;
+    padding-left: 10px;
 }
 
 .productPrice
 {
     color:#FFFFFF;
     font-weight:bold;
+    padding-left: 12px;
+    padding-bottom: 10px;
+    padding-top: 7px;
 }
 
-.amountSelect
-{
-    width:40%;
-    margin-bottom:20px;
+.btn-product {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
+
 /*______________ CSS for User/Create.cshtml page______________*/
 
 h2.registrer
 {
-
 	text-align: center;
 	font-size: 1em;
     font-weight:bold;
@@ -104,30 +134,23 @@ h2.registrer
 .btn-default
 {
     float:right;
-
-  
-   
 }
 
 .col-md-6
 {
-  margin-top:0px;
+  margin-top:50px;
   padding-bottom:15px;
-
 }
 
 .currentStep
 {
     background-color:#550452;
     color:#FFFFFF;
-     padding-top:15px;
-    width:80%;
-    margin-left:10%;
-    margin-right:10%;
+    padding-top:15px;
 }
 
 .nextStep
 {
     background-color:#E7E7E7;
-      padding-top:50px;
+    padding-top:50px;
 }

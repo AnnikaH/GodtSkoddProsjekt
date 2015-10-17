@@ -10,9 +10,58 @@ namespace GodtSkoddProsjekt.Controllers
     public class UserController : Controller
     {
         // GET: User
-        public ActionResult Index()
+        public ActionResult Index()  // int? id > i metoden: sende med id.Value til dbGodtSkodd, best å ikke ta inn en id her (sikkerhet)
         {
-            return View();
+            // sjekk om bruker innlogget (og få tak i id?)
+
+            // tester:
+            /*
+            // Checking login:
+            if (Session["LoggedIn"] == null)
+            {
+                // da definerer vi den og setter den til false
+                Session["LoggedIn"] = false;
+                ViewBag.LoggedIn = false; // oppdaterer denne også!
+            }
+            else
+            {
+                // vil så hente ut statusen til session'en og legge denne over i ViewBag'en:
+                ViewBag.LoggedIn = (bool) Session["LoggedIn"]; // Husk: Må castes!
+            }*/
+
+            if (Session["LoggedIn"] != null)   // må teste på om den er satt eller ikke!
+            {
+                bool loggedIn = (bool)Session["LoggedIn"];
+
+                if (loggedIn)
+                {
+                    var dbGodtSkodd = new DBGodtSkodd();
+                    User user = dbGodtSkodd.GetUser(1);
+
+                    if (user != null)
+                        return View(user);
+                    else
+                    {
+                        // (since no user was found):
+                        Session["LoggedIn"] = false;
+                        ViewBag.LoggedIn = false;
+                        return Redirect("Home/Index");
+                    }
+                }
+                else
+                {
+                    // just in case:
+                    Session["LoggedIn"] = false;
+                    ViewBag.LoggedIn = false;
+                    return Redirect("Home/Index");
+                }
+            }
+            else
+            {
+                Session["LoggedIn"] = false;
+                ViewBag.LoggedIn = false;
+                return Redirect("Home/Index");
+            }
         }
 
         // GET: User/Details/5
@@ -21,6 +70,20 @@ namespace GodtSkoddProsjekt.Controllers
             var dbGodtSkodd = new DBGodtSkodd();
             User user = dbGodtSkodd.GetUser(id);
             return View(user);
+        }
+
+        public ActionResult OrderDetails(int id)
+        {
+            // get user id
+            var dbGodtSkodd = new DBGodtSkodd();
+
+            List<Order> orders = dbGodtSkodd.GetOrdersForUser(id);
+
+            if (orders != null)
+                return View(orders);
+            else
+                //return RedirectToAction("Index");
+                return View();
         }
 
         // GET: User/Create
@@ -40,7 +103,11 @@ namespace GodtSkoddProsjekt.Controllers
                 bool insertOK = dbGodtSkodd.CreateUser(user);
 
                 if (insertOK)
-                    return RedirectToAction("Index");
+                {
+                    Session["LoggedIn"] = true;
+                    ViewBag.LoggedIn = true;
+                    return RedirectToAction("Index");   // Går til Min side
+                }
             }
 
             return View();
@@ -84,11 +151,14 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, User user)   // istedenfor User: FormCollection collection ?
         {
-            var dbGodtSkodd = new DBGodtSkodd();
-            bool deleteOK = dbGodtSkodd.DeleteUser(id, user);
+            if (ModelState.IsValid)
+            {
+                var dbGodtSkodd = new DBGodtSkodd();
+                bool deleteOK = dbGodtSkodd.DeleteUser(id, user);
 
-            if (deleteOK)
-                return RedirectToAction("Index");
+                if (deleteOK)
+                    return RedirectToAction("Index");
+            }
 
             return View();
         }
