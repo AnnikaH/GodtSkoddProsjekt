@@ -1,7 +1,4 @@
-﻿
-
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -9,11 +6,8 @@
 </head>
 <body>
     <h2>Admin</h2>
-    <div> 
+    <div>
+        @Html.ActionLink("Lag Produkter", "CreateAllProducts", "Admin", new { @class = "btn btn-success" })
     </div>
-
-    @Html.ActionLink("Lag Produkter", "CreateAllProducts", "Admin", new { @class= "btn btn-success"}) 
-
-
 </body>
 </html>

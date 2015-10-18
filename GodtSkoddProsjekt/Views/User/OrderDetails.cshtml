@@ -1,6 +1,5 @@
 ﻿@model List<GodtSkoddProsjekt.Models.Order>
 
-
 <!DOCTYPE html>
 
 <html>
@@ -20,21 +19,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading"><strong>Ordre nr. @Model[i].id</strong> <div class="orderDate"><strong>Dato:</strong> @Html.DisplayFor(modelItem => Model[i].date)</div></div>
 
-                        <!--<dt>
-                        Html.DisplayNameFor(model => model.userID)
-                    </dt>
-
-                    <dd>
-                        Html.DisplayFor(model => model.userID)
-                    </dd>-->
-                        
-
                         @for (int j = 0; j < Model[i].orderlines.Count; j++)
                         {
                             <table class="table">
                                 <tr>
                                     <td><strong>Produkt nr.</strong></td>
-
 
                                     <td>
                                         @Model[i].orderlines[j].productId.ToString()
@@ -45,7 +34,6 @@
                                         <strong>Antall</strong>
                                     </td>
 
-
                                     <td>
                                         @Model[i].orderlines[j].quantity.ToString()
                                     </td>
@@ -55,6 +43,8 @@
                    
                 </div><!-- /.panel default-->
             }
-        </div></div><!--./col-sm-9-->
+        
+        </div>
+    </div><!--./col-sm-9-->
 </body>
 </html>
