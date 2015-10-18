@@ -99,12 +99,12 @@ namespace GodtSkoddProsjekt.Controllers
         public ActionResult CreateAllProducts()
         {
             DBGodtSkodd dbGodtSkodd = new DBGodtSkodd();
-
-            dbGodtSkodd.CreateProduct(CreateNewProduct("Traktor regnstøvler", 200, 1, "Rød", "Gummi", "Amazon", "/Content/Images/Boys/Boots/1.jpg", "Boys", "Boots"));
+            
             dbGodtSkodd.CreateProduct(CreateNewProduct("Frosk regnstøvler", 290, 1, "Grønn", "Gummi", "Amazon", "/Content/Images/Boys/Boots/2.jpg", "Boys", "Boots"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Viking regnstøvler", 230, 1, "Blå", "Gummi", "Viking", "/Content/Images/Boys/Boots/3.jpg", "Boys", "Boots"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Hunter regnstøvler", 800, 1, "Blå/Grå", "Gummi", "Hunter", "/Content/Images/Boys/Boots/4.jpg", "Boys", "Boots"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Byggmester Bob", 450, 1, "Blå", "Gummi", "BobBuilder", "/Content/Images/Boys/Boots/5.jpg", "Boys", "Boots"));
+            dbGodtSkodd.CreateProduct(CreateNewProduct("Traktor regnstøvler", 200, 1, "Rød", "Gummi", "Amazon", "/Content/Images/Boys/Boots/1.jpg", "Boys", "Boots"));
 
             dbGodtSkodd.CreateProduct(CreateNewProduct("Pensko", 370, 1,"Hvit/Svart", "Skinn", "AliExpress", "/Content/Images/Boys/DressShoes/1.jpg", "Boys", "DressShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Pensko", 350, 1,"Svart/Sølv", "Skinn", "LM83", "/Content/Images/Boys/DressShoes/2.jpg", "Boys", "DressShoes"));
