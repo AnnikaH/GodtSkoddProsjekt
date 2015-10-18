@@ -76,9 +76,9 @@ namespace GodtSkoddProsjekt.Controllers
                 Session["LoggedIn"] = true;
                 ViewBag.LoggedIn = true;
 
-                List<LoginUser> list = new List<LoginUser>();
-                list.Add(loginUser);
-                JsonResult jsonOutput = Json(list, JsonRequestBehavior.AllowGet);
+                //List<LoginUser> list = new List<LoginUser>();
+                //list.Add(loginUser);
+                JsonResult jsonOutput = Json(loginUser, JsonRequestBehavior.AllowGet);
                 return jsonOutput;
                 
                 //return RedirectToAction("Index");
