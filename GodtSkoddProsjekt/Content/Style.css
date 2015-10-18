@@ -17,9 +17,8 @@
 
 h2.header
 {
-    margin-top:50px;
+    margin-top:30px;
     text-align:center;
-
 }
 
 footer
@@ -45,14 +44,6 @@ footer
 #shoppingCartImg {
     width: 5%;
 }
-/*
-.navbar-right {
-    width: 50%;
-}
-
-.dropdown {
-    width: 50%;
-}*/
 
 /*_________________ CSS for showing products__________________*/
 
@@ -169,4 +160,10 @@ h2.registrer
 {
     float:right;
     margin-right:1%;
+}
+
+/*__________________________ CSS for My page (User/Index.cshtml) _______________________*/
+
+#myPageBtnContainer {
+     padding-top: 10px;
 }

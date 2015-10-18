@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="col-sm-9">
-            <h2 class="header">Min Side</h2>
+            <h2 class="subpage_titles">Min Side</h2>
             <dl class="dl-horizontal">
                 <dt>
                     @Html.DisplayNameFor(model => model.firstName)
@@ -78,17 +78,12 @@
                     @Html.DisplayFor(model => model.userName)
                 </dd>
 
-                <dd>
+                <dd id="myPageBtnContainer">
                     @Html.ActionLink("Endre", "Edit", "User", new { id = Model.id }, new { @class = "btn btn-danger" })
                     @Html.ActionLink("Se ordrehistorikk", "OrderDetails", "User", new { id = Model.id }, new { @class = "btn btn-info" })
                 </dd>
             </dl>
     
-    <!--<h2 class="header">Ordrehistorikk</h2>
-        <table class="table table-hover">
-            <tr><td>Ordre 1</td><td>Navn</td><td>Produktnavn</td></tr>
-        </table>-->
-
     </div><!-- /. col-sm-9 aka wrapper-->
 </body>
 </html>
