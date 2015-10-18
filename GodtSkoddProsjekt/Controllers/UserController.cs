@@ -10,7 +10,7 @@ namespace GodtSkoddProsjekt.Controllers
     public class UserController : Controller
     {
         // GET: User
-        public ActionResult Index()  // int? id > i metoden: sende med id.Value til dbGodtSkodd, best å ikke ta inn en id her (sikkerhet)
+        public ActionResult Index(int? id)  // int? id > i metoden: sende med id.Value til dbGodtSkodd, best å ikke ta inn en id her (sikkerhet)
         {
             // sjekk om bruker innlogget (og få tak i id?)
 
@@ -36,7 +36,8 @@ namespace GodtSkoddProsjekt.Controllers
                 if (loggedIn)
                 {
                     var dbGodtSkodd = new DBGodtSkodd();
-                    User user = dbGodtSkodd.GetUser(1);
+                    
+                    User user = dbGodtSkodd.GetUser(id);
 
                     if (user != null)
                         return View(user);
