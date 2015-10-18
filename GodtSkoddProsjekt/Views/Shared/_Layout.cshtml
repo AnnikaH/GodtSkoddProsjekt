@@ -25,21 +25,26 @@
             var username = $('#logginnbrukernavn').val();
             var password = $('#logginnpassord').val();
 
-            var success = false;
+            //var success = false;
+            var message = "Feil brukernavn eller passord!";
 
             $.getJSON("/Home/Login", { username: username, password: password }, function (loginUserData) {
                 // only enters here if success
 
-                // NB!!!! sende med id til User (ikke loginUser):
-                var userId = 1;
+                // NB!!!! sende med id til User (ikke loginUser): - SETTE SESSION MED USER I Login-metoden!!??
+                //var userId = 1;
 
+                //success = true;
+                message = "";
                 window.location.reload();
-                
-                success = true;
             });
 
-            if (!success)   // If $.getJson() fails:
-                $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
+            //if (!success)   // If $.getJson() fails:
+                //$('#logginntilbakemelding').html("Feil brukernavn eller passord!");
+            //else
+                //$('#logginntilbakemelding').html("");
+
+            $('#logginntilbakemelding').html(message);
         }
     </script>
 </head>
@@ -71,25 +76,39 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="">Logg inn | Registrer deg</a>
-                        <div class="dropdown-menu">
-                            <form action="JavaScript:checkLogin()">
-                                <div class="form-group">
-                                    <label for="logginnbrukernavn" class="labellogginn">Brukernavn</label>
-                                    <input type="text" class="form-control" id="logginnbrukernavn" placeholder="Brukernavn">
-                                    <label for="logginnpassord" class="labellogginn">Passord</label>
-                                    <input type="password" class="form-control" id="logginnpassord" placeholder="Passord">
-                                </div><!-- /.form-group-->
-                                <div class="form-group">
-                                    <button type="submit" id="btnlogginn" class="btn btn-default" onsubmit="checkLogin()">Logg Inn</button>
-                                    <br /><br />
-                                    <div id="logginntilbakemelding"></div>
-                                    @Html.ActionLink("Registrer deg", "Create", "User")
-                                </div>
-                            </form>
-                        </div>
-                    </li>
+                    <!-- Not show if user not logged in -->
+                    @if (ViewBag.LoggedIn != null && ViewBag.LoggedIn)
+                    {
+                        // NB!!!!! Send med riktig id (til user):
+                        <li>
+                            @Html.ActionLink("Min side", "Index", "User", new { id = 1 }, new { @class = "" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Logg ut", "LogOut", "Home")
+                        </li>
+                    }
+                    else // Show if user is not logged in:
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="">Logg inn | Registrer deg</a>
+                            <div class="dropdown-menu">
+                                <form action="JavaScript:checkLogin()">
+                                    <div class="form-group">
+                                        <label for="logginnbrukernavn" class="labellogginn">Brukernavn</label>
+                                        <input type="text" class="form-control" id="logginnbrukernavn" placeholder="Brukernavn">
+                                        <label for="logginnpassord" class="labellogginn">Passord</label>
+                                        <input type="password" class="form-control" id="logginnpassord" placeholder="Passord">
+                                    </div><!-- /.form-group-->
+                                    <div class="form-group">
+                                        <button type="submit" id="btnlogginn" class="btn btn-default" onsubmit="checkLogin()">Logg Inn</button>
+                                        <br /><br />
+                                        <div id="logginntilbakemelding"></div>
+                                        @Html.ActionLink("Registrer deg", "Create", "User")
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                    }
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href=""><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
                         <div class="dropdown-menu">
@@ -103,16 +122,6 @@
                                 </div>
                             </form>
                         </div>
-                    </li>
-                    <li id="minSideLi">
-                        <!-- Not show if user not logged in -->
-                        @if (ViewBag.LoggedIn != null && ViewBag.LoggedIn)
-                        {
-                            // NB!!!!! Send med riktig id (til user):
-
-                            @Html.ActionLink("Min side", "Index", "User", new { id = 1 }, new { @class = "" })
-                            @Html.ActionLink("Logg ut", "LogOut", "Home");
-                        }
                     </li>
                 </ul>
             </div><!--/.nav-collapse -->
