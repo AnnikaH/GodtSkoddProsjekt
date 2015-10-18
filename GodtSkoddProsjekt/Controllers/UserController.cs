@@ -89,9 +89,6 @@ namespace GodtSkoddProsjekt.Controllers
 
                 if (orders != null)
                     return View(orders);
-                //else
-                    //return RedirectToAction("Index");
-                    //return View();
             }
 
             return RedirectToAction("Index", "Home");
@@ -187,7 +184,7 @@ namespace GodtSkoddProsjekt.Controllers
                     bool changeOK = dbGodtSkodd.EditUser(id, user);
 
                     if (changeOK)
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", new { id = id });
                 }
 
                 return View();
