@@ -14,11 +14,11 @@
             <h2 class="subpage_titles">Ordrehistorikk</h2>
             <hr />
 
-            @foreach (var order in Model)
+            @for(int i = 0; i < Model.Count; i++)
             {
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Ordre nr. @order.id</div>
+                    <div class="panel-heading">Ordre nr. @Model[i].id</div>
 
                     <dl class="dl-horizontal">
                         <!--<dt>
@@ -30,17 +30,23 @@
                     </dd>-->
 
                         <dt>
-                            @Html.DisplayNameFor(modelItem => order.date)
+                            @Html.DisplayNameFor(modelItem => Model[i].date)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(modelItem => order.date)
-                        </dd>
-
+                            @Html.DisplayFor(modelItem => Model[i].date)
+                        </dd>  
+                        
+                        @for (int j = 0; j < Model[i].orderlines.Count; j++)
+                        {
                         <dd>
-                            @Html.DisplayFor(modelItem => order.orderlines[0])
+                            Produkt nr: 
+                            @Model[i].orderlines[j].productId.ToString();
+                            . Antall: 
+                            @Model[i].orderlines[j].quantity.ToString();
+                            .
                         </dd>
-
+                        }
                     </dl>
                 </div><!-- /.panel default-->
             }
