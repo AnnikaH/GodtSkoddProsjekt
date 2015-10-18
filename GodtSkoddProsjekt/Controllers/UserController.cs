@@ -30,7 +30,7 @@ namespace GodtSkoddProsjekt.Controllers
 
             if (loggedIn)
             {
-                if(id.HasValue)
+                if(id.HasValue && ((int) Session["UserId"] == id))  // you get thrown out if you try to access info to another user
                 {
                     var dbGodtSkodd = new DBGodtSkodd();
 
@@ -80,7 +80,7 @@ namespace GodtSkoddProsjekt.Controllers
 
             bool loggedIn = (bool)Session["LoggedIn"];
 
-            if (loggedIn)
+            if (loggedIn && ((int) Session["UserId"] == id))    // you get thrown out if you try to access info to another user
             {
                 // get user id
                 var dbGodtSkodd = new DBGodtSkodd();
@@ -146,7 +146,7 @@ namespace GodtSkoddProsjekt.Controllers
 
             bool loggedIn = (bool)Session["LoggedIn"];
 
-            if (loggedIn)
+            if (loggedIn && ((int) Session["UserId"] == id))    // you get thrown out if you try to access info to another user
             {
                 var dbGodtSkodd = new DBGodtSkodd();
                 User user = dbGodtSkodd.GetUser(id);
