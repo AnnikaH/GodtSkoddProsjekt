@@ -223,6 +223,8 @@ namespace GodtSkoddProsjekt.Controllers
             dbGodtSkodd.CreateProduct(CreateNewProduct("Classic Short", 2300, 1,"Brun", "Skinn", "Uggs", "/Content/Images/Women/Sneakers/4.jpg", "Women", "WinterShoes"));
             dbGodtSkodd.CreateProduct(CreateNewProduct("Vintersko", 790, 1,"Brun", "Skinn", "FriendSkorner", "/Content/Images/Women/Sneakers/5.jpg", "Women", "WinterShoes"));
 
+            // Testing out Order and Orderline (adding to user with id 1):
+
             var newOrder = new Order();
             newOrder.id = 1;
             newOrder.userID = 1;
@@ -237,9 +239,8 @@ namespace GodtSkoddProsjekt.Controllers
             newOrder.orderlines.Add(newOrderLine);
             
             dbGodtSkodd.CreateOrder(newOrder);
-
-
-            return RedirectToAction("Index");
+            
+            return RedirectToAction("Index", "Home");
         }
 
         private Product CreateNewProduct(String n, double p, int s, String c, String m, String b, String u, String g, String t)

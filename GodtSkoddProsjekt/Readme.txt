@@ -10,5 +10,5 @@ Hvis det ikke ligger noen produkt i databasen:
 
 Se eksempel på ordrehistorikk hvis databasen er fylt:
 	Hvis databasen er full av produkter og har en bruker med brukernavn annika som har id 1:
-	man logger inn med brukernavn "annika" og passord "Galtvort1" og går inn på ordrehistorikk
+	man logger inn med brukernavn "annika" og passord "annikahammervoll" og går inn på ordrehistorikk
 	på Min side vil man få opp en ordre der.
