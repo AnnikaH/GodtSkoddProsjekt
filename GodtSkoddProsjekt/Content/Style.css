@@ -157,8 +157,10 @@ h2.registrer
     margin-right:10%;
 }
 
-.nextStep
+
+/*__________________________ CSS for Orderhistory_______________________*/
+
+.subpage_titles
 {
-    background-color:#E7E7E7;
-    padding-top:50px;
+    text-align:center;
 }

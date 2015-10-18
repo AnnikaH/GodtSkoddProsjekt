@@ -10,38 +10,40 @@
 </head>
 <body>
     <div>
-        <h4>Ordrehistorikk</h4>
-        <hr />
+        <div class="col-sm-9">
+            <h2 class="subpage_titles">Ordrehistorikk</h2>
+            <hr />
 
-        @foreach (var order in Model)
-        {
+            @foreach (var order in Model)
+            {
 
-        <h3>Ordre nr. @order.id</h3>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Ordre nr. @order.id</div>
 
-        <dl class="dl-horizontal">
-            <!--<dt>
-                Html.DisplayNameFor(model => model.userID)
-            </dt>
-    
-            <dd>
-                Html.DisplayFor(model => model.userID)
-            </dd>-->
-    
-            <dt>
-                @Html.DisplayNameFor(modelItem => order.date)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(modelItem => order.date)
-            </dd>
+                    <dl class="dl-horizontal">
+                        <!--<dt>
+                        Html.DisplayNameFor(model => model.userID)
+                    </dt>
 
-            <dd>
-                @Html.DisplayFor(modelItem => order.orderlines[0])
-            </dd>
-    
-        </dl>
+                    <dd>
+                        Html.DisplayFor(model => model.userID)
+                    </dd>-->
 
-        }
-    </div>
+                        <dt>
+                            @Html.DisplayNameFor(modelItem => order.date)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(modelItem => order.date)
+                        </dd>
+
+                        <dd>
+                            @Html.DisplayFor(modelItem => order.orderlines[0])
+                        </dd>
+
+                    </dl>
+                </div><!-- /.panel default-->
+            }
+        </div></div><!--./col-sm-9-->
 </body>
 </html>
