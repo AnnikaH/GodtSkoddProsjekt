@@ -117,7 +117,14 @@ namespace GodtSkoddProsjekt.Controllers
                 {
                     Session["LoggedIn"] = true;
                     ViewBag.LoggedIn = true;
-                    return RedirectToAction("Index", "Home");   // must log in after created user
+
+                    LoginUser loginUser = new LoginUser();
+                    loginUser.userName = user.userName;
+                    loginUser.password = user.password;
+
+                    Session["UserId"] = dbGodtSkodd.GetUserIdInDB(loginUser);
+
+                    return RedirectToAction("Index", "Home");
                 }
             }
 

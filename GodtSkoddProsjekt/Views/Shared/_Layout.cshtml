@@ -71,7 +71,7 @@
                     <!-- Not show if user not logged in -->
                     @if (ViewBag.LoggedIn != null && ViewBag.LoggedIn)
                     {
-                        // Then Session["UserId"] has been set too (in the Login-method)
+                        // Then Session["UserId"] has been set too (in the Login-method and Create user-method)
                         var userId = (int) Session["UserId"];
 
                         <li id="minSideLi">
