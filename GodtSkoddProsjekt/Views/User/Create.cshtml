@@ -1,12 +1,9 @@
 ﻿@model GodtSkoddProsjekt.Models.User
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Registrer bruker</title>
-</head>
-<body>
+@{ 
+    ViewBag.Title = "Registrer bruker";
+}
+
     <div class="col-sm-9">
         @using (Html.BeginForm())
         {
@@ -17,7 +14,8 @@
                 @Html.ValidationSummary(true, "")
 
                 <div class="col-md-6 currentStep">
-                    <h2 class="registrer">Registrer ny bruker <br>Trinn 1</h2>
+                    <h2 class="registrer">Registrer ny bruker</h2>
+                    <h2 class="registrer">Trinn 1</h2>
                     <div class="form-group">
                         @Html.LabelFor(model => model.userName, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
@@ -102,5 +100,3 @@
         }
     
     </div><!--- /.col-sm-9  aka wrapper-->
-</body>
-</html>

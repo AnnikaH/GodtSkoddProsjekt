@@ -1,14 +1,9 @@
 ﻿@model List<GodtSkoddProsjekt.Models.Product>
 
-<!DOCTYPE html>
+@{ 
+    ViewBag.Title = "Godt Skodd";
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Godt Skodd - Home</title>
-</head>
-<body>
-    
     <div class="col-sm-9">
        
             @foreach (var item in Model)
@@ -85,5 +80,3 @@
             }
 
     </div><!-- /.col-sm-9 aka Wrapper -->
-</body>
-</html>
