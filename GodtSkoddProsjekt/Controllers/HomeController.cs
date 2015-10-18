@@ -34,8 +34,6 @@ namespace GodtSkoddProsjekt.Controllers
                 Session["Cart"] = ViewBag.Cart = Cart;
             }
             
-
-
             // id 1 == Women, 2 == Men, 3 == Girls, 4 == Boys
 
             var dbGodtSkodd = new DBGodtSkodd();
@@ -66,11 +64,6 @@ namespace GodtSkoddProsjekt.Controllers
         
         public JsonResult Login(String username, String password)
         {
-            // EV. FÅ USER FRA DBGODTSKODD OG SENDE DENNE I JSON-FORMAT TIL AJAX-KALLET?
-
-            // NB!!!! sende med id til User (ikke loginUser): - SETTE SESSION MED USER I Login-metoden!!??
-            //var userId = 1;
-
             // checking login
 
             LoginUser loginUser = new LoginUser();
@@ -78,12 +71,16 @@ namespace GodtSkoddProsjekt.Controllers
             loginUser.password = password;
 
             var dbGodtSkodd = new DBGodtSkodd();
+            var userId = dbGodtSkodd.GetUserIdInDB(loginUser);
 
-            if (dbGodtSkodd.UserInDb(loginUser))
+            //if (dbGodtSkodd.UserInDb(loginUser))
+            if (userId != -1)
             {
                 // yes username and password is OK
                 Session["LoggedIn"] = true;
                 ViewBag.LoggedIn = true;
+
+                Session["UserId"] = userId;
 
                 JsonResult jsonOutput = Json(loginUser, JsonRequestBehavior.AllowGet);
                 return jsonOutput;

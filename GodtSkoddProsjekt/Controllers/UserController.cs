@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GodtSkoddProsjekt.Models;
+using System.Web.Routing;
 
 namespace GodtSkoddProsjekt.Controllers
 {
@@ -43,14 +44,14 @@ namespace GodtSkoddProsjekt.Controllers
                         // (since no user was found):
                         Session["LoggedIn"] = false;
                         ViewBag.LoggedIn = false;
-                        return Redirect("Home/Index");
+                        return RedirectToAction("Index", "Home");
                     }
                 }
             }
 
             Session["LoggedIn"] = false;
             ViewBag.LoggedIn = false;
-            return Redirect("Home/Index");
+            return RedirectToAction("Index", "Home");
         }
 
         /* GET: User/Details/5
@@ -93,7 +94,7 @@ namespace GodtSkoddProsjekt.Controllers
                     //return View();
             }
 
-            return Redirect("Home/Index");
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: User/Create
@@ -116,7 +117,7 @@ namespace GodtSkoddProsjekt.Controllers
                 {
                     Session["LoggedIn"] = true;
                     ViewBag.LoggedIn = true;
-                    return RedirectToAction("Index");   // Går til Min side
+                    return RedirectToAction("Index", "Home");   // must log in after created user
                 }
             }
 
@@ -148,7 +149,7 @@ namespace GodtSkoddProsjekt.Controllers
                 return View(user);
             }
 
-            return Redirect("Home/Index");
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: User/Edit/5
@@ -184,8 +185,8 @@ namespace GodtSkoddProsjekt.Controllers
 
                 return View();
             }
-            
-            return Redirect("Home/Index");
+
+            return RedirectToAction("Index", "Home");
         }
 
         /* GET: User/Delete/5

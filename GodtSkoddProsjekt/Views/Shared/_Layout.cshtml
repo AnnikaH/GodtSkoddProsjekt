@@ -33,7 +33,7 @@
                 $('#logginntilbakemelding').html("");
             });
 
-            // Finnes en bedre løsning?
+            // Finnes det en bedre løsning?
             if (document.getElementById('minSideLi') == null) {
                 $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
             }
@@ -71,9 +71,11 @@
                     <!-- Not show if user not logged in -->
                     @if (ViewBag.LoggedIn != null && ViewBag.LoggedIn)
                     {
-                        // NB!!!!! Send med riktig id (til user):
+                        // Then Session["UserId"] has been set too (in the Login-method)
+                        var userId = (int) Session["UserId"];
+
                         <li id="minSideLi">
-                            @Html.ActionLink("Min side", "Index", "User", new { id = 1 }, new { @class = "" })
+                            @Html.ActionLink("Min side", "Index", "User", new { id = userId }, new { @class = "" })
                         </li>
                         <li>
                             @Html.ActionLink("Logg ut", "LogOut", "Home")

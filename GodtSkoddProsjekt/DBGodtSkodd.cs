@@ -84,6 +84,28 @@ namespace GodtSkoddProsjekt
             }
         }
 
+        // Alternative: get the ID for the User in the database
+        public int GetUserIdInDB(LoginUser loginUser)
+        {   
+            //Function for checking if its the correct input for logging in
+            //and returning the corresponding UserID in the database (not LoginUser, but Users)
+
+            using (var db = new DBContext())
+            {
+                byte[] passwordDB = CreateHash(loginUser.password);
+                Users foundUser = db.Users.FirstOrDefault(
+                    b => b.Password == passwordDB && b.UserName == loginUser.userName);
+                if (foundUser == null)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return foundUser.ID;
+                }
+            }
+        }
+
         public bool EditUser(int id, User inputUser)
         {
             using (var db = new DBContext())
