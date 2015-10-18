@@ -35,12 +35,23 @@ namespace GodtSkoddProsjekt.Controllers
 
                 if (loggedIn)
                 {
-                    var dbGodtSkodd = new DBGodtSkodd();
-                    
-                    User user = dbGodtSkodd.GetUser(id);
+                    if(id.HasValue)
+                    {
+                        var dbGodtSkodd = new DBGodtSkodd();
 
-                    if (user != null)
-                        return View(user);
+                        int idNumber = (int)id;
+                        User user = dbGodtSkodd.GetUser(idNumber);
+
+                        if (user != null)
+                            return View(user);
+                        else
+                        {
+                            // (since no user was found):
+                            Session["LoggedIn"] = false;
+                            ViewBag.LoggedIn = false;
+                            return Redirect("Home/Index");
+                        }
+                    }
                     else
                     {
                         // (since no user was found):
