@@ -134,7 +134,10 @@
 
                         @if (ViewBag.LoggedIn != null && ViewBag.LoggedIn)
                         {
-                            @Html.ActionLink("Min side", "Index", "User", new { id = "" }, new { @class = "" })
+
+                            // NB!!!!! Send med riktig id (til user):
+
+                            @Html.ActionLink("Min side", "Index", "User", new { id = 1 }, new { @class = "" })
                             <a href="JavaScript:logOut()">Logg ut</a>
                         }
                         else
