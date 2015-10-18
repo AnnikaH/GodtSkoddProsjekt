@@ -18,9 +18,8 @@
             {
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Ordre nr. @Model[i].id</div>
+                    <div class="panel-heading"><strong>Ordre nr. @Model[i].id</strong> <div class="orderDate"><strong>Dato:</strong> @Html.DisplayFor(modelItem => Model[i].date)</div></div>
 
-                    <dl class="dl-horizontal">
                         <!--<dt>
                         Html.DisplayNameFor(model => model.userID)
                     </dt>
@@ -28,34 +27,32 @@
                     <dd>
                         Html.DisplayFor(model => model.userID)
                     </dd>-->
-
-                        <dt>
-                            Tidspunkt
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(modelItem => Model[i].date)
-                        </dd>
+                        
 
                         @for (int j = 0; j < Model[i].orderlines.Count; j++)
                         {
-                            <dt>
-                                Produkt nr.
-                            </dt>
-                            
-                            <dd>
-                                @Model[i].orderlines[j].productId.ToString()
-                            </dd>
+                            <table class="table">
+                                <tr>
+                                    <td><strong>Produkt nr.</strong></td>
 
-                            <dt>
-                                Antall
-                            </dt>
 
-                            <dd>
-                                @Model[i].orderlines[j].quantity.ToString()
-                            </dd>
+                                    <td>
+                                        @Model[i].orderlines[j].productId.ToString()
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Antall</strong>
+                                    </td>
+
+
+                                    <td>
+                                        @Model[i].orderlines[j].quantity.ToString()
+                                    </td>
+                                </tr>
+                            </table>
                         }
-                    </dl>
+                   
                 </div><!-- /.panel default-->
             }
         </div></div><!--./col-sm-9-->
