@@ -88,6 +88,13 @@ namespace GodtSkoddProsjekt.Controllers
             //return RedirectToAction("Index");
         }
 
+        public ActionResult LogOut()
+        {
+            Session["LoggedIn"] = false;
+            ViewBag.LoggedIn = false;
+            return RedirectToAction("Index");
+        }
+
         // GET: Home/Details/5
         /*public ActionResult Details(int id)
         {

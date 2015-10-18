@@ -21,15 +21,6 @@
     <!-- Ajax: -->
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script type="text/javascript">
-        function logOut() {
-            /*{
-                ViewBag.LoggedIn = false;
-                Session["LoggedIn"] = false;
-            }*/
-            
-            window.location.reload();
-        }
-
         function checkLogin() {
             var username = $('#logginnbrukernavn').val();
             var password = $('#logginnpassord').val();
@@ -128,23 +119,14 @@
                         </div>
                     </li>
                     <li id="minSideLi">
-                        <!-- Not show if user not logged in? -->
-
-                        <!--Html.ActionLink("Min side", "Index", "User", new { brukernavn = "" }, new { class = "" })-->
-
+                        <!-- Not show if user not logged in -->
                         @if (ViewBag.LoggedIn != null && ViewBag.LoggedIn)
                         {
-
                             // NB!!!!! Send med riktig id (til user):
 
                             @Html.ActionLink("Min side", "Index", "User", new { id = 1 }, new { @class = "" })
-                            <a href="JavaScript:logOut()">Logg ut</a>
+                            @Html.ActionLink("Logg ut", "LogOut", "Home");
                         }
-                        else
-                        {
-                            <a href="">IKKE INNLOGGET</a>
-                        }
-                    
                     </li>
                 </ul>
             </div><!--/.nav-collapse -->
