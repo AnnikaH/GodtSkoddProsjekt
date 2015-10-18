@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using GodtSkoddProsjekt.Models;
 
-// Use this for adding products (shoes) among other things?
+// Use this for adding products (shoes) among other things
+// For now: no security here
 
 namespace GodtSkoddProsjekt.Controllers
 {

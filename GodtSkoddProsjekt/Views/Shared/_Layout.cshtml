@@ -25,26 +25,18 @@
             var username = $('#logginnbrukernavn').val();
             var password = $('#logginnpassord').val();
 
-            //var success = false;
-            var message = "Feil brukernavn eller passord!";
-
             $.getJSON("/Home/Login", { username: username, password: password }, function (loginUserData) {
                 // only enters here if success
-
-                // NB!!!! sende med id til User (ikke loginUser): - SETTE SESSION MED USER I Login-metoden!!??
-                //var userId = 1;
-
-                //success = true;
-                message = "";
+                
                 window.location.reload();
+
+                $('#logginntilbakemelding').html("");
             });
 
-            //if (!success)   // If $.getJson() fails:
-                //$('#logginntilbakemelding').html("Feil brukernavn eller passord!");
-            //else
-                //$('#logginntilbakemelding').html("");
-
-            $('#logginntilbakemelding').html(message);
+            // Finnes en bedre løsning?
+            if (document.getElementById('minSideLi') == null) {
+                $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
+            }
         }
     </script>
 </head>
@@ -80,7 +72,7 @@
                     @if (ViewBag.LoggedIn != null && ViewBag.LoggedIn)
                     {
                         // NB!!!!! Send med riktig id (til user):
-                        <li>
+                        <li id="minSideLi">
                             @Html.ActionLink("Min side", "Index", "User", new { id = 1 }, new { @class = "" })
                         </li>
                         <li>
@@ -89,7 +81,7 @@
                     }
                     else // Show if user is not logged in:
                     {
-                        <li class="dropdown">
+                        <li id="loggInnLi" class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="">Logg inn | Registrer deg</a>
                             <div class="dropdown-menu">
                                 <form action="JavaScript:checkLogin()">

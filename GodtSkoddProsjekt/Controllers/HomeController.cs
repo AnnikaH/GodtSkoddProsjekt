@@ -68,6 +68,9 @@ namespace GodtSkoddProsjekt.Controllers
         {
             // EV. FÅ USER FRA DBGODTSKODD OG SENDE DENNE I JSON-FORMAT TIL AJAX-KALLET?
 
+            // NB!!!! sende med id til User (ikke loginUser): - SETTE SESSION MED USER I Login-metoden!!??
+            //var userId = 1;
+
             // checking login
 
             LoginUser loginUser = new LoginUser();
@@ -84,19 +87,14 @@ namespace GodtSkoddProsjekt.Controllers
 
                 JsonResult jsonOutput = Json(loginUser, JsonRequestBehavior.AllowGet);
                 return jsonOutput;
-                
-                //return RedirectToAction("Index");
             }
             else
             {
                 // no
                 Session["LoggedIn"] = false;
                 ViewBag.LoggedIn = false;
-                // return RedirectToAction("Index");
                 return null;
             }
-            
-            //return RedirectToAction("Index");
         }
 
         public ActionResult LogOut()

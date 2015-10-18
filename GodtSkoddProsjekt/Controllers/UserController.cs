@@ -93,7 +93,7 @@ namespace GodtSkoddProsjekt.Controllers
                     //return View();
             }
 
-            return View();
+            return Redirect("Home/Index");
         }
 
         // GET: User/Create
@@ -148,7 +148,7 @@ namespace GodtSkoddProsjekt.Controllers
                 return View(user);
             }
 
-            return View();
+            return Redirect("Home/Index");
         }
 
         // POST: User/Edit/5
@@ -171,16 +171,21 @@ namespace GodtSkoddProsjekt.Controllers
 
             bool loggedIn = (bool)Session["LoggedIn"];
 
-            if (loggedIn && ModelState.IsValid)
+            if (loggedIn)
             {
-                var dbGodtSkodd = new DBGodtSkodd();
-                bool changeOK = dbGodtSkodd.EditUser(id, user);
+                if(ModelState.IsValid)
+                {
+                    var dbGodtSkodd = new DBGodtSkodd();
+                    bool changeOK = dbGodtSkodd.EditUser(id, user);
 
-                if (changeOK)
-                    return RedirectToAction("Index");
+                    if (changeOK)
+                        return RedirectToAction("Index");
+                }
+
+                return View();
             }
-
-            return View();
+            
+            return Redirect("Home/Index");
         }
 
         /* GET: User/Delete/5
