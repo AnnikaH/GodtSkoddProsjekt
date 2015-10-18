@@ -26,7 +26,9 @@
             $.getJSON("/Home/Login", { username: username, password: password }, function (loginUserData) {
                 // only enters here if success
                 
-                window.location.reload();
+                //window.location.reload();
+                // Because of /Admin/Index (need to change location to update navbar when logging in from here):
+                window.location = "/Home/Index";
 
                 $('#logginntilbakemelding').html("");
             });
