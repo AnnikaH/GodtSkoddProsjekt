@@ -82,7 +82,7 @@
                                 }
                             </select><br />
                         Antall:
-                        <select class="form-control amountSelect">
+                        <select id="Quantity" class="form-control amountSelect">
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -90,7 +90,7 @@
                             <option>5</option>
                         </select>
                         </p><!-- /. p.productDescription -->
-                        <a id=@item.id href="#" class="btn btn-default btn-product" role="button">Kjøp</a>
+                        <a id=@item.id href="#" action="/Home/AddToCart(@Html.DisplayFor(modelItem => item.id), document.getElementById(Quantity.value))" class="btn btn-default btn-product" role="button">Kjøp</a>
                         <h4 class="productPrice">@Html.DisplayFor(modelItem => item.price),-</h4>
                     </div>
                 </div></div>
