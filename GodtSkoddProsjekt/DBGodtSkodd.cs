@@ -11,8 +11,6 @@ namespace GodtSkoddProsjekt
     public class DBGodtSkodd
     {
 
-        //DBGodtSkodd fungerer som både BLL og DAL
-
 //------------------------------------------- USERS ------------------------------------------
         public bool CreateUser(User user)
         {
@@ -66,6 +64,7 @@ namespace GodtSkoddProsjekt
             output = algorythm.ComputeHash(input);
             return output;
         }
+
         public bool UserInDb(LoginUser inputUser)
         {
             //Function for checking if its the correct input for logging in

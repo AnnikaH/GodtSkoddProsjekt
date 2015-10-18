@@ -8,12 +8,12 @@ namespace GodtSkoddProsjekt.Models
 {
     public class LoginUser
     {
-        [Display(Name = "Brukernavn")]
-        [Required(ErrorMessage = "Brukernavn må oppgis")]
+        /*[Display(Name = "Brukernavn")]
+        [Required(ErrorMessage = "Brukernavn må oppgis")]*/
         public String userName { get; set; }
 
-        [Display(Name = "Passord")]
-        [Required(ErrorMessage = "Passord må oppgis")]
+        /*[Display(Name = "Passord")]
+        [Required(ErrorMessage = "Passord må oppgis")]*/
         public String password { get; set; }
     }
 }

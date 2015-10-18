@@ -55,11 +55,13 @@ namespace GodtSkoddProsjekt.Controllers
 
             return View(products);
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public LoginUser Login(String username, String password)
+        
+        /*[HttpPost]
+        [ValidateAntiForgeryToken]*/
+        public JsonResult Login(String username, String password)     //String userName, String password
         {
+            // EV. FÅ USER FRA DBGODTSKODD OG SENDE DENNE I JSON-FORMAT TIL AJAX-KALLET?
+
             // checking login
 
             LoginUser loginUser = new LoginUser();
@@ -73,8 +75,14 @@ namespace GodtSkoddProsjekt.Controllers
                 // yes username and password is OK
                 Session["LoggedIn"] = true;
                 ViewBag.LoggedIn = true;
+
+                List<LoginUser> list = new List<LoginUser>();
+                list.Add(loginUser);
+                JsonResult jsonOutput = Json(list, JsonRequestBehavior.AllowGet);
+                return jsonOutput;
+                
                 //return RedirectToAction("Index");
-                return loginUser;
+                //return loginUser;
             }
             else
             {
@@ -90,6 +98,52 @@ namespace GodtSkoddProsjekt.Controllers
 
             //return RedirectToAction("Index");
         }
+
+        /*[HttpPost]
+        [ValidateAntiForgeryToken]
+        public String Login(String username, String password)
+        {
+            throw new SystemException();
+
+            // EV. FÅ USER FRA DBGODTSKODD OG SENDE DENNE I JSON-FORMAT TIL AJAX-KALLET?
+
+            // checking login
+
+            LoginUser loginUser = new LoginUser();
+            loginUser.userName = username;
+            loginUser.password = password;
+
+            var dbGodtSkodd = new DBGodtSkodd();
+
+            if (dbGodtSkodd.UserInDb(loginUser))
+            {
+                throw new SystemException();
+
+                // yes username and password is OK
+                Session["LoggedIn"] = true;
+                ViewBag.LoggedIn = true;
+
+                //JsonResult jsonOutput = Json(loginUser, JsonRequestBehavior.AllowGet);
+                //return jsonOutput;
+                return "Logget inn!";
+
+                //return RedirectToAction("Index");
+                //return loginUser;
+            }
+            else
+            {
+                // no
+                Session["LoggedIn"] = false;
+                ViewBag.LoggedIn = false;
+                //throw new Exception();
+                // return RedirectToAction("Index");
+                return "Ikke logget inn!";
+            }
+
+            // Can use ViewBag in the view!
+
+            //return RedirectToAction("Index");
+        }*/
 
         // GET: Home/Details/5
         /*public ActionResult Details(int id)
