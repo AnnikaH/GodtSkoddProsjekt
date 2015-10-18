@@ -30,22 +30,30 @@
                     </dd>-->
 
                         <dt>
-                            @Html.DisplayNameFor(modelItem => Model[i].date)
+                            Tidspunkt
                         </dt>
 
                         <dd>
                             @Html.DisplayFor(modelItem => Model[i].date)
-                        </dd>  
-                        
+                        </dd>
+
                         @for (int j = 0; j < Model[i].orderlines.Count; j++)
                         {
-                        <dd>
-                            Produkt nr: 
-                            @Model[i].orderlines[j].productId.ToString();
-                            . Antall: 
-                            @Model[i].orderlines[j].quantity.ToString();
-                            .
-                        </dd>
+                            <dt>
+                                Produkt nr.
+                            </dt>
+                            
+                            <dd>
+                                @Model[i].orderlines[j].productId.ToString()
+                            </dd>
+
+                            <dt>
+                                Antall
+                            </dt>
+
+                            <dd>
+                                @Model[i].orderlines[j].quantity.ToString()
+                            </dd>
                         }
                     </dl>
                 </div><!-- /.panel default-->
