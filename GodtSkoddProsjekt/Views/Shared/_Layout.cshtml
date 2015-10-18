@@ -21,57 +21,48 @@
     <!-- Ajax: -->
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script type="text/javascript">
+        function logOut() {
+            /*{
+                ViewBag.LoggedIn = false;
+                Session["LoggedIn"] = false;
+            }*/
+            
+            window.location.reload();
+        }
+
         function checkLogin() {
             var username = $('#logginnbrukernavn').val();
             var password = $('#logginnpassord').val();
 
-            $.getJSON("/Home/Login", { username: username, password: password }, function (loginUserData, status, xhr) {
-                if (status == "success") {
-                    $('#logginntilbakemelding').html("Riktig!");
-                    return true;
-                }
-                else {
-                    $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
-                    return false;
-                }
+            $.getJSON("/Home/Login", { username: username, password: password }, function (loginUserData) {
+                // only enters here if success
 
-                /*$.each(loginUserData, function (key, value) {
-                    $('#logginntilbakemelding').html(key + ": " + value);
+                // foreløpig bare (fjerne?):
+                $('#logginntilbakemelding').html("Riktig!");
+                
+                // NB!!!! sende med id til User (ikke loginUser):
+                var userId = 1;
+
+                /*{
+                    ViewBag.LoggedIn = true;
+                    Session["LoggedIn"] = true;
+                }*/
+
+                window.location.reload();
+                
+                /*$.Ajax({
+                    url: 'Url.Action("Index", "User")',
+                    data: { id: userId },
+                    success: function() {
+                        window.location.reload();
+                    }
                 });*/
 
-                /*if (loginUserData == null) {
-                    $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
-                    //return false;
-                }
-                else {
-                    $('#logginntilbakemelding').html("Riktig!");
-                    return true;
-                }*/
+                return true;
             });
 
-
-            /*$.Ajax({
-                url: 'Url.Action("Login", "Home")',
-                data: { username: username, password: password },
-                success: function () {
-                    // vil da kalle list-funksjonen igjen (kalle listekontrolleren for å refreshe viewet
-                    // vil at boksen skal forsvinne og reloade viewet slik at vi ser med en gang at denne
-                    // som vi ønsker fjernet har blitt fjernet
-                    // Må ta et ajax-kall til altså:
-                    $.Ajax({
-                        url: 'Url.Action("Liste", "Kunde")',
-                        success: function () {
-                            window.location.reload();
-                        }
-                    });
-                    //window.location.reload();
-                    return true;
-                },
-                error: function () {
-                    $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
-                    return false;
-                }
-            });*/
+            // If getJson fails:
+            $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
         }
     </script>
 </head>
@@ -114,7 +105,7 @@
                                     <input type="password" class="form-control" id="logginnpassord" placeholder="Passord">
                                 </div><!-- /.form-group-->
                                 <div class="form-group">
-                                    <button type="submit" id="btnlogginn" class="btn btn-default" onsubmit="return checkLogin()">Logg Inn</button>
+                                    <button type="submit" id="btnlogginn" class="btn btn-default" onsubmit="checkLogin()">Logg Inn</button>
                                     <br /><br />
                                     <div id="logginntilbakemelding"></div>
                                     @Html.ActionLink("Registrer deg", "Create", "User")
@@ -136,10 +127,23 @@
                             </form>
                         </div>
                     </li>
-                    <li>
+                    <li id="minSideLi">
                         <!-- Not show if user not logged in? -->
 
-                        @Html.ActionLink("Min side", "Index", "User", new { brukernavn = "" }, new { @class = "" })
+                        <!--Html.ActionLink("Min side", "Index", "User", new { brukernavn = "" }, new { class = "" })-->
+
+                        @if (ViewBag.LoggedIn != null && ViewBag.LoggedIn)
+                        {
+
+                            // NB!!!!! Send med riktig id (til user):
+
+                            @Html.ActionLink("Min side", "Index", "User", new { id = 1 }, new { @class = "" })
+                            <a href="JavaScript:logOut()">Logg ut</a>
+                        }
+                        else
+                        {
+                            <a href="">IKKE INNLOGGET</a>
+                        }
                     
                     </li>
                 </ul>
