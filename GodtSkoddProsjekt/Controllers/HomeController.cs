@@ -25,6 +25,17 @@ namespace GodtSkoddProsjekt.Controllers
                 ViewBag.LoggedIn = (bool) Session["LoggedIn"]; // Husk: Må castes!
             }
 
+            // Checking Cart
+            if(Session["Cart"] == null)
+            {
+                Order Cart = new Order();
+                Cart.date = DateTime.Now;
+                Cart.orderlines = new List<Orderline>();
+                Session["Cart"] = ViewBag.Cart = Cart;
+            }
+            
+
+
             // id 1 == Women, 2 == Men, 3 == Girls, 4 == Boys
 
             var dbGodtSkodd = new DBGodtSkodd();
@@ -102,5 +113,23 @@ namespace GodtSkoddProsjekt.Controllers
             Product product = dbGodtSkodd.GetProduct(id);
             return View(product);
         }*/
+
+        public void AddToCart(int id, int quantity)
+        {
+            Orderline newOrderLine = new Orderline();
+            newOrderLine.productId = id;
+            newOrderLine.quantity = quantity;
+            Order Cart = (Order) Session["Cart"];
+            Cart.orderlines.Add(newOrderLine);
+            Session["Cart"] = Cart;
+        }
+
+        public void Buy(Order order)
+        {
+            Order Cart = (Order) Session["Cart"];
+            Cart.userID = 1; //hente bruker fra session og legge inn ID til user i Cart før den sendes videre
+            DBGodtSkodd db = new DBGodtSkodd();
+            db.CreateOrder(Cart);
+        }
     }
 }
