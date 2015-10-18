@@ -25,35 +25,21 @@
             var username = $('#logginnbrukernavn').val();
             var password = $('#logginnpassord').val();
 
+            var success = false;
+
             $.getJSON("/Home/Login", { username: username, password: password }, function (loginUserData) {
                 // only enters here if success
 
-                // foreløpig bare (fjerne?):
-                $('#logginntilbakemelding').html("Riktig!");
-                
                 // NB!!!! sende med id til User (ikke loginUser):
                 var userId = 1;
 
-                /*{
-                    ViewBag.LoggedIn = true;
-                    Session["LoggedIn"] = true;
-                }*/
-
                 window.location.reload();
                 
-                /*$.Ajax({
-                    url: 'Url.Action("Index", "User")',
-                    data: { id: userId },
-                    success: function() {
-                        window.location.reload();
-                    }
-                });*/
-
-                return true;
+                success = true;
             });
 
-            // If getJson fails:
-            $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
+            if (!success)   // If $.getJson() fails:
+                $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
         }
     </script>
 </head>
