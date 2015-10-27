@@ -30,6 +30,12 @@ namespace GodtSkoddProsjekt
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "User", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "ADMINMain",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "ADMINMain", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }
