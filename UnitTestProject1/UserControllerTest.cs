@@ -1,10 +1,14 @@
 ﻿using System;
+using GodtSkoddProsjekt.Controllers;
+using GodtSkoddProsjekt.Models;
+
+using 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestProject1
 {
     [TestClass]
-    public class UnitTest1
+    public class UserControllerTest
     {
         [TestMethod]
         public void TestMethod1()
