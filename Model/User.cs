@@ -8,7 +8,7 @@ namespace Model
 {
     public class User
     {
-        // Dette er både en domenemodell og en view-modell
+        // Dette er både en domenemodell og en view-modell 
         public int id { get; set; }
 
         [Display(Name = "Fornavn")]
