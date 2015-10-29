@@ -10,8 +10,43 @@ namespace DAL
 {
     public class DBGodtSkodd
     {
+        public bool CreateDatabaseContent()
+        {
+            //
 
-//------------------------------------------- USERS ------------------------------------------
+            return false;
+        }
+
+        public List<AdminUser> GetAdminUsers()
+        {
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    var dbAdminUsers = db.AdminUsers.ToList();
+                    List<AdminUser> output = new List<AdminUser>();
+                    foreach (var adminUser in dbAdminUsers)
+                    {
+                        var oneUser = new AdminUser();
+                        oneUser.userName = adminUser.UserName;
+                        //oneUser.password = adminUser.Password;  // hash (byte[]) - not return
+                        output.Add(oneUser);
+                    }
+                    return output;
+                }
+                catch (Exception)
+                {
+                    // Write to log
+
+                    var output = new List<AdminUser>();
+                    return output;
+                }
+            }
+        }
+
+//-------- EVERYTHING UNDER HERE IS COPIED FROM THE FORMER DBGodtSkodd: -----------------------
+
+        //------------------------------------------- USERS ------------------------------------------
         public bool CreateUser(User user)
         {
             // Adding a new row in the database table Users for this User:

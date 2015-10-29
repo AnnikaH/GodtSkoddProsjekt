@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Model
 {
-    class AdminUser
+    public class AdminUser
     {
         public int id { get; set; }
 

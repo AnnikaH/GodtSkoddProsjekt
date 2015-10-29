@@ -3,13 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL;
+using Model;
 
 namespace BLL
 {
     public class BusinessLogic
     {
-        // var kundeDAL = new DAL();
-        /* Fra Tor sitt eksempel (Lagdeling):
+        public bool CreateDatabaseContent()
+        {
+            var dal = new DBGodtSkodd();
+            return dal.CreateDatabaseContent();
+        }
+
+        public List<AdminUser> GetAdminUsers()
+        {
+            var dal = new DBGodtSkodd();
+            return dal.GetAdminUsers();
+        }
+
+/* ----------------- Fra Tor sitt eksempel (Lagdeling):
+
         public List<Kunde> hentAlle()
         {
             var KundeDAL = new KundeDAL();

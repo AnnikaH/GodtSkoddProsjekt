@@ -92,13 +92,41 @@ namespace GodtSkoddProsjekt.Controllers
         //---------------------- AUTOGENERERT KODE: ---------------------------------//
 
         // GET: ADMINMain
-        public ActionResult Index()
+        public ActionResult LogIn()
         {
-            /*var dbBLL = new BusinessLogic();
-            List<AdminUser> allAdminUsers = dbBLL.GetAll();
-            return View(allAdminUsers);*/
+            // Log in-page for administrators
+
+            // Place these lines another place?:
+            var dbBLL = new BusinessLogic();
+            if(dbBLL.CreateDatabaseContent())
+            {
+                //
+            }
+            else
+            {
+                //
+            }
 
             return View();
+        }
+
+        public ActionResult Index()
+        {
+            // Main page for administrators (you get here after logged in successfully)
+
+            var dbBLL = new BusinessLogic();
+            List<AdminUser> allAdminUsers = dbBLL.GetAdminUsers();
+
+            return View(allAdminUsers);
+        }
+
+        public ActionResult AdminUsers()
+        {
+            // create AdminUsers view or do this code in another method?
+
+            var dbBLL = new BusinessLogic();
+            List<AdminUser> allAdminUsers = dbBLL.GetAdminUsers();
+            return View(allAdminUsers);
         }
 
         // GET: ADMINMain/Details/5

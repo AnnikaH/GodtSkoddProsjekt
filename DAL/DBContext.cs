@@ -80,7 +80,7 @@ namespace DAL
     {
         public int ID { get; set; }
         public String UserName { get; set; }
-        public String Password { get; set; }
+        public byte[] Password { get; set; }
     }
 
     public class DBContext : DbContext

@@ -34,7 +34,7 @@ namespace GodtSkoddProsjekt
             routes.MapRoute(
                 name: "ADMINMain",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "ADMINMain", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "ADMINMain", action = "LogIn", id = UrlParameter.Optional }
             );
         }
     }

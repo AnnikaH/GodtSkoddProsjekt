@@ -2,7 +2,6 @@
 using GodtSkoddProsjekt.Controllers;
 using GodtSkoddProsjekt.Models;
 
-using 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestProject1
