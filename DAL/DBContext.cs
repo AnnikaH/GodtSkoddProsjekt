@@ -75,6 +75,14 @@ namespace DAL
         public virtual Products Product { get; set; }
     }
 
+    // Class AdminUsers:
+    public class AdminUsers
+    {
+        public int ID { get; set; }
+        public String UserName { get; set; }
+        public String Password { get; set; }
+    }
+
     public class DBContext : DbContext
     {
         public DBContext() : base("name=GodtSkodd")
@@ -87,6 +95,7 @@ namespace DAL
         public DbSet<Orders> Orders { get; set; }
         public DbSet<Products> Products { get; set; }
         public DbSet<Orderlines> Orderlines { get; set; }
+        public DbSet<AdminUsers> AdminUsers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

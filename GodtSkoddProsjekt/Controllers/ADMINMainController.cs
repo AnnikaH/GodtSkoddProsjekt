@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BLL;
+using Model;
 
 namespace GodtSkoddProsjekt.Controllers
 {
@@ -92,6 +94,10 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain
         public ActionResult Index()
         {
+            /*var dbBLL = new BusinessLogic();
+            List<AdminUser> allAdminUsers = dbBLL.GetAll();
+            return View(allAdminUsers);*/
+
             return View();
         }
 
