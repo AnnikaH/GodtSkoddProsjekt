@@ -192,7 +192,13 @@ h2.registrer
     padding-top:30px;
 }
 
-.margin_buttom
+.margin_buttom  /* Used to create some space between form button and end of wrapper */
 {
     margin-bottom:30px;
+}
+
+.table_header
+{
+    font-weight:bold;
+    text-align:center;
 }
