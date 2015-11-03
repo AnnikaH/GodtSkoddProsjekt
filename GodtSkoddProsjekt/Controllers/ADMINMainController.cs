@@ -91,7 +91,31 @@ namespace GodtSkoddProsjekt.Controllers
 
         //---------------------- AUTOGENERERT KODE: ---------------------------------//
 
-        // GET: ADMINMain
+        public ActionResult AdminAdminUsers()
+        {
+            return View();
+
+            /*
+
+            // create AdminUsers view or do this code in another method?
+            
+            var dbBLL = new BusinessLogic();
+            List<AdminUser> allAdminUsers = dbBLL.GetAdminUsers();
+            return View(allAdminUsers);
+            
+            */
+        }
+
+        public ActionResult AdminCustomers()
+        {
+            return View();
+        }
+
+        public ActionResult AdminOrders()
+        {
+            return View();
+        }
+
         public ActionResult LogIn()
         {
             // Log in-page for administrators
@@ -119,16 +143,7 @@ namespace GodtSkoddProsjekt.Controllers
 
             return View(allAdminUsers);
         }
-
-        public ActionResult AdminUsers()
-        {
-            // create AdminUsers view or do this code in another method?
-
-            var dbBLL = new BusinessLogic();
-            List<AdminUser> allAdminUsers = dbBLL.GetAdminUsers();
-            return View(allAdminUsers);
-        }
-
+        
         // GET: ADMINMain/Details/5
         public ActionResult Details(int id)
         {
