@@ -269,6 +269,11 @@
     <Content Include="Views\ADMINMain\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\ADMINMain\LogIn.cshtml" />
+    <Content Include="Views\Admin\AdminLogin.cshtml" />
+    <Content Include="Views\Admin\AdminControlPanel.cshtml" />
+    <Content Include="Views\Admin\AdminCustomers.cshtml" />
+    <Content Include="Views\Admin\AdminAdminUsers.cshtml" />
+    <Content Include="Views\Admin\AdminOrders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
