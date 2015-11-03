@@ -166,3 +166,33 @@ h2.registrer
 #myPageBtnContainer {
      padding-top: 10px;
 }
+
+
+/*________________________________CSS for Admin sites (ADMINMain)________________________*/
+
+.admin_controlpanel_wrapper
+{
+    width:80%;
+    margin-left:20%;
+
+
+    
+}
+
+.admin_controlpanel_option
+{
+   text-align:center;
+   margin-left:6%;
+   display:inline-block;
+}
+
+.glyphicon.glyphicon-user
+{
+    font-size:90px;
+    padding-top:30px;
+}
+
+.margin_buttom
+{
+    margin-bottom:30px;
+}

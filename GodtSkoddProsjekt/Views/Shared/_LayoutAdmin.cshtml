@@ -42,15 +42,23 @@
     </script>
 </head>
 <body>
-    <div> 
-    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                @Html.ActionLink("Godt Skodd", "Index", "ADMINMain", new { id = "" }, new { @class = "navbar-brand" })
+                
+            </div>
+        </div>
+    </nav>
+        <div>
+        </div>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Godt Skodd</p>
-        </footer>
-    </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Godt Skodd</p>
+            </footer>
+        </div>
 </body>
 </html>
