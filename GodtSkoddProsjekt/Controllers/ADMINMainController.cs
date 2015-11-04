@@ -89,19 +89,14 @@ namespace GodtSkoddProsjekt.Controllers
         }
         */
 
-        public ActionResult AdminCustomers()
-        {
-            // TODO: CHECK LOG IN
-
-            return View();
-        }
-
         public ActionResult AdminOrders()
         {
             // TODO: CHECK LOG IN
 
             return View();
         }
+
+        // --------------------------- Log in/out ------------------------------
 
         public ActionResult LogIn()
         {
@@ -147,6 +142,8 @@ namespace GodtSkoddProsjekt.Controllers
             ViewBag.LoggedInAdmin = false;
             return RedirectToAction("Index", "Home");
         }
+
+        // ------------------------------- Index ---------------------------------
 
         public ActionResult Index()
         {
@@ -253,19 +250,25 @@ namespace GodtSkoddProsjekt.Controllers
         }
         
         // GET: ADMINMain/UpdateAdminUser/5
-        public ActionResult UpdateAdminUser(int id)
+        public ActionResult EditAdminUser(int id)
         {
-            return View();
+            // TODO: CHECK LOG IN
+
+            var dbBLL = new BusinessLogic();
+            AdminUser adminUser = dbBLL.GetAdminUser(id);
+            return View(adminUser);
         }
  
         // POST: ADMINMain/UpdateAdminUser/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UpdateAdminUser(int id, AdminUser adminUser)
+        public ActionResult EditAdminUser(int id, AdminUser adminUser)
         {
-            var dal = new BusinessLogic();
+            // TODO: CHECK LOG IN
 
-            bool updateOk = dal.UpdateAdminUser(id, adminUser);
+            var dbBLL = new BusinessLogic();
+
+            bool updateOk = dbBLL.EditAdminUser(id, adminUser);
 
             if(updateOk)
                 return RedirectToAction("AdminAdminUsers");
@@ -273,7 +276,8 @@ namespace GodtSkoddProsjekt.Controllers
             return View();
         }
 
-        /* GET: ADMINMain/DeleteAdminUser/5
+        /* Vil ikke gå til ny side for å slette - vil bare oppdatere AdminAdminUsers-siden (ajax-kall)
+        // GET: ADMINMain/DeleteAdminUser/5
         public ActionResult DeleteAdminUser(int id)
         {
             return View();
@@ -296,13 +300,138 @@ namespace GodtSkoddProsjekt.Controllers
             return jsonOutput;
         }
 
-        // --------------------------- AUTOGENERERT KODE: ----------------------------------
+        // ---------------------------------- User ------------------------------
 
-        // GET: ADMINMain/Details/5
-        public ActionResult Details(int id)
+        public ActionResult AdminCustomers(int? id)
         {
+            // TODO: CHECK LOG IN
+
+            // Showing all Users (and buttons for deleting and updating them) + button to CreateUser
+
+            var dbBLL = new BusinessLogic();
+
+            List<User> users = new List<User>();
+
+            if (id.HasValue)
+            {
+                int userId = (int)id;
+
+                User user = dbBLL.GetUser(userId);
+
+                if (user != null)
+                {
+                    users.Add(user);
+                    return View(users);
+                }
+            }
+
+            users = dbBLL.GetUsers();
+
+            return View(users);
+        }
+
+        // Called when searching for an AdminUser based on id:
+        // GET: ADMINMain/GetUser/5
+        public ActionResult GetUser(int userId)
+        {
+            var dbBLL = new BusinessLogic();
+            User user = dbBLL.GetUser(userId);
+
+            if (user != null)
+                return RedirectToAction("AdminCustomers", new { id = userId });
+
+            return RedirectToAction("AdminAdminUsers");
+        }
+
+        // GET: ADMINMain/CreateUser
+        public ActionResult CreateUser()
+        {
+            // TODO: CHECK LOG IN
+
             return View();
         }
+
+        // POST: ADMINMain/CreateUser
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateUser(User user)
+        {
+            // TODO: CHECK LOG IN
+
+            if (ModelState.IsValid)
+            {
+                var dbBLL = new BusinessLogic();
+                bool insertOK = dbBLL.CreateUser(user);
+
+                if (insertOK)
+                    return RedirectToAction("AdminCustomers");
+            }
+
+            return View();
+        }
+
+        // GET: ADMINMain/EditUser/5
+        public ActionResult EditUser(int id)
+        {
+            // TODO: CHECK LOG IN
+
+            var dbBLL = new BusinessLogic();
+            User user = dbBLL.GetUser(id);
+            return View(user);
+        }
+
+        // POST: ADMINMain/EditUser/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUser(int id, User user)
+        {
+            // TODO: CHECK LOG IN
+
+            if (ModelState.IsValid)
+            {
+                var dbBLL = new BusinessLogic();
+                bool changeOK = dbBLL.EditUser(id, user);
+
+                if (changeOK)
+                    return RedirectToAction("AdminCustomers");
+            }
+
+            return View();
+        }
+
+        /* Vil ikke gå til ny side for å slette - vil bare oppdatere AdminCustomers-siden (ajax-kall)
+        // GET: ADMINMain/DeleteAdminUser/5
+        public ActionResult DeleteAdminUser(int id)
+        {
+            return View();
+        }*/
+
+        // Called from JavaScript (AJAX) (when clicking delete-button):
+        public JsonResult DeleteUser(int id)
+        {
+            // TODO: CHECK LOG IN
+
+            var dbBLL = new BusinessLogic();
+            bool deleteOk = dbBLL.DeleteUser(id);
+
+            JsonResult jsonOutput;
+
+            if (deleteOk)
+                jsonOutput = Json(true, JsonRequestBehavior.AllowGet);
+            else
+                jsonOutput = Json(false, JsonRequestBehavior.AllowGet);
+
+            return jsonOutput;
+        }
+    }
+
+    /* --------------------------- AUTOGENERERT KODE: ----------------------------------
+
+    // GET: ADMINMain/Details/5
+    public ActionResult Details(int id)
+    {
+        return View();
+    }
 
         // GET: ADMINMain/Create
         public ActionResult Create()
@@ -369,5 +498,5 @@ namespace GodtSkoddProsjekt.Controllers
                 return View();
             }
         }
-    }
+    }*/
 }

@@ -57,6 +57,23 @@
 
             //$('#logginntilbakemelding').html("Feil brukernavn eller passord!");
         }
+
+        function deleteUser(id) {
+            if (NaN(id))
+                return;
+
+            $.getJSON("/ADMINMain/DeleteUser", { id: id }, function (deleteOkData) {
+                // only enters here if success
+
+                // deleteOkData contains "true" or "false"
+
+                window.location = "/ADMINMain/AdminCustomers";
+
+                //$('#logginntilbakemelding').html("");
+            });
+
+            //$('#logginntilbakemelding').html("Feil brukernavn eller passord!");
+        }
     </script>
 </head>
 <body>

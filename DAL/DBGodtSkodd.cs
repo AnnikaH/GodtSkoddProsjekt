@@ -296,6 +296,24 @@ namespace DAL
             }
         }
 
+        public bool DeleteUser(int id)
+        {
+            var db = new DBContext();
+            try
+            {
+                Users delUser = db.Users.Find(id);
+                db.Users.Remove(delUser);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                // Write to log
+
+                return false;
+            }
+        }
+
         public User GetUser(int id)
         {
             var db = new DBContext();
@@ -322,6 +340,13 @@ namespace DAL
                 };
                 return output;
             }
+        }
+
+        public List<User> GetUsers()
+        {
+            // Fill in
+            
+            return null;
         }
 
         //------------------------------------------ PRODUCTS ---------------------------------

@@ -58,7 +58,7 @@ namespace BLL
             return dal.CreateAdminUser(adminUser);
         }
 
-        public bool UpdateAdminUser(int id, AdminUser adminUser)
+        public bool EditAdminUser(int id, AdminUser adminUser)
         {
             var dal = new DBGodtSkodd();
             return dal.EditAdminUser(id, adminUser);
@@ -68,6 +68,38 @@ namespace BLL
         {
             var dal = new DBGodtSkodd();
             return dal.DeleteAdminUser(id);
+        }
+
+        // -------------------------------- User -------------------------
+
+        public User GetUser(int id)
+        {
+            var dal = new DBGodtSkodd();
+            return dal.GetUser(id);
+        }
+
+        public List<User> GetUsers()
+        {
+            var dal = new DBGodtSkodd();
+            return dal.GetUsers();
+        }
+
+        public bool CreateUser(User user)
+        {
+            var dal = new DBGodtSkodd();
+            return dal.CreateUser(user);
+        }
+
+        public bool EditUser(int id, User user)
+        {
+            var dal = new DBGodtSkodd();
+            return dal.EditUser(id, user);
+        }
+
+        public bool DeleteUser(int id)
+        {
+            var dal = new DBGodtSkodd();
+            return dal.DeleteUser(id);
         }
 
 /* ----------------- Fra Tor sitt eksempel (Lagdeling):
