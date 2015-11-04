@@ -16,8 +16,11 @@
     <!-- Vise alle adminbrukere her (får inn fra model)
         + kunne endre/oppdatere og slette hver enkelt (knapper på samme linje hvor oppdater-knappen går til UpdateAdminUser + sende med id, og
         hvor slette-knappen kaller javascript-metoden deleteAdminUser(id) (onclick) som ligger i _LayoutAdmin.cshtml)
-        + kunne søke etter en bestemt en ut fra id (actionlink til GetAdminUser i ADMINMainController + sende med id)
+        + kunne søke etter en bestemt en ut fra id (se nedenfor: kalle på javascript-funksjon)
         + en knapp for å gå til CreateAdminUser.cshtml (registrere ny adminbruker) : -->
+
+    <!-- Der man søker etter en administrator på ID: kall på javascript-funksjonen searchForAdminUser(id) +
+        legg inn en div bak søke-knappen for å vise feilmelding - denne div'en må ha id="adminUserSearchMessage" -->
 
     <table class="table">
         <tr class="table_header">

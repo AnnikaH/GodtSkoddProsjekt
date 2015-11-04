@@ -74,6 +74,62 @@
 
             //$('#logginntilbakemelding').html("Feil brukernavn eller passord!");
         }
+
+        function deleteProduct(id) {
+            if (NaN(id))
+                return;
+
+            $.getJSON("/ADMINMain/DeleteProduct", { id: id }, function (deleteOkData) {
+                // only enters here if success
+
+                // deleteOkData contains "true" or "false"
+
+                window.location = "/ADMINMain/AdminProducts";
+
+                //$('#logginntilbakemelding').html("");
+            });
+
+            //$('#logginntilbakemelding').html("Feil brukernavn eller passord!");
+        }
+
+        function searchForAdminUser(id) {
+            if (NaN(id)) {
+                $('#adminUserSearchMessage').html("Id må være et tall!");
+                return;
+            }
+
+            $.getJSON("/ADMINMain/GetAdminUser", { adminId: id }, function () {
+                // only enters here if success
+
+                // ADMINMain/GetAdminUser redirects
+            });
+        }
+
+        function searchForUser(id) {
+            if (NaN(id)) {
+                $('#userSearchMessage').html("Id må være et tall!");
+                return;
+            }
+
+            $.getJSON("/ADMINMain/GetUser", { userId: id }, function () {
+                // only enters here if success
+
+                // ADMINMain/GetUser redirects
+            });
+        }
+
+        function searchForProduct(id) {
+            if (NaN(id)) {
+                $('#productSearchMessage').html("Id må være et tall!");
+                return;
+            }
+
+            $.getJSON("/ADMINMain/GetProduct", { productId: id }, function () {
+                // only enters here if success
+
+                // ADMINMain/GetProduct redirects
+            });
+        }
     </script>
 </head>
 <body>

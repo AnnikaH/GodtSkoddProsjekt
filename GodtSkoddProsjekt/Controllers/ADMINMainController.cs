@@ -323,7 +323,7 @@ namespace GodtSkoddProsjekt.Controllers
             return View(users);
         }
 
-        // Called when searching for an AdminUser based on id:
+        // Called when searching for a User based on id:
         // GET: ADMINMain/GetUser/5
         public ActionResult GetUser(int userId)
         {
@@ -447,9 +447,39 @@ namespace GodtSkoddProsjekt.Controllers
             return View(products);
         }
 
+        // Called when searching for a Product based on id:
+        // GET: ADMINMain/GetProduct/5
+        public ActionResult GetProduct(int productId)
+        {
+            var dbBLL = new BusinessLogic();
+            Product product = dbBLL.GetProduct(productId);
+
+            if (product != null)
+                return RedirectToAction("AdminProducts", new { id = productId });
+
+            return RedirectToAction("AdminProducts");
+        }
+
         // Create
         // Edit
-        // Delete
+
+        // Called from JavaScript (AJAX) (when clicking delete-button):
+        public JsonResult DeleteProduct(int id)
+        {
+            // TODO: CHECK LOG IN
+
+            var dbBLL = new BusinessLogic();
+            bool deleteOk = dbBLL.DeleteProduct(id);
+
+            JsonResult jsonOutput;
+
+            if (deleteOk)
+                jsonOutput = Json(true, JsonRequestBehavior.AllowGet);
+            else
+                jsonOutput = Json(false, JsonRequestBehavior.AllowGet);
+
+            return jsonOutput;
+        }
 
         // ------------------------------- Order ----------------------------------
 
