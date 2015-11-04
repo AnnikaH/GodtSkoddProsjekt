@@ -89,28 +89,17 @@ namespace GodtSkoddProsjekt.Controllers
         }
         */
 
-        public ActionResult AdminAdminUsers()
-        {
-            return View();
-
-            /*
-
-            // create AdminUsers view or do this code in another method?
-            
-            var dbBLL = new BusinessLogic();
-            List<AdminUser> allAdminUsers = dbBLL.GetAdminUsers();
-            return View(allAdminUsers);
-            
-            */
-        }
-
         public ActionResult AdminCustomers()
         {
+            // TODO: CHECK LOG IN
+
             return View();
         }
 
         public ActionResult AdminOrders()
         {
+            // TODO: CHECK LOG IN
+
             return View();
         }
 
@@ -185,7 +174,52 @@ namespace GodtSkoddProsjekt.Controllers
             return View(allAdminUsers);
             */
         }
-        
+
+        // --------------------------- AdminUser: -----------------------------------------
+
+        public ActionResult AdminAdminUsers()
+        {
+            // TODO: CHECK LOG IN
+
+            var dbBLL = new BusinessLogic();
+            List<AdminUser> allAdminUsers = dbBLL.GetAdminUsers();
+            return View(allAdminUsers);
+        }
+
+        // GET: ADMINMain/CreateAdminUser
+        public ActionResult CreateAdminUser()
+        {
+            return View();
+        }
+
+        // POST: ADMINMain/CreateAdminUser
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAdminUser(AdminUser adminUser)
+        {
+            // TODO: CHECK LOG IN
+
+            if (ModelState.IsValid)
+            {
+                var dal = new BusinessLogic();
+                bool insertOK = dal.CreateAdminUser(adminUser);
+
+                if (insertOK)
+                {
+                    Session["LoggedInAdmin"] = true;
+                    ViewBag.LoggedInAdmin = true;
+                    
+                    Session["AdminId"] = dal.GetAdminIdInDB(adminUser);
+
+                    return RedirectToAction("AdminAdminUsers");
+                }
+            }
+
+            return View();
+        }
+
+        // --------------------------- AUTOGENERERT KODE: ----------------------------------
+
         // GET: ADMINMain/Details/5
         public ActionResult Details(int id)
         {

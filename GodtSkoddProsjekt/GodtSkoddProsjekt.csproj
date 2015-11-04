@@ -272,6 +272,7 @@
     <Content Include="Views\ADMINMain\AdminCustomers.cshtml" />
     <Content Include="Views\ADMINMain\AdminAdminUsers.cshtml" />
     <Content Include="Views\ADMINMain\AdminOrders.cshtml" />
+    <Content Include="Views\ADMINMain\CreateAdminUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
