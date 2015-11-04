@@ -333,7 +333,7 @@ namespace GodtSkoddProsjekt.Controllers
             if (user != null)
                 return RedirectToAction("AdminCustomers", new { id = userId });
 
-            return RedirectToAction("AdminAdminUsers");
+            return RedirectToAction("AdminCustomers");
         }
 
         // GET: ADMINMain/CreateUser
