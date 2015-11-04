@@ -40,6 +40,23 @@
             }
         }
         */
+
+        function deleteAdminUser(id) {
+            if (NaN(id))
+                return;
+
+            $.getJSON("/ADMINMain/DeleteAdminUser", { id: id }, function (deleteOkData) {
+                // only enters here if success
+
+                // deleteOkData contains "true" or "false"
+
+                window.location = "/ADMINMain/AdminAdminUsers";
+
+                //$('#logginntilbakemelding').html("");
+            });
+
+            //$('#logginntilbakemelding').html("Feil brukernavn eller passord!");
+        }
     </script>
 </head>
 <body>

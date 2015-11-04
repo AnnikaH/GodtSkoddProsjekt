@@ -251,6 +251,50 @@ namespace GodtSkoddProsjekt.Controllers
 
             return View();
         }
+        
+        // GET: ADMINMain/UpdateAdminUser/5
+        public ActionResult UpdateAdminUser(int id)
+        {
+            return View();
+        }
+ 
+        // POST: ADMINMain/UpdateAdminUser/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateAdminUser(int id, AdminUser adminUser)
+        {
+            var dal = new BusinessLogic();
+
+            bool updateOk = dal.UpdateAdminUser(id, adminUser);
+
+            if(updateOk)
+                return RedirectToAction("AdminAdminUsers");
+
+            return View();
+        }
+
+        /* GET: ADMINMain/DeleteAdminUser/5
+        public ActionResult DeleteAdminUser(int id)
+        {
+            return View();
+        }*/
+
+        // Called from JavaScript (AJAX) (when clicking delete-button):
+        public JsonResult DeleteAdminUser(int id)
+        {
+            var dbBLL = new BusinessLogic();
+
+            bool deleteOk = dbBLL.DeleteAdminUser(id);
+
+            JsonResult jsonOutput;
+
+            if (deleteOk)
+                jsonOutput = Json(true, JsonRequestBehavior.AllowGet);
+            else
+                jsonOutput = Json(false, JsonRequestBehavior.AllowGet);
+
+            return jsonOutput;
+        }
 
         // --------------------------- AUTOGENERERT KODE: ----------------------------------
 

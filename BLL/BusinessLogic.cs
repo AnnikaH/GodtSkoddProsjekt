@@ -27,6 +27,8 @@ namespace BLL
             return dal.CreateDatabaseContent();
         }
 
+        // ---------------------------- AdminUser -------------------------------
+
         public List<AdminUser> GetAdminUsers()
         {
             var dal = new DBGodtSkodd();
@@ -54,6 +56,18 @@ namespace BLL
         {
             var dal = new DBGodtSkodd();
             return dal.CreateAdminUser(adminUser);
+        }
+
+        public bool UpdateAdminUser(int id, AdminUser adminUser)
+        {
+            var dal = new DBGodtSkodd();
+            return dal.EditAdminUser(id, adminUser);
+        }
+
+        public bool DeleteAdminUser(int id)
+        {
+            var dal = new DBGodtSkodd();
+            return dal.DeleteAdminUser(id);
         }
 
 /* ----------------- Fra Tor sitt eksempel (Lagdeling):

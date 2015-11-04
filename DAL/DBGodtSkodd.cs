@@ -17,6 +17,8 @@ namespace DAL
             return false;
         }
 
+        // ----------------------------- AdminUser ---------------------------------
+
         public List<AdminUser> GetAdminUsers()
         {
             using (var db = new DBContext())
@@ -112,6 +114,24 @@ namespace DAL
             }
         }
 
+        public bool EditAdminUser(int id, AdminUser adminUser)
+        {
+            // Fill in
+
+            // Write to log in catch
+
+            return false;
+        }
+
+        public bool DeleteAdminUser(int id)
+        {
+            // Fill in
+
+            // Write to log in catch
+
+            return false;
+        }
+
         //-------- EVERYTHING UNDER HERE IS COPIED FROM THE FORMER DBGodtSkodd: -----------------------
 
         //------------------------------------------- USERS ------------------------------------------
@@ -154,6 +174,8 @@ namespace DAL
             }
             catch (Exception)
             {
+                // Write to log
+
                 return false;
             }
         }
@@ -249,6 +271,8 @@ namespace DAL
                 }
                 catch
                 {
+                    // Write to log
+
                     return false;
                 }
             }
@@ -266,6 +290,8 @@ namespace DAL
             }
             catch (Exception)
             {
+                // Write to log
+
                 return false;
             }
         }
@@ -327,6 +353,8 @@ namespace DAL
             }
             catch (Exception)
             {
+                // Write to log
+
                 return false;
             }
         }
@@ -351,6 +379,8 @@ namespace DAL
                 }
                 catch
                 {
+                    // Write to log
+
                     return false;
                 }
             }
@@ -368,6 +398,8 @@ namespace DAL
             }
             catch (Exception)
             {
+                // Write to log
+
                 return false;
             }
         }
@@ -439,6 +471,8 @@ namespace DAL
                 }
                 catch (Exception)
                 {
+                    // Write to log
+
                     var output = new List<Product>();
                     return output;
                 }
@@ -548,7 +582,6 @@ namespace DAL
 
         public bool CreateOrder(Order order)
         {
-
             var db = new DBContext();
 
             var newOrder = new Orders()
@@ -579,6 +612,8 @@ namespace DAL
             }
             catch (Exception)
             {
+                // Write to log
+
                 return false;
             }
         }
@@ -587,6 +622,8 @@ namespace DAL
         public List<Order> GetOrders()
         {
             //Returns all orders. (for statistics?)
+
+            // Write to log in catch
 
             return null;
         }
@@ -625,6 +662,8 @@ namespace DAL
                 }
                 catch (Exception)
                 {
+                    // Write to log
+
                     var output = new List<Order>();
                     var errorOrder = new Order();
                     errorOrder.id = 1337;
