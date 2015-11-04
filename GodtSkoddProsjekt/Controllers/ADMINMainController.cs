@@ -534,7 +534,7 @@ namespace GodtSkoddProsjekt.Controllers
             return jsonOutput;
         }
 
-        // ------------------------------- Order ----------------------------------
+        // ------------------------------- Order og Orderline ----------------------------------
 
         public ActionResult AdminOrders()
         {
