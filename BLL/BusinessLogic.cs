@@ -33,6 +33,11 @@ namespace BLL
             return dal.GetAdminUsers();
         }
 
+        public AdminUser GetAdminUser(int id) {
+            var dal = new DBGodtSkodd();
+            return dal.GetAdminUser(id);
+        }
+
         public int GetAdminIdInDB(AdminUser adminUser)
         {
             var dal = new DBGodtSkodd();

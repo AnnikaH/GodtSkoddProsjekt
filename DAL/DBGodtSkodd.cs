@@ -44,6 +44,13 @@ namespace DAL
             }
         }
 
+        public AdminUser GetAdminUser(int id)
+        {
+            // Fill in
+
+            return null;
+        }
+
         public int GetAdminIdInDB(AdminUser adminUser)
         {
             using (var db = new DBContext())

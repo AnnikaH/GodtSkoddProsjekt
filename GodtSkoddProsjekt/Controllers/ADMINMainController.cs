@@ -177,15 +177,45 @@ namespace GodtSkoddProsjekt.Controllers
 
         // --------------------------- AdminUser: -----------------------------------------
 
-        public ActionResult AdminAdminUsers()
+        public ActionResult AdminAdminUsers(int? id)
         {
             // TODO: CHECK LOG IN
 
             // Showing all AdminUsers (and buttons for deleting and updating them) + button to CreateAdminUser
 
             var dbBLL = new BusinessLogic();
-            List<AdminUser> allAdminUsers = dbBLL.GetAdminUsers();
-            return View(allAdminUsers);
+
+            List<AdminUser> adminUsers = new List<AdminUser>();
+
+            if (id.HasValue)
+            {
+                int adminId = (int)id;
+
+                AdminUser adminUser = dbBLL.GetAdminUser(adminId);
+
+                if (adminUser != null)
+                {
+                    adminUsers.Add(adminUser);
+                    return View(adminUsers);
+                }
+            }
+            
+            adminUsers = dbBLL.GetAdminUsers();
+            
+            return View(adminUsers);
+        }
+
+        // Called when searching for an AdminUser based on id:
+        // GET: ADMINMain/GetAdminUser/5
+        public ActionResult GetAdminUser(int adminId)
+        {
+            var dbBLL = new BusinessLogic();
+            AdminUser adminUser = dbBLL.GetAdminUser(adminId);
+
+            if (adminUser != null)
+                return RedirectToAction("AdminAdminUsers", new { id = adminId });
+
+            return RedirectToAction("AdminAdminUsers");
         }
 
         // GET: ADMINMain/CreateAdminUser

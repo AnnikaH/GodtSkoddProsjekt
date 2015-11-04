@@ -18,7 +18,7 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script type="text/javascript">
 
-        // Copied from _Layout.cshtml:
+        /* Copied from _Layout.cshtml:
 
         function checkLogin() {
             var username = $('#logginnbrukernavn').val();
@@ -39,6 +39,7 @@
                 $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
             }
         }
+        */
     </script>
 </head>
 <body>
@@ -48,6 +49,10 @@
                 @Html.ActionLink("Godt Skodd", "Index", "ADMINMain", new { id = "" }, new { @class = "navbar-brand" })
                 
             </div>
+
+            <!-- TODO: Legge inn link til hoved-admin-siden (ADMINMain/Index.cshtml) + en logg ut-knapp +
+                vise hvem som er logget inn (?) -->
+            
         </div>
     </nav>
         <div>
