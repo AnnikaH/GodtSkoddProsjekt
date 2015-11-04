@@ -181,6 +181,8 @@ namespace GodtSkoddProsjekt.Controllers
         {
             // TODO: CHECK LOG IN
 
+            // Showing all AdminUsers (and buttons for deleting and updating them) + button to CreateAdminUser
+
             var dbBLL = new BusinessLogic();
             List<AdminUser> allAdminUsers = dbBLL.GetAdminUsers();
             return View(allAdminUsers);
@@ -189,6 +191,8 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/CreateAdminUser
         public ActionResult CreateAdminUser()
         {
+            // TODO: CHECK LOG IN
+
             return View();
         }
 
