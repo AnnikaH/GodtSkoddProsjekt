@@ -460,10 +460,61 @@ namespace GodtSkoddProsjekt.Controllers
             return RedirectToAction("AdminProducts");
         }
 
-        // Create
-        // Edit
+        // GET: ADMINMain/CreateProduct
+        public ActionResult CreateProduct()
+        {
+            // TODO: CHECK LOG IN
 
-        
+            return View();
+        }
+
+        // POST: ADMINMain/CreateProduct
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateProduct(Product product)
+        {
+            // TODO: CHECK LOG IN
+
+            if (ModelState.IsValid)
+            {
+                var dbBLL = new BusinessLogic();
+                bool insertOK = dbBLL.CreateProduct(product);
+
+                if (insertOK)
+                    return RedirectToAction("AdminProducts");
+            }
+
+            return View();
+        }
+
+        // GET: ADMINMain/EditProduct/5
+        public ActionResult EditProduct(int id)
+        {
+            // TODO: CHECK LOG IN
+
+            var dbBLL = new BusinessLogic();
+            Product product = dbBLL.GetProduct(id);
+            return View(product);
+        }
+
+        // POST: ADMINMain/EditProduct/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProduct(int id, Product product)
+        {
+            // TODO: CHECK LOG IN
+
+            if (ModelState.IsValid)
+            {
+                var dbBLL = new BusinessLogic();
+                bool changeOK = dbBLL.EditProduct(id, product);
+
+                if (changeOK)
+                    return RedirectToAction("AdminProducts");
+            }
+
+            return View();
+        }
 
         // Called from JavaScript (AJAX) (when clicking delete-button):
         public JsonResult DeleteProduct(int id)

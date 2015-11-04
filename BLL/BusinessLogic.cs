@@ -116,8 +116,17 @@ namespace BLL
             return dal.ListAllProducts();
         }
 
-        // Create
-        // Edit
+        public bool CreateProduct(Product product)
+        {
+            var dal = new DBGodtSkodd();
+            return dal.CreateProduct(product);
+        }
+
+        public bool EditProduct(int id, Product product)
+        {
+            var dal = new DBGodtSkodd();
+            return dal.EditProduct(id, product);
+        }
 
         public bool DeleteProduct(int id)
         {
