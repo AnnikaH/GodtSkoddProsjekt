@@ -1,10 +1,17 @@
-﻿
+﻿@model List<Model.Order>
+
 @{
-    ViewBag.Title = "AdminOrders";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{
+    ViewBag.Title = "Admin Bestillinger";
 }
 
 <div class="col-sm-9">
 
-    <h2 class="header">Ordrehistorikk</h2>
-</div><!-- /. col-sm-9 -->
+    <h2 class="header">Ordre</h2>
 
+    <!-- Vise ordre (til en bestemt bruker eller alle?) (får inn fra model): -->
+
+</div><!-- /. col-sm-9 -->

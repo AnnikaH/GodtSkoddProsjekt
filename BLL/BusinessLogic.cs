@@ -10,6 +10,17 @@ namespace BLL
 {
     public class BusinessLogic
     {
+        public bool DatabaseProductsFilled()
+        {
+            var dal = new DBGodtSkodd();
+            List<Product> products = dal.ListAllProducts();
+
+            if (products.Count == 0)
+                return false;
+
+            return true;
+        }
+
         public bool CreateDatabaseContent()
         {
             var dal = new DBGodtSkodd();
@@ -20,6 +31,24 @@ namespace BLL
         {
             var dal = new DBGodtSkodd();
             return dal.GetAdminUsers();
+        }
+
+        public int GetAdminIdInDB(AdminUser adminUser)
+        {
+            var dal = new DBGodtSkodd();
+            return dal.GetAdminIdInDB(adminUser);
+        }
+
+        public bool AdminUserInDb(AdminUser adminUser)
+        {
+            var dal = new DBGodtSkodd();
+            return dal.AdminUserInDb(adminUser);
+        }
+
+        public bool CreateAdminUser(AdminUser adminUser)
+        {
+            var dal = new DBGodtSkodd();
+            return dal.CreateAdminUser(adminUser);
         }
 
 /* ----------------- Fra Tor sitt eksempel (Lagdeling):

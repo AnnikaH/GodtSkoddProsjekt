@@ -1,26 +1,29 @@
-﻿
-@{
-    ViewBag.Title = "Admin Log in";
+﻿@{
+    ViewBag.Title = "Admin Logg inn";
 }
+
+<!-- Using default layout: _Layout.cshtml -->
 
 <!-- Log in page for administrators: only fill in username and password -->
 
 <div class="col-sm-9">
-    <h2 class="header">Admin Innlogging</h2>
+    <h2 class="header">Admin innlogging</h2>
 
-    <form>
+    <form action="JavaScript:checkAdminLogin()">
         <div class="form-group">
             <label for="Adminusername">Brukernavn:</label>
-            <input type="text" class="form-control" />
+            <input type="text" id="userNameAdmin" class="form-control" />
         </div>
 
         <div class="form-group">
             <label for="Adminpassword">Passord:</label>
-            <input type="password" class="form-control" />
+            <input type="password" id="passwordAdmin" class="form-control" />
         </div>
         <div class="form-group">
-            <input type="submit" class="btn btn-default margin_buttom" value="Logg Inn" />
+            <input type="submit" class="btn btn-default margin_buttom" value="Logg Inn" onsubmit="checkAdminLogin()" />
         </div>
     </form>
+
+    <div id="logInAdminMessage"></div>
 
 </div><!-- /. col-sm-9 aka wrapper -->

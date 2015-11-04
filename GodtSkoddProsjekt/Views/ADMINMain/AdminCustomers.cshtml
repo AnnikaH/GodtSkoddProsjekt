@@ -1,16 +1,23 @@
-﻿
+﻿@model List<Model.User>
+
 @{
-    ViewBag.Title = "AdminCustomers";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{
+    ViewBag.Title = "Admin Kunder";
 }
 
 <div class="col-sm-9">
 
 <h2 class="header">Kunderegister</h2>
     
-  <table class="table">
-      <tr class="table_header">
-          <td>#</td>
-          <td>Navn:</td>
+    <!-- Vise alle kunder/brukere (får inn fra model): -->
+
+    <table class="table">
+        <tr class="table_header">
+            <td>#</td>
+            <td>Navn:</td>
 
       </tr>
   </table>    

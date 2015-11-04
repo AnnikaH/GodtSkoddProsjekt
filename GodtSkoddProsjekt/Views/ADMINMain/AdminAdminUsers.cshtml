@@ -1,10 +1,17 @@
-﻿
+﻿@model List<Model.AdminUser>
+
 @{
-    ViewBag.Title = "AdminAdminUsers";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{
+    ViewBag.Title = "Administratorer";
 }
 
 <div class="col-sm-9">
-    <h2 class="header">Administrator brukere</h2>
+    <h2 class="header">Administrator-brukere</h2>
+
+    <!-- Vise alle adminbrukere her (får inn fra model): -->
 
     <table class="table">
         <tr class="table_header">

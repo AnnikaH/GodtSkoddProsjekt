@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GodtSkoddProsjekt.Models;
+using BLL;  // just for added code in Index(int? id) (filling database with products)
 
 namespace GodtSkoddProsjekt.Controllers
 {
@@ -12,6 +13,12 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: Home
         public ActionResult Index(int? id)
         {
+            // Fill database with pre-defined products (if none exists):
+            var dbBLL = new BusinessLogic();
+
+            if (!dbBLL.DatabaseProductsFilled())
+                dbBLL.CreateDatabaseContent();
+
             // Checking login:
             if (Session["LoggedIn"] == null)
             {

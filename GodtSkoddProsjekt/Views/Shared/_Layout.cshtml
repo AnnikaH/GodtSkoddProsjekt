@@ -38,6 +38,25 @@
                 $('#logginntilbakemelding').html("Feil brukernavn eller passord!");
             }
         }
+
+        function checkAdminLogin() {
+            var username = $('#userNameAdmin').val();
+            var password = $('#passwordAdmin').val();
+
+            $.getJSON("/ADMINMain/CheckLogIn", { username: username, password: password }, function (loginAdminData) {
+                // only enters here if success
+
+                //window.location.reload();
+                // Because of /Admin/Index (need to change location to update navbar when logging in from here):
+                window.location = "/ADMINMain/Index";
+
+                $('#logInAdminMessage').html("").removeClass("text-danger");
+            });
+
+            // Is there a better solution?
+            //if (document.getElementById('minSideLi') == null) {
+            $('#logInAdminMessage').html("Feil brukernavn eller passord!").addClass("text-danger");
+        }
     </script>
 </head>
 <body>
@@ -116,6 +135,9 @@
                                 </div>
                             </form>
                         </div>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Admin", "LogIn", "ADMINMain")
                     </li>
                 </ul>
             </div><!--/.nav-collapse -->

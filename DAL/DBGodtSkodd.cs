@@ -12,7 +12,7 @@ namespace DAL
     {
         public bool CreateDatabaseContent()
         {
-            //
+            // Kopier kode for når man trykker på knappen i Admin/Index.cshtml - (bortsett fra å legge inn en ordre på bruker nr. 1..?
 
             return false;
         }
@@ -44,7 +44,68 @@ namespace DAL
             }
         }
 
-//-------- EVERYTHING UNDER HERE IS COPIED FROM THE FORMER DBGodtSkodd: -----------------------
+        public int GetAdminIdInDB(AdminUser adminUser)
+        {
+            using (var db = new DBContext())
+            {
+                byte[] passwordDB = CreateHash(adminUser.password);
+                AdminUsers foundAdminUser = db.AdminUsers.FirstOrDefault(
+                    a => a.Password == passwordDB && a.UserName == adminUser.userName);
+
+                if (foundAdminUser == null)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return foundAdminUser.ID;
+                }
+            }
+        }
+
+        public bool AdminUserInDb(AdminUser inputUser)
+        {
+            //Function for checking if its the correct input for logging in
+            using (var db = new DBContext())
+            {
+                byte[] passwordDB = CreateHash(inputUser.password);
+                AdminUsers foundUser = db.AdminUsers.FirstOrDefault(
+                    a => a.Password == passwordDB && a.UserName == inputUser.userName);
+
+                if (foundUser == null)
+                    return false;
+                else
+                    return true;
+            }
+        }
+
+        public bool CreateAdminUser(AdminUser adminUser)
+        {
+            // Adding a new row in the database table AdminUsers for this AdminUser:
+            var newUser = new AdminUsers()
+            {
+                UserName = adminUser.userName,
+                Password = CreateHash(adminUser.password)
+            };
+
+            var db = new DBContext();
+
+            try
+            {
+                // Adding the new AdminUsers-row in the database:
+                db.AdminUsers.Add(newUser);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                // Write to log
+
+                return false;
+            }
+        }
+
+        //-------- EVERYTHING UNDER HERE IS COPIED FROM THE FORMER DBGodtSkodd: -----------------------
 
         //------------------------------------------- USERS ------------------------------------------
         public bool CreateUser(User user)

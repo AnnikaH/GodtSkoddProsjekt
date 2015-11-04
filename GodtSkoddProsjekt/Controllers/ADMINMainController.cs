@@ -89,8 +89,6 @@ namespace GodtSkoddProsjekt.Controllers
         }
         */
 
-        //---------------------- AUTOGENERERT KODE: ---------------------------------//
-
         public ActionResult AdminAdminUsers()
         {
             return View();
@@ -120,28 +118,72 @@ namespace GodtSkoddProsjekt.Controllers
         {
             // Log in-page for administrators
 
-            // Place these lines another place?:
+            return View();
+        }
+
+        public JsonResult CheckLogIn(String username, String password)
+        {
+            // checking login
+
+            AdminUser adminUser = new AdminUser();
+            adminUser.userName = username;
+            adminUser.password = password;
+
             var dbBLL = new BusinessLogic();
-            if(dbBLL.CreateDatabaseContent())
+            var adminId = dbBLL.GetAdminIdInDB(adminUser);
+
+            if (adminId != -1)
             {
-                //
+                // yes username and password is OK
+                Session["LoggedInAdmin"] = true;
+                ViewBag.LoggedInAdmin = true;
+
+                Session["AdminId"] = adminId;
+
+                JsonResult jsonOutput = Json(adminUser, JsonRequestBehavior.AllowGet);
+                return jsonOutput;
             }
             else
             {
-                //
+                // no
+                Session["LoggedInAdmin"] = false;
+                ViewBag.LoggedInAdmin = false;
+                return null;
             }
+        }
 
-            return View();
+        public ActionResult LogOut()
+        {
+            Session["LoggedInAdmin"] = false;
+            ViewBag.LoggedInAdmin = false;
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Index()
         {
             // Main page for administrators (you get here after logged in successfully)
 
+            // Checking login:
+            if (Session["LoggedInAdmin"] == null)
+            {
+                // da definerer vi den og setter den til false
+                Session["LoggedInAdmin"] = false;
+                ViewBag.LoggedInAdmin = false; // oppdaterer denne også!
+            }
+            else
+            {
+                // vil så hente ut statusen til session'en og legge denne over i ViewBag'en:
+                ViewBag.LoggedInAdmin = (bool)Session["LoggedInAdmin"]; // Husk: Må castes!
+            }
+
+            return View();
+
+            /*
             var dbBLL = new BusinessLogic();
             List<AdminUser> allAdminUsers = dbBLL.GetAdminUsers();
 
             return View(allAdminUsers);
+            */
         }
         
         // GET: ADMINMain/Details/5
