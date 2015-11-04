@@ -463,6 +463,8 @@ namespace GodtSkoddProsjekt.Controllers
         // Create
         // Edit
 
+        
+
         // Called from JavaScript (AJAX) (when clicking delete-button):
         public JsonResult DeleteProduct(int id)
         {

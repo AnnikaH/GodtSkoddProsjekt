@@ -18,8 +18,7 @@
 
 <!-- Slette-knappen her (se kommentarer i AdminAdminUsers) skal kalle på javascript-metoden deleteProduct(id) -->
 
-<!-- Der man søker etter et produkt på ID: kall på javascript-funksjonen searchForProduct(id) +
-        legg inn en div bak søke-knappen for å vise feilmelding - denne div'en må ha id="productSearchMessage" -->
+<!-- Der man søker etter et produkt på ID: Kall metoden GetProduct i ADMINMainController + send med id -->
 
     <p>
         @Html.ActionLink("Registrer nytt produkt", "CreateProduct", "ADMINMain")
