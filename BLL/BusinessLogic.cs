@@ -102,6 +102,20 @@ namespace BLL
             return dal.DeleteUser(id);
         }
 
+        // ------------------------------- Product --------------------------
+
+        public Product GetProduct(int productId)
+        {
+            var dal = new DBGodtSkodd();
+            return dal.GetProduct(productId);
+        }
+
+        public List<Product> GetProducts()
+        {
+            var dal = new DBGodtSkodd();
+            return dal.ListAllProducts();
+        }
+
 /* ----------------- Fra Tor sitt eksempel (Lagdeling):
 
         public List<Kunde> hentAlle()

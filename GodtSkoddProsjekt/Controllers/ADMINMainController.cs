@@ -89,13 +89,6 @@ namespace GodtSkoddProsjekt.Controllers
         }
         */
 
-        public ActionResult AdminOrders()
-        {
-            // TODO: CHECK LOG IN
-
-            return View();
-        }
-
         // --------------------------- Log in/out ------------------------------
 
         public ActionResult LogIn()
@@ -422,6 +415,49 @@ namespace GodtSkoddProsjekt.Controllers
                 jsonOutput = Json(false, JsonRequestBehavior.AllowGet);
 
             return jsonOutput;
+        }
+
+        // ----------------------------------- Product -------------------------------------
+
+        public ActionResult AdminProducts(int? id)
+        {
+            // TODO: CHECK LOG IN
+
+            // Showing all Products (and buttons for deleting and updating them) + button to CreateProduct
+
+            var dbBLL = new BusinessLogic();
+
+            List<Product> products = new List<Product>();
+
+            if (id.HasValue)
+            {
+                int productId = (int)id;
+
+                Product product = dbBLL.GetProduct(productId);
+
+                if (product != null)
+                {
+                    products.Add(product);
+                    return View(products);
+                }
+            }
+
+            products = dbBLL.GetProducts();
+
+            return View(products);
+        }
+
+        // Create
+        // Edit
+        // Delete
+
+        // ------------------------------- Order ----------------------------------
+
+        public ActionResult AdminOrders()
+        {
+            // TODO: CHECK LOG IN
+
+            return View();
         }
     }
 

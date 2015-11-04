@@ -1,0 +1,83 @@
+﻿@model List<Model.Product>
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{ 
+    ViewBag.Title = "Admin Produkt";
+}
+
+    <p>
+        @Html.ActionLink("Registrer nytt produkt", "CreateProduct", "ADMINMain")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.material)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.type)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.material)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.ActionLink("Endre", "EditProduct", "ADMINMain", new { id = item.id }, new { @class = "" } ) |
+                @Html.ActionLink("Se detaljer", "DetailsProduct", "ADMINMain", new { id = item.id }, new { @class = "" }) |
+                @Html.ActionLink("Slett", "DeleteProduct", "ADMINMain", new { id = item.id }, new { @class = "" })
+            </td>
+        </tr>
+    }
+    
+    </table>
