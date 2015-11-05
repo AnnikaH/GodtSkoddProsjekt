@@ -41,8 +41,8 @@ namespace Model
         public String brand { get; set; }
 
         [Display(Name = "Bilde-url")]
-        //[Required(ErrorMessage = "Bilde-url må oppgis")]
-        //[RegularExpression(@"[A-ZÆØÅa-zæøå\s]{2,30}", ErrorMessage = "Bilde-url kan bare inneholde bokstaver fra A-Å")]
+        [Required(ErrorMessage = "Bilde-url må oppgis")]
+        [RegularExpression(@"^/Content/Images/.{1,30}", ErrorMessage = "Bilde-url må starte med /Content/Images/")]
         public String url { get; set; }
 
         [Display(Name = "For hvem")]
