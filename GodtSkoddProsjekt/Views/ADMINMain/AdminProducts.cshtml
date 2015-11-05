@@ -22,21 +22,11 @@
 
 <!-- CSS: Må ha mer padding eller marg på toppen for å se "Registrer nytt produkt" (som får i _Layout.cshtml) -->
 
-<script type="text/javascript">
-    $(document).ready(function()
-    {
-        
-        $(".link_toggle").click(function () {
-       
-            $(".MoreInfo").toggle();
-        })});
-</script>
-
 <div class="col-sm-9">
     <h2 class="header">Produkter</h2>
     <p>
         <div class="Link_addnew"><span class="glyphicon glyphicon-arrow-down"></span><a href="#" class="link_toggle">Vis mer informasjon</a> | <span class="glyphicon glyphicon-plus"></span>  @Html.ActionLink("Registrer nytt produkt", "CreateProduct", "ADMINMain", new { id = "" }, new { @class = "" })
-            </div>
+        </div>
     </p>
 
     <!-- Search for product by id here?:
@@ -96,12 +86,11 @@
               
                 <td>
                     @Html.ActionLink("Endre", "EditProduct", "ADMINMain", new { id = item.id }, new { @class = "" }) |
+                    <a onclick="toggleRow(@item.id)">Se detaljer</a> |
                     @Html.ActionLink("Slett", "DeleteProduct", "ADMINMain", new { id = item.id }, new { @class = "" }) 
-                   
                 </td>
             </tr>
-            <tr class="MoreInfo">
-       
+            <tr id="@item.id" class="MoreInfo">
                 <td colspan="7">
                     <table class="MoreInfoTable">
                         <tr>
@@ -125,5 +114,3 @@
         }
     </table>
         </div> <!-- /. col-sm-9 aka wrapper -->
-    
-   

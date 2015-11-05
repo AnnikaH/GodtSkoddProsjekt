@@ -7,6 +7,8 @@ namespace Model
 {
     public class Order
     {
+        // Legge inn regex m.m.?
+
         public int id { get; set; }
         public int userID { get; set; }
         public DateTime date { get; set; }

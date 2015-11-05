@@ -18,7 +18,15 @@
     <!-- Ajax: -->
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script type="text/javascript">
+        $(document).ready(function () {
+            $(".link_toggle").click(function () {
+                $(".MoreInfo").toggle();
+            });
+        });
 
+        function toggleRow(id) {
+            $('#' + id).toggle();
+        }
     </script>
 </head>
 <body>
