@@ -93,7 +93,12 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult LogIn()
         {
-            // Log in-page for administrators
+            // TODO: CHECK LOG IN (mer enn dette under?):
+
+            if (Session["LoggedInAdmin"] != null && (bool)Session["LoggedInAdmin"]) // if logged in from before
+                return RedirectToAction("Index");
+
+            // else: Log in-page for administrators:
 
             return View();
         }
