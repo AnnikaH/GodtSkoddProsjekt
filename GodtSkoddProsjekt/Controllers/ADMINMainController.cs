@@ -283,6 +283,13 @@ namespace GodtSkoddProsjekt.Controllers
             return RedirectToAction("AdminAdminUsers");
         }
 
+        public ActionResult CancelAdminUser()
+        {
+            // TODO: CHECK LOG IN
+
+            return RedirectToAction("AdminAdminUsers");
+        }
+
         // ---------------------------------- User ------------------------------
 
         public ActionResult AdminCustomers(int? id)
@@ -393,6 +400,13 @@ namespace GodtSkoddProsjekt.Controllers
 
             //if (deleteOk)
             
+            return RedirectToAction("AdminCustomers");
+        }
+
+        public ActionResult CancelUser()
+        {
+            // TODO: CHECK LOG IN
+
             return RedirectToAction("AdminCustomers");
         }
 
@@ -509,9 +523,16 @@ namespace GodtSkoddProsjekt.Controllers
             return RedirectToAction("AdminProducts");
         }
 
+        public ActionResult CancelProduct()
+        {
+            // TODO: CHECK LOG IN
+
+            return RedirectToAction("AdminProducts");
+        }
+
         // ------------------------------- Order og Orderline ----------------------------------
 
-        public ActionResult AdminOrders(int id)    // id is User ID and must be
+        public ActionResult AdminOrders(int id)    // id is User ID and must be sent in
         {
             // TODO: CHECK LOG IN
 
@@ -629,6 +650,15 @@ namespace GodtSkoddProsjekt.Controllers
             bool deleteOk = dbBLL.DeleteOrder(id);
 
             //if (deleteOk)
+
+            int userId = (int)Session["UserIdForOrders"];    // Gets stored in session-variable in AdminOrders
+
+            return RedirectToAction("AdminOrders", new { id = userId });
+        }
+
+        public ActionResult CancelOrder()
+        {
+            // TODO: CHECK LOG IN
 
             int userId = (int)Session["UserIdForOrders"];    // Gets stored in session-variable in AdminOrders
 
