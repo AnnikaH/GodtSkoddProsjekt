@@ -36,7 +36,8 @@
 <div class="col-sm-9">
     <h2 class="header">Produkter</h2>
     <p>
-        <div class="Link_addnew"><span class="glyphicon glyphicon-plus"></span>  @Html.ActionLink("Registrer nytt produkt", "CreateProduct", "ADMINMain", new { id = "" }, new { @class = "" })</div>
+        <div class="Link_addnew"><span class="glyphicon glyphicon-arrow-down"></span><a href="#" class="link_toggle">Vis mer informasjon</a> | <span class="glyphicon glyphicon-plus"></span>  @Html.ActionLink("Registrer nytt produkt", "CreateProduct", "ADMINMain", new { id = "" }, new { @class = "" })
+            </div>
     </p>
 
     <!-- Search for product by id here?:
@@ -96,8 +97,8 @@
               
                 <td>
                     @Html.ActionLink("Endre", "EditProduct", "ADMINMain", new { id = item.id }, new { @class = "" }) |
-                    @Html.ActionLink("Slett", "DeleteProduct", "ADMINMain", new { id = item.id }, new { @class = "" }) |
-                    <a href="#" class="link_toggle">Vis mer</a>
+                    @Html.ActionLink("Slett", "DeleteProduct", "ADMINMain", new { id = item.id }, new { @class = "" }) 
+                   
                 </td>
             </tr>
             <tr class="MoreInfo">
