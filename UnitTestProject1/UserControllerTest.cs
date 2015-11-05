@@ -18,7 +18,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Delete()
         {
-            var controller = new DAL.DBGodtSkodd(new BLL.BusinessLogic(new DAL.RepositoryStub()));
+           // var controller = new DAL.DBGodtSkodd(new BLL.BusinessLogic(new DAL.RepositoryStub()));
         }
     }
 }
