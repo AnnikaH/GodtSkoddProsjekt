@@ -517,6 +517,7 @@ namespace DAL
                     foreach (var product in dbProducts)
                     {
                         var oneProduct = new Product();
+                        oneProduct.id = product.ID;
                         oneProduct.name = product.Name;
                         oneProduct.price = product.Price;
                         oneProduct.color = product.Color;

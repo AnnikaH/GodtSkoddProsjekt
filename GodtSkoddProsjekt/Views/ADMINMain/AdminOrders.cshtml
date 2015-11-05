@@ -8,6 +8,8 @@
     ViewBag.Title = "Admin Ordre";
 }
 
+<!-- Se oppsettet til AdminProducts.cshtml (autogenerert når velger template List) -->
+
 <!-- Liste alle ordrene til en bruker (får inn ordrene via model) - husk også at hver Order inneholder en eller flere
     Orderline (se Views/User/OrderDetails.cshtml) -->
 
@@ -18,7 +20,7 @@
 
 <!-- Må ha en knapp for å opprette en ny ordre: metode CreateOrder i ADMINMainController - går til CreateOrder.cshtml -->
 
-<!-- Må ha en knapp for å slette en ordre (sende med id til ordren): Kall på javascript-funksjonen deleteOrder(id) (onclick) -->
+<!-- Må ha en knapp for å slette en ordre (sende med id til ordren): Kall på DeleteOrder + sende med ordre-id til ADMINMainController -->
 
 <!-- Edit og create Orderline skal gjøres i CreateOrder.cshtml og EditOrder.cshtml.
     Mulig å ta delete på en Orderline også? I så fall gjøre dette i EditOrder.cshtml -->

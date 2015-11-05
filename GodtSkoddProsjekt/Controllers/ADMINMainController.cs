@@ -271,30 +271,16 @@ namespace GodtSkoddProsjekt.Controllers
             return View();
         }
 
-        /* Vil ikke gå til ny side for å slette - vil bare oppdatere AdminAdminUsers-siden (ajax-kall)
-        // GET: ADMINMain/DeleteAdminUser/5
         public ActionResult DeleteAdminUser(int id)
-        {
-            return View();
-        }*/
-
-        // Called from JavaScript (AJAX) (when clicking delete-button):
-        public JsonResult DeleteAdminUser(int id)
         {
             // TODO: CHECK LOG IN
 
             var dbBLL = new BusinessLogic();
-
             bool deleteOk = dbBLL.DeleteAdminUser(id);
 
-            JsonResult jsonOutput;
+            //if (deleteOk)
 
-            if (deleteOk)
-                jsonOutput = Json(true, JsonRequestBehavior.AllowGet);
-            else
-                jsonOutput = Json(false, JsonRequestBehavior.AllowGet);
-
-            return jsonOutput;
+            return RedirectToAction("AdminAdminUsers");
         }
 
         // ---------------------------------- User ------------------------------
@@ -398,29 +384,16 @@ namespace GodtSkoddProsjekt.Controllers
             return View();
         }
 
-        /* Vil ikke gå til ny side for å slette - vil bare oppdatere AdminCustomers-siden (ajax-kall)
-        // GET: ADMINMain/DeleteAdminUser/5
-        public ActionResult DeleteAdminUser(int id)
-        {
-            return View();
-        }*/
-
-        // Called from JavaScript (AJAX) (when clicking delete-button):
-        public JsonResult DeleteUser(int id)
+        public ActionResult DeleteUser(int id)
         {
             // TODO: CHECK LOG IN
 
             var dbBLL = new BusinessLogic();
             bool deleteOk = dbBLL.DeleteUser(id);
 
-            JsonResult jsonOutput;
-
-            if (deleteOk)
-                jsonOutput = Json(true, JsonRequestBehavior.AllowGet);
-            else
-                jsonOutput = Json(false, JsonRequestBehavior.AllowGet);
-
-            return jsonOutput;
+            //if (deleteOk)
+            
+            return RedirectToAction("AdminCustomers");
         }
 
         // ----------------------------------- Product -------------------------------------
@@ -524,22 +497,16 @@ namespace GodtSkoddProsjekt.Controllers
             return View();
         }
 
-        // Called from JavaScript (AJAX) (when clicking delete-button):
-        public JsonResult DeleteProduct(int id)
+        public ActionResult DeleteProduct(int id)
         {
             // TODO: CHECK LOG IN
 
             var dbBLL = new BusinessLogic();
             bool deleteOk = dbBLL.DeleteProduct(id);
 
-            JsonResult jsonOutput;
+            //if (deleteOk)
 
-            if (deleteOk)
-                jsonOutput = Json(true, JsonRequestBehavior.AllowGet);
-            else
-                jsonOutput = Json(false, JsonRequestBehavior.AllowGet);
-
-            return jsonOutput;
+            return RedirectToAction("AdminProducts");
         }
 
         // ------------------------------- Order og Orderline ----------------------------------
@@ -654,22 +621,18 @@ namespace GodtSkoddProsjekt.Controllers
             return View();
         }
 
-        // Called from JavaScript (AJAX) (when clicking delete-button):
-        public JsonResult DeleteOrder(int id)
+        public ActionResult DeleteOrder(int id)
         {
             // TODO: CHECK LOG IN
 
             var dbBLL = new BusinessLogic();
             bool deleteOk = dbBLL.DeleteOrder(id);
-            
-            JsonResult jsonOutput;
 
-            if (deleteOk)
-                jsonOutput = Json(true, JsonRequestBehavior.AllowGet);
-            else
-                jsonOutput = Json(false, JsonRequestBehavior.AllowGet);
+            //if (deleteOk)
 
-            return jsonOutput;
+            int userId = (int)Session["UserIdForOrders"];    // Gets stored in session-variable in AdminOrders
+
+            return RedirectToAction("AdminOrders", new { id = userId });
         }
 
         // Legge inn Create, Edit, Delete for Orderline også?

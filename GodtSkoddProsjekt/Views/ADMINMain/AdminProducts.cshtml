@@ -12,11 +12,11 @@
 
 <!-- Autogenerert kode (template List og model Product(Model)) -->
 
-<!-- Vise alle produkt (får inn fra model): -->
+<!-- OK Vise alle produkt (får inn fra model): -->
 
 <!-- Gjøre mye av det samme som på AdminAdminUsers og AdminCustomers -->
 
-<!-- Slette-knappen her (se kommentarer i AdminAdminUsers) skal kalle på javascript-metoden deleteProduct(id) -->
+<!-- OK Slette-knappen her (se kommentarer i AdminAdminUsers) skal kalle på DeleteProduct(id) i ADMINMainController -->
 
 <!-- Der man søker etter et produkt på ID: Kall metoden GetProduct i ADMINMainController + send med id -->
 
@@ -98,7 +98,7 @@
             </td>
             <td>
                 @Html.ActionLink("Endre", "EditProduct", "ADMINMain", new { id = item.id }, new { @class = "" } ) |
-                <a href="JavaScript:deleteProduct(@item.id)">Slett</a>
+                @Html.ActionLink("Slett", "DeleteProduct", "ADMINMain", new { id = item.id }, new { @class = "" })
             </td>
         </tr>
     }

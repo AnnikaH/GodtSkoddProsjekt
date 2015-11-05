@@ -10,12 +10,14 @@
 
 <!-- Skal kunne: READ (id og alle), CREATE, UPDATE og DELETE -->
 
+<!-- Se oppsettet til AdminProducts.cshtml (autogenerert når velger template List) -->
+
 <div class="col-sm-9">
     <h2 class="header">Administrator-brukere</h2>
 
     <!-- Vise alle adminbrukere her (får inn fra model)
-        + kunne endre/oppdatere og slette hver enkelt (knapper på samme linje hvor oppdater-knappen går til UpdateAdminUser + sende med id, og
-        hvor slette-knappen kaller javascript-metoden deleteAdminUser(id) (onclick) som ligger i _LayoutAdmin.cshtml)
+        + kunne endre/oppdatere og slette hver enkelt (knapper på samme linje hvor oppdater-knappen går til UpdateAdminUser + sende med id,
+        og hvor slette-knappen går til DeleteAdminUser + sende med id til ADMINMainController)
         + kunne søke etter en bestemt en ut fra id (se nedenfor: kalle på javascript-funksjon)
         + en knapp for å gå til CreateAdminUser.cshtml (registrere ny adminbruker) : -->
 
