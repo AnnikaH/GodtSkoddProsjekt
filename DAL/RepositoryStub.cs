@@ -10,26 +10,33 @@ namespace DAL
     class RepositoryStub
     {
 
-
+        
         public bool CreateUser(User user)
         {
-            return false;
+            if (user.firstName == "")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
-        /*  private static byte[] CreateHash(string inPassword)
-          {
-              //Hash function to hash a password and return the hash
-              byte[] input, output;
-              var algorythm = System.Security.Cryptography.SHA256.Create();
-              input = System.Text.Encoding.ASCII.GetBytes(inPassword);
-              output = algorythm.ComputeHash(input);
-              return output;
-    }*/
+         
 
     public bool UserInDb(LoginUser inputUser)
         {
             //Function for checking if its the correct input for logging in
-            return false;
+            if(inputUser.userName == "")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+            
         }
 
         // Alternative: get the ID for the User in the database
@@ -38,22 +45,82 @@ namespace DAL
             //Function for checking if its the correct input for logging in
             //and returning the corresponding UserID in the database (not LoginUser, but Users)
 
-            return 0;
+            if(loginUser.userName == "")
+            {
+                var user = new User();
+                user.id = 0;
+                return user.id;
+
+            }
+
+            else
+            {
+                var user = new User()
+                {
+                    id = 1,
+                    firstName = "Test",
+                    lastName = "Testen",
+                    address = "Testveien 1",
+                    postalCode = "1234",
+                    city = "Test",
+                    userName = "Test",
+                    password = "Testing"
+
+                };
+                return user.id;
+
+            }
+
         }
 
         public bool EditUser(int id, User inputUser)
         {
-            return false;
+            if (id == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public bool DeleteUser(int id, User inputUser)
         {
-            return false;
+            if (id == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public User GetUser(int id)
         {
-            return null;
+            if (id == 0)
+            {
+                var user = new User();
+                user.id = 0;
+                return user;
+            }
+            else
+            {
+                var user = new User()
+                {
+                    id = 1,
+                    firstName = "Test",
+                    lastName = "Testen",
+                    address = "Testveien 1",
+                    postalCode= "1234",
+                    city = "Test",
+                    userName = "Test",
+                    password = "Testing"
+                    
+                };
+                return user;
+            }
         }
 
         //------------------------------------------ PRODUCTS ---------------------------------
@@ -61,65 +128,234 @@ namespace DAL
         public bool CreateProduct(Product product)
         {
             // Adding a new row in the database table Product for this Product:
-            return false;
+            if (product.name == "")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public bool EditProduct(int id, Product inputProduct)
         {
-            return false;
+            if (id == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public bool DeleteProduct(int id)
         {
-            return false;
+            if (id == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
-        public List<Product> ListTopProducts()
-        {
-            // For now: just listing the first 9 products
-
-            return null;
-        }
 
         public List<Product> ListAllProducts()
         {
-            return null;
+            var productList = new List<Product>();
+            var product = new Product()
+            {
+                id = 1,
+                name = "Shoe",
+                price = 499,
+                size = 45,
+                color = "Black",
+                material = "Mesh",
+                brand = "Brand",
+                url = "/Here",
+                gender = "Men",
+                type = "Sneakers"
+                
+
+            };
+            productList.Add(product);
+            productList.Add(product);
+            productList.Add(product);
+            return productList;
         }
 
         public List<Product> ListProductsOfGender(String gender)    // F.ex. Men
         {
-            return null;
+            var productList = new List<Product>();
+            var product = new Product()
+            {
+                id = 1,
+                name = "Shoe",
+                price = 499,
+                size = 45,
+                color = "Black",
+                material = "Mesh",
+                brand = "Brand",
+                url = "/Here",
+                gender = "Men",
+                type = "Boots"
+
+
+            };
+
+            
+            if(product.gender == gender)
+            {
+                productList.Add(product);
+                productList.Add(product);
+                productList.Add(product);
+
+            }
+            return productList;
         }
 
         public List<Product> ListProductsOfType(String type)    // f.ex. Boots
         {
-            return null;
+            var productList = new List<Product>();
+            var product = new Product()
+            {
+                id = 1,
+                name = "Shoe",
+                price = 499,
+                size = 45,
+                color = "Black",
+                material = "Mesh",
+                brand = "Brand",
+                url = "/Here",
+                gender = "Men",
+                type = "Boots"
+
+
+            };
+
+
+            if (product.type == type)
+            {
+                productList.Add(product);
+                productList.Add(product);
+                productList.Add(product);
+
+            }
+            return productList;
         }
 
         public Product GetProduct(int id)
         {
-            return null;
+            if (id == 0)
+            {
+                var product = new Product();
+                product.id = 0;
+                return product;
+            }
+            else
+            {
+                var product = new Product()
+                {
+                    id = 1,
+                    name = "Shoe",
+                    price = 499,
+                    size = 45,
+                    color = "Black",
+                    material = "Mesh",
+                    brand = "Brand",
+                    url = "/Here",
+                    gender = "Men",
+                    type = "Boots"
+                };
+                return product;
+            }
         }
 
         // --------------------------------------------- ORDERS -------------------------------
 
         public bool CreateOrder(Order order)
         {
-
-            return false;
+            if (order.id == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
 
         public List<Order> GetOrders()
         {
             //Returns all orders. (for statistics?)
+            DateTime dt = new DateTime();
+            var orderLines = new List<Orderline>();
+            var orderline = new Orderline()
+            {
+                id = 1,
+                orderID = 1,
+                productId = 1,
+                quantity = 1
+            };
+            orderLines.Add(orderline);
+            orderLines.Add(orderline);
+            orderLines.Add(orderline);
 
-            return null;
+            var orderList = new List<Order>();
+            var order = new Order()
+            {
+                id = 1,
+                userID = 1,
+                date = dt,
+                orderlines = orderLines
+
+            };
+            orderList.Add(order);
+            orderList.Add(order);
+            orderList.Add(order);
+
+            return orderList;
+
         }
 
         public List<Order> GetOrdersForUser(int userId)
         {
-            return null;
+
+            DateTime dt = new DateTime();
+            var orderLines = new List<Orderline>();
+            var orderline = new Orderline()
+            {
+                id = 1,
+                orderID = 1,
+                productId = 1,
+                quantity = 1
+            };
+            orderLines.Add(orderline);
+            orderLines.Add(orderline);
+            orderLines.Add(orderline);
+
+
+            var orderList = new List<Order>();
+            var order = new Order()
+            {
+                id = 1,
+                userID = 1,
+                date = dt,
+                orderlines = orderLines
+
+            };
+
+            if(order.userID == userId)
+            { 
+                orderList.Add(order);
+                orderList.Add(order);
+                orderList.Add(order);
+            }
+            return orderList;
         }
     }
 }
