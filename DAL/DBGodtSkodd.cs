@@ -495,6 +495,7 @@ namespace DAL
                     Products editProduct = db.Products.Find(id);
                     editProduct.Name = inputProduct.name;
                     editProduct.Price = inputProduct.price;
+                    editProduct.Color = inputProduct.color;
                     editProduct.Material = inputProduct.material;
                     editProduct.Brand = inputProduct.brand;
                     editProduct.Gender = inputProduct.gender;
@@ -548,6 +549,7 @@ namespace DAL
                         oneProduct.id = product.ID;
                         oneProduct.name = product.Name;
                         oneProduct.price = product.Price;
+                        oneProduct.size = product.Size;
                         oneProduct.color = product.Color;
                         oneProduct.material = product.Material;
                         oneProduct.brand = product.Brand;
@@ -583,8 +585,10 @@ namespace DAL
                         if (product.Gender.Equals(gender))
                         {
                             var oneProduct = new Product();
+                            oneProduct.id = product.ID;
                             oneProduct.name = product.Name;
                             oneProduct.price = product.Price;
+                            oneProduct.size = product.Size;
                             oneProduct.color = product.Color;
                             oneProduct.material = product.Material;
                             oneProduct.brand = product.Brand;
@@ -617,8 +621,10 @@ namespace DAL
                         if (product.Type.Equals(type))
                         {
                             var oneProduct = new Product();
+                            oneProduct.id = product.ID;
                             oneProduct.name = product.Name;
                             oneProduct.price = product.Price;
+                            oneProduct.size = product.Size;
                             oneProduct.color = product.Color;
                             oneProduct.material = product.Material;
                             oneProduct.brand = product.Brand;
@@ -662,7 +668,6 @@ namespace DAL
                     size = oneProducts.Size,
                     color = oneProducts.Color,
                     url = oneProducts.Url
-
                 };
                 return output;
             }
