@@ -21,11 +21,28 @@
         + kunne søke etter en bestemt administrator ut fra id: kall GetAdminUser i ADMINMainController + send med id
         + en knapp for å gå til CreateAdminUser.cshtml (registrere ny adminbruker) : -->
 
-    <table class="table">
-        <tr class="table_header">
-            <td>#</td>
-            <td>Navn</td>
+    <p>
+        <div class="Searchbar"><input type="text" id="Searchinn" /></div>
+        <div class="Link_addnew">
+        <span class="glyphicon glyphicon-plus"></span>  @Html.ActionLink("Registrer ny Administrator", "CreateAdminUser", "ADMINMain", new { id = "" }, new { @class = "" })
+        </div>
+    </p>
 
+    <table class="table">
+        <tr>
+        <th>Brukernavn </th>
         </tr>
-    </table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.userName)</td>
+
+                <td>
+                    @Html.ActionLink("Endre", "EditAdmin", "ADMINMain", new { id = item.id }, new { @class = "" }) |
+                    @Html.ActionLink("Slett", "DeleteAdmin", "ADMINMain", new { id = item.id }, new { @class = "" })
+                </td>
+            </tr>
+                }
+
+</table>
 </div><!-- /. col-sm-9 aka wrapper-->
