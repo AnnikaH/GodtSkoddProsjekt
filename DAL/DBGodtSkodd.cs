@@ -5,16 +5,59 @@ using System.Web;
 using Model;
 
 using System.Diagnostics;
+using System.IO;
 
 namespace DAL
 {
     public class DBGodtSkodd
     {
+        string errorLogPath = AppDomain.CurrentDomain.BaseDirectory + "Logs";
+
         public bool CreateDatabaseContent()
         {
+            try
+            {
+                throw new InvalidDataException("This might be working");
+            }
+            catch (Exception e)
+            {
+                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                writeToLog(errorMessage);
+            }
             // Kopier kode for når man trykker på knappen i Admin/Index.cshtml - (bortsett fra å legge inn en ordre på bruker nr. 1..?
 
             return false;
+        }
+
+        public void writeToLog(string input)
+        {
+            string day = DateTime.Now.Day.ToString();
+            string month = DateTime.Now.Month.ToString();
+            string year = DateTime.Now.Year.ToString();
+            string today = "" + day + "." + month + "." + year;
+            string nowHour = DateTime.Now.Hour.ToString();
+            string nowMinute = DateTime.Now.Minute.ToString();
+            string todayFile = @"\Log " + today + ".txt";
+
+            if (File.Exists(errorLogPath + todayFile))
+            {
+                using (StreamWriter outputFile = new StreamWriter("" + errorLogPath + todayFile, true))
+                {
+                    outputFile.WriteLine("[" + nowHour + ":" + nowMinute + "] " + input);
+                }
+
+            }
+            else
+            {
+                if (!Directory.Exists(errorLogPath))
+                {
+                    Directory.CreateDirectory(errorLogPath);
+                }
+                using (StreamWriter outputFile = new StreamWriter("" + errorLogPath + todayFile))
+                {
+                    outputFile.WriteLine("[" + nowHour + ":" + nowMinute + "] " + input);
+                }
+            }
         }
 
         // ----------------------------- AdminUser ---------------------------------
@@ -30,15 +73,18 @@ namespace DAL
                     foreach (var adminUser in dbAdminUsers)
                     {
                         var oneUser = new AdminUser();
+                        oneUser.id = adminUser.ID;
                         oneUser.userName = adminUser.UserName;
-                        //oneUser.password = adminUser.Password;  // hash (byte[]) - not return
+                        oneUser.password = null;
                         output.Add(oneUser);
                     }
                     return output;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    // Write to log
+                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                    writeToLog(errorMessage);
+
 
                     var output = new List<AdminUser>();
                     return output;
@@ -50,8 +96,19 @@ namespace DAL
         {
             // Fill in
 
-            return null;
+            using (var db = new DBContext())
+            {
+
+                AdminUser returnAdminUser = new AdminUser();
+                AdminUsers foundAdminUser = db.AdminUsers.Find(id);
+                returnAdminUser.id = foundAdminUser.ID;
+                returnAdminUser.userName = foundAdminUser.UserName;
+                returnAdminUser.password = null;
+                return returnAdminUser;
+            }
         }
+
+
 
         public int GetAdminIdInDB(AdminUser adminUser)
         {
@@ -106,9 +163,10 @@ namespace DAL
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // Write to log
+                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                writeToLog(errorMessage);
 
                 return false;
             }
@@ -116,11 +174,24 @@ namespace DAL
 
         public bool EditAdminUser(int id, AdminUser adminUser)
         {
-            // Fill in
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    AdminUsers changeUser = db.AdminUsers.Find(id);
+                    changeUser.UserName = adminUser.userName;
+                    changeUser.Password = CreateHash(adminUser.password);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                    writeToLog(errorMessage);
 
-            // Write to log in catch
-
-            return false;
+                    return false;
+                }
+            }
         }
 
         public bool DeleteAdminUser(int id)
@@ -131,8 +202,6 @@ namespace DAL
 
             return false;
         }
-
-        //-------- EVERYTHING UNDER HERE IS COPIED FROM THE FORMER DBGodtSkodd: -----------------------
 
         //------------------------------------------- USERS ------------------------------------------
         public bool CreateUser(User user)
@@ -172,9 +241,10 @@ namespace DAL
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // Write to log
+                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                writeToLog(errorMessage);
 
                 return false;
             }
@@ -211,7 +281,7 @@ namespace DAL
 
         // Alternative: get the ID for the User in the database
         public int GetUserIdInDB(LoginUser loginUser)
-        {   
+        {
             //Function for checking if its the correct input for logging in
             //and returning the corresponding UserID in the database (not LoginUser, but Users)
 
@@ -246,7 +316,7 @@ namespace DAL
                     changeUser.PostalCode = inputUser.postalCode;
                     changeUser.UserName = inputUser.userName;
                     changeUser.Password = CreateHash(inputUser.password);
-                    
+
                     if (changeUser.PostalCode != inputUser.postalCode)
                     {
                         Cities postalCodeExists = db.Cities.FirstOrDefault(p => p.PostalCode == inputUser.postalCode);
@@ -260,7 +330,7 @@ namespace DAL
                             db.Cities.Add(newCity);
                         }
                         else
-                        {   
+                        {
                             changeUser.PostalCode = inputUser.postalCode;
                         }
                         db.SaveChanges();
@@ -269,15 +339,16 @@ namespace DAL
                     db.SaveChanges();
                     return true;
                 }
-                catch
+                catch (Exception e)
                 {
-                    // Write to log
+                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                    writeToLog(errorMessage);
 
                     return false;
                 }
             }
         }
-    
+
         public bool DeleteUser(int id, User inputUser)
         {
             var db = new DBContext();
@@ -288,9 +359,10 @@ namespace DAL
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // Write to log
+                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                writeToLog(errorMessage);
 
                 return false;
             }
@@ -306,9 +378,10 @@ namespace DAL
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // Write to log
+                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                writeToLog(errorMessage);
 
                 return false;
             }
@@ -345,7 +418,7 @@ namespace DAL
         public List<User> GetUsers()
         {
             // Fill in
-            
+
             return null;
         }
 
@@ -376,9 +449,10 @@ namespace DAL
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // Write to log
+                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                writeToLog(errorMessage);
 
                 return false;
             }
@@ -402,16 +476,17 @@ namespace DAL
                     db.SaveChanges();
                     return true;
                 }
-                catch
+                catch (Exception e)
                 {
-                    // Write to log
+                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                    writeToLog(errorMessage);
 
                     return false;
                 }
             }
         }
 
-        public bool DeleteProduct(int id) 
+        public bool DeleteProduct(int id)
         {
             var db = new DBContext();
             try
@@ -421,55 +496,15 @@ namespace DAL
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // Write to log
+                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                writeToLog(errorMessage);
 
                 return false;
             }
         }
 
-        public List<Product> ListTopProducts()
-        {
-            // For now: just listing the first 9 products
-
-            using (var db = new DBContext())
-            {
-                try
-                {
-                    var dbProducts = db.Products.ToList();
-                    List<Product> outputProducts = new List<Product>();
-
-                    for(int i = 0; i < 9; i++)
-                    {
-                        var oneProduct = new Product();
-
-                        if(dbProducts[i] != null)
-                        {
-                            oneProduct.name = dbProducts[i].Name;
-                            oneProduct.price = dbProducts[i].Price;
-                            oneProduct.color = dbProducts[i].Color;
-                            oneProduct.material = dbProducts[i].Material;
-                            oneProduct.brand = dbProducts[i].Brand;
-                            oneProduct.url = dbProducts[i].Url;
-                            oneProduct.gender = dbProducts[i].Gender;
-                            oneProduct.type = dbProducts[i].Type;
-                            outputProducts.Add(oneProduct);
-                        }
-                        else
-                        {
-                            return outputProducts;
-                        }
-                    }
-                    return outputProducts;
-                }
-                catch (Exception)
-                {
-                    var outputProducts = new List<Product>();
-                    return outputProducts;
-                }
-            }
-        }
 
         public List<Product> ListAllProducts()
         {
@@ -482,21 +517,22 @@ namespace DAL
                     foreach (var product in dbProducts)
                     {
                         var oneProduct = new Product();
-                        oneProduct.name= product.Name;
-                        oneProduct.price= product.Price;
-                        oneProduct.color= product.Color;
-                        oneProduct.material= product.Material;
-                        oneProduct.brand=product.Brand;
-                        oneProduct.url= product.Url;
-                        oneProduct.gender= product.Gender;
-                        oneProduct.type=product.Type;
+                        oneProduct.name = product.Name;
+                        oneProduct.price = product.Price;
+                        oneProduct.color = product.Color;
+                        oneProduct.material = product.Material;
+                        oneProduct.brand = product.Brand;
+                        oneProduct.url = product.Url;
+                        oneProduct.gender = product.Gender;
+                        oneProduct.type = product.Type;
                         output.Add(oneProduct);
                     }
                     return output;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    // Write to log
+                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                    writeToLog(errorMessage);
 
                     var output = new List<Product>();
                     return output;
@@ -549,7 +585,7 @@ namespace DAL
                     List<Product> outputProducts = new List<Product>();
                     foreach (var product in dbProducts)
                     {
-                        if(product.Type.Equals(type))
+                        if (product.Type.Equals(type))
                         {
                             var oneProduct = new Product();
                             oneProduct.name = product.Name;
@@ -635,9 +671,10 @@ namespace DAL
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // Write to log
+                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                writeToLog(errorMessage);
 
                 return false;
             }
@@ -671,7 +708,7 @@ namespace DAL
                             oneOrder.date = order.Date;
                             oneOrder.orderlines = new List<Orderline>();
 
-                            foreach(var orderline in order.Orderlines)
+                            foreach (var orderline in order.Orderlines)
                             {
                                 var NewOrderLine = new Orderline();
                                 NewOrderLine.productId = orderline.ProductID;
@@ -685,9 +722,10 @@ namespace DAL
 
                     return outputOrder;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    // Write to log
+                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                    writeToLog(errorMessage);
 
                     var output = new List<Order>();
                     var errorOrder = new Order();
@@ -696,6 +734,59 @@ namespace DAL
                     return output;
                 }
             }
+        }
+        public Order getOrder(int id)
+        {
+            // Fill in
+            using (var db = new DBContext())
+            {
+
+                Order returnOrder = new Order();
+                Orders foundOrder = db.Orders.Find(id);
+                returnOrder.id = foundOrder.ID;
+                returnOrder.userID = foundOrder.UserID;
+                foreach (var item in foundOrder.Orderlines)
+                {
+                    Orderline newOrderLine = new Orderline();
+                    newOrderLine.id = item.ID;
+                    newOrderLine.orderID = item.OrderID;
+                    newOrderLine.productId = item.ProductID;
+                    newOrderLine.quantity = item.Quantity;
+                    returnOrder.orderlines.Add(newOrderLine);
+                }
+                return returnOrder;
+            }
+        }
+        public bool EditOrder(int id, Order input)
+        {
+            /*using (var db = new DBContext())
+            {
+                try
+                {
+                    Orders changeOrder = db.Orders.Find(id);
+                    changeOrder.UserID = input.userID;
+
+                    foreach (var item in input.orderlines)
+                    {
+                        changeOrder.Orderlines.Find(item.id);
+                    }
+
+
+
+
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                    writeToLog(errorMessage);
+
+
+                    return false;
+                }
+            }*/
+            return false;
         }
     }
 }
