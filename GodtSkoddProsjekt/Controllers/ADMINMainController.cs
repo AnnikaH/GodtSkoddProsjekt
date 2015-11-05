@@ -98,7 +98,7 @@ namespace GodtSkoddProsjekt.Controllers
             if (Session["LoggedInAdmin"] != null && (bool)Session["LoggedInAdmin"]) // if logged in from before
                 return RedirectToAction("Index");
 
-            // else: Log in-page for administrators:
+            // else: Go to log in-page for administrators:
 
             return View();
         }

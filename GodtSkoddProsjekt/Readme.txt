@@ -1,4 +1,16 @@
-﻿Spesielle notiser:
+﻿Spesielle notiser innlevering mappe 2:
+
+Start-url: /Home/Index
+Herfra kan man gå til Admin-siden ved å klikke på "Admin" øverst til høyre i navbaren.
+Her må man logge inn med brukernavn annika og passord annikahammervoll (hoved-administrator).
+Man kan bare opprette nye administratorer når man er logget inn som en administrator.
+
+Produktene opprettes automatisk når man går inn på hovedsiden /Home/Index hvis de ikke finnes
+i databasen fra før av.
+
+// ---------------------------------------------------------------------------------
+
+Spesielle notiser innlevering mappe 1:
 
 Hvis det ikke ligger noen produkt i databasen:
 	Slett den aktuelle databasen.
