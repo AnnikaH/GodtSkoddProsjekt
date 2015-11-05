@@ -10,8 +10,15 @@ namespace UnitTestProject1
     public class UserControllerTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void GetUser()
         {
+
+        }
+
+        [TestMethod]
+        public void Delete()
+        {
+            var controller = new DAL.DBGodtSkodd(new BLL.BusinessLogic(new DAL.RepositoryStub()));
         }
     }
 }
