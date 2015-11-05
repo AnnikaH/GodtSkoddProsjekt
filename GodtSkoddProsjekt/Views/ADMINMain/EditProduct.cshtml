@@ -8,18 +8,19 @@
     ViewBag.Title = "Admin Endre produkt";
 }
 
-<!-- Autogenerert kode: -->
+<div class="col-sm-9">
+    <!-- Autogenerert kode: -->
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        
+
         <div class="form-horizontal">
-            <h4>Endre produkt</h4>
+            <h2 class="header">Endre produkt</h2>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.id)
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -27,7 +28,7 @@
                     @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -35,7 +36,7 @@
                     @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.size, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -43,7 +44,7 @@
                     @Html.ValidationMessageFor(model => model.size, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.color, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -51,7 +52,7 @@
                     @Html.ValidationMessageFor(model => model.color, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.material, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -59,7 +60,7 @@
                     @Html.ValidationMessageFor(model => model.material, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.brand, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -67,7 +68,7 @@
                     @Html.ValidationMessageFor(model => model.brand, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.url, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -75,7 +76,7 @@
                     @Html.ValidationMessageFor(model => model.url, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -83,7 +84,7 @@
                     @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.type, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -91,15 +92,17 @@
                     @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Lagre" class="btn btn-default" />
                 </div>
             </div>
         </div>
+
     }
-    
+</div>
+
     <!--<div>
         Html.ActionLink("Back to List", "Index")
     </div>-->
