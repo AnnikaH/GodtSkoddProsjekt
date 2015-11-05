@@ -1,4 +1,4 @@
-﻿@model List<Model.Product>
+﻿@model IEnumerable<Model.Product>
 
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -8,9 +8,9 @@
     ViewBag.Title = "Admin Produkt";
 }
 
-<!-- Autogenerert kode (template List og model Product(Model)) -->
+<!-- MERK!: Tar inn IEnumerable<Model.Product> istedenfor List<Model.Product> -->
 
-<!-- Får feilmelding på denne siden -->
+<!-- Autogenerert kode (template List og model Product(Model)) -->
 
 <!-- Vise alle produkt (får inn fra model): -->
 
@@ -20,11 +20,20 @@
 
 <!-- Der man søker etter et produkt på ID: Kall metoden GetProduct i ADMINMainController + send med id -->
 
+<!-- CSS: Må ha mer padding eller marg på toppen for å se "Registrer nytt produkt" (som får i _Layout.cshtml) -->
+
     <p>
-        @Html.ActionLink("Registrer nytt produkt", "CreateProduct", "ADMINMain")
+        @Html.ActionLink("Registrer nytt produkt", "CreateProduct", "ADMINMain", new { id = "" }, new { @class = "" })
     </p>
+
+    <!-- Search for product by id here?:
+        Call method GetProduct in ADMINMainController + id to product -->
+
     <table class="table">
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.name)
             </th>
@@ -58,6 +67,9 @@
     @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
@@ -86,8 +98,7 @@
             </td>
             <td>
                 @Html.ActionLink("Endre", "EditProduct", "ADMINMain", new { id = item.id }, new { @class = "" } ) |
-                @Html.ActionLink("Se detaljer", "DetailsProduct", "ADMINMain", new { id = item.id }, new { @class = "" }) |
-                @Html.ActionLink("Slett", "DeleteProduct", "ADMINMain", new { id = item.id }, new { @class = "" })
+                <a href="JavaScript:deleteProduct(@item.id)">Slett</a>
             </td>
         </tr>
     }
