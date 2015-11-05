@@ -191,7 +191,11 @@ h2.registrer
     font-size:90px;
     padding-top:30px;
 }
-
+.glyphicon.glyphicon-list-alt
+{
+    font-size:90px;
+    padding-top:30px;
+}
 .margin_buttom  /* Used to create some space between form button and end of wrapper */
 {
     margin-bottom:30px;
@@ -201,4 +205,25 @@ h2.registrer
 {
     font-weight:bold;
     text-align:center;
+}
+
+.Link_addnew
+{
+    float:right;
+}
+
+th{
+    background-color:#D8ECF2;
+}
+
+.MoreInfoTable
+{
+    width:100%;
+}
+
+.MoreInfo
+{
+    background-color:#EDEDED;
+    display:none;
+ 
 }

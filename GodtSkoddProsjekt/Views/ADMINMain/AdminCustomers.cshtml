@@ -1,4 +1,4 @@
-﻿@model List<Model.User>
+﻿@model IEnumerable<Model.User>
 
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -24,12 +24,26 @@
     <!-- Der man søker etter en kunde på ID: Kall metoden GetUser i ADMINMainController + send med id -->
 
     <table class="table">
-        <tr class="table_header">
-            <td>#</td>
-            <td>Navn:</td>
-
+      <tr>
+        <th>#</th>
+          <th>Navn</th>
+          <th>Adresse:</th>
       </tr>
-  </table>    
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => model.FirstName) @Html.DisplayFor(Model => Model.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Adresse) @Html.DisplayFor(Model => Model.Postnr) @Html.DisplayFor(Model => Model.Poststed)
+                </td>
+             
+</table>    
+
     
 </div><!-- /. col-sm-9  aka wrapper -->
-

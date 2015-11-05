@@ -22,8 +22,21 @@
 
 <!-- CSS: Må ha mer padding eller marg på toppen for å se "Registrer nytt produkt" (som får i _Layout.cshtml) -->
 
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        
+        $(".link_toggle").click(function () {
+       
+            $(".MoreInfo").toggle();
+        })});
+</script>
+
+<div class="col-sm-9">
+    <h2 class="header">Produkter</h2>
     <p>
-        @Html.ActionLink("Registrer nytt produkt", "CreateProduct", "ADMINMain", new { id = "" }, new { @class = "" })
+        <div class="Link_addnew"><span class="glyphicon glyphicon-plus"></span>  @Html.ActionLink("Registrer nytt produkt", "CreateProduct", "ADMINMain", new { id = "" }, new { @class = "" })</div>
     </p>
 
     <!-- Search for product by id here?:
@@ -40,67 +53,77 @@
             <th>
                 @Html.DisplayNameFor(model => model.price)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.size)
-            </th>
+         
             <th>
                 @Html.DisplayNameFor(model => model.color)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.material)
-            </th>
+          
             <th>
                 @Html.DisplayNameFor(model => model.brand)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.url)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.gender)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.type)
-            </th>
+          
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.size)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.color)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.material)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.brand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.url)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.gender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.type)
-            </td>
-            <td>
-                @Html.ActionLink("Endre", "EditProduct", "ADMINMain", new { id = item.id }, new { @class = "" } ) |
-                @Html.ActionLink("Slett", "DeleteProduct", "ADMINMain", new { id = item.id }, new { @class = "" })
-            </td>
-        </tr>
-    }
-    
+
+        @foreach (var item in Model)
+        {
+            <tr class="productLine">
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.color)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.brand)
+                </td>
+              
+                <td>
+                    @Html.DisplayFor(modelItem => item.gender)
+                </td>
+              
+                <td>
+                    @Html.ActionLink("Endre", "EditProduct", "ADMINMain", new { id = item.id }, new { @class = "" }) |
+                    @Html.ActionLink("Slett", "DeleteProduct", "ADMINMain", new { id = item.id }, new { @class = "" }) |
+                    <a href="#" class="link_toggle">Vis mer</a>
+                </td>
+            </tr>
+            <tr class="MoreInfo">
+       
+                <td colspan="7">
+                    <table class="MoreInfoTable">
+                        <tr>
+                            <td class="table_header">Id:</td><td>@Html.DisplayFor(modelItem => item.id)</td>
+                        </tr>
+                        <tr>
+                            <td class="table_header">Navn: </td><td>@Html.DisplayFor(modelItem => item.name)</td>
+                        </tr>
+                        <tr><td class="table_header">Pris: </td><td>@Html.DisplayFor(modelItem => item.price)</td></tr>
+                        <tr><td class="table_header">Størrelse:</td><td>@Html.DisplayFor(modelItem => item.size)</td></tr>
+                        <tr><td class="table_header">Farge:</td><td>@Html.DisplayFor(modelItem => item.color)</td></tr>
+                        <tr><td class="table_header">Materiale:</td><td>@Html.DisplayFor(modelItem => item.material)</td></tr>
+                        <tr><td class="table_header">Merke:</td><td>@Html.DisplayFor(modelItem => item.brand)</td></tr>
+                        <tr><td class="table_header">Bilde-url:</td><td>@Html.DisplayFor(modelItem => item.url)</td></tr>
+                        <tr><td class="table_header">For hvem:</td><td>@Html.DisplayFor(modelItem => item.gender)</td></tr>
+                        <tr><td class="table_header">Type sko:</td><td>@Html.DisplayFor(modelItem => item.type)</td></tr>
+                    </table>
+                </td>
+               
+            </tr>
+        }
     </table>
+        </div> <!-- /. col-sm-9 aka wrapper -->
+    
+   
