@@ -417,9 +417,37 @@ namespace DAL
 
         public List<User> GetUsers()
         {
-            // Fill in
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    var dbUsers = db.Users.ToList();
+                    List<User> output = new List<User>();
+                    foreach (var user in dbUsers)
+                    {
+                        var oneUser = new User();
+                        oneUser.id = user.ID;
+                        oneUser.firstName = user.FirstName;
+                        oneUser.lastName = user.LastName;
+                        oneUser.address = user.Address;
+                        oneUser.email = user.Email;
+                        oneUser.phoneNumber = user.PhoneNumber;
+                        oneUser.postalCode = user.PostalCode;
+                        oneUser.city = user.City.City;
+                        oneUser.userName = user.UserName;
+                        output.Add(oneUser);
+                    }
+                    return output;
+                }
+                catch (Exception e)
+                {
+                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
+                    writeToLog(errorMessage);
 
-            return null;
+                    var output = new List<User>();
+                    return output;
+                }
+            }
         }
 
         //------------------------------------------ PRODUCTS ---------------------------------

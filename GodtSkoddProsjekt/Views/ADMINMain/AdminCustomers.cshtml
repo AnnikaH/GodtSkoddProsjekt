@@ -24,26 +24,30 @@
     <!-- Der man søker etter en kunde på ID: Kall metoden GetUser i ADMINMainController + send med id -->
 
     <table class="table">
-      <tr>
-        <th>#</th>
-          <th>Navn</th>
-          <th>Adresse:</th>
-      </tr>
+        <tr>
+            <th>#</th>
+            <th>Navn</th>
+            <th>Adresse</th>
+            <!-- + E-post, Telefonnummer, Brukernavn -->
+        </tr>
 
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(Model => Model.id)
+                    @Html.DisplayFor(modelItem => item.id)
                 </td>
                 <td>
-                    @Html.DisplayFor(Model => model.FirstName) @Html.DisplayFor(Model => Model.LastName)
+                    @Html.DisplayFor(modelItem => item.firstName) @Html.DisplayFor(modelItem => item.lastName)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => model.Adresse) @Html.DisplayFor(Model => Model.Postnr) @Html.DisplayFor(Model => Model.Poststed)
+                    @Html.DisplayFor(modelItem => item.address), @Html.DisplayFor(modelItem => item.postalCode) @Html.DisplayFor(modelItem => item.city)
                 </td>
-             
-</table>    
+             </tr>
+             //item.email
+             //item.phoneNumber
+             //item.userName
+        }
+    </table>
 
-    
 </div><!-- /. col-sm-9  aka wrapper -->
