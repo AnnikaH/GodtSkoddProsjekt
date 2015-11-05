@@ -182,7 +182,9 @@ h2.registrer
 .admin_controlpanel_option
 {
    text-align:center;
-   margin-left:6%;
+   margin-left:5%;
+   margin-right:5%;
+   margin-bottom:5%;
    display:inline-block;
 }
 
@@ -191,11 +193,19 @@ h2.registrer
     font-size:90px;
     padding-top:30px;
 }
+
 .glyphicon.glyphicon-list-alt
 {
     font-size:90px;
     padding-top:30px;
 }
+
+.glyphicon.glyphicon-barcode
+{
+    font-size:90px;
+    padding-top:30px;
+}
+
 .margin_buttom  /* Used to create some space between form button and end of wrapper */
 {
     margin-bottom:30px;

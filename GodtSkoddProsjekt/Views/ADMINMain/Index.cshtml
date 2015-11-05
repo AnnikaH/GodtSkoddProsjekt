@@ -14,17 +14,22 @@
         
         <div class="admin_controlpanel_option">
             <span class="glyphicon glyphicon-user"></span><br />
-            Kunder
+            @Html.ActionLink("Kunder", "AdminCustomers", "ADMINMain", new { id = "" }, new { @class = "" })
         </div><!-- /. admin-controlpanel-option-->
         <div class="admin_controlpanel_option">
             <span class="glyphicon glyphicon-user"></span><br />
-            Adminbrukere
+            @Html.ActionLink("Administratorer", "AdminAdminUsers", "ADMINMain", new { id = "" }, new { @class = "" })
         </div><!-- /. admin-controlpanel-option-->
-
         <div class="admin_controlpanel_option">
+            <span class="glyphicon glyphicon-barcode"></span><br />
+            @Html.ActionLink("Produkter", "AdminProducts", "ADMINMain", new { id = "" }, new { @class = "" })
+        </div>
+
+        <!--Går inn på ordre via Kunder
+            <div class="admin_controlpanel_option">
             <span class="glyphicon glyphicon-list-alt"></span><br />
             Ordre
-        </div>
-</div><!-- /- admin-controlpanel-wrapper -->
-</div> <!-- /. col-sm-9 aka wrapper -->
+        </div>-->
 
+    </div><!-- /- admin-controlpanel-wrapper -->
+</div> <!-- /. col-sm-9 aka wrapper -->
