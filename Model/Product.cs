@@ -17,7 +17,7 @@ namespace Model
 
         [Display(Name = "Pris")]
         [Required(ErrorMessage = "Pris må oppgis")]
-        [RegularExpression(@"[0-9]{1,8},[0-9]{1,3}", ErrorMessage = "Pris kan bare inneholde siffer, og kr og øre må skilles med ,")]
+        [RegularExpression(@"^[0-9]{1,8}([.][0-9]{1,3})?$", ErrorMessage = "Pris kan bare inneholde siffer og eventuelt desimalpunktum etterfulgt av desimaler")]
         public double price { get; set; }
 
         [Display(Name = "Størrelse")]
