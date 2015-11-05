@@ -11,7 +11,7 @@ namespace BLL
     public class BusinessLogic
     {
 
-        private DBGodtSkodd _repository;
+         public DBGodtSkodd _repository;
 
         public BusinessLogic(DBGodtSkodd stub)
         {
