@@ -197,13 +197,15 @@ namespace GodtSkoddProsjekt.Controllers
 
         // Called when searching for an AdminUser based on id:
         // GET: ADMINMain/GetAdminUser/5
-        public ActionResult GetAdminUser(int adminId)
+        public ActionResult GetAdminUser(int id)
         {
+            // TODO: CHECK LOG IN
+
             var dbBLL = new BusinessLogic();
-            AdminUser adminUser = dbBLL.GetAdminUser(adminId);
+            AdminUser adminUser = dbBLL.GetAdminUser(id);
 
             if (adminUser != null)
-                return RedirectToAction("AdminAdminUsers", new { id = adminId });
+                return RedirectToAction("AdminAdminUsers", new { id = id });
 
             return RedirectToAction("AdminAdminUsers");
         }
@@ -279,6 +281,8 @@ namespace GodtSkoddProsjekt.Controllers
         // Called from JavaScript (AJAX) (when clicking delete-button):
         public JsonResult DeleteAdminUser(int id)
         {
+            // TODO: CHECK LOG IN
+
             var dbBLL = new BusinessLogic();
 
             bool deleteOk = dbBLL.DeleteAdminUser(id);
@@ -325,13 +329,15 @@ namespace GodtSkoddProsjekt.Controllers
 
         // Called when searching for a User based on id:
         // GET: ADMINMain/GetUser/5
-        public ActionResult GetUser(int userId)
+        public ActionResult GetUser(int id)
         {
+            // TODO: CHECK LOG IN
+
             var dbBLL = new BusinessLogic();
-            User user = dbBLL.GetUser(userId);
+            User user = dbBLL.GetUser(id);
 
             if (user != null)
-                return RedirectToAction("AdminCustomers", new { id = userId });
+                return RedirectToAction("AdminCustomers", new { id = id });
 
             return RedirectToAction("AdminCustomers");
         }
@@ -449,13 +455,15 @@ namespace GodtSkoddProsjekt.Controllers
 
         // Called when searching for a Product based on id:
         // GET: ADMINMain/GetProduct/5
-        public ActionResult GetProduct(int productId)
+        public ActionResult GetProduct(int id)
         {
+            // TODO: CHECK LOG IN
+
             var dbBLL = new BusinessLogic();
-            Product product = dbBLL.GetProduct(productId);
+            Product product = dbBLL.GetProduct(id);
 
             if (product != null)
-                return RedirectToAction("AdminProducts", new { id = productId });
+                return RedirectToAction("AdminProducts", new { id = id });
 
             return RedirectToAction("AdminProducts");
         }
@@ -536,12 +544,136 @@ namespace GodtSkoddProsjekt.Controllers
 
         // ------------------------------- Order og Orderline ----------------------------------
 
-        public ActionResult AdminOrders()
+        public ActionResult AdminOrders(int id)    // id is User ID and must be
+        {
+            // TODO: CHECK LOG IN
+
+            // Showing all Orders for specified User (id) (and buttons for deleting and updating them) + button to CreateOrder
+
+            var dbBLL = new BusinessLogic();
+
+            /* Must store this userId in a session-variable so that can check if user has
+            an order with the searched for orderId: */
+            Session["UserIdForOrders"] = id;
+
+            List<Order> orders = new List<Order>();
+
+            Order order = (Order)Session["Order"];
+
+            if (order != null)
+            {
+                orders.Add(order);
+                /* If Session["Order"] contains an Order, then only show this order
+                (admin has searched/called GetOrder(orderId))*/
+                Session["Order"] = null;    // reset
+            }
+            else
+            {
+                orders = dbBLL.GetOrders(id);  // GetOrders from User ID (all orders for this user)
+            }
+
+            return View(orders);
+        }
+
+        // Called when searching for an Order based on id:
+        // GET: ADMINMain/GetOrder/5
+        public ActionResult GetOrder(int id)   // must check if this orderId belongs to the user
+        {
+            // TODO: CHECK LOG IN
+
+            var dbBLL = new BusinessLogic();
+            Order order = dbBLL.GetOrder(id);
+
+            int userId = (int)Session["UserIdForOrders"];    // Gets stored in session-variable in AdminOrders
+
+            if (order != null && userId == order.userID)
+            {
+                Session["Order"] = order;
+            }
+            else
+            {
+                Session["Order"] = null;
+            }
+
+            return RedirectToAction("AdminOrders", new { id = userId });
+        }
+
+        // GET: ADMINMain/CreateOrder
+        public ActionResult CreateOrder()
         {
             // TODO: CHECK LOG IN
 
             return View();
         }
+
+        // POST: ADMINMain/CreateOrder
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateOrder(Order order)
+        {
+            // TODO: CHECK LOG IN
+
+            if (ModelState.IsValid)
+            {
+                var dbBLL = new BusinessLogic();
+                bool insertOK = dbBLL.CreateOrder(order);
+
+                if (insertOK)
+                    return RedirectToAction("AdminOrders", new { id = order.userID });
+            }
+
+            return View();
+        }
+
+        // GET: ADMINMain/EditOrder/5
+        public ActionResult EditOrder(int id)
+        {
+            // TODO: CHECK LOG IN
+
+            var dbBLL = new BusinessLogic();
+            Order order = dbBLL.GetOrder(id);
+            return View(order);
+        }
+
+        // POST: ADMINMain/EditOrder/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditOrder(int id, Order order)
+        {
+            // TODO: CHECK LOG IN
+
+            if (ModelState.IsValid)
+            {
+                var dbBLL = new BusinessLogic();
+                bool changeOK = dbBLL.EditOrder(id, order);
+
+                if (changeOK)
+                    return RedirectToAction("AdminOrders", new { id = order.userID });
+            }
+
+            return View();
+        }
+
+        // Called from JavaScript (AJAX) (when clicking delete-button):
+        public JsonResult DeleteOrder(int id)
+        {
+            // TODO: CHECK LOG IN
+
+            var dbBLL = new BusinessLogic();
+            bool deleteOk = dbBLL.DeleteOrder(id);
+            
+            JsonResult jsonOutput;
+
+            if (deleteOk)
+                jsonOutput = Json(true, JsonRequestBehavior.AllowGet);
+            else
+                jsonOutput = Json(false, JsonRequestBehavior.AllowGet);
+
+            return jsonOutput;
+        }
+
+        // Legge inn Create, Edit, Delete for Orderline også?
+        // AJAX-kall til DeleteOrderline(int id) i så fall. Får inn Orderline-id
     }
 
     /* --------------------------- AUTOGENERERT KODE: ----------------------------------

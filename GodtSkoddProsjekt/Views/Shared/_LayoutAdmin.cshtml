@@ -92,46 +92,24 @@
             //$('#logginntilbakemelding').html("Feil brukernavn eller passord!");
         }
 
-        /* Legg inn en ActionLink til kontroller-metodene istedenfor dette:
-
-        function searchForAdminUser(id) {
-            if (NaN(id)) {
-                $('#adminUserSearchMessage').html("Id må være et tall!");
+        function deleteOrder(id) {
+            if (NaN(id))
                 return;
-            }
 
-            $.getJSON("/ADMINMain/GetAdminUser", { adminId: id }, function () {
+            $.getJSON("/ADMINMain/DeleteOrder", { id: id }, function (deleteOkData) {
                 // only enters here if success
 
-                // ADMINMain/GetAdminUser redirects
+                // deleteOkData contains "true" or "false"
+
+                userId = @Session["UserIdForOrders"];   // session set the last time we called ADMINMain/AdminOrders/id
+                
+                window.location = "/ADMINMain/AdminOrders/" + userId;
+                
+                //$('#logginntilbakemelding').html("");
             });
+
+            //$('#logginntilbakemelding').html("Feil brukernavn eller passord!");
         }
-
-        function searchForUser(id) {
-            if (NaN(id)) {
-                $('#userSearchMessage').html("Id må være et tall!");
-                return;
-            }
-
-            $.getJSON("/ADMINMain/GetUser", { userId: id }, function () {
-                // only enters here if success
-
-                // ADMINMain/GetUser redirects
-            });
-        }
-
-        function searchForProduct(id) {
-            if (NaN(id)) {
-                $('#productSearchMessage').html("Id må være et tall!");
-                return;
-            }
-
-            $.getJSON("/ADMINMain/GetProduct", { productId: id }, function () {
-                // only enters here if success
-
-                // ADMINMain/GetProduct redirects
-            });
-        }*/
     </script>
 </head>
 <body>

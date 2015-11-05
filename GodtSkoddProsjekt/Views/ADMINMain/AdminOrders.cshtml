@@ -5,8 +5,23 @@
 }
 
 @{
-    ViewBag.Title = "Admin Bestillinger";
+    ViewBag.Title = "Admin Ordre";
 }
+
+<!-- Liste alle ordrene til en bruker (får inn ordrene via model) - husk også at hver Order inneholder en eller flere
+    Orderline (se Views/User/OrderDetails.cshtml) -->
+
+<!-- Skal kunne søke opp en ordre ut fra id: metode GetOrder(id) i ADMINMainController -->
+
+<!-- Må ha en knapp for å endre en bestemt ordre: metode EditOrder i ADMINMainController som tar inn en id (id'en til ordren) -
+    går til EditOrder.cshtml - innebærer også at man må kunne endre hver Orderline inni denne Order'en -->
+
+<!-- Må ha en knapp for å opprette en ny ordre: metode CreateOrder i ADMINMainController - går til CreateOrder.cshtml -->
+
+<!-- Må ha en knapp for å slette en ordre (sende med id til ordren): Kall på javascript-funksjonen deleteOrder(id) (onclick) -->
+
+<!-- Edit og create Orderline skal gjøres i CreateOrder.cshtml og EditOrder.cshtml.
+    Mulig å ta delete på en Orderline også? I så fall gjøre dette i EditOrder.cshtml -->
 
 <div class="col-sm-9">
 

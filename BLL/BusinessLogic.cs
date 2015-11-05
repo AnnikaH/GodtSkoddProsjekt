@@ -134,34 +134,66 @@ namespace BLL
             return dal.DeleteProduct(id);
         }
 
-/* ----------------- Fra Tor sitt eksempel (Lagdeling):
+        // ----------------------------- Order and Orderline ----------------------------
 
-        public List<Kunde> hentAlle()
+        public List<Order> GetOrders(int userId)  // GetOrders from User ID
         {
-            var KundeDAL = new KundeDAL();
-            List<Kunde> alleKunder = KundeDAL.hentAlle();
-            return alleKunder;
+            var dal = new DBGodtSkodd();
+            return dal.GetOrdersForUser(userId);
         }
-        public bool settInn(Kunde innKunde)
+
+        public Order GetOrder(int orderId)
         {
-            var KundeDAL = new KundeDAL();
-            return KundeDAL.settInn(innKunde);
+            var dal = new DBGodtSkodd();
+            return dal.getOrder(orderId);
         }
-        public bool endreKunde(int id, Kunde innKunde)
+
+        public bool CreateOrder(Order order)
         {
-            var KundeDAL = new KundeDAL();
-            return KundeDAL.endreKunde(id, innKunde);
+            var dal = new DBGodtSkodd();
+            return dal.CreateOrder(order);
         }
-        public bool slettKunde(int slettId)
+
+        public bool EditOrder(int id, Order order)
         {
-            var KundeDAL = new KundeDAL();
-            return KundeDAL.slettKunde(slettId);
+            var dal = new DBGodtSkodd();
+            return dal.EditOrder(id, order);
         }
-        public Kunde hentEnKunde(int id)
+
+        public bool DeleteOrder(int id)
         {
-            var KundeDAL = new KundeDAL();
-            return KundeDAL.hentEnKunde(id);
+            var dal = new DBGodtSkodd();
+            return dal.DeleteOrder(id);
         }
-        */
+
+        /* ----------------- Fra Tor sitt eksempel (Lagdeling):
+
+                public List<Kunde> hentAlle()
+                {
+                    var KundeDAL = new KundeDAL();
+                    List<Kunde> alleKunder = KundeDAL.hentAlle();
+                    return alleKunder;
+                }
+                public bool settInn(Kunde innKunde)
+                {
+                    var KundeDAL = new KundeDAL();
+                    return KundeDAL.settInn(innKunde);
+                }
+                public bool endreKunde(int id, Kunde innKunde)
+                {
+                    var KundeDAL = new KundeDAL();
+                    return KundeDAL.endreKunde(id, innKunde);
+                }
+                public bool slettKunde(int slettId)
+                {
+                    var KundeDAL = new KundeDAL();
+                    return KundeDAL.slettKunde(slettId);
+                }
+                public Kunde hentEnKunde(int id)
+                {
+                    var KundeDAL = new KundeDAL();
+                    return KundeDAL.hentEnKunde(id);
+                }
+                */
     }
 }
