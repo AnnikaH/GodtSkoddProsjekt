@@ -10,19 +10,6 @@ namespace BLL
 {
     public class BusinessLogic
     {
-        private DBGodtSkodd _repository;
-
-        public BusinessLogic(DBGodtSkodd stub)
-        {
-            _repository = stub;
-        }
-
-        public BusinessLogic()
-        {
-
-        }
-
-
         public bool DatabaseProductsFilled()
         {
             var dal = new DBGodtSkodd();
