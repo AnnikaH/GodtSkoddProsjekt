@@ -768,7 +768,7 @@ namespace DAL
 
                     foreach (var item in input.orderlines)
                     {
-                        changeOrder.Orderlines.Find(item.id);
+                        changeOrder.Orderlines.Find();
                     }
 
 
@@ -786,6 +786,10 @@ namespace DAL
                     return false;
                 }
             }*/
+            return false;
+        }
+        public bool DeleteOrder(int id)
+        {
             return false;
         }
     }
