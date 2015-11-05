@@ -333,7 +333,7 @@ namespace GodtSkoddProsjekt.Controllers
             if (user != null)
                 return RedirectToAction("AdminCustomers", new { id = userId });
 
-            return RedirectToAction("AdminAdminUsers");
+            return RedirectToAction("AdminCustomers");
         }
 
         // GET: ADMINMain/CreateUser
@@ -534,7 +534,7 @@ namespace GodtSkoddProsjekt.Controllers
             return jsonOutput;
         }
 
-        // ------------------------------- Order ----------------------------------
+        // ------------------------------- Order og Orderline ----------------------------------
 
         public ActionResult AdminOrders()
         {
