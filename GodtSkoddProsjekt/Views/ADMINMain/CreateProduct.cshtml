@@ -8,6 +8,7 @@
     ViewBag.Title = "Admin Nytt produkt";
 }
 
+<div class="col-sm-9">
 <!-- Autogenerert kode: -->
 
     @using (Html.BeginForm()) 
@@ -15,7 +16,7 @@
         @Html.AntiForgeryToken()
         
         <div class="form-horizontal">
-            <h4>Registrer nytt produkt</h4>
+            <h2 class="header">Registrer nytt produkt</h2>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
@@ -92,11 +93,14 @@
     
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
+                    @Html.ActionLink("Avbryt", "CancelProduct", "ADMINMain", null, new { @class = "Cancelbuttons" })
                     <input type="submit" value="Registrer" class="btn btn-default" />
+                    
                 </div>
             </div>
         </div>
     }
+    </div> <!-- /. col-sm-9 aka wrapper -->
     
     <!--<div>
         Html.ActionLink("Back to List", "Index")
