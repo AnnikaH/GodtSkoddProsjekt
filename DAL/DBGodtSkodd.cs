@@ -960,6 +960,7 @@ namespace DAL
 
 
                     db.Orderlines.Add(newOrderline);
+                    newOrderline.Order.Orderlines.Add(newOrderline); // is this neccessary? (AB)
                     db.SaveChanges();
                     return true;
                 }
