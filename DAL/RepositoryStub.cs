@@ -121,6 +121,31 @@ namespace DAL
                 };
                 return user;
             }
+
+        }
+
+
+        public List<User> getUsers()
+        {
+            var userList = new List<User>();
+            var user = new User()
+            {
+                id = 1,
+                firstName = "Test",
+                lastName = "Testen",
+                address = "Testveien 1",
+                postalCode = "1234",
+                city = "Test",
+                userName = "Test",
+                password = "Testing"
+
+            };
+
+            userList.Add(user);
+            userList.Add(user);
+            userList.Add(user);
+
+            return userList;
         }
 
         //------------------------------------------ PRODUCTS ---------------------------------
