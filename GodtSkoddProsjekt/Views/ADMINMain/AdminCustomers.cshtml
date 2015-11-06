@@ -11,7 +11,13 @@
 <div class="col-sm-9">
 
 <h2 class="header">Kunderegister</h2>
-    
+    <p>
+        <div class="Searchbar"><input type="text" id="Searchinn" /></div>
+        <div class="Link_addnew">
+            <span class="glyphicon glyphicon-arrow-down"></span><a href="#" class="link_toggle">Vis mer informasjon</a> | <span class="glyphicon glyphicon-plus"></span>  @Html.ActionLink("Registrer ny Kunde", "CreateUser", "ADMINMain", new { id = "" }, new { @class = "" })
+        </div>
+    </p>
+
     <!-- Se oppsettet til AdminProducts.cshtml (autogenerert når velger template List) -->
 
     <!-- Vise alle kunder/brukere (får inn fra model): -->
@@ -25,10 +31,14 @@
 
     <table class="table">
         <tr>
-            <th>#</th>
-            <th>Navn</th>
-            <th>Adresse</th>
-            <!-- + E-post, Telefonnummer, Brukernavn -->
+            <th>@Html.DisplayNameFor(model => model.id) </th>
+            <th>@Html.DisplayNameFor(model => model.firstName)</th>
+            <th>@Html.DisplayNameFor(model => model.lastName)</th>
+            <th>@Html.DisplayNameFor(model => model.address)</th>
+            <th>@Html.DisplayNameFor(model => model.email)</th>
+            <th>@Html.DisplayNameFor(model => model.phoneNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.userName)</th>
+        
         </tr>
 
         @foreach (var item in Model)
@@ -43,10 +53,30 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.address), @Html.DisplayFor(modelItem => item.postalCode) @Html.DisplayFor(modelItem => item.city)
                 </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userName)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Endre", "EditUser", "ADMINMain", new { id = item.id }, new { @class = "" }) |
+                    <a onclick="toggleRow(@item.id)">Se detaljer</a> |
+                    @Html.ActionLink("Slett", "DeleteUser", "ADMINMain", new { id = item.id }, new { @class = "" })
+                </td>
              </tr>
-             //item.email
-             //item.phoneNumber
-             //item.userName
+            <tr id="@item.id" class="MoreInfo">
+                <td colspan="7">
+                    <table class="MoreInfoTable">
+                        <tr><td>Her kommer ordrelinjer </td></tr>
+                    </table>
+                </td>
+
+            </tr>
         }
     </table>
 
