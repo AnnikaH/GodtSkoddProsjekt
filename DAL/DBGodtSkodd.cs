@@ -9,7 +9,7 @@ using System.IO;
 
 namespace DAL
 {
-    public class DBGodtSkodd
+    public class DBGodtSkodd : DAL.InDBGodtSkodd
     {
         string errorLogPath = AppDomain.CurrentDomain.BaseDirectory + "Logs";
 
