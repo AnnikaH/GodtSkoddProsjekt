@@ -105,14 +105,35 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult LogIn()
         {
-            // TODO: CHECK LOG IN (mer enn dette under?):
-
             if (Session["LoggedInAdmin"] != null && (bool)Session["LoggedInAdmin"]) // if logged in from before
                 return RedirectToAction("Index");
 
             // else: Go to log in-page for administrators:
 
             return View();
+        }
+
+        // private method to check if admin is logged in or not
+        private bool LoggedIn()
+        {
+            if (Session["LoggedInAdmin"] == null)
+            {
+                // da definerer vi den og setter den til false
+                Session["LoggedInAdmin"] = false;
+                ViewBag.LoggedInAdmin = false; // oppdaterer denne også!
+            }
+            else
+            {
+                // vil så hente ut statusen til session'en og legge denne over i ViewBag'en:
+                ViewBag.LoggedInAdmin = (bool)Session["LoggedInAdmin"]; // Husk: Må castes!
+            }
+
+            bool loggedIn = (bool)Session["LoggedInAdmin"];
+            
+            if (loggedIn)
+                return true;
+            else
+                return false;
         }
 
         public JsonResult CheckLogIn(String username, String password)
@@ -149,6 +170,7 @@ namespace GodtSkoddProsjekt.Controllers
         {
             Session["LoggedInAdmin"] = false;
             ViewBag.LoggedInAdmin = false;
+            Session["AdminId"] = null;
             return RedirectToAction("Index", "Home");
         }
 
@@ -158,26 +180,10 @@ namespace GodtSkoddProsjekt.Controllers
         {
             // Main page for administrators (you get here after logged in successfully)
 
-            // Checking login:
-            if (Session["LoggedInAdmin"] == null)
-            {
-                // da definerer vi den og setter den til false
-                Session["LoggedInAdmin"] = false;
-                ViewBag.LoggedInAdmin = false; // oppdaterer denne også!
-            }
-            else
-            {
-                // vil så hente ut statusen til session'en og legge denne over i ViewBag'en:
-                ViewBag.LoggedInAdmin = (bool)Session["LoggedInAdmin"]; // Husk: Må castes!
-            }
+            if (LoggedIn())
+                return View();
 
-            return View();
-
-            /*
-            List<AdminUser> allAdminUsers = dbBLL.GetAdminUsers();
-
-            return View(allAdminUsers);
-            */
+            return RedirectToAction("LogIn");
         }
 
         // --------------------------- AdminUser: -----------------------------------------
