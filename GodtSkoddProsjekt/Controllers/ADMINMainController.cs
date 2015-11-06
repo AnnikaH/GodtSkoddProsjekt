@@ -200,7 +200,7 @@ namespace GodtSkoddProsjekt.Controllers
             return View(adminUsers);
         }
 
-        // Called when searching for an AdminUser based on id:
+        /* Called when searching for an AdminUser based on id:
         // GET: ADMINMain/GetAdminUser/5
         public ActionResult GetAdminUser(int id)
         {
@@ -213,6 +213,21 @@ namespace GodtSkoddProsjekt.Controllers
                 return RedirectToAction("AdminAdminUsers", new { id = id });
 
             return RedirectToAction("AdminAdminUsers");
+        }*/
+
+        // Called from JavaScript-function when searching for a AdminUser based on id:
+        // GET: ADMINMain/GetAdminUser/5
+        public JsonResult GetAdminUser(int id)
+        {
+            // TODO: CHECK LOG IN
+
+            var dbBLL = new BusinessLogic();
+            AdminUser adminUser = dbBLL.GetAdminUser(id);
+
+            if (adminUser != null)
+                return Json(adminUser, JsonRequestBehavior.AllowGet);
+
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
         // GET: ADMINMain/CreateAdminUser
@@ -325,7 +340,7 @@ namespace GodtSkoddProsjekt.Controllers
             return View(users);
         }
 
-        // Called when searching for a User based on id:
+        /* Called when searching for a User based on id:
         // GET: ADMINMain/GetUser/5
         public ActionResult GetUser(int id)
         {
@@ -338,6 +353,21 @@ namespace GodtSkoddProsjekt.Controllers
                 return RedirectToAction("AdminCustomers", new { id = id });
 
             return RedirectToAction("AdminCustomers");
+        }*/
+
+        // Called from JavaScript-function when searching for a User based on id:
+        // GET: ADMINMain/GetUser/5
+        public JsonResult GetUser(int id)
+        {
+            // TODO: CHECK LOG IN
+
+            var dbBLL = new BusinessLogic();
+            User user = dbBLL.GetUser(id);
+
+            if (user != null)
+                return Json(user, JsonRequestBehavior.AllowGet);
+
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
         // GET: ADMINMain/CreateUser
@@ -445,7 +475,7 @@ namespace GodtSkoddProsjekt.Controllers
             return View(products);
         }
 
-        // Called when searching for a Product based on id:
+        /* Called when searching for a Product based on id:
         // GET: ADMINMain/GetProduct/5
         public ActionResult GetProduct(int id)
         {
@@ -458,6 +488,21 @@ namespace GodtSkoddProsjekt.Controllers
                 return RedirectToAction("AdminProducts", new { id = id });
 
             return RedirectToAction("AdminProducts");
+        }*/
+
+        // Called from JavaScript-function when searching for a Product based on id:
+        // GET: ADMINMain/GetProduct/5
+        public JsonResult GetProduct(int id)
+        {
+            // TODO: CHECK LOG IN
+
+            var dbBLL = new BusinessLogic();
+            Product product = dbBLL.GetProduct(id);
+
+            if (product != null)
+                return Json(product, JsonRequestBehavior.AllowGet);
+
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
         // GET: ADMINMain/CreateProduct
@@ -568,7 +613,7 @@ namespace GodtSkoddProsjekt.Controllers
             return View(orders);
         }
 
-        // Called when searching for an Order based on id:
+        /* Called when searching for an Order based on id:
         // GET: ADMINMain/GetOrder/5
         public ActionResult GetOrder(int id)   // must check if this orderId belongs to the user
         {
@@ -589,6 +634,32 @@ namespace GodtSkoddProsjekt.Controllers
             }
 
             return RedirectToAction("AdminOrders", new { id = userId });
+        }*/
+
+        // Called from JavaScript-function when searching for an Order based on id:
+        // GET: ADMINMain/GetOrder/5
+        public JsonResult GetOrder(int id)
+        {
+            // TODO: CHECK LOG IN
+
+            var dbBLL = new BusinessLogic();
+
+            Order order = dbBLL.GetOrder(id);
+
+            int userId = (int)Session["UserIdForOrders"];    // Gets stored in session-variable in AdminOrders
+
+            if (order != null && userId == order.userID)
+            {
+                Session["Order"] = order;
+                return Json(order, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                Session["Order"] = null;
+            }
+
+            return Json("", JsonRequestBehavior.AllowGet);
+            //return RedirectToAction("AdminOrders", new { id = userId });
         }
 
         // GET: ADMINMain/CreateOrder

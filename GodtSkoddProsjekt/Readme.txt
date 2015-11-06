@@ -8,6 +8,9 @@ Man kan bare opprette nye administratorer når man er logget inn som en administ
 Produktene opprettes automatisk når man går inn på hovedsiden /Home/Index hvis de ikke finnes
 i databasen fra før av.
 
+Liten notis: I UnitTest-prosjektet heter test-filen UserControllerTest.cs, men denne tester
+ADMINMainControlleren, ikke UserControlleren.
+
 // ---------------------------------------------------------------------------------
 
 Spesielle notiser innlevering mappe 1:

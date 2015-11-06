@@ -1,4 +1,4 @@
-﻿@model List<Model.AdminUser>
+﻿@model IEnumerable<Model.AdminUser>
 
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -21,11 +21,46 @@
         + kunne søke etter en bestemt administrator ut fra id: kall GetAdminUser i ADMINMainController + send med id
         + en knapp for å gå til CreateAdminUser.cshtml (registrere ny adminbruker) : -->
 
-    <table class="table">
-        <tr class="table_header">
-            <td>#</td>
-            <td>Navn</td>
+    <p>
+        <div class="Searchbar">
+            Id: <input type="text" id="searchId" />
+            <input type="button" onclick="showAllAdminUsers()" value="Vis alle" class="btn btn-default" />
+            <input type="button" style="margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" onclick="searchAdminUser($('#searchId').val())" value="Søk" class="btn btn-default" />
+            <div id="adminUserErrorMessage"></div>
+        </div>
+        <!--<div class="Searchbar"><input type="text" id="Searchinn" /></div>-->
 
+        <div class="Link_addnew">
+        <span class="glyphicon glyphicon-plus"></span>  @Html.ActionLink("Registrer ny administrator", "CreateAdminUser", "ADMINMain", new { id = "" }, new { @class = "" })
+        </div>
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.userName)
+            </th>
+            <th></th>
         </tr>
-    </table>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userName)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Endre", "EditAdminUser", "ADMINMain", new { id = item.id }, new { @class = "" }) |
+                    @Html.ActionLink("Slett", "DeleteAdminUser", "ADMINMain", new { id = item.id }, new { @class = "" })
+                </td>
+            </tr>
+        }
+</table>
 </div><!-- /. col-sm-9 aka wrapper-->
