@@ -9,6 +9,7 @@ namespace DAL
 {
     public interface InDBGodtSkodd
     {
+        bool CreateDatabaseContent();
         List<AdminUser> GetAdminUsers();
         AdminUser GetAdminUser(int id);
         int GetAdminIdInDB(AdminUser adminUser);
@@ -42,11 +43,5 @@ namespace DAL
         bool EditOrderline(int id, Orderline input);
         bool DeleteOrderline(int id);
         Orderline GetOrderline(int id);
-
-
-
-
-
-
     }
 }

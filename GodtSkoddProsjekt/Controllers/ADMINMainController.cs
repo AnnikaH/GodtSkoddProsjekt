@@ -123,7 +123,6 @@ namespace GodtSkoddProsjekt.Controllers
             adminUser.userName = username;
             adminUser.password = password;
 
-            var dbBLL = new BusinessLogic();
             var adminId = dbBLL.GetAdminIdInDB(adminUser);
 
             if (adminId != -1)
@@ -175,7 +174,6 @@ namespace GodtSkoddProsjekt.Controllers
             return View();
 
             /*
-            var dbBLL = new BusinessLogic();
             List<AdminUser> allAdminUsers = dbBLL.GetAdminUsers();
 
             return View(allAdminUsers);
@@ -189,8 +187,6 @@ namespace GodtSkoddProsjekt.Controllers
             // TODO: CHECK LOG IN
 
             // Showing all AdminUsers (and buttons for deleting and updating them) + button to CreateAdminUser
-
-            var dbBLL = new BusinessLogic();
 
             List<AdminUser> adminUsers = new List<AdminUser>();
 
@@ -217,8 +213,7 @@ namespace GodtSkoddProsjekt.Controllers
         public ActionResult GetAdminUser(int id)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            
             AdminUser adminUser = dbBLL.GetAdminUser(id);
 
             if (adminUser != null)
@@ -232,8 +227,7 @@ namespace GodtSkoddProsjekt.Controllers
         public JsonResult GetAdminUser(int id)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            
             AdminUser adminUser = dbBLL.GetAdminUser(id);
 
             if (adminUser != null)
@@ -280,8 +274,7 @@ namespace GodtSkoddProsjekt.Controllers
         public ActionResult EditAdminUser(int id)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            
             AdminUser adminUser = dbBLL.GetAdminUser(id);
             return View(adminUser);
         }
@@ -292,9 +285,7 @@ namespace GodtSkoddProsjekt.Controllers
         public ActionResult EditAdminUser(int id, AdminUser adminUser)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
-
+            
             bool updateOk = dbBLL.EditAdminUser(id, adminUser);
 
             if(updateOk)
@@ -306,8 +297,7 @@ namespace GodtSkoddProsjekt.Controllers
         public ActionResult DeleteAdminUser(int id)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            
             bool deleteOk = dbBLL.DeleteAdminUser(id);
 
             //if (deleteOk)
@@ -329,9 +319,7 @@ namespace GodtSkoddProsjekt.Controllers
             // TODO: CHECK LOG IN
 
             // Showing all Users (and buttons for deleting and updating them) + button to CreateUser
-
-            var dbBLL = new BusinessLogic();
-
+            
             List<User> users = new List<User>();
 
             if (id.HasValue)
@@ -357,8 +345,7 @@ namespace GodtSkoddProsjekt.Controllers
         public ActionResult GetUser(int id)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            
             User user = dbBLL.GetUser(id);
 
             if (user != null)
@@ -372,8 +359,7 @@ namespace GodtSkoddProsjekt.Controllers
         public JsonResult GetUser(int id)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            
             User user = dbBLL.GetUser(id);
 
             if (user != null)
@@ -399,7 +385,6 @@ namespace GodtSkoddProsjekt.Controllers
 
             if (ModelState.IsValid)
             {
-                var dbBLL = new BusinessLogic();
                 bool insertOK = dbBLL.CreateUser(user);
 
                 if (insertOK)
@@ -413,8 +398,7 @@ namespace GodtSkoddProsjekt.Controllers
         public ActionResult EditUser(int id)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            
             User user = dbBLL.GetUser(id);
             return View(user);
         }
@@ -428,7 +412,6 @@ namespace GodtSkoddProsjekt.Controllers
 
             if (ModelState.IsValid)
             {
-                var dbBLL = new BusinessLogic();
                 bool changeOK = dbBLL.EditUser(id, user);
 
                 if (changeOK)
@@ -441,8 +424,7 @@ namespace GodtSkoddProsjekt.Controllers
         public ActionResult DeleteUser(int id)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            
             bool deleteOk = dbBLL.DeleteUser(id);
 
             //if (deleteOk)
@@ -464,9 +446,7 @@ namespace GodtSkoddProsjekt.Controllers
             // TODO: CHECK LOG IN
 
             // Showing all Products (and buttons for deleting and updating them) + button to CreateProduct
-
-            var dbBLL = new BusinessLogic();
-
+            
             List<Product> products = new List<Product>();
 
             if (id.HasValue)
@@ -492,8 +472,7 @@ namespace GodtSkoddProsjekt.Controllers
         public ActionResult GetProduct(int id)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            
             Product product = dbBLL.GetProduct(id);
 
             if (product != null)
@@ -507,8 +486,7 @@ namespace GodtSkoddProsjekt.Controllers
         public JsonResult GetProduct(int id)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            
             Product product = dbBLL.GetProduct(id);
 
             if (product != null)
@@ -534,7 +512,6 @@ namespace GodtSkoddProsjekt.Controllers
 
             if (ModelState.IsValid)
             {
-                var dbBLL = new BusinessLogic();
                 bool insertOK = dbBLL.CreateProduct(product);
 
                 if (insertOK)
@@ -548,8 +525,7 @@ namespace GodtSkoddProsjekt.Controllers
         public ActionResult EditProduct(int id)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            
             Product product = dbBLL.GetProduct(id);
             return View(product);
         }
@@ -563,7 +539,6 @@ namespace GodtSkoddProsjekt.Controllers
 
             if (ModelState.IsValid)
             {
-                var dbBLL = new BusinessLogic();
                 bool changeOK = dbBLL.EditProduct(id, product);
 
                 if (changeOK)
@@ -576,8 +551,7 @@ namespace GodtSkoddProsjekt.Controllers
         public ActionResult DeleteProduct(int id)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            
             bool deleteOk = dbBLL.DeleteProduct(id);
 
             //if (deleteOk)
@@ -599,9 +573,7 @@ namespace GodtSkoddProsjekt.Controllers
             // TODO: CHECK LOG IN
 
             // Showing all Orders for specified User (id) (and buttons for deleting and updating them) + button to CreateOrder
-
-            var dbBLL = new BusinessLogic();
-
+            
             /* Must store this userId in a session-variable so that can check if user has
             an order with the searched for orderId: */
             Session["UserIdForOrders"] = id;
@@ -630,8 +602,7 @@ namespace GodtSkoddProsjekt.Controllers
         public ActionResult GetOrder(int id)   // must check if this orderId belongs to the user
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            
             Order order = dbBLL.GetOrder(id);
 
             int userId = (int)Session["UserIdForOrders"];    // Gets stored in session-variable in AdminOrders
@@ -653,9 +624,7 @@ namespace GodtSkoddProsjekt.Controllers
         public JsonResult GetOrder(int id)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
-
+            
             Order order = dbBLL.GetOrder(id);
 
             int userId = (int)Session["UserIdForOrders"];    // Gets stored in session-variable in AdminOrders
@@ -691,7 +660,6 @@ namespace GodtSkoddProsjekt.Controllers
 
             if (ModelState.IsValid)
             {
-                var dbBLL = new BusinessLogic();
                 bool insertOK = dbBLL.CreateOrder(order);
 
                 if (insertOK)
@@ -705,8 +673,7 @@ namespace GodtSkoddProsjekt.Controllers
         public ActionResult EditOrder(int id)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            
             Order order = dbBLL.GetOrder(id);
             return View(order);
         }
@@ -720,7 +687,6 @@ namespace GodtSkoddProsjekt.Controllers
 
             if (ModelState.IsValid)
             {
-                var dbBLL = new BusinessLogic();
                 bool changeOK = dbBLL.EditOrder(id, order);
 
                 if (changeOK)
@@ -733,8 +699,7 @@ namespace GodtSkoddProsjekt.Controllers
         public ActionResult DeleteOrder(int id)
         {
             // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            
             bool deleteOk = dbBLL.DeleteOrder(id);
 
             //if (deleteOk)
