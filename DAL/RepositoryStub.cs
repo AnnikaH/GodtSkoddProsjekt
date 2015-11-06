@@ -466,5 +466,10 @@ namespace DAL
         {
             throw new NotImplementedException();
         }
+
+        public bool CreateDatabaseContent()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
