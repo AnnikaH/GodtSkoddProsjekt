@@ -14,17 +14,10 @@ namespace UnitTestProject1
     public class UserControllerTest
     {
         [TestMethod]
-        public void LogIn_show()
+        public void GetUser()
         {
             // Arrange
             //var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub));
-
-            
-        }
-
-        [TestMethod]
-        public void GetUser()
-        {
 
         }
 
