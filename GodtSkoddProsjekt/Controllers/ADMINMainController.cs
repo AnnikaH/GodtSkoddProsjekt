@@ -138,7 +138,7 @@ namespace GodtSkoddProsjekt.Controllers
 
         public JsonResult CheckLogIn(String username, String password)
         {
-            // checking login
+            // checking login info:
 
             AdminUser adminUser = new AdminUser();
             adminUser.userName = username;
@@ -180,17 +180,18 @@ namespace GodtSkoddProsjekt.Controllers
         {
             // Main page for administrators (you get here after logged in successfully)
 
-            if (LoggedIn())
-                return View();
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
-            return RedirectToAction("LogIn");
+            return View();
         }
 
         // --------------------------- AdminUser: -----------------------------------------
 
         public ActionResult AdminAdminUsers(int? id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             // Showing all AdminUsers (and buttons for deleting and updating them) + button to CreateAdminUser
 
@@ -218,7 +219,8 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/GetAdminUser/5
         public ActionResult GetAdminUser(int id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
             
             AdminUser adminUser = dbBLL.GetAdminUser(id);
 
@@ -232,8 +234,9 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/GetAdminUser/5
         public JsonResult GetAdminUser(int id)
         {
-            // TODO: CHECK LOG IN
-            
+            if (!LoggedIn())
+                return null;
+
             AdminUser adminUser = dbBLL.GetAdminUser(id);
 
             if (adminUser != null)
@@ -245,7 +248,8 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/CreateAdminUser
         public ActionResult CreateAdminUser()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             return View();
         }
@@ -255,7 +259,8 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateAdminUser(AdminUser adminUser)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             if (ModelState.IsValid)
             {
@@ -279,8 +284,9 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/UpdateAdminUser/5
         public ActionResult EditAdminUser(int id)
         {
-            // TODO: CHECK LOG IN
-            
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+
             AdminUser adminUser = dbBLL.GetAdminUser(id);
             return View(adminUser);
         }
@@ -290,8 +296,9 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditAdminUser(int id, AdminUser adminUser)
         {
-            // TODO: CHECK LOG IN
-            
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+
             bool updateOk = dbBLL.EditAdminUser(id, adminUser);
 
             if(updateOk)
@@ -302,8 +309,9 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult DeleteAdminUser(int id)
         {
-            // TODO: CHECK LOG IN
-            
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+
             bool deleteOk = dbBLL.DeleteAdminUser(id);
 
             //if (deleteOk)
@@ -313,7 +321,8 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult CancelAdminUser()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             return RedirectToAction("AdminAdminUsers");
         }
@@ -322,10 +331,11 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult AdminCustomers(int? id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             // Showing all Users (and buttons for deleting and updating them) + button to CreateUser
-            
+
             List<User> users = new List<User>();
 
             if (id.HasValue)
@@ -350,7 +360,8 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/GetUser/5
         public ActionResult GetUser(int id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
             
             User user = dbBLL.GetUser(id);
 
@@ -364,8 +375,9 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/GetUser/5
         public JsonResult GetUser(int id)
         {
-            // TODO: CHECK LOG IN
-            
+            if (!LoggedIn())
+                return null;
+
             User user = dbBLL.GetUser(id);
 
             if (user != null)
@@ -377,7 +389,8 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/CreateUser
         public ActionResult CreateUser()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             return View();
         }
@@ -387,7 +400,8 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateUser(User user)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             if (ModelState.IsValid)
             {
@@ -403,8 +417,9 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/EditUser/5
         public ActionResult EditUser(int id)
         {
-            // TODO: CHECK LOG IN
-            
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+
             User user = dbBLL.GetUser(id);
             return View(user);
         }
@@ -414,7 +429,8 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditUser(int id, User user)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             if (ModelState.IsValid)
             {
@@ -429,8 +445,9 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult DeleteUser(int id)
         {
-            // TODO: CHECK LOG IN
-            
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+
             bool deleteOk = dbBLL.DeleteUser(id);
 
             //if (deleteOk)
@@ -440,7 +457,8 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult CancelUser()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             return RedirectToAction("AdminCustomers");
         }
@@ -449,10 +467,11 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult AdminProducts(int? id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             // Showing all Products (and buttons for deleting and updating them) + button to CreateProduct
-            
+
             List<Product> products = new List<Product>();
 
             if (id.HasValue)
@@ -477,7 +496,8 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/GetProduct/5
         public ActionResult GetProduct(int id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
             
             Product product = dbBLL.GetProduct(id);
 
@@ -491,8 +511,9 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/GetProduct/5
         public JsonResult GetProduct(int id)
         {
-            // TODO: CHECK LOG IN
-            
+            if (!LoggedIn())
+                return null;
+
             Product product = dbBLL.GetProduct(id);
 
             if (product != null)
@@ -504,7 +525,8 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/CreateProduct
         public ActionResult CreateProduct()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             return View();
         }
@@ -514,7 +536,8 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateProduct(Product product)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             if (ModelState.IsValid)
             {
@@ -530,8 +553,9 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/EditProduct/5
         public ActionResult EditProduct(int id)
         {
-            // TODO: CHECK LOG IN
-            
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+
             Product product = dbBLL.GetProduct(id);
             return View(product);
         }
@@ -541,7 +565,8 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditProduct(int id, Product product)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             if (ModelState.IsValid)
             {
@@ -556,8 +581,9 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult DeleteProduct(int id)
         {
-            // TODO: CHECK LOG IN
-            
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+
             bool deleteOk = dbBLL.DeleteProduct(id);
 
             //if (deleteOk)
@@ -567,7 +593,8 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult CancelProduct()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             return RedirectToAction("AdminProducts");
         }
@@ -576,10 +603,11 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult AdminOrders(int id)    // id is User ID and must be sent in
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             // Showing all Orders for specified User (id) (and buttons for deleting and updating them) + button to CreateOrder
-            
+
             /* Must store this userId in a session-variable so that can check if user has
             an order with the searched for orderId: */
             Session["UserIdForOrders"] = id;
@@ -607,7 +635,8 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/GetOrder/5
         public ActionResult GetOrder(int id)   // must check if this orderId belongs to the user
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
             
             Order order = dbBLL.GetOrder(id);
 
@@ -629,8 +658,9 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/GetOrder/5
         public JsonResult GetOrder(int id)
         {
-            // TODO: CHECK LOG IN
-            
+            if (!LoggedIn())
+                return null;
+
             Order order = dbBLL.GetOrder(id);
 
             int userId = (int)Session["UserIdForOrders"];    // Gets stored in session-variable in AdminOrders
@@ -652,7 +682,8 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/CreateOrder
         public ActionResult CreateOrder()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             return View();
         }
@@ -662,7 +693,8 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateOrder(Order order)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             if (ModelState.IsValid)
             {
@@ -678,8 +710,9 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/EditOrder/5
         public ActionResult EditOrder(int id)
         {
-            // TODO: CHECK LOG IN
-            
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+
             Order order = dbBLL.GetOrder(id);
             return View(order);
         }
@@ -689,7 +722,8 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditOrder(int id, Order order)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             if (ModelState.IsValid)
             {
@@ -704,8 +738,9 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult DeleteOrder(int id)
         {
-            // TODO: CHECK LOG IN
-            
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+
             bool deleteOk = dbBLL.DeleteOrder(id);
 
             //if (deleteOk)
@@ -717,7 +752,8 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult CancelOrder()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             int userId = (int)Session["UserIdForOrders"];    // Gets stored in session-variable in AdminOrders
 
