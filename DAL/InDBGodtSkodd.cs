@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    interface InDBGodtSkodd
+    public interface InDBGodtSkodd
     {
-
         List<AdminUser> GetAdminUsers();
         AdminUser GetAdminUser(int id);
         int GetAdminIdInDB(AdminUser adminUser);
