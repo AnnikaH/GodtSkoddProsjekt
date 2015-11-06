@@ -8,19 +8,18 @@ using Model;
 
 namespace BLL
 {
-    public class BusinessLogic
+    public class BusinessLogic : IBusinessLogic
     {
-
-         public DBGodtSkodd _repository;
-
-        public BusinessLogic(DBGodtSkodd stub)
-        {
-            _repository = stub;
-        }
+        private InDBGodtSkodd _repository;
 
         public BusinessLogic()
         {
+            _repository = new DBGodtSkodd();
+        }
 
+        public BusinessLogic(InDBGodtSkodd stub)
+        {
+            _repository = stub;
         }
 
         public bool DatabaseProductsFilled()

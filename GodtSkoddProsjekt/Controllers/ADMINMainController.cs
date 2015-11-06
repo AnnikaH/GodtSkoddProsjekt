@@ -10,6 +10,18 @@ namespace GodtSkoddProsjekt.Controllers
 {
     public class ADMINMainController : Controller
     {
+        private IBusinessLogic dbBLL;
+
+        public ADMINMainController()
+        {
+            dbBLL = new BusinessLogic();
+        }
+
+        public ADMINMainController(IBusinessLogic stub)
+        {
+            dbBLL = stub;
+        }
+
         //---------------------- TOR SIN KODE FRA TIMEN (Lagdeling): ------------------------//
         /*
         public ActionResult Liste()
