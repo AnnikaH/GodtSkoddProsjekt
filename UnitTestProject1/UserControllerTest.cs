@@ -14,6 +14,15 @@ namespace UnitTestProject1
     public class UserControllerTest
     {
         [TestMethod]
+        public void LogIn_show()
+        {
+            // Arrange
+            //var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub));
+
+            
+        }
+
+        [TestMethod]
         public void GetUser()
         {
 
@@ -22,7 +31,10 @@ namespace UnitTestProject1
         [TestMethod]
         public void Delete()
         {
-           // var controller = new DAL.DBGodtSkodd(new BLL.BusinessLogic(new DAL.RepositoryStub()));
+            // Arrange
+            //var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub));
+
+
         }
     }
 }
