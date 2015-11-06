@@ -1,8 +1,12 @@
 ﻿using System;
-using GodtSkoddProsjekt.Controllers;
-using GodtSkoddProsjekt.Models;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Web.Mvc;
+using System.Linq;
+using System.Collections.Generic;
+using GodtSkoddProsjekt.Controllers;
+using Model;
+using BLL;
+using DAL;
 
 namespace UnitTestProject1
 {
