@@ -17,14 +17,23 @@ namespace UnitTestProject1
         public void GetUser()
         {
             // Arrange
-            //var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub));
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
-            
+            // Act
+
+            // Assert
+
         }
 
         [TestMethod]
         public void GetUsers()
         {
+            // Arrange
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+
+            // Act
+
+            // Assert
 
         }
 
@@ -32,21 +41,35 @@ namespace UnitTestProject1
         public void DeleteUser()
         {
             // Arrange
-            //var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub));
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
+            // Act
+
+            // Assert
 
         }
 
         [TestMethod]
         public void CreateUser()
         {
-            // var controller = new DAL.DBGodtSkodd(new BLL.BusinessLogic(new DAL.RepositoryStub()));
+            // Arrange
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+
+            // Act
+
+            // Assert
         }
 
         [TestMethod]
         public void EditUser()
         {
-            // var controller = new DAL.DBGodtSkodd(new BLL.BusinessLogic(new DAL.RepositoryStub()));
+            // Arrange
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+
+            // Act
+
+            // Assert
+
         }
     }
 }
