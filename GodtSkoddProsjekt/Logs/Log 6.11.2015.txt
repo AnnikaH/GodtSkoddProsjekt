@@ -1,0 +1,2 @@
+[3:39] Objektreferanse er ikke satt til en objektforekomst. in Model.AdminUser GetAdminUser(Int32)   ved DAL.DBGodtSkodd.GetAdminUser(Int32 id) i C:\Users\Annika\Documents\Visual Studio 2015\Projects\Webapplikasjoner\DAL\DBGodtSkodd.cs:linje 101
+[3:40] Objektreferanse er ikke satt til en objektforekomst. in Model.AdminUser GetAdminUser(Int32)   ved DAL.DBGodtSkodd.GetAdminUser(Int32 id) i C:\Users\Annika\Documents\Visual Studio 2015\Projects\Webapplikasjoner\DAL\DBGodtSkodd.cs:linje 101
