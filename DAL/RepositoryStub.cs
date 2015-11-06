@@ -7,10 +7,49 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class RepositoryStub
+    public class RepositoryStub : DAL.InDBGodtSkodd
     {
 
-        
+
+        //------------------------------------------ Admin ---------------------------------
+
+        public List<AdminUser> GetAdminUsers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public AdminUser GetAdminUser(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetAdminIdInDB(AdminUser adminUser)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AdminUserInDb(AdminUser inputUser)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CreateAdminUser(AdminUser adminUser)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool EditAdminUser(int id, AdminUser adminUser)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteAdminUser(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        //------------------------------------------ Users ---------------------------------
+
         public bool CreateUser(User user)
         {
             if (user.firstName == "")
@@ -95,6 +134,16 @@ namespace DAL
             {
                 return true;
             }
+        }
+
+        public bool DeleteUser(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> GetUsers()
+        {
+            throw new NotImplementedException();
         }
 
         public User GetUser(int id)
@@ -381,6 +430,41 @@ namespace DAL
                 orderList.Add(order);
             }
             return orderList;
+        }
+
+        public Order getOrder(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool EditOrder(int id, Order input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteOrder(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CreateOrderline(Orderline input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool EditOrderline(int id, Orderline input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteOrderline(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Orderline GetOrderline(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

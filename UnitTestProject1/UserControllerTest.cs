@@ -14,7 +14,7 @@ namespace UnitTestProject1
     public class UserControllerTest
     {
         [TestMethod]
-        public void LogIn_show()
+        public void GetUser()
         {
             // Arrange
             //var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub));
@@ -23,34 +23,8 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void GetUser()
+        public void GetUsers()
         {
-            // var controller = new DAL.DBGodtSkodd(new BLL.BusinessLogic(new DAL.RepositoryStub()));
-        }
-
-        [TestMethod]
-        public void GetUsers() //alle kunder
-        {
-            // var controller = new DAL.DBGodtSkodd(new BLL.BusinessLogic(new DAL.RepositoryStub()));
-            //var expecedResult = new List<User>();
-            //var user = new User()
-            /*
-            {
-                 id = 1,
-                 firstName = "Test",
-                 lastName = "Testen",
-                 address = "Testveien 1",
-                 postalCode= "1234",
-                 city = "Test",
-                 userName = "Test",
-                 password = "Testing"
-          
-            }
-          expectedResult.Add(user);
-          expectedResult.Add(user);
-          expectedResult.Add(user);  
-            
-            */
 
         }
 
