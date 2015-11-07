@@ -248,9 +248,9 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/CreateAdminUser
         public ActionResult CreateAdminUser()
         {
-            if (!LoggedIn())
+            /*if (!LoggedIn())
                 return RedirectToAction("LogIn");
-
+                */
             return View();
         }
 
@@ -259,9 +259,11 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateAdminUser(AdminUser adminUser)
         {
+            /*
             if (!LoggedIn())
                 return RedirectToAction("LogIn");
 
+            */
             if (ModelState.IsValid)
             {
                 var dal = new BusinessLogic();
@@ -614,14 +616,14 @@ namespace GodtSkoddProsjekt.Controllers
 
             List<Order> orders = new List<Order>();
 
-            Order order = (Order)Session["Order"];
+            Order order = (Order)Session["Order"];  // hvis søker på en bestemt ordre (ut fra id)
 
             if (order != null)
             {
                 orders.Add(order);
                 /* If Session["Order"] contains an Order, then only show this order
                 (admin has searched/called GetOrder(orderId))*/
-                Session["Order"] = null;    // reset
+                Session["Order"] = null;    // reset order
             }
             else
             {
