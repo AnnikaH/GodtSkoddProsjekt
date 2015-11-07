@@ -32,6 +32,7 @@ namespace BLL
         Order GetOrder(int orderId);
         bool CreateOrder(Order order);
         bool CreateOrderline(Orderline orderline);
+        bool DeleteOrderline(int id);
         bool EditOrder(int id, Order order);
         bool DeleteOrder(int id);
     }

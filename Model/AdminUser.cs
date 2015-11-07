@@ -13,7 +13,7 @@ namespace Model
 
         [Display(Name = "Brukernavn")]
         [Required(ErrorMessage = "Brukernavn må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå0-9]{2,30}", ErrorMessage = "Brukernavn kan bare inneholde bokstaver fra A-Å og siffer")]
+        [RegularExpression(@"[A-ZÆØÅa-zæøå0-9]{1,30}", ErrorMessage = "Brukernavn kan bare inneholde bokstaver fra A-Å og siffer")]
         public String userName { get; set; }
 
         [Display(Name = "Passord")]
