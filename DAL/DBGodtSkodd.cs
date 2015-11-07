@@ -1005,8 +1005,8 @@ namespace DAL
                         ProductID = input.productId,
                         Quantity = input.quantity,
                         // nødvendig?:
-                        //Order = db.Orders.Find(input.orderID),
-                        //Product = db.Products.Find(input.productId)
+                        Order = db.Orders.Find(input.orderID),
+                        Product = db.Products.Find(input.productId)
                     };
                     
                     db.Orderlines.Add(newOrderline);
