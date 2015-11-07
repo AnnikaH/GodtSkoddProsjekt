@@ -55,29 +55,24 @@
                 </td>
             </tr>
             <tr id="@item.id"> <!--class="MoreInfo"-->
-                <td colspan="7">
+                <td colspan="4">
                     <table class="MoreInfoTable">
                         @for (int j = 0; j < item.orderlines.Count; j++)
                         {
                             <tr>
-                                <td class="table_header">Id:</td>
-                                <td>@item.orderlines[j].id</td>
+                                <td class="table_header orderline_header">Ordrelinje med id nr. @item.orderlines[j].id:</td>
                             </tr>
                             <tr>
-                                <td class="table_header">Ordre-Id:</td>
+                                <td class="orderline_header">Ordre-Id:</td>
                                 <td>@item.orderlines[j].orderID</td>
                             </tr>
                             <tr>
-                                <td class="table_header">Produkt-Id:</td>
-                                <td>
-                                    @item.orderlines[j].productId
-                                </td>
+                                <td class="orderline_header">Produkt-Id:</td>
+                                <td>@item.orderlines[j].productId</td>
                             </tr>
                             <tr>
-                                <td class="table_header">Antall:</td>
-                                <td>
-                                    @item.orderlines[j].quantity
-                                </td>
+                                <td class="orderline_header">Antall:</td>
+                                <td>@item.orderlines[j].quantity</td>
                             </tr>
                         }
                     </table>

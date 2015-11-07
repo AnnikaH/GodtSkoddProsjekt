@@ -217,6 +217,10 @@ h2.registrer
     text-align:center;
 }
 
+.orderline_header {
+    text-align:left;
+}
+
 .Link_addnew
 {
     float:right;
