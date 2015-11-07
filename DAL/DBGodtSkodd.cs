@@ -22,13 +22,59 @@ namespace DAL
             try
             {
                 AdminUser Default = new AdminUser();
-                List<AdminUser> list = GetAdminUsers();
-                if (list.Find(a => a.userName == "Admin") == null)
+                List<AdminUser> firstlist = GetAdminUsers();
+                if (firstlist.Find(a => a.userName == "Admin") == null)
                 {
                     Default.userName = "Admin";
                     Default.password = "12345678";
                     CreateAdminUser(Default);
                 }
+
+
+                // MIDLERTIDLIG LAGE BRUKER OG ORDRE
+
+
+                DBContext db = new DBContext();
+
+                List<Users> list = db.Users.ToList();
+                Users theOne = list.Find(a => a.FirstName == "Test");
+                if (theOne == null)
+                {
+                    User newUser = new User();
+                    newUser.firstName = "Test";
+                    newUser.lastName = "Testesten";
+                    newUser.city = "Test";
+                    newUser.email = "Test@test.test";
+                    newUser.phoneNumber = "12345678";
+                    newUser.address = "Testveien 1";
+                    newUser.postalCode = "1234";
+                    newUser.userName = "Test";
+                    newUser.password = "12345678";
+                    CreateUser(newUser);
+                }
+
+                int id;
+                List<Users> list2 = db.Users.ToList();
+                Users theUser = list2.Find(a => a.FirstName == "Test");
+                id = theUser.ID;
+
+                Order newOrder = new Order();
+                newOrder.userID = id;
+                newOrder.date = DateTime.Now;
+                newOrder.orderlines = new List<Orderline>();
+                CreateOrder(newOrder);
+
+                int id2;
+                List<Orders> list3 = db.Orders.ToList();
+                Orders theOrder = list3.Find(a => a.UserID == id);
+                id2 = theOrder.ID;
+
+                Orderline newOrderLine = new Orderline();
+                newOrderLine.orderID = id2;
+                newOrderLine.productId = 1;
+                newOrderLine.quantity = 9001;
+                CreateOrderline(newOrderLine);
+              
                 return true;
             }
             catch(Exception e)
