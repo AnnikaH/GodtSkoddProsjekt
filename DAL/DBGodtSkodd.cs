@@ -893,6 +893,7 @@ namespace DAL
                 }
             }
         }
+
         public Order getOrder(int id)
         {
             using (var db = new DBContext())
@@ -925,6 +926,7 @@ namespace DAL
                 }
             }
         }
+
         public bool EditOrder(int id, Order input)
         {
             using (var db = new DBContext())
@@ -933,6 +935,9 @@ namespace DAL
                 {
                     Orders changeOrder = db.Orders.Find(id);
                     changeOrder.UserID = input.userID;
+                    changeOrder.Date = input.date;
+                    
+                    // nødvendig?:
                     changeOrder.User = db.Users.Find(input.userID);
 
                     foreach (var item in input.orderlines)
@@ -1000,8 +1005,8 @@ namespace DAL
                         ProductID = input.productId,
                         Quantity = input.quantity,
                         // nødvendig?:
-                        Order = db.Orders.Find(input.orderID),
-                        Product = db.Products.Find(input.productId)
+                        //Order = db.Orders.Find(input.orderID),
+                        //Product = db.Products.Find(input.productId)
                     };
                     
                     db.Orderlines.Add(newOrderline);
@@ -1027,8 +1032,8 @@ namespace DAL
                     Orderlines changeOrderline = db.Orderlines.Find(id);
 
                     // nødvendig?
-                    //changeOrderline.Order = db.Orders.Find(input.orderID);
-                    //changeOrderline.Product = db.Products.Find(input.productId);
+                    changeOrderline.Order = db.Orders.Find(input.orderID);
+                    changeOrderline.Product = db.Products.Find(input.productId);
 
                     changeOrderline.OrderID = input.orderID;
                     changeOrderline.Product = db.Products.Find(input.productId);
