@@ -266,15 +266,14 @@ namespace GodtSkoddProsjekt.Controllers
             */
             if (ModelState.IsValid)
             {
-                var dal = new BusinessLogic();
-                bool insertOK = dal.CreateAdminUser(adminUser);
+                bool insertOK = dbBLL.CreateAdminUser(adminUser);
 
                 if (insertOK)
                 {
                     Session["LoggedInAdmin"] = true;
                     ViewBag.LoggedInAdmin = true;
                     
-                    Session["AdminId"] = dal.GetAdminIdInDB(adminUser);
+                    Session["AdminId"] = dbBLL.GetAdminIdInDB(adminUser);
 
                     return RedirectToAction("AdminAdminUsers");
                 }
