@@ -30,7 +30,12 @@
     <h2 class="header">Ordrehistorikk</h2>
 
     <p>
-        <div class="Searchbar"><input type="text" id="Searchinn" /></div>
+        <div class="Searchbar">
+            Id: <input type="text" id="searchId" />
+            <input type="button" onclick="showAllOrders()" value="Vis alle" class="btn btn-default" />
+            <input type="button" style="margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" onclick="searchOrder($('#searchId').val())" value="Søk" class="btn btn-default" />
+            <div id="userErrorMessage"></div>
+        </div>
         <div class="Link_addnew">
             <span class="glyphicon glyphicon-arrow-down"></span><a href="#" class="link_toggle">Vis mer informasjon</a> | <span class="glyphicon glyphicon-plus"></span>  @Html.ActionLink("Registrer ny ordre", "CreateOrder", "ADMINMain", new { id = "" }, new { @class = "" })
         </div>
@@ -67,27 +72,35 @@
             </tr>
             <tr id="@item.id" class="MoreInfo">
                 <td colspan="7">
-                    @for (int j = 0; j < item.orderlines.Count; j++)
-                    {
-                        <table class="MoreInfoTable">
+                    <table class="MoreInfoTable">
+                        @for (int j = 0; j < item.orderlines.Count; j++)
+                        {
                             <tr>
-                                <th>Produkt nr.</></th>
-
+                                <td class="table_header">ID:</td>
+                                <td>@item.orderlines[j].id</td>
+                            </tr>
+                            <tr>
+                                <td class="table_header">Order ID:</td>
+                                <td>@item.orderlines[j].orderID</td>
+                            </tr>
+                            <tr>
+                                <td class="table_header">Product id:</td>
                                 <td>
-                                    @item.orderlines[j].productId.ToString()
+                                    @item.orderlines[j].productId
                                 </td>
                             </tr>
                             <tr>
-                                <th>
-                                    Antall
-                                </th>
+                                 <td class="table_header">
+                                    Antall:
+                                </td>
 
                                 <td>
-                                    @item.orderlines[j].quantity.ToString()
+                                    @item.orderlines[j].quantity
                                 </td>
                             </tr>
-                        </table>
-                    }
+
+                        }
+                    </table>
                 </td>
 
             </tr>
