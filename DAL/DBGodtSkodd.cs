@@ -51,29 +51,30 @@ namespace DAL
                     newUser.userName = "Test";
                     newUser.password = "12345678";
                     CreateUser(newUser);
+
+
+                    int id;
+                    List<Users> list2 = db.Users.ToList();
+                    Users theUser = list2.Find(a => a.FirstName == "Test");
+                    id = theUser.ID;
+
+                    Order newOrder = new Order();
+                    newOrder.userID = id;
+                    newOrder.date = DateTime.Now;
+                    newOrder.orderlines = new List<Orderline>();
+                    CreateOrder(newOrder);
+
+                    int id2;
+                    List<Orders> list3 = db.Orders.ToList();
+                    Orders theOrder = list3.Find(a => a.UserID == id);
+                    id2 = theOrder.ID;
+
+                    Orderline newOrderLine = new Orderline();
+                    newOrderLine.orderID = id2;
+                    newOrderLine.productId = 1;
+                    newOrderLine.quantity = 9001;
+                    CreateOrderline(newOrderLine);
                 }
-
-                int id;
-                List<Users> list2 = db.Users.ToList();
-                Users theUser = list2.Find(a => a.FirstName == "Test");
-                id = theUser.ID;
-
-                Order newOrder = new Order();
-                newOrder.userID = id;
-                newOrder.date = DateTime.Now;
-                newOrder.orderlines = new List<Orderline>();
-                CreateOrder(newOrder);
-
-                int id2;
-                List<Orders> list3 = db.Orders.ToList();
-                Orders theOrder = list3.Find(a => a.UserID == id);
-                id2 = theOrder.ID;
-
-                Orderline newOrderLine = new Orderline();
-                newOrderLine.orderID = id2;
-                newOrderLine.productId = 1;
-                newOrderLine.quantity = 9001;
-                CreateOrderline(newOrderLine);
               
                 return true;
             }
