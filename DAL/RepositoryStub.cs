@@ -620,7 +620,7 @@ namespace DAL
 
         public bool CreateDatabaseContent()
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
