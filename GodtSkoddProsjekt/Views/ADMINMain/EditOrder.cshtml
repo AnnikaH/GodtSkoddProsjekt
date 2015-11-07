@@ -35,7 +35,7 @@
             @foreach (var orderline in Model.orderlines)
             {   
                 <div align="center">
-                    <h4>Ordrelinje @Html.DisplayFor(modelitem => orderline.id)</h4>
+                    <h4>Ordrelinje med ID @Html.DisplayFor(modelitem => orderline.id)</h4>
                     @Html.ActionLink("Slett", "DeleteOrderline", "ADMINMain", new { id = orderline.id }, new { @class = "btn btn-danger Cancelbuttons" })<br />
                 </div>
                 <div class="form-group">
