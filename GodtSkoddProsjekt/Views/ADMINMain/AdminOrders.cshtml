@@ -20,7 +20,7 @@
             <div id="userErrorMessage"></div>
         </div>
         <div class="Link_addnew">
-            <span class="glyphicon glyphicon-arrow-down"></span><a href="" class="link_toggle">Vis mer informasjon</a> |
+            <span class="glyphicon glyphicon-arrow-down"></span><a class="link_toggle">Vis mer informasjon</a> |
             <span class="glyphicon glyphicon-plus"></span> @Html.ActionLink("Registrer ny ordre", "CreateOrder", "ADMINMain", new { id = "" }, new { @class = "" })
         </div>
     </p>
@@ -50,11 +50,11 @@
                 <td>
                     @Html.ActionLink("Endre", "EditOrder", "ADMINMain", new { id = item.id }, new { @class = "" }) |
                     @Html.ActionLink("Legg til ordrelinje", "CreateOrderline", "ADMINMain", new { id = item.id }, new { @class = "" }) |
-                    <a href="" onclick="toggleRow(@item.id)">Se detaljer</a> |
+                    <a onclick="toggleRow(@item.id)">Se detaljer</a> |
                     @Html.ActionLink("Slett", "DeleteOrder", "ADMINMain", new { id = item.id }, new { @class = "" })
                 </td>
             </tr>
-            <tr id="@item.id"> <!--class="MoreInfo"-->
+            <tr id="@item.id" class="MoreInfo">
                 <td colspan="4">
                     <table class="MoreInfoTable">
                         @for (int j = 0; j < item.orderlines.Count; j++)
