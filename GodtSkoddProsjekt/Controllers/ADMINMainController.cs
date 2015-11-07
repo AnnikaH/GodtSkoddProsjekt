@@ -679,16 +679,21 @@ namespace GodtSkoddProsjekt.Controllers
         }
         
         // GET: ADMINMain/CreateOrder/5
-        public ActionResult CreateOrder(int id)
+        public ActionResult CreateOrder()
         {
             if (!LoggedIn())
                 return RedirectToAction("LogIn");
 
-            //
-            // opprett ordre og returner til AdminOrders:
-            //
-
             var userId = (int)Session["UserIdForOrders"];
+            
+            Order order = new Order();
+            DateTime date = DateTime.Now;
+            List<Orderline> orderlines = new List<Orderline>();
+            order.date = date;
+            order.userID = userId;
+            order.orderlines = orderlines;
+            
+            dbBLL.CreateOrder(order);
 
             return RedirectToAction("AdminOrders", new { id = userId });
         }
