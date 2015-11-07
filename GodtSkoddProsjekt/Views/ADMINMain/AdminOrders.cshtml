@@ -10,7 +10,7 @@
 
 <div class="col-sm-9">
 
-    <h2 class="header">Ordrehistorikk</h2>
+    <h2 class="header">Ordre</h2>
 
     <p>
         <div class="Searchbar">
@@ -50,34 +50,31 @@
                 <td>
                     @Html.ActionLink("Endre", "EditOrder", "ADMINMain", new { id = item.id }, new { @class = "" }) |
                     @Html.ActionLink("Legg til ordrelinje", "CreateOrderline", "ADMINMain", new { id = item.id }, new { @class = "" }) |
-                    <a onclick="toggleRow(@item.id)">Se detaljer</a> |
+                    <a href="" onclick="toggleRow(@item.id)">Se detaljer</a> |
                     @Html.ActionLink("Slett", "DeleteOrder", "ADMINMain", new { id = item.id }, new { @class = "" })
                 </td>
             </tr>
-            <tr id="@item.id" class="MoreInfo">
+            <tr id="@item.id"> <!--class="MoreInfo"-->
                 <td colspan="7">
                     <table class="MoreInfoTable">
                         @for (int j = 0; j < item.orderlines.Count; j++)
                         {
                             <tr>
-                                <td class="table_header">ID:</td>
+                                <td class="table_header">Id:</td>
                                 <td>@item.orderlines[j].id</td>
                             </tr>
                             <tr>
-                                <td class="table_header">Order ID:</td>
+                                <td class="table_header">Ordre-Id:</td>
                                 <td>@item.orderlines[j].orderID</td>
                             </tr>
                             <tr>
-                                <td class="table_header">Product id:</td>
+                                <td class="table_header">Produkt-Id:</td>
                                 <td>
                                     @item.orderlines[j].productId
                                 </td>
                             </tr>
                             <tr>
-                                 <td class="table_header">
-                                    Antall:
-                                </td>
-
+                                <td class="table_header">Antall:</td>
                                 <td>
                                     @item.orderlines[j].quantity
                                 </td>
