@@ -1018,11 +1018,11 @@ namespace DAL
                         OrderID = input.orderID,
                         ProductID = input.productId,
                         Quantity = input.quantity,
-                        Order = db.Orders.Find(input.orderID),
-                        Product = db.Products.Find(input.productId)
+                        // nødvendig?:
+                        //Order = db.Orders.Find(input.orderID),
+                        //Product = db.Products.Find(input.productId)
                     };
-
-
+                    
                     db.Orderlines.Add(newOrderline);
                     //newOrderline.Order.Orderlines.Add(newOrderline); // is this neccessary? (AB) !! får feilmelding på denne!
                     db.SaveChanges();

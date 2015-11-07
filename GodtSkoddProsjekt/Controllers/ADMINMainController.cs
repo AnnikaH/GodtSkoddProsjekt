@@ -688,9 +688,9 @@ namespace GodtSkoddProsjekt.Controllers
             
             Order order = new Order();
             DateTime date = DateTime.Now;
-            List<Orderline> orderlines = new List<Orderline>();
             order.date = date;
             order.userID = userId;
+            List<Orderline> orderlines = new List<Orderline>();
             order.orderlines = orderlines;
             
             dbBLL.CreateOrder(order);
