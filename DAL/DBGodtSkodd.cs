@@ -15,16 +15,29 @@ namespace DAL
 
         public bool CreateDatabaseContent()
         {
-            AdminUser Default = new AdminUser();
-            List<AdminUser> list = GetAdminUsers();
-            if (list.Find(a => a.userName == "Admin") == null)
-            {
-                Default.userName = "Admin";
-                Default.password = "12345678";
-                CreateAdminUser(Default);
-            }
             return createProducts();
         }
+        public bool createDefaultAdmin()
+        {
+            try
+            {
+                AdminUser Default = new AdminUser();
+                List<AdminUser> list = GetAdminUsers();
+                if (list.Find(a => a.userName == "Admin") == null)
+                {
+                    Default.userName = "Admin";
+                    Default.password = "12345678";
+                    CreateAdminUser(Default);
+                }
+                return true;
+            }
+            catch(Exception e)
+            {
+                writeToLog(e);
+                return false;
+            }
+        }
+
 
         public void writeToLog(Exception e)
         {
