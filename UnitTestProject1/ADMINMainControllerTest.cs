@@ -613,27 +613,64 @@ namespace UnitTestProject1
         // Tester for å sjekke GetUser(int id):
 
         [TestMethod]
-        public void GetUser()
+        public void GetUser_LoggedIn_Fail()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-
+            SessionMock.InitializeController(controller);
             // Act
+
             var actionResult = (JsonResult)controller.GetUser(1);
 
             // Assert
-            //Assert.AreEqual(actionResult.)
+            Assert.IsNull(actionResult);
+        }
+
+        [TestMethod]
+        public void GetUser_null()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+
+            // Act
+            var actionResult = (JsonResult)controller.GetUser(-1);
+
+            // Assert
+            Assert.IsInstanceOfType(actionResult, typeof(JsonResult)); // Aner ikke om denne funker heller.
+
 
         }
 
         // Tester for å sjekke CreateUser():
 
         [TestMethod]
+        public void createUser_LoggedIn_Fail()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.CreateUser();
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+
+        }
+
+        [TestMethod]
         public void CreateUser()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
             // Act
             var actionResult = (ViewResult)controller.CreateUser();
 
