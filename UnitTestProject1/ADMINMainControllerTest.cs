@@ -212,7 +212,7 @@ namespace UnitTestProject1
             SessionMock.InitializeController(controller);
             // Act
 
-            var actionResult = (RedirectToRouteResult)controller.Index();
+            var actionResult = (RedirectToRouteResult)controller.AdminAdminUsers(1);
 
             // Assert
             Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
