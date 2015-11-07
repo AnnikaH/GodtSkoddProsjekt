@@ -34,9 +34,7 @@ namespace DAL
         {
             if (id == 0)
             {
-                var adminUser = new AdminUser();
-                adminUser.id = 0;
-                return adminUser;
+                return null;
             }
             else
             {
@@ -101,7 +99,7 @@ namespace DAL
 
         public bool EditAdminUser(int id, AdminUser adminUser)
         {
-            if(id == 0)
+            if(adminUser.userName == "")
             {
                 return false;
             }
