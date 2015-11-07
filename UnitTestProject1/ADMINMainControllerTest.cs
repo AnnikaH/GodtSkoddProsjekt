@@ -487,34 +487,75 @@ namespace UnitTestProject1
 
 
         // Tester for å sjekke DeleteAdminUser(int id):
+        [TestMethod]
+        public void deleteAdminUser_LoggedIn_Fail()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            var ExpectedAdminUser = new AdminUser();
+            ExpectedAdminUser.userName = "";
+            ExpectedAdminUser.password = null;
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.DeleteAdminUser(1);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+
+        }
 
         [TestMethod]
         public void DeleteAdminUser()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
 
             // Act
-            var actionResult = (ViewResult)controller.DeleteAdminUser(1);
-            var result = (AdminUser)actionResult.Model;
+            var actionResult = (RedirectToRouteResult)controller.DeleteAdminUser(1);
 
             // Assert
-            Assert.AreEqual(actionResult.ViewName, "");
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminAdminUsers");
 
         }
 
         // Tester for å sjekke CancelAdminUser():
+        [TestMethod]
+        public void CancelAdminUser_LoggedIn_Fail()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            var ExpectedAdminUser = new AdminUser();
+            ExpectedAdminUser.userName = "";
+            ExpectedAdminUser.password = null;
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.CancelAdminUser();
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+
+        }
 
         [TestMethod]
         public void CancelAdminUser()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
             // Act
+            var actionResult = (RedirectToRouteResult)controller.CancelAdminUser();
 
             // Assert
-
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminAdminUsers");
         }
 
         // -------------------------- User ---------------------------
@@ -522,15 +563,51 @@ namespace UnitTestProject1
         // Tester for å sjekke AdminCustomers(int? id):
 
         [TestMethod]
-        public void AdminCustomers()
+        public void AdminCustomers_LoggedIn_Fail()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-
+            SessionMock.InitializeController(controller);
+            var ExpectedAdminUser = new AdminUser();
+            ExpectedAdminUser.userName = "";
+            ExpectedAdminUser.password = null;
             // Act
 
-            // Assert
+            var actionResult = (RedirectToRouteResult)controller.AdminCustomers(1);
 
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+
+        }
+        [TestMethod]
+        public void AdminCustomers_Null()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            // Act
+            var actionResult = (ViewResult)controller.AdminCustomers(null);
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
+        }
+
+        [TestMethod]
+        public void AdminCustomers_NOT_Null()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            // Act
+            var actionResult = (ViewResult)controller.AdminCustomers(1);
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
         }
 
         // Tester for å sjekke GetUser(int id):

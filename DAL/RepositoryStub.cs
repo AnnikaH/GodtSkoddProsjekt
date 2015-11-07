@@ -250,11 +250,9 @@ namespace DAL
 
         public User GetUser(int id)
         {
-            if (id == 0)
+            if (id == -1)
             {
-                var user = new User();
-                user.id = 0;
-                return user;
+                return null;
             }
             else
             {
