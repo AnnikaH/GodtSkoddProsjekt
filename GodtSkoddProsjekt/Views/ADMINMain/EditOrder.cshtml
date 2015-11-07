@@ -36,7 +36,7 @@
             {   
                 <div align="center">
                     <h4>Ordrelinje @Html.DisplayFor(modelitem => orderline.id)</h4>
-                    @Html.ActionLink("Slett", "DeleteOrderline", "ADMINMain", null, new { @class = "btn btn-danger Cancelbuttons" })
+                    @Html.ActionLink("Slett", "DeleteOrderline", "ADMINMain", null, new { @class = "btn btn-danger Cancelbuttons" })<br />
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => orderline.productId, htmlAttributes: new { @class = "control-label col-md-2" })
