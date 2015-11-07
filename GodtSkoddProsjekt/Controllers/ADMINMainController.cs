@@ -114,7 +114,7 @@ namespace GodtSkoddProsjekt.Controllers
         }
 
         // private method to check if admin is logged in or not
-        private bool LoggedIn()
+        public bool LoggedIn()
         {
             if (Session["LoggedInAdmin"] == null)
             {

@@ -7,6 +7,7 @@ using GodtSkoddProsjekt.Controllers;
 using Model;
 using BLL;
 using DAL;
+using MvcContrib.TestHelper;
 
 namespace UnitTestProject1
 {
@@ -26,20 +27,26 @@ namespace UnitTestProject1
         [TestMethod]
         public void LogIn()
         {
-            // Arrange
-            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController();
+            SessionMock.InitializeController(controller);
+            
+            controller.Session["LoggedInAdmin"] = false;
             // Act
-            var actionResult = (ViewResult)controller.LogIn();
-
+            var result = (ViewResult)controller.LogIn();
             // Assert
-            Assert.AreEqual(actionResult.ViewName, "");
-           }
-        [TestMethod]
+            Assert.AreEqual(result.ViewName, "");
+        }
+
+    [TestMethod]
         public void Login_NotOk()
         {
-            // Arrange
-            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController();
+            SessionMock.InitializeController(controller);
+
+            controller.Session["LoggedInAdmin"] = true;
+            // Act
             
             var actionResult = (RedirectToRouteResult)controller.LogIn();
 
@@ -50,14 +57,19 @@ namespace UnitTestProject1
         // Tester for å sjekke LoggedIn():
 
         [TestMethod]
-        public void LoggedIn()
+        public void LoggedIn_null()
         {
-            // Arrange
-            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController();
+            SessionMock.InitializeController(controller);
 
+            controller.Session["LoggedInAdmin"] = null;
             // Act
 
+            var actionResult = (RedirectToRouteResult)controller.LoggedIn();
+
             // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "Index");
 
         }
 
