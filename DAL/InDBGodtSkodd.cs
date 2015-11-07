@@ -10,6 +10,7 @@ namespace DAL
     public interface InDBGodtSkodd
     {
         bool CreateDatabaseContent();
+        bool createDefaultAdmin();
         List<AdminUser> GetAdminUsers();
         AdminUser GetAdminUser(int id);
         int GetAdminIdInDB(AdminUser adminUser);

@@ -24,6 +24,9 @@ namespace BLL
 
         public bool DatabaseProductsFilled()
         {
+            // testing if default admin exists inside createDefaultAdmin()
+            dal.createDefaultAdmin();
+            
             List<Product> products = dal.ListAllProducts();
 
             if (products.Count == 0)

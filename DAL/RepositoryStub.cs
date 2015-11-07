@@ -20,7 +20,7 @@ namespace DAL
             {
                 id = 1,
                 userName = "Test",
-                password = "testing"
+                password = "Testing1"
             };
 
             adminList.Add(adminUser);
@@ -44,7 +44,7 @@ namespace DAL
                 {
                     id = 1,
                     userName = "Test",
-                    password = "Testing"
+                    password = "Testing1"
 
                 };
                 return adminUser;
@@ -619,6 +619,11 @@ namespace DAL
         }
 
         public bool CreateDatabaseContent()
+        {
+            return true;
+        }
+
+        public bool createDefaultAdmin()
         {
             return true;
         }
