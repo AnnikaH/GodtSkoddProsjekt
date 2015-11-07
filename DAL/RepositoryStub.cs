@@ -177,6 +177,8 @@ namespace DAL
                     address = "Testveien 1",
                     postalCode = "1234",
                     city = "Test",
+                    email= "test@test.test",
+                    phoneNumber = "12345678", 
                     userName = "Test",
                     password = "Testing"
 
@@ -234,6 +236,8 @@ namespace DAL
                 address = "Testveien 1",
                 postalCode = "1234",
                 city = "Test",
+                email = "test@test.test",
+                phoneNumber = "12345678",
                 userName = "Test",
                 password = "Testing1"
 
@@ -264,6 +268,8 @@ namespace DAL
                     address = "Testveien 1",
                     postalCode= "1234",
                     city = "Test",
+                    email = "test@test.test",
+                    phoneNumber = "12345678",
                     userName = "Test",
                     password = "Testing1"
                     
