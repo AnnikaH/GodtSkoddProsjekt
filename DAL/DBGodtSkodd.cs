@@ -17,27 +17,26 @@ namespace DAL
         {
             return createProducts();
         }
+
         public bool createDefaultAdmin()
         {
             try
             {
                 AdminUser Default = new AdminUser();
                 List<AdminUser> firstlist = GetAdminUsers();
+
                 if (firstlist.Find(a => a.userName == "Admin") == null)
                 {
                     Default.userName = "Admin";
                     Default.password = "12345678";
                     CreateAdminUser(Default);
                 }
-
-
-                // MIDLERTIDLIG LAGE BRUKER OG ORDRE
-
-
+                
                 DBContext db = new DBContext();
 
                 List<Users> list = db.Users.ToList();
                 Users theOne = list.Find(a => a.FirstName == "Test");
+
                 if (theOne == null)
                 {
                     User newUser = new User();
@@ -51,37 +50,8 @@ namespace DAL
                     newUser.userName = "Test";
                     newUser.password = "12345678";
                     CreateUser(newUser);
-
-
-                    int id;
-                    List<Users> list2 = db.Users.ToList();
-                    Users theUser = list2.Find(a => a.FirstName == "Test");
-                    id = theUser.ID;
-
-                    Order newOrder = new Order();
-                    newOrder.userID = id;
-                    newOrder.date = DateTime.Now;
-                    newOrder.orderlines = new List<Orderline>();
-                    CreateOrder(newOrder);
-
-                    int id2;
-                    List<Orders> list3 = db.Orders.ToList();
-                    Orders theOrder = list3.Find(a => a.UserID == id);
-                    id2 = theOrder.ID;
-
-                    Orderline newOrderLine = new Orderline();
-                    newOrderLine.orderID = id2;
-                    newOrderLine.productId = 1;
-                    newOrderLine.quantity = 9001;
-                    CreateOrderline(newOrderLine);
-
-                    Orderline newOrderLine2 = new Orderline();
-                    newOrderLine.orderID = id2;
-                    newOrderLine.productId = 2;
-                    newOrderLine.quantity = 9002;
-                    CreateOrderline(newOrderLine2);
                 }
-              
+                
                 return true;
             }
             catch(Exception e)
@@ -90,8 +60,7 @@ namespace DAL
                 return false;
             }
         }
-
-
+        
         public void writeToLog(Exception e)
         {
             string errorMessage = e.Message.ToString() + " in " + e.TargetSite.ToString() + e.StackTrace.ToString();
@@ -110,7 +79,6 @@ namespace DAL
                 {
                     outputFile.WriteLine("[" + nowHour + ":" + nowMinute + "] " + errorMessage);
                 }
-
             }
             else
             {
@@ -817,10 +785,10 @@ namespace DAL
                 {
                     var newOrder = new Orders()
                     {
-                        User = db.Users.Find(order.userID),
                         UserID = order.userID,
                         Date = order.date,
-                        Orderlines = new List<Orderlines>()
+                        Orderlines = new List<Orderlines>(),
+                        User = db.Users.Find(order.userID)
                     };
 
                     foreach (var orderLine in order.orderlines)
@@ -845,9 +813,7 @@ namespace DAL
                 }
             }
         }
-
-
-
+        
         public List<Order> GetOrders()
         {
             using (var db = new DBContext())
@@ -860,6 +826,18 @@ namespace DAL
                     {
                         var oneOrder = new Order();
                         oneOrder.id = order.ID;
+                        oneOrder.date = order.Date;
+                        oneOrder.userID = order.UserID;
+                        oneOrder.orderlines = new List<Orderline>();
+
+                        foreach (var orderline in order.Orderlines)
+                        {
+                            var newOrderLine = new Orderline();
+                            newOrderLine.productId = orderline.ProductID;
+                            newOrderLine.quantity = orderline.Quantity;
+                            newOrderLine.orderID = oneOrder.id;
+                            oneOrder.orderlines.Add(newOrderLine);
+                        }
 
                         output.Add(oneOrder);
                     }
@@ -894,11 +872,12 @@ namespace DAL
 
                             foreach (var orderline in order.Orderlines)
                             {
-                                var NewOrderLine = new Orderline();
-                                NewOrderLine.productId = orderline.ProductID;
-                                NewOrderLine.quantity = orderline.Quantity;
-                                NewOrderLine.orderID = oneOrder.id;
-                                oneOrder.orderlines.Add(NewOrderLine);
+                                var newOrderLine = new Orderline();
+                                newOrderLine.id = orderline.ID;
+                                newOrderLine.productId = orderline.ProductID;
+                                newOrderLine.quantity = orderline.Quantity;
+                                newOrderLine.orderID = oneOrder.id;
+                                oneOrder.orderlines.Add(newOrderLine);
                             }
                             outputOrder.Add(oneOrder);
                         }
@@ -920,13 +899,13 @@ namespace DAL
             {
                 try
                 {
-
                     Order returnOrder = new Order();
                     Orders foundOrder = db.Orders.Find(id);
                     returnOrder.id = foundOrder.ID;
                     returnOrder.userID = foundOrder.UserID;
                     returnOrder.date = foundOrder.Date;
                     returnOrder.orderlines = new List<Orderline>();
+
                     foreach (var item in foundOrder.Orderlines)
                     {
                         Orderline newOrderLine = new Orderline();
@@ -979,6 +958,7 @@ namespace DAL
                 }
             }
         }
+
         public bool DeleteOrder(int id)
         {
             using (var db = new DBContext())
@@ -991,6 +971,7 @@ namespace DAL
                     {
                         DeleteOrderline(orderline.ID);
                     }
+
                     db.Orders.Remove(delOrder);
                     db.SaveChanges();
                     return true;
@@ -1019,8 +1000,8 @@ namespace DAL
                         ProductID = input.productId,
                         Quantity = input.quantity,
                         // nødvendig?:
-                        //Order = db.Orders.Find(input.orderID),
-                        //Product = db.Products.Find(input.productId)
+                        Order = db.Orders.Find(input.orderID),
+                        Product = db.Products.Find(input.productId)
                     };
                     
                     db.Orderlines.Add(newOrderline);
@@ -1036,6 +1017,7 @@ namespace DAL
                 }
             }
         }
+
         public bool EditOrderline(int id, Orderline input)
         {
             using (var db = new DBContext())
@@ -1043,7 +1025,11 @@ namespace DAL
                 try
                 {
                     Orderlines changeOrderline = db.Orderlines.Find(id);
-                    changeOrderline.Order = db.Orders.Find(input.orderID);
+
+                    // nødvendig?
+                    //changeOrderline.Order = db.Orders.Find(input.orderID);
+                    //changeOrderline.Product = db.Products.Find(input.productId);
+
                     changeOrderline.OrderID = input.orderID;
                     changeOrderline.Product = db.Products.Find(input.productId);
                     changeOrderline.ProductID = input.productId;
