@@ -677,9 +677,29 @@ namespace GodtSkoddProsjekt.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
             //return RedirectToAction("AdminOrders", new { id = userId });
         }
-
-        // GET: ADMINMain/CreateOrder
+        
+        // GET: ADMINMain/CreateOrder/5
         public ActionResult CreateOrder()
+        {
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+
+            var userId = (int)Session["UserIdForOrders"];
+            
+            Order order = new Order();
+            DateTime date = DateTime.Now;
+            order.date = date;
+            order.userID = userId;
+            List<Orderline> orderlines = new List<Orderline>();
+            order.orderlines = orderlines;
+            
+            dbBLL.CreateOrder(order);
+
+            return RedirectToAction("AdminOrders", new { id = userId });
+        }
+
+        // GET: ADMINMain/CreateOrderline
+        public ActionResult CreateOrderline()
         {
             if (!LoggedIn())
                 return RedirectToAction("LogIn");
@@ -687,7 +707,37 @@ namespace GodtSkoddProsjekt.Controllers
             return View();
         }
 
-        // POST: ADMINMain/CreateOrder
+        // POST: ADMINMain/CreateOrderline
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateOrderline(Orderline orderline)
+        {
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+
+            if (ModelState.IsValid)
+            {
+                bool insertOK = dbBLL.CreateOrderline(orderline);
+
+                var userId = (int)Session["UserIdForOrders"];
+
+                if (insertOK)
+                    return RedirectToAction("AdminOrders", new { id = userId });
+            }
+
+            return View();
+        }
+
+        /* GET: ADMINMain/CreateOrder
+        public ActionResult CreateOrder()
+        {
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+
+            return View();
+        }*/
+        
+        /* POST: ADMINMain/CreateOrder
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateOrder(Order order)
@@ -704,7 +754,7 @@ namespace GodtSkoddProsjekt.Controllers
             }
 
             return View();
-        }
+        }*/
 
         // GET: ADMINMain/EditOrder/5
         public ActionResult EditOrder(int id)
