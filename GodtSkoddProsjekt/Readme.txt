@@ -1,7 +1,7 @@
 ﻿Spesielle notiser innlevering mappe 2:
 
-Start-url: /Home/Index (her opprettes default-administrator hvis denne ikke finnes, samt default-
-produkter hvis disse ikke finnes)
+Start-url: /Home/Index (Her opprettes default-administrator hvis denne ikke finnes, samt default-
+produkter hvis disse ikke finnes.)
 Herfra kan man gå til Admin-siden ved å klikke på "Admin" øverst til høyre i navbaren.
 Her må man logge inn med brukernavn annika og passord annikahammervoll (hoved-administrator).
 Man kan bare opprette nye administratorer når man er logget inn som en administrator.
