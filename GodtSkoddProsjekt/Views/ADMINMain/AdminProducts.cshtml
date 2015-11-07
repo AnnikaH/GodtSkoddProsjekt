@@ -5,14 +5,8 @@
 }
 
 @{ 
-    ViewBag.Title = "Admin Produkt";
+    ViewBag.Title = "Admin Produkter";
 }
-
-<!-- MERK!: Tar inn IEnumerable<Model.Product> istedenfor List<Model.Product> -->
-
-<!-- Autogenerert kode (template List og model Product(Model)) -->
-
-<!-- Gjøre mye av det samme som på AdminAdminUsers og AdminCustomers -->
 
 <div class="col-sm-9">
     <h2 class="header">Produkter</h2>
@@ -96,9 +90,9 @@
                             <td class="table_header">Id:</td><td>@Html.DisplayFor(modelItem => item.id)</td>
                         </tr>
                         <tr>
-                            <td class="table_header">Navn: </td><td>@Html.DisplayFor(modelItem => item.name)</td>
+                            <td class="table_header">Navn:</td><td>@Html.DisplayFor(modelItem => item.name)</td>
                         </tr>
-                        <tr><td class="table_header">Pris: </td><td>@Html.DisplayFor(modelItem => item.price)</td></tr>
+                        <tr><td class="table_header">Pris:</td><td>@Html.DisplayFor(modelItem => item.price)</td></tr>
                         <tr><td class="table_header">Størrelse:</td><td>@Html.DisplayFor(modelItem => item.size)</td></tr>
                         <tr><td class="table_header">Farge:</td><td>@Html.DisplayFor(modelItem => item.color)</td></tr>
                         <tr><td class="table_header">Materiale:</td><td>@Html.DisplayFor(modelItem => item.material)</td></tr>

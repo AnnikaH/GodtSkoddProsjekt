@@ -787,6 +787,7 @@ namespace GodtSkoddProsjekt.Controllers
                 return RedirectToAction("LogIn");
 
             Order order = dbBLL.GetOrder(id);
+            
             return View(order);
         }
 
@@ -798,14 +799,16 @@ namespace GodtSkoddProsjekt.Controllers
             if (!LoggedIn())
                 return RedirectToAction("LogIn");
 
+            order.date = DateTime.Now;  // Setter tidspunktet til nå
+
             if (ModelState.IsValid)
             {
                 bool changeOK = dbBLL.EditOrder(id, order);
-
+                
                 if (changeOK)
                     return RedirectToAction("AdminOrders", new { id = order.userID });
             }
-
+            
             return View();
         }
 

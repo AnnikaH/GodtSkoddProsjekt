@@ -30,25 +30,6 @@
 
         // ---------------------------- Product -----------------------------
 
-        /*function searchProduct(id) {
-            if (isNaN(id) || id == "") {
-                $('#productErrorMessage').html("Id må være et tall!").addClass("text-danger");
-                return;
-            }
-
-            $('#productErrorMessage').html("").removeClass("text-danger");
-
-            $.getJSON("/ADMINMain/GetProduct", { id: id }, function (productData) {
-                // only enters here if success
-
-                // have to refresh the page:
-
-                window.location = "/ADMINMain/AdminProducts/" + id;
-            });
-
-            //window.location.reload();
-        }*/
-
         function searchProduct(id) {
             if (isNaN(id) || id == "") {
                 $('#productErrorMessage').html("Id må være et tall!").addClass("text-danger");

@@ -17,6 +17,7 @@ namespace Model
         public int userID { get; set; }
 
         [Display(Name = "Tidspunkt")]
+        [DataType(DataType.DateTime)]
         public DateTime date { get; set; }
         
         public List<Orderline> orderlines { get; set; }

@@ -8,14 +8,6 @@
     ViewBag.Title = "Admin Endre ordre";
 }
 
-<!-- Autogenerert kode: -->
-
-<!-- Må også hente ut alle ordrelinjene (se Views/User/OrderDetails.cshtml) så man kan endre disse også -->
-<!-- Skal ikke kunne endre userID (ikke nødvendig heller) og date skal vel bli satt til "nå" (C#-metode vi bruker i footer)? -->
-
-<!-- Edit Orderline skal gjøres i her.
-    Mulig å ta delete på en Orderline også? I så fall gjøre dette her (må nesten være mulig å slette en ordrelinje uten
-    å slette hele ordren?) -->
 <div class="col-sm-9">
     @using (Html.BeginForm())
     {
@@ -27,15 +19,16 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.id)
 
-          
-                    @Html.HiddenFor(model => model.userID, new { htmlAttributes = new { @class = "form-control" } })
-                 
-                    @Html.HiddenFor(model => model.date, new { htmlAttributes = new { @class = "form-control" } })
-                   
+            @Html.HiddenFor(model => model.userID, new { htmlAttributes = new { @class = "form-control" } })
+
+            <!--     
+            Html.HiddenFor(model => model.date, new { htmlAttributes = new { class = "form-control" } })
+            -->
+            
             @foreach (var orderline in Model.orderlines)
             {   
                 <div align="center">
-                    <h4>Ordrelinje med ID @Html.DisplayFor(modelitem => orderline.id)</h4>
+                    <h4>Ordrelinje med id nr. @Html.DisplayFor(modelitem => orderline.id)</h4>
                     @Html.ActionLink("Slett", "DeleteOrderline", "ADMINMain", new { id = orderline.id }, new { @class = "btn btn-danger Cancelbuttons" })<br />
                 </div>
                 <div class="form-group">
@@ -54,8 +47,6 @@
                 </div>
             }
 
-            <!-- Og alle ordrelinjene også her ... -->
-
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     @Html.ActionLink("Avbryt", "CancelOrder", "ADMINMain", new { id = "" }, new { @class = "btn btn-danger Cancelbuttons" })
@@ -66,4 +57,3 @@
 
     }
      </div>
-

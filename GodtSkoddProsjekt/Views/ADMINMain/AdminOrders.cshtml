@@ -8,26 +8,9 @@
     ViewBag.Title = "Admin Ordre";
 }
 
-<!-- Se oppsettet til AdminProducts.cshtml (autogenerert når velger template List) -->
-
-<!-- Liste alle ordrene til en bruker (får inn ordrene via model) - husk også at hver Order inneholder en eller flere
-    Orderline (se Views/User/OrderDetails.cshtml) -->
-
-<!-- Skal kunne søke opp en ordre ut fra id: metode GetOrder i ADMINMainController + sende med id -->
-
-<!-- Må ha en knapp for å endre en bestemt ordre: metode EditOrder i ADMINMainController som tar inn en id (id'en til ordren) -
-    går til EditOrder.cshtml - innebærer også at man må kunne endre hver Orderline inni denne Order'en -->
-
-<!-- Må ha en knapp for å opprette en ny ordre: metode CreateOrder i ADMINMainController - går til CreateOrder.cshtml -->
-
-<!-- Må ha en knapp for å slette en ordre (sende med id til ordren): Kall på DeleteOrder + sende med ordre-id til ADMINMainController -->
-
-<!-- Edit og create Orderline skal gjøres i CreateOrder.cshtml og EditOrder.cshtml.
-    Mulig å ta delete på en Orderline også? I så fall gjøre dette i EditOrder.cshtml -->
-
 <div class="col-sm-9">
 
-    <h2 class="header">Ordrehistorikk</h2>
+    <h2 class="header">Ordre</h2>
 
     <p>
         <div class="Searchbar">
@@ -37,11 +20,11 @@
             <div id="userErrorMessage"></div>
         </div>
         <div class="Link_addnew">
-            <span class="glyphicon glyphicon-arrow-down"></span><a href="" class="link_toggle">Vis mer informasjon</a> | <span class="glyphicon glyphicon-plus"></span> @Html.ActionLink("Registrer ny ordre", "CreateOrder", "ADMINMain", new { id = "" }, new { @class = "" })
+            <span class="glyphicon glyphicon-arrow-down"></span><a href="" class="link_toggle">Vis mer informasjon</a> |
+            <span class="glyphicon glyphicon-plus"></span> @Html.ActionLink("Registrer ny ordre", "CreateOrder", "ADMINMain", new { id = "" }, new { @class = "" })
         </div>
     </p>
 
-    <!-- Vise ordre (til en bestemt bruker eller alle?) (får inn fra model): -->
     <table class="table">
         <tr>
             <th>@Html.DisplayNameFor(model => model.id)</th>
@@ -67,47 +50,35 @@
                 <td>
                     @Html.ActionLink("Endre", "EditOrder", "ADMINMain", new { id = item.id }, new { @class = "" }) |
                     @Html.ActionLink("Legg til ordrelinje", "CreateOrderline", "ADMINMain", new { id = item.id }, new { @class = "" }) |
-                    <a onclick="toggleRow(@item.id)">Se detaljer</a> |
+                    <a href="" onclick="toggleRow(@item.id)">Se detaljer</a> |
                     @Html.ActionLink("Slett", "DeleteOrder", "ADMINMain", new { id = item.id }, new { @class = "" })
                 </td>
             </tr>
-            <tr id="@item.id" class="MoreInfo">
-                <td colspan="7">
+            <tr id="@item.id"> <!--class="MoreInfo"-->
+                <td colspan="4">
                     <table class="MoreInfoTable">
                         @for (int j = 0; j < item.orderlines.Count; j++)
                         {
                             <tr>
-                                <td class="table_header">ID:</td>
-                                <td>@item.orderlines[j].id</td>
+                                <td class="table_header orderline_header">Ordrelinje med id nr. @item.orderlines[j].id:</td>
                             </tr>
                             <tr>
-                                <td class="table_header">Order ID:</td>
+                                <td class="orderline_header">Ordre-Id:</td>
                                 <td>@item.orderlines[j].orderID</td>
                             </tr>
                             <tr>
-                                <td class="table_header">Product id:</td>
-                                <td>
-                                    @item.orderlines[j].productId
-                                </td>
+                                <td class="orderline_header">Produkt-Id:</td>
+                                <td>@item.orderlines[j].productId</td>
                             </tr>
                             <tr>
-                                 <td class="table_header">
-                                    Antall:
-                                </td>
-
-                                <td>
-                                    @item.orderlines[j].quantity
-                                </td>
+                                <td class="orderline_header">Antall:</td>
+                                <td>@item.orderlines[j].quantity</td>
                             </tr>
-
                         }
                     </table>
                 </td>
 
             </tr>
         }
-
-
     </table>
-
 </div><!-- /. col-sm-9 -->
