@@ -23,7 +23,15 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div align="center"></div>
+            <div align="center">
+                <h4>Opprettet ordrelinjer</h4>
+            </div>
+
+            <table class="table">
+               <tr>
+               <td></td>
+               </tr>
+            </table>
             <div class="form-group">
                 @Html.LabelFor(model => model.userID, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
