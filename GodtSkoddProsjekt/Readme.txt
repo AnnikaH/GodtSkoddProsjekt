@@ -8,6 +8,11 @@ Man kan bare opprette nye administratorer når man er logget inn som en administ
 Produktene opprettes automatisk når man går inn på hovedsiden /Home/Index hvis de ikke finnes
 i databasen fra før av.
 
+Det skrives til en logg-fil i DAL.DBGodtSkodd, og denne logg-filen ligger under GodtSkoddProsjekt,
+som er en av de 5 prosjektene, under en mappe som heter Logs (denne vises ikke i prosjekt-strukturen,
+men ligger der hvis man går til filutforskeren). Det blir opprettet en ny logg-fil for
+hver dag det oppstår en feil.
+
 // ---------------------------------------------------------------------------------
 
 Spesielle notiser innlevering mappe 1:

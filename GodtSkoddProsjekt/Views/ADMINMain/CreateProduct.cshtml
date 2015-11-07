@@ -9,7 +9,6 @@
 }
 
 <div class="col-sm-9">
-<!-- Autogenerert kode: -->
 
     @using (Html.BeginForm()) 
     {
@@ -93,15 +92,10 @@
     
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    @Html.ActionLink("Avbryt", "CancelProduct", "ADMINMain", null, new { @class = "Cancelbuttons" })
+                    @Html.ActionLink("Avbryt", "CancelProduct", "ADMINMain", null, new { @class = "btn btn-danger Cancelbuttons" })
                     <input type="submit" value="Registrer" class="btn btn-default" />
-                    
                 </div>
             </div>
         </div>
     }
     </div> <!-- /. col-sm-9 aka wrapper -->
-    
-    <!--<div>
-        Html.ActionLink("Back to List", "Index")
-    </div>-->

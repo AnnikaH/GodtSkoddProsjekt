@@ -9,6 +9,8 @@ namespace Model
     public class User
     {
         // Dette er både en domenemodell og en view-modell 
+
+        [Display(Name = "Id")]
         public int id { get; set; }
 
         [Display(Name = "Fornavn")]

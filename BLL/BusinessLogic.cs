@@ -8,24 +8,22 @@ using Model;
 
 namespace BLL
 {
-    public class BusinessLogic
+    public class BusinessLogic : IBusinessLogic
     {
-
-         public DBGodtSkodd _repository;
-
-        public BusinessLogic(DBGodtSkodd stub)
-        {
-            _repository = stub;
-        }
+        private InDBGodtSkodd dal;
 
         public BusinessLogic()
         {
+            dal = new DBGodtSkodd();
+        }
 
+        public BusinessLogic(InDBGodtSkodd stub)
+        {
+            dal = stub;
         }
 
         public bool DatabaseProductsFilled()
         {
-            var dal = new DBGodtSkodd();
             List<Product> products = dal.ListAllProducts();
 
             if (products.Count == 0)
@@ -36,7 +34,6 @@ namespace BLL
 
         public bool CreateDatabaseContent()
         {
-            var dal = new DBGodtSkodd();
             return dal.CreateDatabaseContent();
         }
 
@@ -44,42 +41,36 @@ namespace BLL
 
         public List<AdminUser> GetAdminUsers()
         {
-            var dal = new DBGodtSkodd();
             return dal.GetAdminUsers();
         }
 
-        public AdminUser GetAdminUser(int id) {
-            var dal = new DBGodtSkodd();
+        public AdminUser GetAdminUser(int id)
+        {
             return dal.GetAdminUser(id);
         }
 
         public int GetAdminIdInDB(AdminUser adminUser)
         {
-            var dal = new DBGodtSkodd();
             return dal.GetAdminIdInDB(adminUser);
         }
 
         public bool AdminUserInDb(AdminUser adminUser)
         {
-            var dal = new DBGodtSkodd();
             return dal.AdminUserInDb(adminUser);
         }
 
         public bool CreateAdminUser(AdminUser adminUser)
         {
-            var dal = new DBGodtSkodd();
             return dal.CreateAdminUser(adminUser);
         }
 
         public bool EditAdminUser(int id, AdminUser adminUser)
         {
-            var dal = new DBGodtSkodd();
             return dal.EditAdminUser(id, adminUser);
         }
 
         public bool DeleteAdminUser(int id)
         {
-            var dal = new DBGodtSkodd();
             return dal.DeleteAdminUser(id);
         }
 
@@ -87,31 +78,26 @@ namespace BLL
 
         public User GetUser(int id)
         {
-            var dal = new DBGodtSkodd();
             return dal.GetUser(id);
         }
 
         public List<User> GetUsers()
         {
-            var dal = new DBGodtSkodd();
             return dal.GetUsers();
         }
 
         public bool CreateUser(User user)
         {
-            var dal = new DBGodtSkodd();
             return dal.CreateUser(user);
         }
 
         public bool EditUser(int id, User user)
         {
-            var dal = new DBGodtSkodd();
             return dal.EditUser(id, user);
         }
 
         public bool DeleteUser(int id)
         {
-            var dal = new DBGodtSkodd();
             return dal.DeleteUser(id);
         }
 
@@ -119,31 +105,26 @@ namespace BLL
 
         public Product GetProduct(int productId)
         {
-            var dal = new DBGodtSkodd();
             return dal.GetProduct(productId);
         }
 
         public List<Product> GetProducts()
         {
-            var dal = new DBGodtSkodd();
             return dal.ListAllProducts();
         }
 
         public bool CreateProduct(Product product)
         {
-            var dal = new DBGodtSkodd();
             return dal.CreateProduct(product);
         }
 
         public bool EditProduct(int id, Product product)
         {
-            var dal = new DBGodtSkodd();
             return dal.EditProduct(id, product);
         }
 
         public bool DeleteProduct(int id)
         {
-            var dal = new DBGodtSkodd();
             return dal.DeleteProduct(id);
         }
 
@@ -151,31 +132,26 @@ namespace BLL
 
         public List<Order> GetOrders(int userId)  // GetOrders from User ID
         {
-            var dal = new DBGodtSkodd();
             return dal.GetOrdersForUser(userId);
         }
 
         public Order GetOrder(int orderId)
         {
-            var dal = new DBGodtSkodd();
             return dal.getOrder(orderId);
         }
 
         public bool CreateOrder(Order order)
         {
-            var dal = new DBGodtSkodd();
             return dal.CreateOrder(order);
         }
 
         public bool EditOrder(int id, Order order)
         {
-            var dal = new DBGodtSkodd();
             return dal.EditOrder(id, order);
         }
 
         public bool DeleteOrder(int id)
         {
-            var dal = new DBGodtSkodd();
             return dal.DeleteOrder(id);
         }
 

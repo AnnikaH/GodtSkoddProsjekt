@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="DBContext.cs" />
     <Compile Include="DBGodtSkodd.cs" />
+    <Compile Include="InDBGodtSkodd.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryStub.cs" />
   </ItemGroup>

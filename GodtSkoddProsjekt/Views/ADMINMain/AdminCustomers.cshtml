@@ -12,9 +12,17 @@
 
 <h2 class="header">Kunderegister</h2>
     <p>
-        <div class="Searchbar"><input type="text" id="Searchinn" /></div>
+        <div class="Searchbar">
+            Id: <input type="text" id="searchId" />
+            <input type="button" onclick="showAllUsers()" value="Vis alle" class="btn btn-default" />
+            <input type="button" style="margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" onclick="searchUser($('#searchId').val())" value="Søk" class="btn btn-default" />
+            <div id="userErrorMessage"></div>
+        </div>
+<!--    <div class="Searchbar"><input type="text" id="Searchinn" /></div>-->
+
         <div class="Link_addnew">
-            <span class="glyphicon glyphicon-arrow-down"></span><a href="#" class="link_toggle">Vis mer informasjon</a> | <span class="glyphicon glyphicon-plus"></span>  @Html.ActionLink("Registrer ny Kunde", "CreateUser", "ADMINMain", new { id = "" }, new { @class = "" })
+            <span class="glyphicon glyphicon-arrow-down"></span><a href="#" class="link_toggle">Vis mer informasjon</a> |
+            <span class="glyphicon glyphicon-plus"></span> @Html.ActionLink("Registrer ny kunde", "CreateUser", "ADMINMain", new { id = "" }, new { @class = "" })
         </div>
     </p>
 
@@ -32,13 +40,12 @@
     <table class="table">
         <tr>
             <th>@Html.DisplayNameFor(model => model.id) </th>
-            <th>@Html.DisplayNameFor(model => model.firstName)</th>
-            <th>@Html.DisplayNameFor(model => model.lastName)</th>
+            <th>Navn</th>
             <th>@Html.DisplayNameFor(model => model.address)</th>
             <th>@Html.DisplayNameFor(model => model.email)</th>
             <th>@Html.DisplayNameFor(model => model.phoneNumber)</th>
             <th>@Html.DisplayNameFor(model => model.userName)</th>
-        
+            <th></th>
         </tr>
 
         @foreach (var item in Model)
@@ -72,7 +79,7 @@
             <tr id="@item.id" class="MoreInfo">
                 <td colspan="7">
                     <table class="MoreInfoTable">
-                        <tr><td>Her kommer ordrelinjer </td></tr>
+                        <tr><td>Her kommer ordrelinjer... Nei her skal ikke ordre/ordrelinjer komme - vi skal gå til en ny side - må ha en knapp "Ordrehistorikk" </td></tr>
                     </table>
                 </td>
 

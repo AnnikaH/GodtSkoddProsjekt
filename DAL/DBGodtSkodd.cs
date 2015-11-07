@@ -9,7 +9,7 @@ using System.IO;
 
 namespace DAL
 {
-    public class DBGodtSkodd
+    public class DBGodtSkodd : InDBGodtSkodd
     {
         string errorLogPath = AppDomain.CurrentDomain.BaseDirectory + "Logs";
 
@@ -17,20 +17,21 @@ namespace DAL
         {
             try
             {
-                throw new InvalidDataException("This might be working");
+                throw new InvalidDataException("IT IS ALIVE! ALIIIIIIIIVEEEEEEE (All your base are belong to us :3)");
             }
             catch (Exception e)
             {
-                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                writeToLog(errorMessage);
+                writeToLog(e);
             }
             // Kopier kode for når man trykker på knappen i Admin/Index.cshtml - (bortsett fra å legge inn en ordre på bruker nr. 1..?
 
             return false;
         }
 
-        public void writeToLog(string input)
+        public void writeToLog(Exception e)
         {
+            string errorMessage = e.Message.ToString() + " in " + e.TargetSite.ToString() + e.StackTrace.ToString();
+
             string day = DateTime.Now.Day.ToString();
             string month = DateTime.Now.Month.ToString();
             string year = DateTime.Now.Year.ToString();
@@ -43,7 +44,7 @@ namespace DAL
             {
                 using (StreamWriter outputFile = new StreamWriter("" + errorLogPath + todayFile, true))
                 {
-                    outputFile.WriteLine("[" + nowHour + ":" + nowMinute + "] " + input);
+                    outputFile.WriteLine("[" + nowHour + ":" + nowMinute + "] " + errorMessage);
                 }
 
             }
@@ -55,7 +56,7 @@ namespace DAL
                 }
                 using (StreamWriter outputFile = new StreamWriter("" + errorLogPath + todayFile))
                 {
-                    outputFile.WriteLine("[" + nowHour + ":" + nowMinute + "] " + input);
+                    outputFile.WriteLine("[" + nowHour + ":" + nowMinute + "] " + errorMessage);
                 }
             }
         }
@@ -82,29 +83,32 @@ namespace DAL
                 }
                 catch (Exception e)
                 {
-                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                    writeToLog(errorMessage);
+                    writeToLog(e);
 
-
-                    var output = new List<AdminUser>();
-                    return output;
+                    return null;
                 }
             }
         }
 
         public AdminUser GetAdminUser(int id)
         {
-            // Fill in
-
             using (var db = new DBContext())
             {
+                try
+                {
+                    AdminUser returnAdminUser = new AdminUser();
+                    AdminUsers foundAdminUser = db.AdminUsers.Find(id);
+                    returnAdminUser.id = foundAdminUser.ID;
+                    returnAdminUser.userName = foundAdminUser.UserName;
+                    returnAdminUser.password = null;
+                    return returnAdminUser;
+                }
+                catch (Exception e)
+                {
+                    writeToLog(e);
 
-                AdminUser returnAdminUser = new AdminUser();
-                AdminUsers foundAdminUser = db.AdminUsers.Find(id);
-                returnAdminUser.id = foundAdminUser.ID;
-                returnAdminUser.userName = foundAdminUser.UserName;
-                returnAdminUser.password = null;
-                return returnAdminUser;
+                    return null;
+                }
             }
         }
 
@@ -114,17 +118,26 @@ namespace DAL
         {
             using (var db = new DBContext())
             {
-                byte[] passwordDB = CreateHash(adminUser.password);
-                AdminUsers foundAdminUser = db.AdminUsers.FirstOrDefault(
-                    a => a.Password == passwordDB && a.UserName == adminUser.userName);
+                try
+                {
+                    byte[] passwordDB = CreateHash(adminUser.password);
+                    AdminUsers foundAdminUser = db.AdminUsers.FirstOrDefault(
+                        a => a.Password == passwordDB && a.UserName == adminUser.userName);
 
-                if (foundAdminUser == null)
-                {
-                    return -1;
+                    if (foundAdminUser == null)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return foundAdminUser.ID;
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    return foundAdminUser.ID;
+                    writeToLog(e);
+
+                    return -1;
                 }
             }
         }
@@ -134,14 +147,24 @@ namespace DAL
             //Function for checking if its the correct input for logging in
             using (var db = new DBContext())
             {
-                byte[] passwordDB = CreateHash(inputUser.password);
-                AdminUsers foundUser = db.AdminUsers.FirstOrDefault(
-                    a => a.Password == passwordDB && a.UserName == inputUser.userName);
+                try
+                {
+                    byte[] passwordDB = CreateHash(inputUser.password);
+                    AdminUsers foundUser = db.AdminUsers.FirstOrDefault(
+                        a => a.Password == passwordDB && a.UserName == inputUser.userName);
 
-                if (foundUser == null)
+                    if (foundUser == null)
+                        return false;
+                    else
+                        return true;
+
+                }
+                catch (Exception e)
+                {
+                    writeToLog(e);
+
                     return false;
-                else
-                    return true;
+                }
             }
         }
 
@@ -154,21 +177,22 @@ namespace DAL
                 Password = CreateHash(adminUser.password)
             };
 
-            var db = new DBContext();
-
-            try
+            using (var db = new DBContext())
             {
-                // Adding the new AdminUsers-row in the database:
-                db.AdminUsers.Add(newUser);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                writeToLog(errorMessage);
+                try
+                {
+                    // Adding the new AdminUsers-row in the database:
+                    db.AdminUsers.Add(newUser);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    
+                    writeToLog(e);
 
-                return false;
+                    return false;
+                }
             }
         }
 
@@ -186,8 +210,7 @@ namespace DAL
                 }
                 catch (Exception e)
                 {
-                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                    writeToLog(errorMessage);
+                    writeToLog(e);
 
                     return false;
                 }
@@ -196,11 +219,22 @@ namespace DAL
 
         public bool DeleteAdminUser(int id)
         {
-            // Fill in
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    AdminUsers delAdminUser = db.AdminUsers.Find(id);
+                    db.AdminUsers.Remove(delAdminUser);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    writeToLog(e);
 
-            // Write to log in catch
-
-            return false;
+                    return false;
+                }
+            }
         }
 
         //------------------------------------------- USERS ------------------------------------------
@@ -219,34 +253,34 @@ namespace DAL
                 Password = CreateHash(user.password)
             };
 
-            var db = new DBContext();
-
-            try
+            using (var db = new DBContext())
             {
-                var postalCodeExists = db.Cities.Find(user.postalCode);
-
-                // We also need to add the user's city in the database if it doesn't exist:
-                if (postalCodeExists == null)
+                try
                 {
-                    var newCity = new Cities()
+                    var postalCodeExists = db.Cities.Find(user.postalCode);
+
+                    // We also need to add the user's city in the database if it doesn't exist:
+                    if (postalCodeExists == null)
                     {
-                        PostalCode = user.postalCode,
-                        City = user.city
-                    };
-                    newUser.City = newCity;
+                        var newCity = new Cities()
+                        {
+                            PostalCode = user.postalCode,
+                            City = user.city
+                        };
+                        newUser.City = newCity;
+                    }
+
+                    // Adding the new Users-row in the database:
+                    db.Users.Add(newUser);
+                    db.SaveChanges();
+                    return true;
                 }
+                catch (Exception e)
+                {
+                    writeToLog(e);
 
-                // Adding the new Users-row in the database:
-                db.Users.Add(newUser);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                writeToLog(errorMessage);
-
-                return false;
+                    return false;
+                }
             }
         }
 
@@ -265,16 +299,25 @@ namespace DAL
             //Function for checking if its the correct input for logging in
             using (var db = new DBContext())
             {
-                byte[] passwordDB = CreateHash(inputUser.password);
-                Users foundUser = db.Users.FirstOrDefault(
-                    b => b.Password == passwordDB && b.UserName == inputUser.userName);
-                if (foundUser == null)
+                try
                 {
-                    return false;
+                    byte[] passwordDB = CreateHash(inputUser.password);
+                    Users foundUser = db.Users.FirstOrDefault(
+                        b => b.Password == passwordDB && b.UserName == inputUser.userName);
+                    if (foundUser == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
-                else
+                catch(Exception e)
                 {
-                    return true;
+                    writeToLog(e);
+
+                    return false;
                 }
             }
         }
@@ -287,16 +330,25 @@ namespace DAL
 
             using (var db = new DBContext())
             {
-                byte[] passwordDB = CreateHash(loginUser.password);
-                Users foundUser = db.Users.FirstOrDefault(
-                    b => b.Password == passwordDB && b.UserName == loginUser.userName);
-                if (foundUser == null)
+                try
                 {
-                    return -1;
+                    byte[] passwordDB = CreateHash(loginUser.password);
+                    Users foundUser = db.Users.FirstOrDefault(
+                        b => b.Password == passwordDB && b.UserName == loginUser.userName);
+                    if (foundUser == null)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return foundUser.ID;
+                    }
                 }
-                else
+                catch(Exception e)
                 {
-                    return foundUser.ID;
+                    writeToLog(e);
+
+                    return -1;
                 }
             }
         }
@@ -341,8 +393,7 @@ namespace DAL
                 }
                 catch (Exception e)
                 {
-                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                    writeToLog(errorMessage);
+                    writeToLog(e);
 
                     return false;
                 }
@@ -351,67 +402,79 @@ namespace DAL
 
         public bool DeleteUser(int id, User inputUser)
         {
-            var db = new DBContext();
-            try
+            using (var db = new DBContext())
             {
-                Users delUser = db.Users.Find(id);
-                db.Users.Remove(delUser);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                writeToLog(errorMessage);
+                try
+                {
+                    Users delUser = db.Users.Find(id);
+                    db.Users.Remove(delUser);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    writeToLog(e);
 
-                return false;
+                    return false;
+                }
             }
         }
 
         public bool DeleteUser(int id)
         {
-            var db = new DBContext();
-            try
+            using (var db = new DBContext())
             {
-                Users delUser = db.Users.Find(id);
-                db.Users.Remove(delUser);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                writeToLog(errorMessage);
+                try
+                {
+                    Users delUser = db.Users.Find(id);
+                    db.Users.Remove(delUser);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    writeToLog(e);
 
-                return false;
+                    return false;
+                }
             }
         }
 
         public User GetUser(int id)
         {
-            var db = new DBContext();
-
-            var oneUsers = db.Users.Find(id);
-
-            if (oneUsers == null)
+            using (var db = new DBContext())
             {
-                return null;
-            }
-            else
-            {
-                var output = new User()
+                try
                 {
-                    id = oneUsers.ID,
-                    firstName = oneUsers.FirstName,
-                    lastName = oneUsers.LastName,
-                    address = oneUsers.Address,
-                    email = oneUsers.Email,
-                    phoneNumber = oneUsers.PhoneNumber,
-                    postalCode = oneUsers.PostalCode,
-                    city = oneUsers.City.City,
-                    userName = oneUsers.UserName
-                };
-                return output;
+                    var oneUsers = db.Users.Find(id);
+
+                    if (oneUsers == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        var output = new User()
+                        {
+                            id = oneUsers.ID,
+                            firstName = oneUsers.FirstName,
+                            lastName = oneUsers.LastName,
+                            address = oneUsers.Address,
+                            email = oneUsers.Email,
+                            phoneNumber = oneUsers.PhoneNumber,
+                            postalCode = oneUsers.PostalCode,
+                            city = oneUsers.City.City,
+                            userName = oneUsers.UserName
+                        };
+                        return output;
+                    }
+                }
+                catch(Exception e)
+                {
+                    writeToLog(e);
+
+                    return null;
+                }
             }
         }
 
@@ -441,11 +504,9 @@ namespace DAL
                 }
                 catch (Exception e)
                 {
-                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                    writeToLog(errorMessage);
+                    writeToLog(e);
 
-                    var output = new List<User>();
-                    return output;
+                    return null;
                 }
             }
         }
@@ -468,21 +529,21 @@ namespace DAL
                 Type = product.type
             };
 
-            var db = new DBContext();
-
-            try
+            using (var db = new DBContext())
             {
-                // Adding the new Product-row in the database:
-                db.Products.Add(newProduct);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                writeToLog(errorMessage);
+                try
+                {
+                    // Adding the new Product-row in the database:
+                    db.Products.Add(newProduct);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    writeToLog(e);
 
-                return false;
+                    return false;
+                }
             }
         }
 
@@ -507,8 +568,7 @@ namespace DAL
                 }
                 catch (Exception e)
                 {
-                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                    writeToLog(errorMessage);
+                    writeToLog(e);
 
                     return false;
                 }
@@ -517,20 +577,21 @@ namespace DAL
 
         public bool DeleteProduct(int id)
         {
-            var db = new DBContext();
-            try
+            using (var db = new DBContext())
             {
-                Products delProduct = db.Products.Find(id);
-                db.Products.Remove(delProduct);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                writeToLog(errorMessage);
+                try
+                {
+                    Products delProduct = db.Products.Find(id);
+                    db.Products.Remove(delProduct);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    writeToLog(e);
 
-                return false;
+                    return false;
+                }
             }
         }
 
@@ -562,11 +623,9 @@ namespace DAL
                 }
                 catch (Exception e)
                 {
-                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                    writeToLog(errorMessage);
+                    writeToLog(e);
 
-                    var output = new List<Product>();
-                    return output;
+                    return null;
                 }
             }
         }
@@ -600,10 +659,11 @@ namespace DAL
                     }
                     return outputProducts;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    var output = new List<Product>();
-                    return output;
+                    writeToLog(e);
+
+                    return null;
                 }
             }
         }
@@ -636,40 +696,52 @@ namespace DAL
                     }
                     return outputProducts;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    var output = new List<Product>();
-                    return output;
+                    writeToLog(e);
+
+                    return null;
                 }
             }
         }
 
         public Product GetProduct(int id)
         {
-            var db = new DBContext();
-
-            var oneProducts = db.Products.Find(id);
-
-            if (oneProducts == null)
+            using (var db = new DBContext())
             {
-                return null;
-            }
-            else
-            {
-                var output = new Product()
+                try
                 {
-                    id = oneProducts.ID,
-                    name = oneProducts.Name,
-                    price = oneProducts.Price,
-                    material = oneProducts.Material,
-                    brand = oneProducts.Brand,
-                    type = oneProducts.Type,
-                    gender = oneProducts.Gender,
-                    size = oneProducts.Size,
-                    color = oneProducts.Color,
-                    url = oneProducts.Url
-                };
-                return output;
+                    var oneProducts = db.Products.Find(id);
+
+                    if (oneProducts == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        var output = new Product()
+                        {
+                            id = oneProducts.ID,
+                            name = oneProducts.Name,
+                            price = oneProducts.Price,
+                            material = oneProducts.Material,
+                            brand = oneProducts.Brand,
+                            type = oneProducts.Type,
+                            gender = oneProducts.Gender,
+                            size = oneProducts.Size,
+                            color = oneProducts.Color,
+                            url = oneProducts.Url
+                        };
+                        return output;
+                    }
+                }
+                catch (Exception e)
+                {
+                    writeToLog(e);
+
+                    return null;
+                }
+
             }
         }
 
@@ -677,51 +749,67 @@ namespace DAL
 
         public bool CreateOrder(Order order)
         {
-            var db = new DBContext();
-
-            var newOrder = new Orders()
+            using (var db = new DBContext())
             {
-                User = db.Users.Find(order.userID),
-                UserID = order.userID,
-                Date = order.date,
-                Orderlines = new List<Orderlines>()
-            };
-
-            foreach (var orderLine in order.orderlines)
-            {
-                var newOrderLine = new Orderlines()
+                try
                 {
-                    ProductID = orderLine.productId,
-                    OrderID = newOrder.ID,
-                    Quantity = orderLine.quantity
-                };
-                newOrder.Orderlines.Add(newOrderLine);
-            }
+                    var newOrder = new Orders()
+                    {
+                        User = db.Users.Find(order.userID),
+                        UserID = order.userID,
+                        Date = order.date,
+                        Orderlines = new List<Orderlines>()
+                    };
 
+                    foreach (var orderLine in order.orderlines)
+                    {
+                        var newOrderLine = new Orderlines()
+                        {
+                            ProductID = orderLine.productId,
+                            OrderID = newOrder.ID,
+                            Quantity = orderLine.quantity
+                        };
+                        newOrder.Orderlines.Add(newOrderLine);
+                    }
+                    db.Orders.Add(newOrder);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    writeToLog(e);
 
-            try
-            {
-                db.Orders.Add(newOrder);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                writeToLog(errorMessage);
-
-                return false;
+                    return false;
+                }
             }
         }
+        
 
 
         public List<Order> GetOrders()
         {
-            //Returns all orders. (for statistics?)
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    var dbOrders = db.Orders.ToList();
+                    List<Order> output = new List<Order>();
+                    foreach (var order in dbOrders)
+                    {
+                        var oneOrder = new Order();
+                        oneOrder.id = order.ID;
 
-            // Write to log in catch
+                        output.Add(oneOrder);
+                    }
+                    return output;
+                }
+                catch (Exception e)
+                {
+                    writeToLog(e);
 
-            return null;
+                    return null;
+                }
+            }
         }
 
         public List<Order> GetOrdersForUser(int userId)
@@ -758,73 +846,197 @@ namespace DAL
                 }
                 catch (Exception e)
                 {
-                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                    writeToLog(errorMessage);
-
-                    var output = new List<Order>();
-                    var errorOrder = new Order();
-                    errorOrder.id = 1337;
-                    output.Add(errorOrder);
-                    return output;
+                    writeToLog(e);
+                    
+                    return null;
                 }
             }
         }
         public Order getOrder(int id)
         {
-            // Fill in
             using (var db = new DBContext())
             {
-
-                Order returnOrder = new Order();
-                Orders foundOrder = db.Orders.Find(id);
-                returnOrder.id = foundOrder.ID;
-                returnOrder.userID = foundOrder.UserID;
-                foreach (var item in foundOrder.Orderlines)
+                try
                 {
-                    Orderline newOrderLine = new Orderline();
-                    newOrderLine.id = item.ID;
-                    newOrderLine.orderID = item.OrderID;
-                    newOrderLine.productId = item.ProductID;
-                    newOrderLine.quantity = item.Quantity;
-                    returnOrder.orderlines.Add(newOrderLine);
+
+                    Order returnOrder = new Order();
+                    Orders foundOrder = db.Orders.Find(id);
+                    returnOrder.id = foundOrder.ID;
+                    returnOrder.userID = foundOrder.UserID;
+                    foreach (var item in foundOrder.Orderlines)
+                    {
+                        Orderline newOrderLine = new Orderline();
+                        newOrderLine.id = item.ID;
+                        newOrderLine.orderID = item.OrderID;
+                        newOrderLine.productId = item.ProductID;
+                        newOrderLine.quantity = item.Quantity;
+                        returnOrder.orderlines.Add(newOrderLine);
+                    }
+                    return returnOrder;
                 }
-                return returnOrder;
+                catch (Exception e)
+                {
+                    writeToLog(e);
+
+                    return null;
+                }
             }
         }
         public bool EditOrder(int id, Order input)
         {
-            /*using (var db = new DBContext())
+            using (var db = new DBContext())
             {
                 try
                 {
                     Orders changeOrder = db.Orders.Find(id);
                     changeOrder.UserID = input.userID;
+                    changeOrder.User = db.Users.Find(input.userID);
 
                     foreach (var item in input.orderlines)
                     {
-                        changeOrder.Orderlines.Find();
+                        foreach (var item2 in changeOrder.Orderlines)
+                        {
+                            if (item.id == item2.ID)
+                            {
+                                EditOrderline(item2.ID, item);
+                            }
+                        }
                     }
-
-
-
 
                     db.SaveChanges();
                     return true;
                 }
                 catch (Exception e)
                 {
-                    string errorMessage = e.Message.ToString() + e.StackTrace.ToString();
-                    writeToLog(errorMessage);
+                    writeToLog(e);
 
 
                     return false;
                 }
-            }*/
-            return false;
+            }
         }
         public bool DeleteOrder(int id)
         {
-            return false;
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    Orders delOrder = db.Orders.Find(id);
+
+                    foreach(var orderline in delOrder.Orderlines)
+                    {
+                        DeleteOrderline(orderline.ID);
+                    }
+                    db.Orders.Remove(delOrder);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    writeToLog(e);
+
+                    return false;
+                }
+            }
+        }
+
+
+        //----------------------------- Orderlines -----------------------------
+
+        public bool CreateOrderline(Orderline input)
+        {
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    var newOrderline = new Orderlines()
+                    {
+                        OrderID = input.orderID,
+                        ProductID = input.productId,
+                        Quantity = input.quantity,
+                        Order = db.Orders.Find(input.orderID),
+                        Product = db.Products.Find(input.productId)
+                    };
+
+
+                    db.Orderlines.Add(newOrderline);
+                    newOrderline.Order.Orderlines.Add(newOrderline); // is this neccessary? (AB)
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    writeToLog(e);
+
+                    return false;
+                }
+            }
+        }
+        public bool EditOrderline(int id, Orderline input)
+        {
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    Orderlines changeOrderline = db.Orderlines.Find(id);
+                    changeOrderline.Order = db.Orders.Find(input.orderID);
+                    changeOrderline.OrderID = input.orderID;
+                    changeOrderline.Product = db.Products.Find(input.productId);
+                    changeOrderline.ProductID = input.productId;
+                    changeOrderline.Quantity = input.quantity;
+
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    writeToLog(e);
+
+                    return false;
+                }
+            }
+        }
+
+        public bool DeleteOrderline(int id)
+        {
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    Orderlines delOrderline = db.Orderlines.Find(id);
+                    db.Orderlines.Remove(delOrderline);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    writeToLog(e);
+
+                    return false;
+                }
+            }
+        }
+        public Orderline GetOrderline(int id)
+        {
+            using (var db = new DBContext())
+            {
+                try
+                {
+                    Orderline returnOrderline = new Orderline();
+                    Orderlines foundOrderline = db.Orderlines.Find(id);
+                    returnOrderline.id = foundOrderline.ID;
+                    returnOrderline.orderID = foundOrderline.OrderID;
+                    returnOrderline.productId = foundOrderline.ProductID;
+                    returnOrderline.quantity = foundOrderline.Quantity;
+                    return returnOrderline;
+                }
+                catch (Exception e)
+                {
+                    writeToLog(e);
+
+                    return null;
+                }
+            }
         }
     }
 }

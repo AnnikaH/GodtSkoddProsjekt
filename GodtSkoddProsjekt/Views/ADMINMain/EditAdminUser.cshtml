@@ -8,7 +8,6 @@
     ViewBag.Title = "Admin Endre administrator";
 }
 <div class="col-sm-9">
-<!-- Autogenerert kode: -->
 
     @using (Html.BeginForm())
     {
@@ -35,16 +34,13 @@
                     @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">'
-                    @Html.ActionLink("Avbryt", "CancelAdminUser", "ADMINMain", null, new { @class = "Cancelbuttons" })
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.ActionLink("Avbryt", "CancelAdminUser", "ADMINMain", null, new { @class = "btn btn-danger Cancelbuttons" })
                     <input type="submit" value="Lagre" class="btn btn-default" />
                 </div>
             </div>
         </div>
     }
-    </div>
-    <!--<div>
-        Html.ActionLink("Back to List", "Index")
-    </div>-->
+</div>

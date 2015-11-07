@@ -10,6 +10,18 @@ namespace GodtSkoddProsjekt.Controllers
 {
     public class ADMINMainController : Controller
     {
+        private IBusinessLogic dbBLL;
+
+        public ADMINMainController()
+        {
+            dbBLL = new BusinessLogic();
+        }
+
+        public ADMINMainController(IBusinessLogic stub)
+        {
+            dbBLL = stub;
+        }
+
         //---------------------- TOR SIN KODE FRA TIMEN (Lagdeling): ------------------------//
         /*
         public ActionResult Liste()
@@ -93,8 +105,6 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult LogIn()
         {
-            // TODO: CHECK LOG IN (mer enn dette under?):
-
             if (Session["LoggedInAdmin"] != null && (bool)Session["LoggedInAdmin"]) // if logged in from before
                 return RedirectToAction("Index");
 
@@ -103,15 +113,37 @@ namespace GodtSkoddProsjekt.Controllers
             return View();
         }
 
+        // private method to check if admin is logged in or not
+        private bool LoggedIn()
+        {
+            if (Session["LoggedInAdmin"] == null)
+            {
+                // da definerer vi den og setter den til false
+                Session["LoggedInAdmin"] = false;
+                ViewBag.LoggedInAdmin = false; // oppdaterer denne også!
+            }
+            else
+            {
+                // vil så hente ut statusen til session'en og legge denne over i ViewBag'en:
+                ViewBag.LoggedInAdmin = (bool)Session["LoggedInAdmin"]; // Husk: Må castes!
+            }
+
+            bool loggedIn = (bool)Session["LoggedInAdmin"];
+            
+            if (loggedIn)
+                return true;
+            else
+                return false;
+        }
+
         public JsonResult CheckLogIn(String username, String password)
         {
-            // checking login
+            // checking login info:
 
             AdminUser adminUser = new AdminUser();
             adminUser.userName = username;
             adminUser.password = password;
 
-            var dbBLL = new BusinessLogic();
             var adminId = dbBLL.GetAdminIdInDB(adminUser);
 
             if (adminId != -1)
@@ -138,6 +170,7 @@ namespace GodtSkoddProsjekt.Controllers
         {
             Session["LoggedInAdmin"] = false;
             ViewBag.LoggedInAdmin = false;
+            Session["AdminId"] = null;
             return RedirectToAction("Index", "Home");
         }
 
@@ -147,38 +180,20 @@ namespace GodtSkoddProsjekt.Controllers
         {
             // Main page for administrators (you get here after logged in successfully)
 
-            // Checking login:
-            if (Session["LoggedInAdmin"] == null)
-            {
-                // da definerer vi den og setter den til false
-                Session["LoggedInAdmin"] = false;
-                ViewBag.LoggedInAdmin = false; // oppdaterer denne også!
-            }
-            else
-            {
-                // vil så hente ut statusen til session'en og legge denne over i ViewBag'en:
-                ViewBag.LoggedInAdmin = (bool)Session["LoggedInAdmin"]; // Husk: Må castes!
-            }
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             return View();
-
-            /*
-            var dbBLL = new BusinessLogic();
-            List<AdminUser> allAdminUsers = dbBLL.GetAdminUsers();
-
-            return View(allAdminUsers);
-            */
         }
 
         // --------------------------- AdminUser: -----------------------------------------
 
         public ActionResult AdminAdminUsers(int? id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             // Showing all AdminUsers (and buttons for deleting and updating them) + button to CreateAdminUser
-
-            var dbBLL = new BusinessLogic();
 
             List<AdminUser> adminUsers = new List<AdminUser>();
 
@@ -200,25 +215,41 @@ namespace GodtSkoddProsjekt.Controllers
             return View(adminUsers);
         }
 
-        // Called when searching for an AdminUser based on id:
+        /* Called when searching for an AdminUser based on id:
         // GET: ADMINMain/GetAdminUser/5
         public ActionResult GetAdminUser(int id)
         {
-            // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+            
             AdminUser adminUser = dbBLL.GetAdminUser(id);
 
             if (adminUser != null)
                 return RedirectToAction("AdminAdminUsers", new { id = id });
 
             return RedirectToAction("AdminAdminUsers");
+        }*/
+
+        // Called from JavaScript-function when searching for a AdminUser based on id:
+        // GET: ADMINMain/GetAdminUser/5
+        public JsonResult GetAdminUser(int id)
+        {
+            if (!LoggedIn())
+                return null;
+
+            AdminUser adminUser = dbBLL.GetAdminUser(id);
+
+            if (adminUser != null)
+                return Json(adminUser, JsonRequestBehavior.AllowGet);
+
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
         // GET: ADMINMain/CreateAdminUser
         public ActionResult CreateAdminUser()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             return View();
         }
@@ -228,7 +259,8 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateAdminUser(AdminUser adminUser)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             if (ModelState.IsValid)
             {
@@ -252,9 +284,9 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/UpdateAdminUser/5
         public ActionResult EditAdminUser(int id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
-            var dbBLL = new BusinessLogic();
             AdminUser adminUser = dbBLL.GetAdminUser(id);
             return View(adminUser);
         }
@@ -264,9 +296,8 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditAdminUser(int id, AdminUser adminUser)
         {
-            // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             bool updateOk = dbBLL.EditAdminUser(id, adminUser);
 
@@ -278,9 +309,9 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult DeleteAdminUser(int id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
-            var dbBLL = new BusinessLogic();
             bool deleteOk = dbBLL.DeleteAdminUser(id);
 
             //if (deleteOk)
@@ -290,7 +321,8 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult CancelAdminUser()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             return RedirectToAction("AdminAdminUsers");
         }
@@ -299,11 +331,10 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult AdminCustomers(int? id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             // Showing all Users (and buttons for deleting and updating them) + button to CreateUser
-
-            var dbBLL = new BusinessLogic();
 
             List<User> users = new List<User>();
 
@@ -325,25 +356,41 @@ namespace GodtSkoddProsjekt.Controllers
             return View(users);
         }
 
-        // Called when searching for a User based on id:
+        /* Called when searching for a User based on id:
         // GET: ADMINMain/GetUser/5
         public ActionResult GetUser(int id)
         {
-            // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+            
             User user = dbBLL.GetUser(id);
 
             if (user != null)
                 return RedirectToAction("AdminCustomers", new { id = id });
 
             return RedirectToAction("AdminCustomers");
+        }*/
+
+        // Called from JavaScript-function when searching for a User based on id:
+        // GET: ADMINMain/GetUser/5
+        public JsonResult GetUser(int id)
+        {
+            if (!LoggedIn())
+                return null;
+
+            User user = dbBLL.GetUser(id);
+
+            if (user != null)
+                return Json(user, JsonRequestBehavior.AllowGet);
+
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
         // GET: ADMINMain/CreateUser
         public ActionResult CreateUser()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             return View();
         }
@@ -353,11 +400,11 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateUser(User user)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             if (ModelState.IsValid)
             {
-                var dbBLL = new BusinessLogic();
                 bool insertOK = dbBLL.CreateUser(user);
 
                 if (insertOK)
@@ -370,9 +417,9 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/EditUser/5
         public ActionResult EditUser(int id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
-            var dbBLL = new BusinessLogic();
             User user = dbBLL.GetUser(id);
             return View(user);
         }
@@ -382,11 +429,11 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditUser(int id, User user)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             if (ModelState.IsValid)
             {
-                var dbBLL = new BusinessLogic();
                 bool changeOK = dbBLL.EditUser(id, user);
 
                 if (changeOK)
@@ -398,9 +445,9 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult DeleteUser(int id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
-            var dbBLL = new BusinessLogic();
             bool deleteOk = dbBLL.DeleteUser(id);
 
             //if (deleteOk)
@@ -410,7 +457,8 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult CancelUser()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             return RedirectToAction("AdminCustomers");
         }
@@ -419,11 +467,10 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult AdminProducts(int? id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             // Showing all Products (and buttons for deleting and updating them) + button to CreateProduct
-
-            var dbBLL = new BusinessLogic();
 
             List<Product> products = new List<Product>();
 
@@ -445,25 +492,41 @@ namespace GodtSkoddProsjekt.Controllers
             return View(products);
         }
 
-        // Called when searching for a Product based on id:
+        /* Called when searching for a Product based on id:
         // GET: ADMINMain/GetProduct/5
         public ActionResult GetProduct(int id)
         {
-            // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+            
             Product product = dbBLL.GetProduct(id);
 
             if (product != null)
                 return RedirectToAction("AdminProducts", new { id = id });
 
             return RedirectToAction("AdminProducts");
+        }*/
+
+        // Called from JavaScript-function when searching for a Product based on id:
+        // GET: ADMINMain/GetProduct/5
+        public JsonResult GetProduct(int id)
+        {
+            if (!LoggedIn())
+                return null;
+
+            Product product = dbBLL.GetProduct(id);
+
+            if (product != null)
+                return Json(product, JsonRequestBehavior.AllowGet);
+
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
         // GET: ADMINMain/CreateProduct
         public ActionResult CreateProduct()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             return View();
         }
@@ -473,11 +536,11 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateProduct(Product product)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             if (ModelState.IsValid)
             {
-                var dbBLL = new BusinessLogic();
                 bool insertOK = dbBLL.CreateProduct(product);
 
                 if (insertOK)
@@ -490,9 +553,9 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/EditProduct/5
         public ActionResult EditProduct(int id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
-            var dbBLL = new BusinessLogic();
             Product product = dbBLL.GetProduct(id);
             return View(product);
         }
@@ -502,11 +565,11 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditProduct(int id, Product product)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             if (ModelState.IsValid)
             {
-                var dbBLL = new BusinessLogic();
                 bool changeOK = dbBLL.EditProduct(id, product);
 
                 if (changeOK)
@@ -518,9 +581,9 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult DeleteProduct(int id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
-            var dbBLL = new BusinessLogic();
             bool deleteOk = dbBLL.DeleteProduct(id);
 
             //if (deleteOk)
@@ -530,7 +593,8 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult CancelProduct()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             return RedirectToAction("AdminProducts");
         }
@@ -539,11 +603,10 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult AdminOrders(int id)    // id is User ID and must be sent in
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             // Showing all Orders for specified User (id) (and buttons for deleting and updating them) + button to CreateOrder
-
-            var dbBLL = new BusinessLogic();
 
             /* Must store this userId in a session-variable so that can check if user has
             an order with the searched for orderId: */
@@ -568,13 +631,13 @@ namespace GodtSkoddProsjekt.Controllers
             return View(orders);
         }
 
-        // Called when searching for an Order based on id:
+        /* Called when searching for an Order based on id:
         // GET: ADMINMain/GetOrder/5
         public ActionResult GetOrder(int id)   // must check if this orderId belongs to the user
         {
-            // TODO: CHECK LOG IN
-
-            var dbBLL = new BusinessLogic();
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+            
             Order order = dbBLL.GetOrder(id);
 
             int userId = (int)Session["UserIdForOrders"];    // Gets stored in session-variable in AdminOrders
@@ -589,12 +652,38 @@ namespace GodtSkoddProsjekt.Controllers
             }
 
             return RedirectToAction("AdminOrders", new { id = userId });
+        }*/
+
+        // Called from JavaScript-function when searching for an Order based on id:
+        // GET: ADMINMain/GetOrder/5
+        public JsonResult GetOrder(int id)
+        {
+            if (!LoggedIn())
+                return null;
+
+            Order order = dbBLL.GetOrder(id);
+
+            int userId = (int)Session["UserIdForOrders"];    // Gets stored in session-variable in AdminOrders
+
+            if (order != null && userId == order.userID)
+            {
+                Session["Order"] = order;
+                return Json(order, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                Session["Order"] = null;
+            }
+
+            return Json("", JsonRequestBehavior.AllowGet);
+            //return RedirectToAction("AdminOrders", new { id = userId });
         }
 
         // GET: ADMINMain/CreateOrder
         public ActionResult CreateOrder()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             return View();
         }
@@ -604,11 +693,11 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateOrder(Order order)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             if (ModelState.IsValid)
             {
-                var dbBLL = new BusinessLogic();
                 bool insertOK = dbBLL.CreateOrder(order);
 
                 if (insertOK)
@@ -621,9 +710,9 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/EditOrder/5
         public ActionResult EditOrder(int id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
-            var dbBLL = new BusinessLogic();
             Order order = dbBLL.GetOrder(id);
             return View(order);
         }
@@ -633,11 +722,11 @@ namespace GodtSkoddProsjekt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditOrder(int id, Order order)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             if (ModelState.IsValid)
             {
-                var dbBLL = new BusinessLogic();
                 bool changeOK = dbBLL.EditOrder(id, order);
 
                 if (changeOK)
@@ -649,9 +738,9 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult DeleteOrder(int id)
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
-            var dbBLL = new BusinessLogic();
             bool deleteOk = dbBLL.DeleteOrder(id);
 
             //if (deleteOk)
@@ -663,7 +752,8 @@ namespace GodtSkoddProsjekt.Controllers
 
         public ActionResult CancelOrder()
         {
-            // TODO: CHECK LOG IN
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
 
             int userId = (int)Session["UserIdForOrders"];    // Gets stored in session-variable in AdminOrders
 

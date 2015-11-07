@@ -7,10 +7,124 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class RepositoryStub
+    public class RepositoryStub : DAL.InDBGodtSkodd
     {
 
-        
+
+        //------------------------------------------ Admin ---------------------------------
+
+        public List<AdminUser> GetAdminUsers()
+        {
+            var adminList = new List<AdminUser>();
+            var adminUser = new AdminUser()
+            {
+                id = 1,
+                userName = "Test",
+                password = "testing"
+            };
+
+            adminList.Add(adminUser);
+            adminList.Add(adminUser);
+            adminList.Add(adminUser);
+
+            return adminList;
+        }
+
+        public AdminUser GetAdminUser(int id)
+        {
+            if (id == 0)
+            {
+                var adminUser = new AdminUser();
+                adminUser.id = 0;
+                return adminUser;
+            }
+            else
+            {
+                var adminUser = new AdminUser()
+                {
+                    id = 1,
+                    userName = "Test",
+                    password = "Testing"
+
+                };
+                return adminUser;
+            }
+        }
+
+        public int GetAdminIdInDB(AdminUser adminUser)
+        {
+            if (adminUser.userName == "")
+            {
+                var aUser = new AdminUser();
+                aUser.id = 0;
+                return aUser.id;
+
+            }
+
+            else
+            {
+                var aUser = new AdminUser()
+                {
+                    id = 1,
+                    userName = "Test",
+                    password = "Testing"
+
+                };
+                return aUser.id;
+
+            }
+        }
+
+        public bool AdminUserInDb(AdminUser inputUser)
+        {
+            if (inputUser.userName == "")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool CreateAdminUser(AdminUser adminUser)
+        {
+            if(adminUser.userName == "")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool EditAdminUser(int id, AdminUser adminUser)
+        {
+            if(id == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool DeleteAdminUser(int id)
+        {
+            if(id == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        //------------------------------------------ Users ---------------------------------
+
         public bool CreateUser(User user)
         {
             if (user.firstName == "")
@@ -97,6 +211,41 @@ namespace DAL
             }
         }
 
+        public bool DeleteUser(int id)
+        {
+            if (id == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public List<User> GetUsers()
+        {
+            var userList = new List<User>();
+            var user = new User()
+            {
+                id = 1,
+                firstName = "Test",
+                lastName = "Testen",
+                address = "Testveien 1",
+                postalCode = "1234",
+                city = "Test",
+                userName = "Test",
+                password = "Testing"
+
+            };
+
+            userList.Add(user);
+            userList.Add(user);
+            userList.Add(user);
+
+            return userList;
+        }
+
         public User GetUser(int id)
         {
             if (id == 0)
@@ -121,6 +270,7 @@ namespace DAL
                 };
                 return user;
             }
+
         }
 
         //------------------------------------------ PRODUCTS ---------------------------------
@@ -356,6 +506,121 @@ namespace DAL
                 orderList.Add(order);
             }
             return orderList;
+        }
+
+        public Order getOrder(int id)
+        {
+            DateTime dt = new DateTime();
+            var orderLines = new List<Orderline>();
+            if (id == 0)
+            {
+                var order = new Order();
+                order.id = 0;
+                return order;
+            }
+            else
+            {
+                var order = new Order()
+                {
+                    id = 1,
+                    userID = 1,
+                    date = dt,
+                    orderlines = orderLines
+
+
+                };
+                return order;
+            }
+        }
+
+        public bool EditOrder(int id, Order input)
+        {
+            if (id == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool DeleteOrder(int id)
+        {
+            if (id == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool CreateOrderline(Orderline input)
+        {
+            if(input.id == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool EditOrderline(int id, Orderline input)
+        {
+            if (id == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool DeleteOrderline(int id)
+        {
+            if (id == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public Orderline GetOrderline(int id)
+        {
+            
+            
+            if (id == 0)
+            {
+                var orderLine = new Orderline();
+                orderLine.id = 0;
+                return orderLine;
+            }
+            else
+            {
+                var orderLine = new Orderline()
+                {
+                    id = 1,
+                    orderID = 1,
+                    productId = 1,
+                    quantity = 1
+                };
+                return orderLine;
+            }
+
+
+        }
+
+        public bool CreateDatabaseContent()
+        {
+            throw new NotImplementedException();
         }
     }
 }

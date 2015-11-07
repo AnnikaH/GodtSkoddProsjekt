@@ -8,6 +8,7 @@ namespace Model
 {
     public class AdminUser
     {
+        [Display(Name = "Id")]
         public int id { get; set; }
 
         [Display(Name = "Brukernavn")]
