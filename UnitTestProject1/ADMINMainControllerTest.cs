@@ -30,21 +30,9 @@ namespace UnitTestProject1
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
-            var actionResult = (ViewResult)controller.LogIn();
 
             // Assert
-            Assert.AreEqual(actionResult.ViewName, "")
-           }
-        [TestMethod]
-        public void Login_NotOk()
-        {
-            // Arrange
-            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-            
-            var actionResult = (RedirectToRouteResult)controller.LogIn();
 
-            // Assert
-            Assert.AreEqual(actionResult.RouteValues.Values.First(), "Index");
         }
 
         // Tester for å sjekke LoggedIn():
@@ -56,7 +44,7 @@ namespace UnitTestProject1
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
-            
+
             // Assert
 
         }
