@@ -873,6 +873,7 @@ namespace DAL
                     returnOrder.id = foundOrder.ID;
                     returnOrder.userID = foundOrder.UserID;
                     returnOrder.date = foundOrder.Date;
+                    returnOrder.orderlines = new List<Orderline>();
                     foreach (var item in foundOrder.Orderlines)
                     {
                         Orderline newOrderLine = new Orderline();
