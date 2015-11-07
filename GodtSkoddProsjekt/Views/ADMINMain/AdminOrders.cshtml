@@ -11,8 +11,6 @@
 <script type="text/javascript">
         // -------------------------------- Order and Orderline -------------------------
         function searchOrder(id) {
-            throw new DOMException();
-
             if (isNaN(id) || id == "") {
                 $('#orderErrorMessage').html("Id må være et tall!").addClass("text-danger");
                 return;
