@@ -126,15 +126,16 @@ namespace UnitTestProject1
         // Tester for å sjekke CreateAdminUser():
 
         [TestMethod]
-        public void CreateAdminUser_show_view()
+        public void CreateAdminUser()
         {
             // Arrange
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
+            var actionResult = (ViewResult)controller.CreateAdminUser();
 
             // Assert
-
+            Assert.AreEqual(actionResult.ViewName, "");
         }
 
         // Tester for å sjekke CreateAdminUser(AdminUser adminUser):
@@ -154,15 +155,16 @@ namespace UnitTestProject1
         // Tester for å sjekke EditAminUser(int id):
 
         [TestMethod]
-        public void EditAdminUser_show_view()
+        public void EditAdminUser()
         {
             // Arrange
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
+            var actionResult = (ViewResult)controller.EditAdminUser(1);
 
             // Assert
-
+            Assert.AreEqual(actionResult.ViewName, "");
         }
 
         // Tester for å sjekke EditAdminUser(int id, AdminUser adminUser):
@@ -172,10 +174,19 @@ namespace UnitTestProject1
         {
             // Arrange
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            var adminUser = new AdminUser()
+            {
+                id = 1,
+                userName = "Test",
+                password = "Testing1"
+            };
 
             // Act
+            var actionResult = (RedirectToRouteResult)controller.EditAdminUser(1, adminUser);
 
             // Assert
+            Assert.AreEqual(actionResult.RouteName, "");
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
 
         }
 
@@ -188,8 +199,11 @@ namespace UnitTestProject1
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
+            var actionResult = (ViewResult)controller.DeleteAdminUser(1);
+            var result = (AdminUser)actionResult.Model;
 
             // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
 
         }
 
@@ -232,8 +246,10 @@ namespace UnitTestProject1
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
+            var actionResult = (JsonResult)controller.GetUser(1);
 
             // Assert
+            //Assert.AreEqual(actionResult.)
 
         }
 
@@ -246,8 +262,10 @@ namespace UnitTestProject1
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
+            var actionResult = (ViewResult)controller.CreateUser();
 
             // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
 
         }
 
@@ -259,24 +277,40 @@ namespace UnitTestProject1
             // Arrange
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
+            var expectedUser = new User()
+            {
+                id = 1,
+                firstName = "Test",
+                lastName = "Testen",
+                address = "Testveien 1",
+                postalCode = "1234",
+                city = "Test",
+                userName = "Test",
+                password = "Testing1"
+            };
+
             // Act
+            var result = (RedirectToRouteResult)controller.CreateUser(expectedUser);
 
             // Assert
+            Assert.AreEqual(result.RouteName, "");
+            Assert.AreEqual(result.RouteValues.Values.First(), "LogIn");
 
         }
 
         // Tester for å sjekke EditUser(int id):
 
         [TestMethod]
-        public void EditUser_show_view()
+        public void EditUser()
         {
             // Arrange
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
+            var actionResult = (ViewResult)controller.EditUser(1);
 
             // Assert
-
+            Assert.AreEqual(actionResult.ViewName, "");
         }
 
         // Tester for å sjekke EditUser(int id, User user):
@@ -286,10 +320,24 @@ namespace UnitTestProject1
         {
             // Arrange
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            var user = new User()
+            {
+                id = 1,
+                firstName = "Test",
+                lastName = "Testen",
+                address = "Testveien 1",
+                postalCode = "1234",
+                city = "Test",
+                userName = "Test",
+                password = "Testing1"
+            };
 
             // Act
+            var actionResult = (RedirectToRouteResult)controller.EditUser(1, user);
 
             // Assert
+            Assert.AreEqual(actionResult.RouteName, "");
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
 
         }
 
@@ -302,9 +350,11 @@ namespace UnitTestProject1
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
+            var actionResult = (ViewResult)controller.DeleteUser(1);
+            var result = (User)actionResult.Model;
 
             // Assert
-
+            Assert.AreEqual(actionResult.ViewName, "");
         }
 
         // Tester for å sjekke CancelUser():

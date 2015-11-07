@@ -67,7 +67,7 @@ namespace DAL
                 {
                     id = 1,
                     userName = "Test",
-                    password = "Testing"
+                    password = "Testing1"
 
                 };
                 return aUser.id;
@@ -235,7 +235,7 @@ namespace DAL
                 postalCode = "1234",
                 city = "Test",
                 userName = "Test",
-                password = "Testing"
+                password = "Testing1"
 
             };
 
@@ -265,7 +265,7 @@ namespace DAL
                     postalCode= "1234",
                     city = "Test",
                     userName = "Test",
-                    password = "Testing"
+                    password = "Testing1"
                     
                 };
                 return user;
