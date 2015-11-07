@@ -13,9 +13,6 @@ som er en av de 5 prosjektene, under en mappe som heter Logs (denne vises ikke i
 men ligger der hvis man går til filutforskeren). Det blir opprettet en ny logg-fil for
 hver dag det oppstår en feil.
 
-Liten notis: I UnitTest-prosjektet heter test-filen UserControllerTest.cs, men denne tester
-ADMINMainControlleren, ikke UserControlleren.
-
 // ---------------------------------------------------------------------------------
 
 Spesielle notiser innlevering mappe 1:
