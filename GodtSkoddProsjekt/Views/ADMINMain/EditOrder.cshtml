@@ -16,17 +16,17 @@
 <!-- Edit Orderline skal gjøres i her.
     Mulig å ta delete på en Orderline også? I så fall gjøre dette her (må nesten være mulig å slette en ordrelinje uten
     å slette hele ordren?) -->
-
+<div class="col-sm-9">
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        
+
         <div class="form-horizontal">
-            <h4>Endre ordre</h4>
+            <h2 class="header">Endre ordre</h2>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.id)
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.userID, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -34,7 +34,7 @@
                     @Html.ValidationMessageFor(model => model.userID, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -42,7 +42,7 @@
                     @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <!-- Og alle ordrelinjene også her ... -->
 
             <div class="form-group">
@@ -52,4 +52,6 @@
                 </div>
             </div>
         </div>
+
     }
+</div>

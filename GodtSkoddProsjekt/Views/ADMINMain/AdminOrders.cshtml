@@ -1,4 +1,4 @@
-﻿@model List<Model.Order>
+﻿@model IEnumerable<Model.Order>
 
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -27,15 +27,86 @@
 
 <div class="col-sm-9">
 
-    <h2 class="header">Ordre</h2>
+    <h2 class="header">Ordrehistorikk</h2>
 
     <p>
-        <div class="Searchbar"><input type="text" id="Searchinn" /></div>
+        <div class="Searchbar">
+            Id: <input type="text" id="searchId" />
+            <input type="button" onclick="showAllOrders()" value="Vis alle" class="btn btn-default" />
+            <input type="button" style="margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" onclick="searchOrder($('#searchId').val())" value="Søk" class="btn btn-default" />
+            <div id="userErrorMessage"></div>
+        </div>
         <div class="Link_addnew">
             <span class="glyphicon glyphicon-arrow-down"></span><a href="#" class="link_toggle">Vis mer informasjon</a> | <span class="glyphicon glyphicon-plus"></span>  @Html.ActionLink("Registrer ny ordre", "CreateOrder", "ADMINMain", new { id = "" }, new { @class = "" })
         </div>
     </p>
 
     <!-- Vise ordre (til en bestemt bruker eller alle?) (får inn fra model): -->
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.id)</th>
+            <th>@Html.DisplayNameFor(model => model.userID)</th>
+            <th>@Html.DisplayNameFor(model => model.date)</th>
+           
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr class="productLine">
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Endre", "EditOrder", "ADMINMain", new { id = item.id }, new { @class = "" }) |
+                    <a onclick="toggleRow(@item.id)">Se detaljer</a> |
+                    @Html.ActionLink("Slett", "DeleteOrder", "ADMINMain", new { id = item.id }, new { @class = "" })
+                </td>
+            </tr>
+            <tr id="@item.id" class="MoreInfo">
+                <td colspan="7">
+                    <table class="MoreInfoTable">
+                        @for (int j = 0; j < item.orderlines.Count; j++)
+                        {
+                            <tr>
+                                <td class="table_header">ID:</td>
+                                <td>@item.orderlines[j].id</td>
+                            </tr>
+                            <tr>
+                                <td class="table_header">Order ID:</td>
+                                <td>@item.orderlines[j].orderID</td>
+                            </tr>
+                            <tr>
+                                <td class="table_header">Product id:</td>
+                                <td>
+                                    @item.orderlines[j].productId
+                                </td>
+                            </tr>
+                            <tr>
+                                 <td class="table_header">
+                                    Antall:
+                                </td>
+
+                                <td>
+                                    @item.orderlines[j].quantity
+                                </td>
+                            </tr>
+
+                        }
+                    </table>
+                </td>
+
+            </tr>
+        }
+
+
+    </table>
 
 </div><!-- /. col-sm-9 -->

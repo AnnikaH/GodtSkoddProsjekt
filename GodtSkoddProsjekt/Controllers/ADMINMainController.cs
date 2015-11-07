@@ -192,7 +192,7 @@ namespace GodtSkoddProsjekt.Controllers
         {
             if (!LoggedIn())
                 return RedirectToAction("LogIn");
-
+            
             // Showing all AdminUsers (and buttons for deleting and updating them) + button to CreateAdminUser
 
             List<AdminUser> adminUsers = new List<AdminUser>();
@@ -250,7 +250,7 @@ namespace GodtSkoddProsjekt.Controllers
         {
             if (!LoggedIn())
                 return RedirectToAction("LogIn");
-
+            
             return View();
         }
 
@@ -264,15 +264,14 @@ namespace GodtSkoddProsjekt.Controllers
 
             if (ModelState.IsValid)
             {
-                var dal = new BusinessLogic();
-                bool insertOK = dal.CreateAdminUser(adminUser);
+                bool insertOK = dbBLL.CreateAdminUser(adminUser);
 
                 if (insertOK)
                 {
                     Session["LoggedInAdmin"] = true;
                     ViewBag.LoggedInAdmin = true;
                     
-                    Session["AdminId"] = dal.GetAdminIdInDB(adminUser);
+                    Session["AdminId"] = dbBLL.GetAdminIdInDB(adminUser);
 
                     return RedirectToAction("AdminAdminUsers");
                 }
@@ -614,14 +613,14 @@ namespace GodtSkoddProsjekt.Controllers
 
             List<Order> orders = new List<Order>();
 
-            Order order = (Order)Session["Order"];
+            Order order = (Order)Session["Order"];  // hvis søker på en bestemt ordre (ut fra id)
 
             if (order != null)
             {
                 orders.Add(order);
                 /* If Session["Order"] contains an Order, then only show this order
                 (admin has searched/called GetOrder(orderId))*/
-                Session["Order"] = null;    // reset
+                Session["Order"] = null;    // reset order
             }
             else
             {
