@@ -256,7 +256,7 @@ namespace UnitTestProject1
         // Tester for å sjekke CreateUser():
 
         [TestMethod]
-        public void CreateUser_show_view()
+        public void CreateUser()
         {
             // Arrange
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
@@ -267,6 +267,14 @@ namespace UnitTestProject1
             // Assert
             Assert.AreEqual(actionResult.ViewName, "");
 
+        }
+
+
+        [TestMethod]
+        public void CreateUser_LogIn()
+        {
+            // Arrange
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
         }
 
         // Tester for å sjekke CreateUser(User user):
@@ -296,9 +304,11 @@ namespace UnitTestProject1
 
             // Assert
             Assert.AreEqual(result.RouteName, "");
-            Assert.AreEqual(result.RouteValues.Values.First(), "LogIn");
+            Assert.AreEqual(result.RouteValues.Values.First(), "AdminCustomers");
 
         }
+
+
 
         // Tester for å sjekke EditUser(int id):
 
