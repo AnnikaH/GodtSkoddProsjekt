@@ -1024,7 +1024,7 @@ namespace DAL
 
 
                     db.Orderlines.Add(newOrderline);
-                    newOrderline.Order.Orderlines.Add(newOrderline); // is this neccessary? (AB)
+                    //newOrderline.Order.Orderlines.Add(newOrderline); // is this neccessary? (AB) !! får feilmelding på denne!
                     db.SaveChanges();
                     return true;
                 }
