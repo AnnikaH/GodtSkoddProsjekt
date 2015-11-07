@@ -43,7 +43,10 @@
                 </div>
             </div>
             @foreach (var orderline in Model.orderlines)
-            {
+            {   
+                <div align="center">
+                    <h4>Order @Html.DisplayFor(modelitem => orderline.id)</h4>
+                </div>
                 <div class="form-group">
                     @Html.LabelFor(model => orderline.productId, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
