@@ -8,16 +8,53 @@
     ViewBag.Title = "Admin Ordre";
 }
 
+<script type="text/javascript">
+        // -------------------------------- Order and Orderline -------------------------
+        function searchOrder(id) {
+            throw new DOMException();
+
+            if (isNaN(id) || id == "") {
+                $('#orderErrorMessage').html("Id må være et tall!").addClass("text-danger");
+                return;
+            }
+
+            $('#orderErrorMessage').html("").removeClass("text-danger");
+
+            //var userId = (int) Session["UserIdForOrders"];
+            var userId = @ViewBag.UserIdForOrders;
+
+            $.getJSON("/ADMINMain/GetOrder", { id: id }, function (orderData) {
+            // only enters here if success
+
+            // refresh the page:
+
+            if (orderData == "") {    // if didn't find any order with this id
+            window.location = "/ADMINMain/AdminOrders/" + userId;
+            //$('#orderErrorMessage').html("Fant ikke noen ordre med id " + id).addClass("text-danger");
+            }
+            else {  // found an order with this id
+            window.location = "/ADMINMain/AdminOrders/" + userId + "/" + id;
+            }
+            });
+            }
+
+            function showAllOrders() {
+            var userId = (int) @Session["UserIdForOrders"];
+
+            window.location = "/ADMINMain/AdminOrders/" + userId;
+            }
+</script>
+
 <div class="col-sm-9">
 
     <h2 class="header">Ordre</h2>
 
     <p>
         <div class="Searchbar">
-            Id: <input type="text" id="searchId" />
+            Id: <input type="text" id="searchIdOrder" />
             <input type="button" onclick="showAllOrders()" value="Vis alle" class="btn btn-default" />
-            <input type="button" style="margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" onclick="searchOrder($('#searchId').val())" value="Søk" class="btn btn-default" />
-            <div id="userErrorMessage"></div>
+            <input type="button" style="margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" onclick="searchOrder($('#searchIdOrder').val())" value="Søk" class="btn btn-default" />
+            <div id="orderErrorMessage"></div>
         </div>
         <div class="Link_addnew">
             <span class="glyphicon glyphicon-arrow-down"></span><a class="link_toggle">Vis mer informasjon</a> |
