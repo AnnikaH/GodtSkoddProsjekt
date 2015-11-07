@@ -388,10 +388,10 @@ namespace GodtSkoddProsjekt.Controllers
         // GET: ADMINMain/CreateUser
         public ActionResult CreateUser()
         {
-            if (!LoggedIn())
-                return RedirectToAction("LogIn");
+            /*if (!LoggedIn())
+                return RedirectToAction("LogIn");*/
 
-            return View();
+            return checkLoggedIn(View());
         }
 
         // POST: ADMINMain/CreateUser
