@@ -21,86 +21,7 @@ namespace GodtSkoddProsjekt.Controllers
         {
             dbBLL = stub;
         }
-
-        //---------------------- TOR SIN KODE FRA TIMEN (Lagdeling): ------------------------//
-        /*
-        public ActionResult Liste()
-        {
-            var kundeDb = new KundeLogikk();
-            List<Kunde> alleKunder = kundeDb.hentAlle();
-            return View(alleKunder);
-        }
-
-        public ActionResult Detaljer(int id)
-        {
-            var kundeDb = new KundeLogikk();
-            Kunde enKunde = kundeDb.hentEnKunde(id);
-            return View(enKunde);
-        }
-
-        public ActionResult Registrer()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Registrer(Kunde innKunde)
-        {
-            if (ModelState.IsValid)
-            {
-                var kundeDb = new KundeLogikk();
-                bool insertOK = kundeDb.settInn(innKunde);
-                if (insertOK)
-                {
-                    return RedirectToAction("Liste");
-                }
-            }
-            return View();
-        }
-
-        public ActionResult Endre(int id)
-        {
-            var kundeDb = new KundeLogikk();
-            Kunde enKunde = kundeDb.hentEnKunde(id);
-            return View(enKunde);
-        }
-
-        [HttpPost]
-        public ActionResult Endre(int id, Kunde endreKunde)
-        {
-
-            if (ModelState.IsValid)
-            {
-                var kundeDb = new KundeLogikk();
-                bool endringOK = kundeDb.endreKunde(id, endreKunde);
-                if (endringOK)
-                {
-                    return RedirectToAction("Liste");
-                }
-            }
-            return View();
-        }
-
-        public ActionResult Slett(int id)
-        {
-            var kundeDb = new KundeLogikk();
-            Kunde enKunde = kundeDb.hentEnKunde(id);
-            return View(enKunde);
-        }
-
-        [HttpPost]
-        public ActionResult Slett(int id, Kunde slettKunde)
-        {
-            var kundeDb = new KundeLogikk();
-            bool slettOK = kundeDb.slettKunde(id);
-            if(slettOK)
-            {
-                return RedirectToAction("Liste");
-            }
-            return View();
-        }
-        */
-
+        
         // --------------------------- Log in/out ------------------------------
 
         public ActionResult LogIn()
@@ -214,22 +135,7 @@ namespace GodtSkoddProsjekt.Controllers
             
             return View(adminUsers);
         }
-
-        /* Called when searching for an AdminUser based on id:
-        // GET: ADMINMain/GetAdminUser/5
-        public ActionResult GetAdminUser(int id)
-        {
-            if (!LoggedIn())
-                return RedirectToAction("LogIn");
-            
-            AdminUser adminUser = dbBLL.GetAdminUser(id);
-
-            if (adminUser != null)
-                return RedirectToAction("AdminAdminUsers", new { id = id });
-
-            return RedirectToAction("AdminAdminUsers");
-        }*/
-
+        
         // Called from JavaScript-function when searching for a AdminUser based on id:
         // GET: ADMINMain/GetAdminUser/5
         public JsonResult GetAdminUser(int id)
@@ -354,22 +260,7 @@ namespace GodtSkoddProsjekt.Controllers
 
             return View(users);
         }
-
-        /* Called when searching for a User based on id:
-        // GET: ADMINMain/GetUser/5
-        public ActionResult GetUser(int id)
-        {
-            if (!LoggedIn())
-                return RedirectToAction("LogIn");
-            
-            User user = dbBLL.GetUser(id);
-
-            if (user != null)
-                return RedirectToAction("AdminCustomers", new { id = id });
-
-            return RedirectToAction("AdminCustomers");
-        }*/
-
+        
         // Called from JavaScript-function when searching for a User based on id:
         // GET: ADMINMain/GetUser/5
         public JsonResult GetUser(int id)
@@ -490,22 +381,7 @@ namespace GodtSkoddProsjekt.Controllers
 
             return View(products);
         }
-
-        /* Called when searching for a Product based on id:
-        // GET: ADMINMain/GetProduct/5
-        public ActionResult GetProduct(int id)
-        {
-            if (!LoggedIn())
-                return RedirectToAction("LogIn");
-            
-            Product product = dbBLL.GetProduct(id);
-
-            if (product != null)
-                return RedirectToAction("AdminProducts", new { id = id });
-
-            return RedirectToAction("AdminProducts");
-        }*/
-
+        
         // Called from JavaScript-function when searching for a Product based on id:
         // GET: ADMINMain/GetProduct/5
         public JsonResult GetProduct(int id)
@@ -631,29 +507,6 @@ namespace GodtSkoddProsjekt.Controllers
             return View(orders);
         }
 
-        /* Called when searching for an Order based on id:
-        // GET: ADMINMain/GetOrder/5
-        public ActionResult GetOrder(int id)   // must check if this orderId belongs to the user
-        {
-            if (!LoggedIn())
-                return RedirectToAction("LogIn");
-            
-            Order order = dbBLL.GetOrder(id);
-
-            int userId = (int)Session["UserIdForOrders"];    // Gets stored in session-variable in AdminOrders
-
-            if (order != null && userId == order.userID)
-            {
-                Session["Order"] = order;
-            }
-            else
-            {
-                Session["Order"] = null;
-            }
-
-            return RedirectToAction("AdminOrders", new { id = userId });
-        }*/
-
         // Called from JavaScript-function when searching for an Order based on id:
         // GET: ADMINMain/GetOrder/5
         public JsonResult GetOrder(int id)
@@ -676,7 +529,6 @@ namespace GodtSkoddProsjekt.Controllers
             }
 
             return Json("", JsonRequestBehavior.AllowGet);
-            //return RedirectToAction("AdminOrders", new { id = userId });
         }
         
         // GET: ADMINMain/CreateOrder/5
@@ -752,35 +604,7 @@ namespace GodtSkoddProsjekt.Controllers
 
             return RedirectToAction("AdminOrders", new { id = userId });
         }
-
-        /* GET: ADMINMain/CreateOrder
-        public ActionResult CreateOrder()
-        {
-            if (!LoggedIn())
-                return RedirectToAction("LogIn");
-
-            return View();
-        }*/
         
-        /* POST: ADMINMain/CreateOrder
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateOrder(Order order)
-        {
-            if (!LoggedIn())
-                return RedirectToAction("LogIn");
-
-            if (ModelState.IsValid)
-            {
-                bool insertOK = dbBLL.CreateOrder(order);
-
-                if (insertOK)
-                    return RedirectToAction("AdminOrders", new { id = order.userID });
-            }
-
-            return View();
-        }*/
-
         // GET: ADMINMain/EditOrder/5
         public ActionResult EditOrder(int id)
         {
@@ -837,83 +661,5 @@ namespace GodtSkoddProsjekt.Controllers
 
             return RedirectToAction("AdminOrders", new { id = userId });
         }
-
-        // Legge inn Create, Edit, Delete for Orderline også?
-        // AJAX-kall til DeleteOrderline(int id) i så fall. Får inn Orderline-id
     }
-
-    /* --------------------------- AUTOGENERERT KODE: ----------------------------------
-
-    // GET: ADMINMain/Details/5
-    public ActionResult Details(int id)
-    {
-        return View();
-    }
-
-        // GET: ADMINMain/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ADMINMain/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ADMINMain/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ADMINMain/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ADMINMain/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ADMINMain/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-    }*/
 }

@@ -18,7 +18,6 @@
 
         $('#orderErrorMessage').html("").removeClass("text-danger");
 
-        //var userId = (int) Session["UserIdForOrders"];
         var userId = @ViewBag.UserIdForOrders;
 
         $.getJSON("/ADMINMain/GetOrder", { id: id }, function (orderData) {
@@ -29,16 +28,16 @@
             if (orderData == "") {    // if didn't find any order with this id
                 window.location = "/ADMINMain/AdminOrders/" + userId;
             
-            //$('#orderErrorMessage').html("Fant ikke noen ordre med id " + id).addClass("text-danger");
+                //$('#orderErrorMessage').html("Fant ikke noen ordre med id " + id).addClass("text-danger");
             }
             else {  // found an order with this id
-                window.location = "/ADMINMain/AdminOrders/" + userId + "/" + id;
+                window.location = "/ADMINMain/AdminOrders/" + userId;   // Session-variable Order has been set in GetOrder
             }
         });
     }
     
     function showAllOrders() {
-        var userId = (int) @Session["UserIdForOrders"];
+        var userId = @ViewBag.UserIdForOrders;
 
         window.location = "/ADMINMain/AdminOrders/" + userId;
     }
@@ -51,8 +50,8 @@
     <p>
         <div class="Searchbar">
             Id: <input type="text" id="searchIdOrder" />
-            <input type="button" onclick="showAllOrders()" value="Vis alle" class="btn btn-default" />
-            <input type="button" style="margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" onclick="searchOrder($('#searchIdOrder').val())" value="Søk" class="btn btn-default" />
+            <input type="button" onclick="JavaScript:showAllOrders()" value="Vis alle" class="btn btn-default" />
+            <input type="button" style="margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" onclick="JavaScript:searchOrder($('#searchIdOrder').val())" value="Søk" class="btn btn-default" />
             <div id="orderErrorMessage"></div>
         </div>
         <div class="Link_addnew">
