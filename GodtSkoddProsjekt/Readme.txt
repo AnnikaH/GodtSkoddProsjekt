@@ -1,6 +1,7 @@
 ﻿Spesielle notiser innlevering mappe 2:
 
-Start-url: /Home/Index
+Start-url: /Home/Index (her opprettes default-administrator hvis denne ikke finnes, samt default-
+produkter hvis disse ikke finnes)
 Herfra kan man gå til Admin-siden ved å klikke på "Admin" øverst til høyre i navbaren.
 Her må man logge inn med brukernavn annika og passord annikahammervoll (hoved-administrator).
 Man kan bare opprette nye administratorer når man er logget inn som en administrator.
@@ -12,6 +13,10 @@ Det skrives til en logg-fil i DAL.DBGodtSkodd, og denne logg-filen ligger under 
 som er en av de 5 prosjektene, under en mappe som heter Logs (denne vises ikke i prosjekt-strukturen,
 men ligger der hvis man går til filutforskeren). Det blir opprettet en ny logg-fil for
 hver dag det oppstår en feil.
+
+Default administrator-bruker:
+	Brukernavn: Admin
+	Passord: 12345678
 
 // ---------------------------------------------------------------------------------
 
