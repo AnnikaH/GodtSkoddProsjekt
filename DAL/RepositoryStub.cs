@@ -56,7 +56,7 @@ namespace DAL
             if (adminUser.userName == "")
             {
                 var aUser = new AdminUser();
-                aUser.id = 0;
+                aUser.id = -1;
                 return aUser.id;
 
             }

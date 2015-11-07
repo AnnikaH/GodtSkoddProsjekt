@@ -7,7 +7,8 @@ using GodtSkoddProsjekt.Controllers;
 using Model;
 using BLL;
 using DAL;
-using MvcContrib.TestHelper;
+using MvcContrib.TestHelper;
+
 
 namespace UnitTestProject1
 {
