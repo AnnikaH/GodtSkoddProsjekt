@@ -74,6 +74,12 @@ namespace DAL
                     newOrderLine.productId = 1;
                     newOrderLine.quantity = 9001;
                     CreateOrderline(newOrderLine);
+
+                    Orderline newOrderLine2 = new Orderline();
+                    newOrderLine.orderID = id2;
+                    newOrderLine.productId = 2;
+                    newOrderLine.quantity = 9002;
+                    CreateOrderline(newOrderLine2);
                 }
               
                 return true;
