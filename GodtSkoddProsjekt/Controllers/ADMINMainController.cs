@@ -724,21 +724,32 @@ namespace GodtSkoddProsjekt.Controllers
                 Session["Order"] = null;
 
                 // validering på produktID - om et produkt med denne id'en finnes:
+                var product = dbBLL.GetProduct(orderline.productId);
 
-                //
-                //
-                //
-                //
+                if(product != null)
+                {
+                    bool insertOK = dbBLL.CreateOrderline(orderline);
 
-                bool insertOK = dbBLL.CreateOrderline(orderline);
+                    var userId = (int)Session["UserIdForOrders"];
 
-                var userId = (int)Session["UserIdForOrders"];
-
-                if (insertOK)
-                    return RedirectToAction("AdminOrders", new { id = userId });
+                    if (insertOK)
+                        return RedirectToAction("AdminOrders", new { id = userId });
+                }
             }
 
             return View();
+        }
+
+        public ActionResult DeleteOrderline(int id)
+        {
+            if (!LoggedIn())
+                return RedirectToAction("LogIn");
+
+            dbBLL.DeleteOrderline(id);
+
+            var userId = (int)Session["UserIdForOrders"];
+
+            return RedirectToAction("AdminOrders", new { id = userId });
         }
 
         /* GET: ADMINMain/CreateOrder

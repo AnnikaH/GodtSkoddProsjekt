@@ -183,7 +183,13 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        @Html.ActionLink("Admin", "Index", "ADMINMain", new { id = "" }, new { @class = "" })
+                        @Html.ActionLink("Kunder og ordre", "AdminCustomers", "ADMINMain", new { id = "" }, new { @class = "" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Administratorer", "AdminAdminUsers", "ADMINMain", new { id = "" }, new { @class = "" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Produkter", "AdminProducts", "ADMINMain", new { id = "" }, new { @class = "" })
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

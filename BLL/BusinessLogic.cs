@@ -153,6 +153,11 @@ namespace BLL
             return dal.CreateOrderline(orderline);
         }
 
+        public bool DeleteOrderline(int id)
+        {
+            return dal.DeleteOrderline(id);
+        }
+
         public bool EditOrder(int id, Order order)
         {
             return dal.EditOrder(id, order);

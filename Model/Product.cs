@@ -13,7 +13,7 @@ namespace Model
 
         [Display(Name = "Navn")]
         [Required(ErrorMessage = "Navn må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå\s]{2,30}", ErrorMessage = "Navn kan bare inneholde bokstaver fra A-Å")]
+        [RegularExpression(@"[A-ZÆØÅa-zæøå\s]{1,30}", ErrorMessage = "Navn kan bare inneholde bokstaver fra A-Å")]
         public String name { get; set; }
 
         [Display(Name = "Pris")]
@@ -28,17 +28,17 @@ namespace Model
 
         [Display(Name = "Farge")]
         [Required(ErrorMessage = "Farge må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå\s]{2,30}", ErrorMessage = "Farge kan bare inneholde bokstaver fra A-Å")]
+        [RegularExpression(@"[A-ZÆØÅa-zæøå\s]{1,30}", ErrorMessage = "Farge kan bare inneholde bokstaver fra A-Å")]
         public String color { get; set; }
 
         [Display(Name = "Materiale")]
         [Required(ErrorMessage = "Materiale må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå\s]{2,30}", ErrorMessage = "Materiale kan bare inneholde bokstaver fra A-Å")]
+        [RegularExpression(@"[A-ZÆØÅa-zæøå\s]{1,30}", ErrorMessage = "Materiale kan bare inneholde bokstaver fra A-Å")]
         public String material { get; set; }
 
         [Display(Name = "Merke")]
         [Required(ErrorMessage = "Merke må oppgis")]
-        [RegularExpression(@"[A-ZÆØÅa-zæøå\s]{2,30}", ErrorMessage = "Merke kan bare inneholde bokstaver fra A-Å")]
+        [RegularExpression(@"[A-ZÆØÅa-zæøå\s]{1,30}", ErrorMessage = "Merke kan bare inneholde bokstaver fra A-Å")]
         public String brand { get; set; }
 
         [Display(Name = "Bilde-url")]
