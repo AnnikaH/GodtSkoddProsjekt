@@ -16,9 +16,13 @@ namespace DAL
         public bool CreateDatabaseContent()
         {
             AdminUser Default = new AdminUser();
-            Default.userName = "Admin";
-            Default.password = "1234";
-            CreateAdminUser(Default);
+            List<AdminUser> list = GetAdminUsers();
+            if (list.Find(a => a.userName == "Admin") == null)
+            {
+                Default.userName = "Admin";
+                Default.password = "12345678";
+                CreateAdminUser(Default);
+            }
             return createProducts();
         }
 
