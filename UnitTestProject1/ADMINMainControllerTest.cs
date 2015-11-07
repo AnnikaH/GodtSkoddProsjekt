@@ -44,7 +44,7 @@ namespace UnitTestProject1
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
-            int test = 0;
+
             // Assert
 
         }
