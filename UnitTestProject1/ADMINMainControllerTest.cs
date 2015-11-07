@@ -474,7 +474,7 @@ namespace UnitTestProject1
 
             // Act
             var actionResult = (ViewResult)controller.DeleteProduct(1);
-            var result = (Product)actionResult.Model;
+            var result = (Product)actionResult.Model; 
 
             // Assert
             Assert.AreEqual(actionResult.ViewName, "");
