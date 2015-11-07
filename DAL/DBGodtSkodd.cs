@@ -872,6 +872,7 @@ namespace DAL
                     Orders foundOrder = db.Orders.Find(id);
                     returnOrder.id = foundOrder.ID;
                     returnOrder.userID = foundOrder.UserID;
+                    returnOrder.date = foundOrder.Date;
                     foreach (var item in foundOrder.Orderlines)
                     {
                         Orderline newOrderLine = new Orderline();
