@@ -7,8 +7,6 @@ using GodtSkoddProsjekt.Controllers;
 using Model;
 using BLL;
 using DAL;
-using MvcContrib.TestHelper;
-
 
 namespace UnitTestProject1
 {
@@ -28,26 +26,20 @@ namespace UnitTestProject1
         [TestMethod]
         public void LogIn()
         {
-            var SessionMock = new TestControllerBuilder();
-            var controller = new ADMINMainController();
-            SessionMock.InitializeController(controller);
-            
-            controller.Session["LoggedInAdmin"] = false;
-            // Act
-            var result = (ViewResult)controller.LogIn();
-            // Assert
-            Assert.AreEqual(result.ViewName, "");
-        }
+            // Arrange
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
-    [TestMethod]
+            // Act
+            var actionResult = (ViewResult)controller.LogIn();
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
+           }
+        [TestMethod]
         public void Login_NotOk()
         {
-            var SessionMock = new TestControllerBuilder();
-            var controller = new ADMINMainController();
-            SessionMock.InitializeController(controller);
-
-            controller.Session["LoggedInAdmin"] = true;
-            // Act
+            // Arrange
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
             
             var actionResult = (RedirectToRouteResult)controller.LogIn();
 
@@ -58,90 +50,29 @@ namespace UnitTestProject1
         // Tester for å sjekke LoggedIn():
 
         [TestMethod]
-        public void LoggedIn_null()
+        public void LoggedIn()
         {
-            var SessionMock = new TestControllerBuilder();
-            var controller = new ADMINMainController();
-            SessionMock.InitializeController(controller);
+            // Arrange
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
-            controller.Session["LoggedInAdmin"] = null;
             // Act
 
-            var actionResult = (bool)controller.LoggedIn();
-
             // Assert
-            Assert.IsFalse(actionResult);
-
-        }
-
-        [TestMethod]
-        public void LoggedIn_True()
-        {
-            var SessionMock = new TestControllerBuilder();
-            var controller = new ADMINMainController();
-            SessionMock.InitializeController(controller);
-
-            controller.Session["LoggedInAdmin"] = true;
-            // Act
-
-            var actionResult = (bool)controller.LoggedIn();
-
-            // Assert
-            Assert.IsTrue(actionResult);
-
-        }
-
-        [TestMethod]
-        public void LoggedIn_False()
-        {
-            var SessionMock = new TestControllerBuilder();
-            var controller = new ADMINMainController();
-            SessionMock.InitializeController(controller);
-
-            controller.Session["LoggedInAdmin"] = false;
-            // Act
-
-            var actionResult = (bool)controller.LoggedIn();
-
-            // Assert
-            Assert.IsFalse(actionResult);
 
         }
 
         // Tester for å sjekke CheckLogIn(String username, String password):
 
         [TestMethod]
-        public void CheckLogIn_null_existing_user()
+        public void CheckLogIn()
         {
             // Arrange
-            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-            SessionMock.InitializeController(controller);
 
-            var userName = "Test";
-            var password = "Testing1";
             // Act
 
-            var actionResult = (JsonResult)controller.CheckLogIn(userName, password);
             // Assert
-            Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
-        }
 
-        [TestMethod]
-        public void CheckLogIn_Json()
-        {
-            // Arrange
-            var SessionMock = new TestControllerBuilder();
-            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-            SessionMock.InitializeController(controller);
-
-            var userName = "";
-            var password = "";
-            // Act
-
-            var actionResult = (JsonResult)controller.CheckLogIn(userName, password);
-            // Assert
-            Assert.IsNull(actionResult);
         }
 
         // Tester for å sjekke LogOut():
