@@ -285,6 +285,8 @@ namespace UnitTestProject1
                 address = "Testveien 1",
                 postalCode = "1234",
                 city = "Test",
+                email = "test@test.test",
+                phoneNumber = "12345678",
                 userName = "Test",
                 password = "Testing1"
             };
@@ -328,6 +330,8 @@ namespace UnitTestProject1
                 address = "Testveien 1",
                 postalCode = "1234",
                 city = "Test",
+                email = "test@test.test",
+                phoneNumber = "12345678",
                 userName = "Test",
                 password = "Testing1"
             };
@@ -404,15 +408,16 @@ namespace UnitTestProject1
         // Tester for å sjekke CreateProduct():
 
         [TestMethod]
-        public void CreateProduct_show_view()
+        public void CreateProduct()
         {
             // Arrange
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
+            var actionResult = (ViewResult)controller.CreateProduct();
 
             // Assert
-
+            Assert.AreEqual(actionResult.ViewName, "");
         }
 
         // Tester for å sjekke CreateProduct(Product product):
@@ -432,14 +437,16 @@ namespace UnitTestProject1
         // Tester for å sjekke EditProduct(int id):
 
         [TestMethod]
-        public void EditProduct_show_view()
+        public void EditProduct()
         {
             // Arrange
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
+            var actionResult = (ViewResult)controller.EditProduct(1);
 
             // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
 
         }
 
@@ -466,9 +473,11 @@ namespace UnitTestProject1
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
+            var actionResult = (ViewResult)controller.DeleteProduct(1);
+            var result = (Product)actionResult.Model;
 
             // Assert
-
+            Assert.AreEqual(actionResult.ViewName, "");
         }
 
         // Tester for å sjekke CancelProduct():
@@ -518,15 +527,16 @@ namespace UnitTestProject1
         // Tester for å sjekke CreateOrder():
 
         [TestMethod]
-        public void CreateOrder_show_view()
+        public void CreateOrder()
         {
             // Arrange
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
+            var actionResult = (ViewResult)controller.CreateOrder();
 
             // Assert
-
+            Assert.AreEqual(actionResult.ViewName, "");
         }
 
         // Tester for å sjekke CreateOrder(Order order):
@@ -546,15 +556,16 @@ namespace UnitTestProject1
         // Tester for å sjekke EditOrder(int id):
 
         [TestMethod]
-        public void EditOrder_show_view()
+        public void EditOrder()
         {
             // Arrange
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
+            var actionResult = (ViewResult)controller.EditOrder(1);
 
             // Assert
-
+            Assert.AreEqual(actionResult.ViewName, "");
         }
 
         // Tester for å sjekke EditOrder(int id, Order order):
@@ -580,9 +591,11 @@ namespace UnitTestProject1
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
             // Act
+            var actionResult = (ViewResult)controller.DeleteOrder(1);
+            var result = (Order)actionResult.Model;
 
             // Assert
-
+            Assert.AreEqual(actionResult.ViewName, "");
         }
 
         // Tester for å sjekke CancelOrder():
