@@ -699,11 +699,14 @@ namespace GodtSkoddProsjekt.Controllers
         }
 
         // GET: ADMINMain/CreateOrderline
-        public ActionResult CreateOrderline()
+        public ActionResult CreateOrderline(int id) // id er orderID
         {
             if (!LoggedIn())
                 return RedirectToAction("LogIn");
-
+            
+            Order order = dbBLL.GetOrder(id);
+            Session["Order"] = order;
+            
             return View();
         }
 
@@ -717,6 +720,16 @@ namespace GodtSkoddProsjekt.Controllers
 
             if (ModelState.IsValid)
             {
+                orderline.orderID = ((Order)Session["Order"]).id;
+                Session["Order"] = null;
+
+                // validering på produktID - om et produkt med denne id'en finnes:
+
+                //
+                //
+                //
+                //
+
                 bool insertOK = dbBLL.CreateOrderline(orderline);
 
                 var userId = (int)Session["UserIdForOrders"];
@@ -804,6 +817,7 @@ namespace GodtSkoddProsjekt.Controllers
             if (!LoggedIn())
                 return RedirectToAction("LogIn");
 
+            Session["Order"] = null;    // reset Session["Order"]
             int userId = (int)Session["UserIdForOrders"];    // Gets stored in session-variable in AdminOrders
 
             return RedirectToAction("AdminOrders", new { id = userId });

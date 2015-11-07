@@ -17,9 +17,13 @@ namespace Model
         public int orderID { get; set; }
 
         [Display(Name = "Produkt-Id")]
+        [Required(ErrorMessage = "Produkt-Id må oppgis")]
+        [RegularExpression(@"[0-9]{1,10}", ErrorMessage = "Produkt-ID kan bare bestå av siffer")]
         public int productId { get; set; }
 
         [Display(Name = "Antall")]
+        [Required(ErrorMessage = "Antall av dette produktet må oppgis")]
+        [RegularExpression(@"[0-9]{1,10}", ErrorMessage = "Antall kan bare bestå av siffer")]
         public int quantity { get; set; }
     }
 }

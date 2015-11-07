@@ -5,14 +5,13 @@
 }
 
 @{
-    ViewBag.Title = "Admin Ny ordre";
+    ViewBag.Title = "Admin Ny ordrelinje";
 }
-
-<!-- Autogenerert kode: -->
 
 <!-- En ordre inneholder flere ordrelinjer.... se Views/User/OrderDetails.cshtml. Hvordan registrere ny ordre?
     Registrere ordrelinjer først eller etterpå eller alt samtidig? -->
 <!-- Create Orderline skal gjøres her. -->
+
 <div class="col-sm-9">
 
     @using (Html.BeginForm())
@@ -20,11 +19,10 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h2 class="header">Registrer ny ordre</h2>
+            <h2 class="header">Registrer ny ordrelinje</h2>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-          
                 <div class="form-group">
                     @Html.LabelFor(model => model.productId, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -39,7 +37,6 @@
                         @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
                     </div>
                 </div>
-             }
 
                     <!-- Legge inn kode for å fylle inn en ordrelinje her også! -->
                     <!-- Og så en knapp for å legge til denne ordrelinjen man har fylt ut til ordren? -->
@@ -49,10 +46,9 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             @Html.ActionLink("Avbryt", "CancelOrder", "ADMINMain", null, new { @class = "btn btn-danger Cancelbuttons" })
-                            <input type="submit" value="Registrer hele ordren" class="btn btn-default" />
+                            <input type="submit" value="Registrer ordrelinjen" class="btn btn-default" />
                         </div>
                     </div>
                 </div>
-
-            }
+    }
 </div>

@@ -51,7 +51,6 @@
            
         </tr>
 
-
         @foreach (var item in Model)
         {
             <tr class="productLine">
@@ -67,6 +66,7 @@
 
                 <td>
                     @Html.ActionLink("Endre", "EditOrder", "ADMINMain", new { id = item.id }, new { @class = "" }) |
+                    @Html.ActionLink("Legg til ordrelinje", "CreateOrderline", "ADMINMain", new { id = item.id }, new { @class = "" }) |
                     <a onclick="toggleRow(@item.id)">Se detaljer</a> |
                     @Html.ActionLink("Slett", "DeleteOrder", "ADMINMain", new { id = item.id }, new { @class = "" })
                 </td>
