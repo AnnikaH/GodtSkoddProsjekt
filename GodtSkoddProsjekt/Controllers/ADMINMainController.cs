@@ -610,6 +610,7 @@ namespace GodtSkoddProsjekt.Controllers
             /* Must store this userId in a session-variable so that can check if user has
             an order with the searched for orderId: */
             Session["UserIdForOrders"] = id;
+            ViewBag.UserIdForOrders = id;
 
             List<Order> orders = new List<Order>();
 

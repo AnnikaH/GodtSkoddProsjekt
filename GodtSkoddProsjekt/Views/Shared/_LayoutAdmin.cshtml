@@ -114,39 +114,6 @@
         function showAllAdminUsers() {
             window.location = "/ADMINMain/AdminAdminUsers";
         }
-
-        // -------------------------------- Order and Orderline -------------------------
-
-        function searchOrder(id) {
-            if (isNaN(id) || id == "") {
-                $('#orderErrorMessage').html("Id må være et tall!").addClass("text-danger");
-                return;
-            }
-
-            $('#orderErrorMessage').html("").removeClass("text-danger");
-
-            var userId = (int) @Session["UserIdForOrders"];
-
-            $.getJSON("/ADMINMain/GetOrder", { id: id }, function (orderData) {
-                // only enters here if success
-
-                // refresh the page:
-
-                if (orderData == "") {    // if didn't find any order with this id
-                    window.location = "/ADMINMain/AdminOrders/" + userId;
-                    //$('#orderErrorMessage').html("Fant ikke noen ordre med id " + id).addClass("text-danger");
-                }
-                else {  // found an order with this id
-                    window.location = "/ADMINMain/AdminOrders/" + userId + "/" + id;
-                }
-            });
-        }
-
-        function showAllOrders() {
-            var userId = (int) @Session["UserIdForOrders"];
-
-            window.location = "/ADMINMain/AdminOrders/" + userId;
-        }
     </script>
 </head>
 <body>
