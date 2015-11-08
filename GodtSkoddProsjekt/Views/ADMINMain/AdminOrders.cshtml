@@ -10,6 +10,7 @@
 
 <script type="text/javascript">
     // -------------------------------- Order and Orderline -------------------------
+
     function searchOrder(id) {
         if (isNaN(id) || id == "") {
             $('#orderErrorMessage').html("Id må være et tall!").addClass("text-danger");
@@ -66,7 +67,6 @@
             <th>@Html.DisplayNameFor(model => model.userID)</th>
             <th>@Html.DisplayNameFor(model => model.date)</th>
             <th></th>
-           
         </tr>
 
         @foreach (var item in Model)
@@ -81,7 +81,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.date)
                 </td>
-
                 <td>
                     @Html.ActionLink("Endre", "EditOrder", "ADMINMain", new { id = item.id }, new { @class = "" }) |
                     @Html.ActionLink("Legg til ordrelinje", "CreateOrderline", "ADMINMain", new { id = item.id }, new { @class = "" }) |
@@ -91,20 +90,24 @@
             </tr>
             <tr id="@item.id" class="MoreInfo">
                 <td colspan="4">
-                    <table class="table-striped MoreInfoTable"><tr>
-    <th class="ThOrderlines">Ordrelinje ID</th>
-    <th class="ThOrderlines">Produkt ID</th>
-    <th class="ThOrderlines">Antall</th>
-    <th class="ThOrderlines">Ordre ID</th>
-</tr>
+                    <table class="table-striped MoreInfoTable">
+                        <tr>
+                            <th class="ThOrderlines">Ordrelinje Id</th>
+                            <th class="ThOrderlines">Ordre Id</th>
+                            <th class="ThOrderlines">Produkt Id</th>
+                            <th class="ThOrderlines">Antall</th>
+                        </tr>
+                        
                         @for (int j = 0; j < item.orderlines.Count; j++)
                         {
-                           
                             <tr>
                                 <td>@item.orderlines[j].id</td>
-                                <td>@item.orderlines[j].productId</td>
-                                <td>@item.orderlines[j].quantity</td>
                                 <td>@item.orderlines[j].orderID</td>
+                                <td>
+                                    <span class="productIds">@item.orderlines[j].productId</span>
+                                    <span class="productNames"></span>
+                                </td>
+                                <td>@item.orderlines[j].quantity</td>
                             </tr>
                         }
                     </table>

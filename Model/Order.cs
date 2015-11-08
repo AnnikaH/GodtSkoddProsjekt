@@ -13,7 +13,7 @@ namespace Model
         [Display(Name = "Id")]
         public int id { get; set; }
 
-        [Display(Name = "Kunde-Id")]
+        [Display(Name = "Kunde Id")]
         public int userID { get; set; }
 
         [Display(Name = "Tidspunkt")]
