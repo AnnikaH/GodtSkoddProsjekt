@@ -9,8 +9,7 @@ namespace DAL
 {
     public class RepositoryStub : DAL.InDBGodtSkodd
     {
-
-
+        
         //------------------------------------------ Admin ---------------------------------
 
         public List<AdminUser> GetAdminUsers()
@@ -56,9 +55,7 @@ namespace DAL
                 var aUser = new AdminUser();
                 aUser.id = -1; 
                 return aUser.id;
-
             }
-
             else
             {
                 var aUser = new AdminUser()
@@ -68,8 +65,8 @@ namespace DAL
                     password = "Testing1"
 
                 };
-                return aUser.id;
 
+                return aUser.id;
             }
         }
 
@@ -134,10 +131,8 @@ namespace DAL
                 return true;
             }
         }
-
-         
-
-    public bool UserInDb(LoginUser inputUser)
+        
+        public bool UserInDb(LoginUser inputUser)
         {
             //Function for checking if its the correct input for logging in
             if(inputUser.userName == "")
@@ -148,10 +143,8 @@ namespace DAL
             {
                 return true;
             }
-            
         }
 
-        // Alternative: get the ID for the User in the database
         public int GetUserIdInDB(LoginUser loginUser)
         {
             //Function for checking if its the correct input for logging in
@@ -162,9 +155,7 @@ namespace DAL
                 var user = new User();
                 user.id = 0;
                 return user.id;
-
             }
-
             else
             {
                 var user = new User()
@@ -181,10 +172,9 @@ namespace DAL
                     password = "Testing"
 
                 };
+
                 return user.id;
-
             }
-
         }
 
         public bool EditUser(int id, User inputUser)
@@ -270,9 +260,9 @@ namespace DAL
                     password = "Testing1"
                     
                 };
+
                 return user;
             }
-
         }
 
         //------------------------------------------ PRODUCTS ---------------------------------
@@ -330,9 +320,8 @@ namespace DAL
                 url = "/Here",
                 gender = "Men",
                 type = "Sneakers"
-                
-
             };
+
             productList.Add(product);
             productList.Add(product);
             productList.Add(product);
@@ -354,18 +343,15 @@ namespace DAL
                 url = "/Here",
                 gender = "Men",
                 type = "Boots"
-
-
             };
-
             
             if(product.gender == gender)
             {
                 productList.Add(product);
                 productList.Add(product);
                 productList.Add(product);
-
             }
+
             return productList;
         }
 
@@ -384,11 +370,8 @@ namespace DAL
                 url = "/Here",
                 gender = "Men",
                 type = "Boots"
-
-
             };
-
-
+            
             if (product.type == type)
             {
                 productList.Add(product);
@@ -396,6 +379,7 @@ namespace DAL
                 productList.Add(product);
 
             }
+
             return productList;
         }
 
@@ -420,6 +404,7 @@ namespace DAL
                     gender = "Men",
                     type = "Boots"
                 };
+
                 return product;
             }
         }
@@ -437,11 +422,11 @@ namespace DAL
                 return true;
             }
         }
-
-
+        
         public List<Order> GetOrders()
         {
-            //Returns all orders. (for statistics?)
+            //Returns all orders
+
             DateTime dt = new DateTime();
             var orderLines = new List<Orderline>();
             var orderline = new Orderline()
@@ -451,6 +436,7 @@ namespace DAL
                 productId = 1,
                 quantity = 1
             };
+
             orderLines.Add(orderline);
             orderLines.Add(orderline);
             orderLines.Add(orderline);
@@ -469,12 +455,10 @@ namespace DAL
             orderList.Add(order);
 
             return orderList;
-
         }
 
         public List<Order> GetOrdersForUser(int userId)
         {
-
             DateTime dt = new DateTime();
             var orderLines = new List<Orderline>();
             var orderline = new Orderline()
@@ -484,11 +468,11 @@ namespace DAL
                 productId = 1,
                 quantity = 1
             };
-            orderLines.Add(orderline);
-            orderLines.Add(orderline);
-            orderLines.Add(orderline);
 
-
+            orderLines.Add(orderline);
+            orderLines.Add(orderline);
+            orderLines.Add(orderline);
+            
             var orderList = new List<Order>();
             var order = new Order()
             {
@@ -505,6 +489,7 @@ namespace DAL
                 orderList.Add(order);
                 orderList.Add(order);
             }
+
             return orderList;
         }
 
@@ -512,6 +497,7 @@ namespace DAL
         {
             DateTime dt = new DateTime();
             var orderLines = new List<Orderline>();
+
             if (id == 0)
             {
                 var order = new Order();
@@ -526,9 +512,8 @@ namespace DAL
                     userID = 1,
                     date = dt,
                     orderlines = orderLines
-
-
                 };
+
                 return order;
             }
         }
@@ -595,8 +580,6 @@ namespace DAL
 
         public Orderline GetOrderline(int id)
         {
-            
-            
             if (id == 0)
             {
                 var orderLine = new Orderline();
@@ -614,8 +597,6 @@ namespace DAL
                 };
                 return orderLine;
             }
-
-
         }
 
         public bool CreateDatabaseContent()
