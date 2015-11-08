@@ -1310,10 +1310,16 @@ namespace UnitTestProject1
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
             SessionMock.InitializeController(controller);
             controller.Session["LoggedInAdmin"] = true;
+            var ExpectedOrder = new Order();
+            ExpectedOrder.id = 1;
+            controller.Session["Order"] = ExpectedOrder;
+            controller.Session["UserIdForOrders"] = 1;
 
             // Act
+            var actionResult = (ViewResult)controller.AdminOrders(1);
 
             // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
 
         }
         [TestMethod]
@@ -1326,8 +1332,10 @@ namespace UnitTestProject1
             controller.Session["LoggedInAdmin"] = true;
 
             // Act
+            var actionResult = (ViewResult)controller.AdminOrders(1);
 
             // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
 
         }
 
@@ -1443,23 +1451,6 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.RouteValues.Values.ElementAt(1), "AdminOrders");
         }
 
-        // Tester for å sjekke CreateOrder(Order order):
-
-        /* [TestMethod]
-         public void CreateOrder_ok_post()
-         {
-             // Arrange
-             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-
-             // Act
-
-             // Assert
-
-         }*/
-
-        // Tester for å sjekke EditOrder(int id):
-
-
         [TestMethod]
         public void EditOrder_LoggedIn_Fail()
         {
@@ -1491,20 +1482,6 @@ namespace UnitTestProject1
             // Assert
             Assert.AreEqual(actionResult.ViewName, "");
         }
-
-        // Tester for å sjekke EditOrder(int id, Order order):
-
-        /*   [TestMethod]
-           public void EditOrder_ok_post()
-           {
-               // Arrange
-               var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-
-               // Act
-
-               // Assert
-
-           }*/
 
         [TestMethod]
         public void EditOrder_Update_Worked()
