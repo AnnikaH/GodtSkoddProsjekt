@@ -174,12 +174,13 @@ namespace UnitTestProject1
             var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
             SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
             // Act
 
-            var actionResult = (RedirectToRouteResult)controller.Index();
+            var actionResult = (ViewResult)controller.Index();
 
             // Assert
-            Assert.AreEqual(actionResult.RouteName, "");
+            Assert.AreEqual(actionResult.ViewName, "");
 
         }
 
@@ -427,6 +428,25 @@ namespace UnitTestProject1
             // Act
 
             var actionResult = (RedirectToRouteResult)controller.EditAdminUser(1, ExpectedAdminUser);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+
+        }
+
+        [TestMethod]
+        public void editAdminUser_LoggedIn_Fail_too()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            var ExpectedAdminUser = new AdminUser();
+            ExpectedAdminUser.userName = "";
+            ExpectedAdminUser.password = null;
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.EditAdminUser(1);
 
             // Assert
             Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
@@ -843,10 +863,23 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.ViewName, "");
         }
 
+        [TestMethod]
+        // Tester for å sjekke DeleteUser(int id):
+        public void DeleteUser_LoggedIn_Fail_too()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
 
-    // Tester for å sjekke DeleteUser(int id):
+            // Act
+            var actionResult = (RedirectToRouteResult)controller.DeleteUser(1);
 
-    [TestMethod]
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+
+        }
+        [TestMethod]
         public void DeleteUser()
         {
             // Arrange
@@ -1145,6 +1178,22 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
         }
 
+        [TestMethod]
+        public void EditProduct_LoggedIn_Fail_too()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            Product Expectedproduct = new Product();
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.EditProduct(0, Expectedproduct);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+        }
+
         // Tester for å sjekke EditProduct(int id):
 
         [TestMethod]
@@ -1223,7 +1272,7 @@ namespace UnitTestProject1
             SessionMock.InitializeController(controller);
             // Act
 
-            var actionResult = (RedirectToRouteResult)controller.DeleteAdminUser(0);
+            var actionResult = (RedirectToRouteResult)controller.DeleteProduct(1);
 
             // Assert
             Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
@@ -1350,9 +1399,23 @@ namespace UnitTestProject1
             SessionMock.InitializeController(controller);
             // Act
 
-            var actionResult = (JsonResult)controller.GetAdminUser(1); 
+            var actionResult = (JsonResult)controller.GetAdminUser(1);
             // Assert
-            Assert.IsNull(actionResult); 
+            Assert.IsNull(actionResult);
+        }
+
+            [TestMethod]
+        public void GetOrder_LoggedIn_Fail()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            // Act
+
+            var actionResult = (JsonResult)controller.GetOrder(1);
+            // Assert
+            Assert.IsNull(actionResult);
         }
 
         [TestMethod]
@@ -1461,6 +1524,21 @@ namespace UnitTestProject1
             // Act
 
             var actionResult = (RedirectToRouteResult)controller.EditOrder(0);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+        }
+        [TestMethod]
+        public void EditOrder_LoggedIn_Fail_too()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            Order ExpectedOrder = new Order();
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.EditOrder(0, ExpectedOrder);
 
             // Assert
             Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
@@ -1632,6 +1710,22 @@ namespace UnitTestProject1
             // Act
 
             var actionResult = (RedirectToRouteResult)controller.CreateOrderline(ExpectedOrderline);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+
+        }
+
+        public void CreateOrderline_LoggedIn_Fail_too()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            var ExpectedOrderline = new Orderline();
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.CreateOrderline(1);
 
             // Assert
             Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
