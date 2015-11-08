@@ -46,12 +46,12 @@ namespace Model
         [RegularExpression(@"^/Content/Images/.{1,30}", ErrorMessage = "Bilde-url må starte med /Content/Images/")]
         public String url { get; set; }
 
-        [Display(Name = "For hvem")]
+        [Display(Name = "For hvem (Women, Men, Boys eller Girls)")]
         [Required(ErrorMessage = "For hvem må oppgis")]
         [RegularExpression(@"Women|Men|Boys|Girls", ErrorMessage = "For hvem kan bare være Women, Men, Boys eller Girls")]
         public String gender { get; set; }  // Women, Men, Boys, Girls
 
-        [Display(Name = "Type sko")]
+        [Display(Name = "Type sko (Boots, DressShoes, Sandals, Sneakers eller WinterShoes)")]
         [Required(ErrorMessage = "Type sko må oppgis")]
         [RegularExpression(@"Boots|DressShoes|Sandals|Sneakers|WinterShoes", ErrorMessage = "Type sko kan bare være Boots, DressShoes, Sandals, Sneakers eller WinterShoes")]
         public String type { get; set; }    // Boots, DressShoes, Sandals, Sneakers, WinterShoes
