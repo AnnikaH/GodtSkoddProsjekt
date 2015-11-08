@@ -130,6 +130,10 @@ namespace DAL
                 {
                     AdminUser returnAdminUser = new AdminUser();
                     AdminUsers foundAdminUser = db.AdminUsers.Find(id);
+
+                    if (foundAdminUser == null)
+                        return null;
+
                     returnAdminUser.id = foundAdminUser.ID;
                     returnAdminUser.userName = foundAdminUser.UserName;
                     returnAdminUser.password = null;
@@ -937,22 +941,23 @@ namespace DAL
                     Orders changeOrder = db.Orders.Find(id);
                     changeOrder.UserID = input.userID;
                     changeOrder.Date = input.date;
-                    
-
+         
                     // nødvendig?:
                     changeOrder.User = db.Users.Find(input.userID);
 
-                        foreach (var item in input.orderlines)
+                    foreach(var item in input.orderlines)
+                    {
+                        foreach(var itemDb in changeOrder.Orderlines)
                         {
-                            foreach (var item2 in changeOrder.Orderlines)
+                            if (item.id == itemDb.ID)
                             {
-                                if (item.id == item2.ID)
-                                {
-                                    EditOrderline(item2.ID, item);
-                                }
+                                // orderID har ikke blitt satt (er 0) av en eller annen grunn, så setter den nå:
+                                item.orderID = itemDb.OrderID;
+
+                                EditOrderline(itemDb.ID, item);
                             }
                         }
-
+                    }
 
                     db.SaveChanges();
                     return true;
@@ -960,8 +965,7 @@ namespace DAL
                 catch (Exception e)
                 {
                     writeToLog(e);
-
-
+                    
                     return false;
                 }
             }
@@ -975,10 +979,11 @@ namespace DAL
                 {
                     Orders delOrder = db.Orders.Find(id);
 
-                    foreach (var orderline in delOrder.Orderlines)
+                    // Remove-metoden tar seg av dette:
+                    /*foreach (var orderline in delOrder.Orderlines)
                     {
                         DeleteOrderline(orderline.ID);
-                    }
+                    }*/
 
                     db.Orders.Remove(delOrder);
                     db.SaveChanges();
@@ -1013,7 +1018,6 @@ namespace DAL
                     };
                     
                     db.Orderlines.Add(newOrderline);
-                    //newOrderline.Order.Orderlines.Add(newOrderline); // is this neccessary? (AB) !! får feilmelding på denne!
                     db.SaveChanges();
                     return true;
                 }
@@ -1033,15 +1037,14 @@ namespace DAL
                 try
                 {
                     Orderlines changeOrderline = db.Orderlines.Find(id);
+                    
+                    changeOrderline.OrderID = input.orderID;
+                    changeOrderline.ProductID = input.productId;
+                    changeOrderline.Quantity = input.quantity;
 
                     // nødvendig?
                     changeOrderline.Order = db.Orders.Find(input.orderID);
                     changeOrderline.Product = db.Products.Find(input.productId);
-
-                    changeOrderline.OrderID = input.orderID;
-                    changeOrderline.Product = db.Products.Find(input.productId);
-                    changeOrderline.ProductID = input.productId;
-                    changeOrderline.Quantity = input.quantity;
 
                     db.SaveChanges();
                     return true;
