@@ -8,18 +8,8 @@
     ViewBag.Title = "Administratorer";
 }
 
-<!-- Skal kunne: READ (id og alle), CREATE, UPDATE og DELETE -->
-
-<!-- Se oppsettet til AdminProducts.cshtml (autogenerert når velger template List) -->
-
 <div class="col-sm-9">
     <h2 class="header">Administrator-brukere</h2>
-
-    <!-- Vise alle adminbrukere her (får inn fra model)
-        + kunne endre/oppdatere og slette hver enkelt (knapper på samme linje hvor oppdater-knappen går til UpdateAdminUser + sende med id,
-        og hvor slette-knappen går til DeleteAdminUser + sende med id til ADMINMainController)
-        + kunne søke etter en bestemt administrator ut fra id: kall GetAdminUser i ADMINMainController + send med id
-        + en knapp for å gå til CreateAdminUser.cshtml (registrere ny adminbruker) : -->
 
     <p>
         <div class="Searchbar">
@@ -28,7 +18,6 @@
             <input type="button" style="margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" onclick="searchAdminUser($('#searchId').val())" value="Søk" class="btn btn-default" />
             <div id="adminUserErrorMessage"></div>
         </div>
-        <!--<div class="Searchbar"><input type="text" id="Searchinn" /></div>-->
 
         <div class="Link_addnew">
         <span class="glyphicon glyphicon-plus"></span>  @Html.ActionLink("Registrer ny administrator", "CreateAdminUser", "ADMINMain", new { id = "" }, new { @class = "" })

@@ -46,15 +46,10 @@
             $.getJSON("/ADMINMain/CheckLogIn", { username: username, password: password }, function (loginAdminData) {
                 // only enters here if success
 
-                //window.location.reload();
-                // Because of /Admin/Index (need to change location to update navbar when logging in from here):
                 window.location = "/ADMINMain/Index";
-
-                $('#logInAdminMessage').html("").removeClass("text-danger");
             });
 
-            // Is there a better solution?
-            //if (document.getElementById('minSideLi') == null) {
+            // is there a better solution?
             $('#logInAdminMessage').html("Feil brukernavn eller passord!").addClass("text-danger");
         }
     </script>

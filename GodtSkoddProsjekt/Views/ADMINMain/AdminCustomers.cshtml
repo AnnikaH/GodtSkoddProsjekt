@@ -18,24 +18,11 @@
             <input type="button" style="margin-left: 5px; margin-right: 5px; margin-bottom: 5px;" onclick="searchUser($('#searchId').val())" value="Søk" class="btn btn-default" />
             <div id="userErrorMessage"></div>
         </div>
-<!--    <div class="Searchbar"><input type="text" id="Searchinn" /></div>-->
 
         <div class="Link_addnew">
-            <!--<span class="glyphicon glyphicon-arrow-down"></span><a href="#" class="link_toggle">Vis mer informasjon</a> |-->
             <span class="glyphicon glyphicon-plus"></span> @Html.ActionLink("Registrer ny kunde", "CreateUser", "ADMINMain", new { id = "" }, new { @class = "" })
         </div>
     </p>
-
-    <!-- Se oppsettet til AdminProducts.cshtml (autogenerert når velger template List) -->
-
-    <!-- Vise alle kunder/brukere (får inn fra model): -->
-
-    <!-- Gjøre mye av det samme som på AdminAdminUsers, men også kunne gå inn på en bestemt bruker og se
-        ordrene til denne brukeren + kunne endre/slette disse ordrene + lage en ny ordre på brukeren -->
-
-    <!-- Slette-knappen her (se kommentarer i AdminAdminUsers) skal kalle på DeleteUser + sende med id til ADMINMainController f.eks. -->
-
-    <!-- Der man søker etter en kunde på ID: Kall metoden GetUser i ADMINMainController + send med id -->
 
     <table class="table">
         <tr>
