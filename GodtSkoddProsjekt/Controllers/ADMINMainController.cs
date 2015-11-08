@@ -573,20 +573,25 @@ namespace GodtSkoddProsjekt.Controllers
 
             if (ModelState.IsValid)
             {
-                orderline.orderID = ((Order)Session["Order"]).id;
-                Session["Order"] = null;
+                var order = (Order)Session["Order"];
 
-                // validering på produktID - om et produkt med denne id'en finnes:
-                var product = dbBLL.GetProduct(orderline.productId);
-
-                if(product != null)
+                if (order != null)
                 {
-                    bool insertOK = dbBLL.CreateOrderline(orderline);
+                    orderline.orderID = order.id;
+                    Session["Order"] = null;
 
-                    var userId = (int)Session["UserIdForOrders"];
+                    // validering på produktID - om et produkt med denne id'en finnes:
+                    var product = dbBLL.GetProduct(orderline.productId);
 
-                    if (insertOK)
-                        return RedirectToAction("AdminOrders", new { id = userId });
+                    if (product != null)
+                    {
+                        bool insertOK = dbBLL.CreateOrderline(orderline);
+
+                        var userId = (int)Session["UserIdForOrders"];
+
+                        if (insertOK)
+                            return RedirectToAction("AdminOrders", new { id = userId });
+                    }
                 }
             }
 
