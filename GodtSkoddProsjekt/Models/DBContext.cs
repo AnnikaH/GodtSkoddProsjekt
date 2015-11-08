@@ -5,10 +5,12 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
+using TrackerEnabledDbContext;
 
 namespace GodtSkoddProsjekt.Models
 {
     // Class Cities:
+    [TrackChanges]
     public class Cities
     {
         [Key]
@@ -19,6 +21,7 @@ namespace GodtSkoddProsjekt.Models
     }
 
     // Class Products:
+    [TrackChanges]
     public class Products
     {
         public int ID { get; set; }
@@ -36,6 +39,7 @@ namespace GodtSkoddProsjekt.Models
     }
 
     // Class Users:
+    [TrackChanges]
     public class Users
     {
         public int ID { get; set; }
@@ -53,6 +57,7 @@ namespace GodtSkoddProsjekt.Models
     }
 
     // Class Orders:
+    [TrackChanges]
     public class Orders
     {
         public int ID { get; set; }
@@ -64,6 +69,7 @@ namespace GodtSkoddProsjekt.Models
     }
 
     // Class Orderlines:
+    [TrackChanges]
     public class Orderlines
     {
         public int ID { get; set; }
@@ -76,14 +82,36 @@ namespace GodtSkoddProsjekt.Models
     }
 
     // Class AdminUsers:
+    [TrackChanges]
     public class AdminUsers
     {
         public int ID { get; set; }
         public String UserName { get; set; }
         public byte[] Password { get; set; }
     }
-
+    /*
     public class DBContext : DbContext
+    {
+        public DBContext() : base("name=GodtSkodd")
+        {
+            Database.CreateIfNotExists();
+        }
+
+        public DbSet<Users> Users { get; set; }
+        public DbSet<Cities> Cities { get; set; }
+        public DbSet<Orders> Orders { get; set; }
+        public DbSet<Products> Products { get; set; }
+        public DbSet<Orderlines> Orderlines { get; set; }
+        public DbSet<AdminUsers> AdminUsers { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            // modelBuilder.Entity<Cities>().HasKey(c => c.PostalCode);
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        }
+    }*/
+
+    public class DBContext : TrackerContext
     {
         public DBContext() : base("name=GodtSkodd")
         {
