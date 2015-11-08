@@ -1,12 +1,10 @@
 ﻿Spesielle notiser innlevering mappe 2:
 
-Start-url: /Home/Index (Her opprettes default-administrator hvis denne ikke finnes, samt default-
-produkter hvis disse ikke finnes.) Herfra kan man gå til Admin-siden ved å klikke på "Admin" øverst
-til høyre i navbaren. Her må man logge inn med brukernavn Admin og passord 12345678 (hoved/default-administrator).
-Man kan bare opprette nye administratorer når man er logget inn som en administrator.
-
-Produktene opprettes automatisk når man går inn på hovedsiden /Home/Index hvis de ikke finnes
-i databasen fra før av.
+Start-url for prosjektet: /Home/Index (Her opprettes default-administrator hvis denne ikke finnes,
+samt default-produkter hvis disse ikke finnes.) Herfra kan man gå til Admin-siden som utgjør mappe 2
+ved å klikke på "Admin" øverst til høyre i navbaren. Her må man logge inn med brukernavn Admin og
+passord 12345678 (hoved/default-administrator). Man kan bare opprette nye administratorer
+når man er logget inn som en administrator.
 
 Mappe 2 benytter ADMINMainController. De andre controllerne er fra mappe 1. De eneste endringene som er
 gjort i de andre controllerne er i HomeController, hvor vi har lagt inn metoder for å automatisk opprette
@@ -16,10 +14,6 @@ Det skrives til en logg-fil i DAL.DBGodtSkodd, og denne logg-filen ligger under 
 som er en av de 5 prosjektene, under en mappe som heter Logs (denne vises ikke i prosjekt-strukturen,
 men ligger der hvis man går til filutforskeren). Det blir opprettet en ny logg-fil for
 hver dag det oppstår en feil.
-
-Default administrator-bruker:
-	Brukernavn: Admin
-	Passord: 12345678
 
 // ---------------------------------------------------------------------------------
 
