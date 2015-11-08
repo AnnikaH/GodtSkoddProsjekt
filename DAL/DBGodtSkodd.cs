@@ -907,6 +907,10 @@ namespace DAL
                 {
                     Order returnOrder = new Order();
                     Orders foundOrder = db.Orders.Find(id);
+
+                    if (foundOrder == null)
+                        return null;
+
                     returnOrder.id = foundOrder.ID;
                     returnOrder.userID = foundOrder.UserID;
                     returnOrder.date = foundOrder.Date;
