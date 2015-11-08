@@ -937,17 +937,33 @@ namespace DAL
                     changeOrder.UserID = input.userID;
                     changeOrder.Date = input.date;
                     
+
                     // nødvendig?:
                     changeOrder.User = db.Users.Find(input.userID);
-
-                    foreach (var item in input.orderlines)
+                    if (changeOrder.Orderlines != null)
                     {
-                        foreach (var item2 in changeOrder.Orderlines)
+                        foreach (var item in input.orderlines)
                         {
-                            if (item.id == item2.ID)
+                            foreach (var item2 in changeOrder.Orderlines)
                             {
-                                EditOrderline(item2.ID, item);
+                                if (item.id == item2.ID)
+                                {
+                                    EditOrderline(item2.ID, item);
+                                }
                             }
+                        }
+                    }
+                    else
+                    {
+                        changeOrder.Orderlines = new List<Orderlines>();
+                        foreach(var item in input.orderlines)
+                        {
+                            Orderlines newOrderLine = new Orderlines();
+                            newOrderLine.ID = item.id;
+                            newOrderLine.OrderID = item.orderID;
+                            newOrderLine.ProductID = item.productId;
+                            newOrderLine.Quantity = item.quantity;
+                            changeOrder.Orderlines.Add(newOrderLine);
                         }
                     }
 
