@@ -1602,11 +1602,12 @@ namespace UnitTestProject1
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
             SessionMock.InitializeController(controller);
             controller.Session["LoggedInAdmin"] = true;
-            // Act
-            var actionResult = (ViewResult)controller.DeleteOrderline(1);
+            controller.Session["UserIdForOrders"] = 1;
+            var actionResult = (RedirectToRouteResult)controller.DeleteOrderline(1);
 
             // Assert
-            Assert.AreEqual(actionResult.ViewName, "");
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), 1);
+            Assert.AreEqual(actionResult.RouteValues.Values.ElementAt(1), "AdminOrders");
         }
     }
 }
