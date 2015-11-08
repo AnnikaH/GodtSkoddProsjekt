@@ -15,6 +15,10 @@ som er en av de 5 prosjektene, under en mappe som heter Logs (denne vises ikke i
 men ligger der hvis man går til filutforskeren). Det blir opprettet en ny logg-fil for
 hver dag det oppstår en feil.
 
+Vi har brukt et privat repository på GitHub til versjonskontroll, gjennom Visual Studio. Det ligger
+noen github-filer i prosjektmappen som vitner om dette, men hvis du ønsker tilgang til dette
+repository'et så kan vi sende deg en link og legge deg til som collaborator.
+
 // ---------------------------------------------------------------------------------
 
 Spesielle notiser innlevering mappe 1:
