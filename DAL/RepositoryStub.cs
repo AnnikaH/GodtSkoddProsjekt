@@ -403,9 +403,7 @@ namespace DAL
         {
             if (id == 0)
             {
-                var product = new Product();
-                product.id = 0;
-                return product;
+                return null;
             }
             else
             {

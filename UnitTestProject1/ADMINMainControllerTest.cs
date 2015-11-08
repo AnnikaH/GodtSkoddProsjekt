@@ -267,8 +267,7 @@ namespace UnitTestProject1
             var actionResult = (JsonResult)controller.GetAdminUser(1);
 
             // Assert
-            Assert.IsNull(actionResult); //Får jo ikke sjekket om denne går til login-sia!!!!!!!!!! <-<
-
+            Assert.IsNull(actionResult);
         }
 
         [TestMethod]
@@ -286,6 +285,7 @@ namespace UnitTestProject1
 
             // Assert
             Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
+            Assert.IsInstanceOfType(actionResult.Data, typeof(AdminUser));
 
         }
 
@@ -304,6 +304,7 @@ namespace UnitTestProject1
 
             // Assert
             Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
+            Assert.AreEqual(actionResult.Data, "");
 
         }
 
@@ -640,7 +641,8 @@ namespace UnitTestProject1
             var actionResult = (JsonResult)controller.GetUser(-1);
 
             // Assert
-            Assert.IsInstanceOfType(actionResult, typeof(JsonResult)); // Aner ikke om denne funker heller.
+            Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
+            Assert.AreEqual(actionResult.Data, "");
 
 
         }
@@ -961,8 +963,7 @@ namespace UnitTestProject1
             var actionResult = (JsonResult)controller.GetProduct(1);
 
             // Assert
-            Assert.IsNull(actionResult); //Får jo ikke sjekket om denne går til login-sia!!!!!!!!!! <-<
-
+            Assert.IsNull(actionResult); 
         }
 
         // Tester for å sjekke GetProduct(int id):
@@ -982,6 +983,7 @@ namespace UnitTestProject1
 
             // Assert
             Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
+            Assert.IsInstanceOfType(actionResult.Data, typeof(Product));
 
 
         }
@@ -1001,6 +1003,7 @@ namespace UnitTestProject1
 
             // Assert
             Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
+            Assert.AreEqual(actionResult.Data, "");
 
         }
 
@@ -1339,11 +1342,9 @@ namespace UnitTestProject1
             SessionMock.InitializeController(controller);
             // Act
 
-            var actionResult = (JsonResult)controller.GetAdminUser(1); // skal det være 1 eller 0??
-
+            var actionResult = (JsonResult)controller.GetAdminUser(1); 
             // Assert
-            Assert.IsNull(actionResult); //Får jo ikke sjekket om denne går til login-sia!!!!!!!!!! <-<
-
+            Assert.IsNull(actionResult); 
         }
 
         [TestMethod]
@@ -1353,7 +1354,7 @@ namespace UnitTestProject1
             var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
             SessionMock.InitializeController(controller);
-
+            controller.Session["UserIdForOrders"] = 1;
             controller.Session["LoggedInAdmin"] = true;
             // Act
 
@@ -1361,18 +1362,19 @@ namespace UnitTestProject1
 
             // Assert
             Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
+            Assert.IsInstanceOfType(actionResult.Data, typeof(Order));
 
         }
 
         [TestMethod]
         public void GetOrder_id_found() // for når user id = order id, må endres
         {
-            /*
+            
             // Arrange
             var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
             SessionMock.InitializeController(controller);
-
+            controller.Session["UserIdForOrders"] = 1;
             controller.Session["LoggedInAdmin"] = true;
             // Act
 
@@ -1380,7 +1382,7 @@ namespace UnitTestProject1
 
             // Assert
             Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
-            */
+            Assert.IsInstanceOfType(actionResult.Data, typeof(Order));
         }
 
 
@@ -1391,7 +1393,7 @@ namespace UnitTestProject1
             var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
             SessionMock.InitializeController(controller);
-
+            controller.Session["UserIdForOrders"] = 1;
             controller.Session["LoggedInAdmin"] = true;
             // Act
 
@@ -1399,6 +1401,7 @@ namespace UnitTestProject1
 
             // Assert
             Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
+            Assert.AreEqual(actionResult.Data, "");
 
         }
 
@@ -1430,12 +1433,14 @@ namespace UnitTestProject1
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
             SessionMock.InitializeController(controller);
             controller.Session["LoggedInAdmin"] = true;
+            controller.Session["UserIdForOrders"] = 1;
 
             // Act
             var actionResult = (RedirectToRouteResult)controller.CreateOrder();
 
             // Assert
-            Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminOrders");
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), 1);
+            Assert.AreEqual(actionResult.RouteValues.Values.ElementAt(1), "AdminOrders");
         }
 
         // Tester for å sjekke CreateOrder(Order order):
@@ -1521,7 +1526,8 @@ namespace UnitTestProject1
             var actionResult = (RedirectToRouteResult)controller.EditOrder(1, ExpectedOrder);
 
             // Assert
-            Assert.AreEqual(actionResult.RouteValues.Values.First(), 1); //egentlig skal det stå adminorder
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), 1);
+            Assert.AreEqual(actionResult.RouteValues.Values.ElementAt(1), "AdminOrders");
         }
 
 
@@ -1574,12 +1580,14 @@ namespace UnitTestProject1
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
             SessionMock.InitializeController(controller);
             controller.Session["LoggedInAdmin"] = true;
+            controller.Session["UserIdForOrders"] = 1;
 
             // Act
             var actionResult = (RedirectToRouteResult)controller.DeleteOrder(1);
 
             // Assert
-            Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminOrders");
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), 1);
+            Assert.AreEqual(actionResult.RouteValues.Values.ElementAt(1), "AdminOrders");
         }
 
         // Tester for å sjekke CancelOrder():
@@ -1609,11 +1617,13 @@ namespace UnitTestProject1
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
             SessionMock.InitializeController(controller);
             controller.Session["LoggedInAdmin"] = true;
+            controller.Session["UserIdForOrders"] = 1;
             // Act
             var actionResult = (RedirectToRouteResult)controller.CancelOrder();
 
             // Assert
-            Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminOrders");
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), 1);
+            Assert.AreEqual(actionResult.RouteValues.Values.ElementAt(1), "AdminOrders");
 
         }
 
@@ -1660,15 +1670,18 @@ namespace UnitTestProject1
             SessionMock.InitializeController(controller);
             controller.Session["LoggedInAdmin"] = true;
             var ExpectedOrderline = new Orderline();
+            ExpectedOrderline.productId = 0;
             var ExpectedOrder = new Order();
+            ExpectedOrder.id = 1;
             controller.Session["Order"] = ExpectedOrder;
             controller.Session["UserIdForOrders"] = 1;
             // Act
 
-            var actionResult = (ViewResult)controller.CreateOrderline(ExpectedOrderline);
+            var actionResult = (RedirectToRouteResult)controller.CreateOrderline(ExpectedOrderline);
 
             // Assert
-            Assert.AreEqual(actionResult.ViewName, "");
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), 1);
+            Assert.AreEqual(actionResult.RouteValues.Values.ElementAt(1), "CreateOrderline");
         }
 
         [TestMethod]
@@ -1681,14 +1694,16 @@ namespace UnitTestProject1
             controller.Session["LoggedInAdmin"] = true;
             var ExpectedOrderline = new Orderline();
             var ExpectedOrder = new Order();
+            ExpectedOrder.id = 1;
             controller.Session["Order"] = ExpectedOrder;
             controller.Session["UserIdForOrders"] = 1;
             // Act
 
-            var actionResult = (ViewResult)controller.CreateOrderline(ExpectedOrderline);
+            var actionResult = (RedirectToRouteResult)controller.CreateOrderline(ExpectedOrderline);
 
             // Assert
-            Assert.AreEqual(actionResult.ViewName, "");
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), 1);
+            Assert.AreEqual(actionResult.RouteValues.Values.ElementAt(1), "CreateOrderline");
         }
 
         [TestMethod]
@@ -1700,6 +1715,7 @@ namespace UnitTestProject1
             SessionMock.InitializeController(controller);
             controller.Session["LoggedInAdmin"] = true;
             var ExpectedOrderline = new Orderline();
+            ExpectedOrderline.productId = 0;
             controller.Session["UserIdForOrders"] = 1;
             // Act
 
@@ -1707,6 +1723,7 @@ namespace UnitTestProject1
 
             // Assert
             Assert.AreEqual(actionResult.ViewName, "");
+
         }
 
         [TestMethod]
@@ -1756,15 +1773,16 @@ namespace UnitTestProject1
             SessionMock.InitializeController(controller);
             controller.Session["LoggedInAdmin"] = true;
             var ExpectedOrder = new Order();
+            ExpectedOrder.id = 1;
             controller.Session["Order"] = ExpectedOrder;
             var ExpectedOrderline = new Orderline();
-            controller.Session["UserIdForOrders"] = 1;
-            // Act
+            //ExpectedOrderline.productId = 0;
 
-            var actionResult = (ViewResult)controller.CreateOrderline(ExpectedOrderline);
+            var actionResult = (RedirectToRouteResult)controller.CreateOrderline(ExpectedOrderline);
 
             // Assert
-            Assert.AreEqual(actionResult.ViewName, "");
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), 1);
+            Assert.AreEqual(actionResult.RouteValues.Values.ElementAt(1), "CreateOrderline");
         }
 
         [TestMethod]
