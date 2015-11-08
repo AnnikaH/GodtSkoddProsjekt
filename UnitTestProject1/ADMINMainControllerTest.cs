@@ -894,6 +894,7 @@ namespace UnitTestProject1
 
         // ----------------------------- Product -----------------------
 
+
         // Tester for å sjekke AdminProducts(int? id):
 
         [TestMethod]
@@ -909,17 +910,77 @@ namespace UnitTestProject1
         }
 
         // Tester for å sjekke GetProduct(int id):
-
         [TestMethod]
-        public void GetProduct()
+        public void GetProduct_LoggedIn_Fail()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-
+            SessionMock.InitializeController(controller);
             // Act
 
-            // Assert
+            var actionResult = (JsonResult)controller.GetProduct(1);
 
+            // Assert
+            Assert.IsNull(actionResult); //Får jo ikke sjekket om denne går til login-sia!!!!!!!!!! <-<
+
+        }
+
+        // Tester for å sjekke GetProduct(int id):
+
+        [TestMethod]
+        public void GetProduct_Found()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+
+            controller.Session["LoggedInAdmin"] = true;
+            // Act
+
+            var actionResult = (JsonResult)controller.GetProduct(1);
+
+            // Assert
+            Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
+
+
+        }
+
+        [TestMethod]
+        public void GetProduct_Not_Found()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+
+            controller.Session["LoggedInAdmin"] = true;
+            // Act
+
+            var actionResult = (JsonResult)controller.GetProduct(0);
+
+            // Assert
+            Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
+
+        }
+
+
+
+        // Tester for å sjekke GetProduct(int id):
+        [TestMethod]
+        public void CreateProduct_LoggedIn_Fail()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.CreateProduct();
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
         }
 
         // Tester for å sjekke CreateProduct():
@@ -928,8 +989,11 @@ namespace UnitTestProject1
         public void CreateProduct()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
 
+            controller.Session["LoggedInAdmin"] = true;
             // Act
             var actionResult = (ViewResult)controller.CreateProduct();
 
@@ -937,18 +1001,106 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.ViewName, "");
         }
 
+
+
+        [TestMethod]
+        public void CreateProduct_LoggedIn_Fail_too()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            var ExpectedProduct = new Product();
+            //ExpectedProduct.id = 0;
+            ExpectedProduct.name = "";
+            /* ExpectedProduct.price = 0;
+             ExpectedProduct.size = 0;
+             ExpectedProduct.color = "";
+             ExpectedProduct.material = "";
+             ExpectedProduct.brand = "";
+             ExpectedProduct.url = "";
+             ExpectedProduct.gender = "";
+             ExpectedProduct.type = "";*/
+
+
+            var actionResult = (RedirectToRouteResult)controller.CreateProduct(ExpectedProduct);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+        }
         // Tester for å sjekke CreateProduct(Product product):
 
         [TestMethod]
-        public void CreateProduct_ok_post()
+        public void CreateProduct_post_error_model()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            var ExpectedProduct = new Product();
+            controller.ViewData.ModelState.AddModelError("Name", "Name missing");
+            controller.Session["LoggedInAdmin"] = true;
+            // Act
+            var actionResult = (ViewResult)controller.CreateProduct(ExpectedProduct);
+            // Assert
+            Assert.IsTrue(actionResult.ViewData.ModelState.Count == 1);
+            Assert.AreEqual(actionResult.ViewName, "");
+        }
 
+        [TestMethod]
+        public void CreateProduct_insertOK_True()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            var ExpectedProduct = new Product();
+            ExpectedProduct.name = "Shoe";
+            ExpectedProduct.price = 499;
+            ExpectedProduct.size = 45;
+            ExpectedProduct.color = "Black";
+            ExpectedProduct.material = "Mesh";
+            ExpectedProduct.brand = "Brand";
+            ExpectedProduct.url = "/Here";
+            ExpectedProduct.gender = "Men";
+            ExpectedProduct.type = "Sneakers";
+
+            controller.Session["LoggedInAdmin"] = true;
+            // Act
+            var actionResult = (RedirectToRouteResult)controller.CreateProduct(ExpectedProduct);
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminProducts");
+        }
+
+
+        [TestMethod]
+        public void CreateProduct_insertOK_False()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            var ExpectedProduct = new Product();
+            controller.Session["LoggedInAdmin"] = true;
+            ExpectedProduct.name = "";
+            var actionResult = (ViewResult)controller.CreateProduct(ExpectedProduct);
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
+        }
+
+        [TestMethod]
+        public void EditProduct_LoggedIn_Fail()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
             // Act
 
-            // Assert
+            var actionResult = (RedirectToRouteResult)controller.EditProduct(0);
 
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
         }
 
         // Tester for å sjekke EditProduct(int id):
@@ -957,8 +1109,11 @@ namespace UnitTestProject1
         public void EditProduct()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
 
+            controller.Session["LoggedInAdmin"] = true;
             // Act
             var actionResult = (ViewResult)controller.EditProduct(1);
 
@@ -970,46 +1125,120 @@ namespace UnitTestProject1
         // Tester for å sjekke EditProduct(int id, Product product):
 
         [TestMethod]
-        public void EditProduct_ok_post()
+        public void EditProduct_Update_Failed()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            var ExpectedProduct = new Product();
+            //ExpectedProduct.name = "";
 
             // Act
-
-            // Assert
-
-        }
-
-        // Tester for å sjekke DeleteProduct(int id):
-
-        [TestMethod]
-        public void DeleteProduct()
-        {
-            // Arrange
-            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-
-            // Act
-            var actionResult = (ViewResult)controller.DeleteProduct(1);
-            var result = (Product)actionResult.Model; 
+            var actionResult = (ViewResult)controller.EditProduct(0, ExpectedProduct);
 
             // Assert
             Assert.AreEqual(actionResult.ViewName, "");
         }
 
+        [TestMethod]
+        public void EditProduct_Update_Worked()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            var ExpectedProduct = new Product();
+            ExpectedProduct.name = "Shoe";
+            ExpectedProduct.price = 499;
+            ExpectedProduct.size = 45;
+            ExpectedProduct.color = "Black";
+            ExpectedProduct.material = "Mesh";
+            ExpectedProduct.brand = "Brand";
+            ExpectedProduct.url = "/Here";
+            ExpectedProduct.gender = "Men";
+            ExpectedProduct.type = "Sneakers";
+
+            // Act
+            var actionResult = (RedirectToRouteResult)controller.EditProduct(1, ExpectedProduct);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminProducts");
+        }
+
+        // Tester for å sjekke DeleteProduct(int id):
+
+
+        // Tester for å sjekke DeleteAdminUser(int id):
+        [TestMethod]
+        public void deleteProduct_LoggedIn_Fail()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.DeleteAdminUser(0);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+
+        }
+
+        [TestMethod]
+        public void DeleteProduct()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+
+            // Act
+            var actionResult = (RedirectToRouteResult)controller.DeleteProduct(1);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminProducts");
+
+        }
         // Tester for å sjekke CancelProduct():
+
+
+        [TestMethod]
+        public void cancelProduct_LoggedIn_Fail()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.CancelProduct();
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+
+        }
 
         [TestMethod]
         public void CancelProduct()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
             // Act
+            var actionResult = (RedirectToRouteResult)controller.CancelProduct();
 
             // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminProducts");
 
         }
+
 
         // ------------------------------ Order and Orderline --------------------
 
