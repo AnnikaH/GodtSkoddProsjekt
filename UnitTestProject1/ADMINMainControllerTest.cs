@@ -17,7 +17,7 @@ namespace UnitTestProject1
         
         // ----------------------------- Log in/out --------------------------
 
-        // Tester for å sjekke LogIn():
+        // Tests to check LogIn():
 
         [TestMethod]
         public void LogIn()
@@ -49,7 +49,7 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.RouteValues.Values.First(), "Index");
         }
 
-        // Tester for å sjekke LoggedIn():
+        // Tests to check LoggedIn():
 
         [TestMethod]
         public void LoggedIn_null()
@@ -102,7 +102,7 @@ namespace UnitTestProject1
 
         }
 
-        // Tester for å sjekke CheckLogIn(String username, String password):
+        // Tests to check CheckLogIn(String username, String password):
 
         [TestMethod]
         public void CheckLogIn_null_existing_user()
@@ -138,7 +138,7 @@ namespace UnitTestProject1
             Assert.IsNull(actionResult);
         }
 
-        // Tester for å sjekke LogOut():
+        // Tests to check LogOut():
 
         [TestMethod]
         public void LogOut()
@@ -159,7 +159,7 @@ namespace UnitTestProject1
 
         // --------------------------- Index --------------------------
 
-        // Tester for å sjekke Index():
+        // Tests to check Index():
 
         [TestMethod]
         public void Index()
@@ -196,7 +196,7 @@ namespace UnitTestProject1
 
         // --------------------------- AdminUser ---------------------
 
-        // Tester for å sjekke AdminAdminUsers(int? id):
+        // Tests to check AdminAdminUsers(int? id):
 
         [TestMethod]
         public void AdminAdminUsers_LoggedIn_Fail()
@@ -249,7 +249,7 @@ namespace UnitTestProject1
 
         }
 
-        // Tester for å sjekke GetAdminUser(int id):
+        // Tests to check GetAdminUser(int id):
         [TestMethod]
         public void GetAdminUser_LoggedIn_Fail()
         {
@@ -303,7 +303,7 @@ namespace UnitTestProject1
 
         }
 
-        // Tester for å sjekke CreateAdminUser():
+        // Tests to check CreateAdminUser(): and CreateAdminUser(AdminUser adminUser):
 
         [TestMethod]
         public void createAdminUser_LoggedIn_Fail()
@@ -335,8 +335,7 @@ namespace UnitTestProject1
             // Assert
             Assert.AreEqual(actionResult.ViewName, "");
         }
-
-        // Tester for å sjekke CreateAdminUser(AdminUser adminUser):
+        
 
         [TestMethod]
         public void createAdminUser_LoggedIn_Fail_too()
@@ -407,7 +406,7 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.ViewName, "");
         }
 
-        // Tester for å sjekke EditAminUser(int id):
+        // Tests to check EditAminUser(int id): and EditAdminUser(int id, AdminUser adminuser)
 
         [TestMethod]
         public void editAdminUser_LoggedIn_Fail()
@@ -498,10 +497,8 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminAdminUsers");
         }
 
-        // Tester for å sjekke EditAdminUser(int id, AdminUser adminUser):
 
-
-        // Tester for å sjekke DeleteAdminUser(int id):
+        // Tests to check DeleteAdminUser(int id):
         [TestMethod]
         public void deleteAdminUser_LoggedIn_Fail()
         {
@@ -538,7 +535,7 @@ namespace UnitTestProject1
 
         }
 
-        // Tester for å sjekke CancelAdminUser():
+        // Tests to check CancelAdminUser():
         [TestMethod]
         public void CancelAdminUser_LoggedIn_Fail()
         {
@@ -575,7 +572,7 @@ namespace UnitTestProject1
 
         // -------------------------- User ---------------------------
 
-        // Tester for å sjekke AdminCustomers(int? id):
+        // Tests to check AdminCustomers(int? id):
 
         [TestMethod]
         public void AdminCustomers_LoggedIn_Fail()
@@ -625,7 +622,7 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.ViewName, "");
         }
 
-        // Tester for å sjekke GetUser(int id):
+        // Tests to check GetUser(int id):
 
         [TestMethod]
         public void GetUser_LoggedIn_Fail()
@@ -678,7 +675,7 @@ namespace UnitTestProject1
 
         }
 
-        // Tester for å sjekke CreateUser():
+        // Tests to check CreateUser(): and CreateUser(User user)
 
         [TestMethod]
         public void CreateUser_LoggedIn_Fail()
@@ -773,7 +770,7 @@ namespace UnitTestProject1
         }
 
 
-        // Tester for å sjekke EditUser(int id):
+        // Tests to check EditUser(int id): and EditUser(int id, User user):
 
         [TestMethod]
         public void EditUser_LoggedIn_Fail()
@@ -806,9 +803,6 @@ namespace UnitTestProject1
             // Assert
             Assert.AreEqual(actionResult.ViewName, "");
         }
-
-
-        // Tester for å sjekke EditUser(int id, User user):
 
         [TestMethod]
         public void EditUser_LoggedIn_Fail_too()
@@ -875,8 +869,11 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.ViewName, "");
         }
 
+
+        // Tests to check DeleteUser(int id):
+
         [TestMethod]
-        // Tester for å sjekke DeleteUser(int id):
+        
         public void DeleteUser_LoggedIn_Fail_too()
         {
             // Arrange
@@ -906,7 +903,7 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminCustomers");
         }
 
-        // Tester for å sjekke CancelUser():
+        // Tests to check CancelUser():
 
         [TestMethod]
         public void CencelUser_LoggedIn_Fail_too()
@@ -942,7 +939,7 @@ namespace UnitTestProject1
         // ----------------------------- Product -----------------------
 
 
-        // Tester for å sjekke AdminProducts(int? id):
+        // Tests to check AdminProducts(int? id):
 
         [TestMethod]
         public void AdminProduct_LoggedIn_Fail()
@@ -995,7 +992,7 @@ namespace UnitTestProject1
 
         }
 
-        // Tester for å sjekke GetProduct(int id):
+        // Tests to check GetProduct(int id):
         [TestMethod]
         public void GetProduct_LoggedIn_Fail()
         {
@@ -1010,8 +1007,6 @@ namespace UnitTestProject1
             // Assert
             Assert.IsNull(actionResult); 
         }
-
-        // Tester for å sjekke GetProduct(int id):
 
         [TestMethod]
         public void GetProduct_Found()
@@ -1054,7 +1049,7 @@ namespace UnitTestProject1
 
 
 
-        // Tester for å sjekke GetProduct(int id):
+        // Tests to check CreateProduct(): and CreateProduct(Product product):
         [TestMethod]
         public void CreateProduct_LoggedIn_Fail()
         {
@@ -1070,7 +1065,7 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
         }
 
-        // Tester for å sjekke CreateProduct():
+    
 
         [TestMethod]
         public void CreateProduct()
@@ -1098,24 +1093,12 @@ namespace UnitTestProject1
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
             SessionMock.InitializeController(controller);
             var ExpectedProduct = new Product();
-            //ExpectedProduct.id = 0;
             ExpectedProduct.name = "";
-            /* ExpectedProduct.price = 0;
-             ExpectedProduct.size = 0;
-             ExpectedProduct.color = "";
-             ExpectedProduct.material = "";
-             ExpectedProduct.brand = "";
-             ExpectedProduct.url = "";
-             ExpectedProduct.gender = "";
-             ExpectedProduct.type = "";*/
-
-
             var actionResult = (RedirectToRouteResult)controller.CreateProduct(ExpectedProduct);
 
             // Assert
             Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
         }
-        // Tester for å sjekke CreateProduct(Product product):
 
         [TestMethod]
         public void CreateProduct_post_error_model()
@@ -1190,6 +1173,8 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
         }
 
+
+        // Tests to check EditProduct(int id): and EditProduct(int id, Product product):
         [TestMethod]
         public void EditProduct_LoggedIn_Fail_too()
         {
@@ -1205,8 +1190,6 @@ namespace UnitTestProject1
             // Assert
             Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
         }
-
-        // Tester for å sjekke EditProduct(int id):
 
         [TestMethod]
         public void EditProduct()
@@ -1224,8 +1207,6 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.ViewName, "");
 
         }
-
-        // Tester for å sjekke EditProduct(int id, Product product):
 
         [TestMethod]
         public void EditProduct_Update_Failed()
@@ -1271,10 +1252,8 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminProducts");
         }
 
-        // Tester for å sjekke DeleteProduct(int id):
+        // Tests to check DeleteProduct(int id):
 
-
-        // Tester for å sjekke DeleteAdminUser(int id):
         [TestMethod]
         public void deleteProduct_LoggedIn_Fail()
         {
@@ -1307,7 +1286,7 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminProducts");
 
         }
-        // Tester for å sjekke CancelProduct():
+        // Tests to check CancelProduct():
 
 
         [TestMethod]
@@ -1345,7 +1324,7 @@ namespace UnitTestProject1
 
         // ------------------------------ Order and Orderline --------------------
 
-        // Tester for å sjekke AdminOrders(int id):
+        //Tests to check AdminOrders(int id):
 
         [TestMethod]
         public void AdminOrders_LoggedIn_Fail()
@@ -1400,7 +1379,7 @@ namespace UnitTestProject1
 
         }
 
-        // Tester for å sjekke GetOrder(int id):
+        // Tests to check GetOrder(int id):
 
         [TestMethod]
         public void GetOrders_LoggedIn_Fail()
@@ -1450,7 +1429,7 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void GetOrder_id_found() // for når user id = order id, må endres
+        public void GetOrder_id_found()
         {
             
             // Arrange
@@ -1489,7 +1468,7 @@ namespace UnitTestProject1
         }
 
 
-        // Tester for å sjekke CreateOrder():
+        // Tests to check CreateOrder():
 
 
         [TestMethod]
@@ -1526,6 +1505,7 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.RouteValues.Values.ElementAt(1), "AdminOrders");
         }
 
+        //Tests to check EditOrder(int id) and EditOrder(int id, Order order)
         [TestMethod]
         public void EditOrder_LoggedIn_Fail()
         {
@@ -1619,7 +1599,7 @@ namespace UnitTestProject1
 
 
 
-        // Tester for å sjekke DeleteOrder(int id):
+        // Tests to check DeleteOrder(int id):
 
 
         [TestMethod]
@@ -1657,7 +1637,7 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.RouteValues.Values.ElementAt(1), "AdminOrders");
         }
 
-        // Tester for å sjekke CancelOrder():
+        // Tests to check CancelOrder():
 
         [TestMethod]
         public void cancelOrder_LoggedIn_Fail()
@@ -1696,6 +1676,7 @@ namespace UnitTestProject1
 
         //---- Orderlines
 
+        //Tests to check CreateOrderLine
         [TestMethod]
         public void CreateOrderline()
         {
@@ -1941,6 +1922,7 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.ViewName, "");
         }
 
+        //Tests to check DeleteOrderLine(int id)
         [TestMethod]
         public void DeleteOrderLine_LoggedIn_Fail()
         {
