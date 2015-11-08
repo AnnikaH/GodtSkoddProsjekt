@@ -1081,6 +1081,7 @@ namespace DAL
                 }
             }
         }
+
         public Orderline GetOrderline(int id)
         {
             using (var db = new DBContext())
@@ -1089,6 +1090,10 @@ namespace DAL
                 {
                     Orderline returnOrderline = new Orderline();
                     Orderlines foundOrderline = db.Orderlines.Find(id);
+
+                    if (foundOrderline == null)
+                        return null;
+
                     returnOrderline.id = foundOrderline.ID;
                     returnOrderline.orderID = foundOrderline.OrderID;
                     returnOrderline.productId = foundOrderline.ProductID;
