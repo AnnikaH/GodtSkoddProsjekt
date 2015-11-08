@@ -1498,6 +1498,7 @@ namespace UnitTestProject1
             var ExpectedOrder = new Order();
             controller.Session["Order"] = ExpectedOrder;
             var ExpectedOrderline = new Orderline();
+            controller.Session["UserIdForOrders"] = 1;
             // Act
 
             var actionResult = (ViewResult)controller.CreateOrderline(ExpectedOrderline);
