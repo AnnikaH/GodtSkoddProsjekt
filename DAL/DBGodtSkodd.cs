@@ -979,10 +979,11 @@ namespace DAL
                 {
                     Orders delOrder = db.Orders.Find(id);
 
-                    foreach (var orderline in delOrder.Orderlines)
+                    // Remove-metoden tar seg av dette:
+                    /*foreach (var orderline in delOrder.Orderlines)
                     {
                         DeleteOrderline(orderline.ID);
-                    }
+                    }*/
 
                     db.Orders.Remove(delOrder);
                     db.SaveChanges();
