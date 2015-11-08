@@ -9,17 +9,11 @@ using BLL;
 using DAL;
 using MvcContrib.TestHelper;
 
-
 namespace UnitTestProject1
 {
     [TestClass]
     public class ADMINMainControllerTest
     {
-        /*
-
-        Trenger flere enn én test-metode per metode i ADMINMainController, men dette er en start
-        
-        */
         
         // ----------------------------- Log in/out --------------------------
 
