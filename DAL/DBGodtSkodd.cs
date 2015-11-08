@@ -795,6 +795,7 @@ namespace DAL
                     {
                         var newOrderLine = new Orderlines()
                         {
+                            ID = orderLine.id,
                             ProductID = orderLine.productId,
                             OrderID = newOrder.ID,
                             Quantity = orderLine.quantity
@@ -940,8 +941,7 @@ namespace DAL
 
                     // nødvendig?:
                     changeOrder.User = db.Users.Find(input.userID);
-                    if (changeOrder.Orderlines != null)
-                    {
+
                         foreach (var item in input.orderlines)
                         {
                             foreach (var item2 in changeOrder.Orderlines)
@@ -952,20 +952,7 @@ namespace DAL
                                 }
                             }
                         }
-                    }
-                    else
-                    {
-                        changeOrder.Orderlines = new List<Orderlines>();
-                        foreach(var item in input.orderlines)
-                        {
-                            Orderlines newOrderLine = new Orderlines();
-                            newOrderLine.ID = item.id;
-                            newOrderLine.OrderID = item.orderID;
-                            newOrderLine.ProductID = item.productId;
-                            newOrderLine.Quantity = item.quantity;
-                            changeOrder.Orderlines.Add(newOrderLine);
-                        }
-                    }
+
 
                     db.SaveChanges();
                     return true;
