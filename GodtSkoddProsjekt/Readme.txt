@@ -8,6 +8,10 @@ Man kan bare opprette nye administratorer når man er logget inn som en administ
 Produktene opprettes automatisk når man går inn på hovedsiden /Home/Index hvis de ikke finnes
 i databasen fra før av.
 
+Mappe 2 benytter ADMINMainController. De andre controllerne er fra mappe 1. De eneste endringene som er
+gjort i de andre controllerne er i HomeController, hvor vi har lagt inn metoder for å automatisk opprette
+database-elementer hvis de ikke finnes.
+
 Det skrives til en logg-fil i DAL.DBGodtSkodd, og denne logg-filen ligger under GodtSkoddProsjekt,
 som er en av de 5 prosjektene, under en mappe som heter Logs (denne vises ikke i prosjekt-strukturen,
 men ligger der hvis man går til filutforskeren). Det blir opprettet en ny logg-fil for

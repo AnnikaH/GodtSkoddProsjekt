@@ -556,6 +556,13 @@ namespace GodtSkoddProsjekt.Controllers
         {
             if (!LoggedIn())
                 return RedirectToAction("LogIn");
+
+            /* Submit-knappen fungerer ikke lenger når vi bare tar return View() i CreateOrderline(Orderline orderline)
+            etter å ha fått feilen at produkt-id ikke finnes. Derfor redirect'es vi til denne metoden istedenfor og
+            sjekker om det ligger noe i Session-variabelen ErrorMessageOrderline: */
+            var errorMessage = (String)Session["ErrorMessageOrderline"];
+            if(errorMessage != null)
+                ModelState.AddModelError("", errorMessage);
             
             Order order = dbBLL.GetOrder(id);
             Session["Order"] = order;
@@ -585,12 +592,24 @@ namespace GodtSkoddProsjekt.Controllers
 
                     if (product != null)
                     {
+                        Session["ErrorMessageOrderline"] = null;
+
                         bool insertOK = dbBLL.CreateOrderline(orderline);
 
                         var userId = (int)Session["UserIdForOrders"];
 
                         if (insertOK)
                             return RedirectToAction("AdminOrders", new { id = userId });
+                    }
+                    else
+                    {
+                        // Submit-knappen fungerer ikke lenger når vi bare tar return View() etter å ha fått feilen
+                        // at produkt-id ikke finnes. Derfor:
+
+                        //ModelState.AddModelError("", "Produkt med produkt id " + orderline.productId + " finnes ikke!");
+                        Session["ErrorMessageOrderline"] = "Produkt med produkt id " + orderline.productId + " finnes ikke!";
+                        return RedirectToAction("CreateOrderline", new { id = order.id });
+                        // og så tester jeg på Session-variabelen i CreateOrderline(int id)
                     }
                 }
             }

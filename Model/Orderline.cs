@@ -23,7 +23,7 @@ namespace Model
 
         [Display(Name = "Antall")]
         [Required(ErrorMessage = "Antall av dette produktet må oppgis")]
-        [RegularExpression(@"[0-9]{1,10}", ErrorMessage = "Antall kan bare bestå av siffer")]
+        [RegularExpression(@"^[1-9]{1}[0-9]{0,3}", ErrorMessage = "Antall kan bare bestå av siffer og kan ikke være 0")]
         public int quantity { get; set; }
     }
 }
