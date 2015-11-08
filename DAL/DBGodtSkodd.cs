@@ -946,7 +946,6 @@ namespace DAL
                     changeOrder.UserID = input.userID;
                     changeOrder.Date = input.date;
          
-                    // nødvendig?:
                     changeOrder.User = db.Users.Find(input.userID);
 
                     foreach(var item in input.orderlines)
@@ -955,7 +954,6 @@ namespace DAL
                         {
                             if (item.id == itemDb.ID)
                             {
-                                // orderID har ikke blitt satt (er 0) av en eller annen grunn, så setter den nå:
                                 item.orderID = itemDb.OrderID;
 
                                 EditOrderline(itemDb.ID, item);
@@ -982,13 +980,7 @@ namespace DAL
                 try
                 {
                     Orders delOrder = db.Orders.Find(id);
-
-                    // Remove-metoden tar seg av dette:
-                    /*foreach (var orderline in delOrder.Orderlines)
-                    {
-                        DeleteOrderline(orderline.ID);
-                    }*/
-
+                    
                     db.Orders.Remove(delOrder);
                     db.SaveChanges();
                     return true;
@@ -1016,7 +1008,6 @@ namespace DAL
                         OrderID = input.orderID,
                         ProductID = input.productId,
                         Quantity = input.quantity,
-                        // nødvendig?:
                         Order = db.Orders.Find(input.orderID),
                         Product = db.Products.Find(input.productId)
                     };
@@ -1045,8 +1036,7 @@ namespace DAL
                     changeOrderline.OrderID = input.orderID;
                     changeOrderline.ProductID = input.productId;
                     changeOrderline.Quantity = input.quantity;
-
-                    // nødvendig?
+                    
                     changeOrderline.Order = db.Orders.Find(input.orderID);
                     changeOrderline.Product = db.Products.Find(input.productId);
 
