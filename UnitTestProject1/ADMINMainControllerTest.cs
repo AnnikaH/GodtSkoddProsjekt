@@ -898,14 +898,53 @@ namespace UnitTestProject1
         // Tester for å sjekke AdminProducts(int? id):
 
         [TestMethod]
-        public void AdminProducts()
+        public void AdminProduct_LoggedIn_Fail()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-
+            SessionMock.InitializeController(controller);
             // Act
 
+            var actionResult = (RedirectToRouteResult)controller.AdminProducts(1);
+
             // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+
+        }
+        [TestMethod]
+        public void AdminProduct_Found_User()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+
+            controller.Session["LoggedInAdmin"] = true;
+            // Act
+
+            var actionResult = (ViewResult)controller.AdminProducts(1);
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
+
+        }
+
+        [TestMethod]
+        public void AdminProduct_NOT_Found_User()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+
+            controller.Session["LoggedInAdmin"] = true;
+            // Act
+
+            var actionResult = (ViewResult)controller.AdminProducts(null);
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
 
         }
 
