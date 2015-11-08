@@ -664,6 +664,23 @@ namespace UnitTestProject1
             Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
             Assert.AreEqual(actionResult.Data, "");
 
+        }
+        [TestMethod]
+        public void GetUser_NOT_null()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+
+            // Act
+            var actionResult = (JsonResult)controller.GetUser(1);
+
+            // Assert
+            Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
+            Assert.IsInstanceOfType(actionResult.Data, typeof(User));
+
 
         }
 
@@ -796,6 +813,7 @@ namespace UnitTestProject1
             Assert.AreEqual(actionResult.ViewName, "");
         }
 
+
         // Tester for å sjekke EditUser(int id, User user):
 
         [TestMethod]
@@ -856,7 +874,7 @@ namespace UnitTestProject1
             controller.ViewData.ModelState.AddModelError("Firstname", "First name missing");
             controller.Session["LoggedInAdmin"] = true;
             // Act
-            var actionResult = (ViewResult)controller.CreateUser(ExpectedUser);
+            var actionResult = (ViewResult)controller.EditUser(1, ExpectedUser);
 
             // Assert
             Assert.IsTrue(actionResult.ViewData.ModelState.Count == 1);
@@ -1700,6 +1718,22 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
+        public void CreateOrderline_with_errormessage()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            controller.Session["ErrorMessageOrderline"] = "Test";
+            // Act
+            var actionResult = (ViewResult)controller.CreateOrderline(1);
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
+        }
+
+        [TestMethod]
         public void CreateOrderline_LoggedIn_Fail()
         {
             // Arrange
@@ -1716,6 +1750,7 @@ namespace UnitTestProject1
 
         }
 
+        [TestMethod]
         public void CreateOrderline_LoggedIn_Fail_too()
         {
             // Arrange
@@ -1816,6 +1851,28 @@ namespace UnitTestProject1
 
             // Assert
             Assert.AreEqual(actionResult.ViewName, "");
+        }
+
+        [TestMethod]
+        public void CreateOrderline_model_valid_with_session_with_order_with_product_insertOK()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            var ExpectedOrderline = new Orderline();
+            ExpectedOrderline.productId = 1;
+            ExpectedOrderline.id = 1;
+            var ExpectedOrder = new Order();
+            controller.Session["Order"] = ExpectedOrder;
+            controller.Session["UserIdForOrders"] = 1;
+            // Act
+            var actionResult = (RedirectToRouteResult)controller.CreateOrderline(ExpectedOrderline);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), 1);
+            Assert.AreEqual(actionResult.RouteValues.Values.ElementAt(1), "AdminOrders");
         }
 
         [TestMethod]
