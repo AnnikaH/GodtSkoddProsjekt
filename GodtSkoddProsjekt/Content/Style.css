@@ -230,6 +230,13 @@ th{
     background-color:#D8ECF2;
 }
 
+.ThOrderlines
+{
+    background-color:#DBDBDB;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
 .MoreInfoTable
 {
     width:100%;

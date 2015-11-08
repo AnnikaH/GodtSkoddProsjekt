@@ -91,23 +91,20 @@
             </tr>
             <tr id="@item.id" class="MoreInfo">
                 <td colspan="4">
-                    <table class="MoreInfoTable">
+                    <table class="table-striped MoreInfoTable"><tr>
+    <th class="ThOrderlines">Ordrelinje ID</th>
+    <th class="ThOrderlines">Produkt ID</th>
+    <th class="ThOrderlines">Antall</th>
+    <th class="ThOrderlines">Ordre ID</th>
+</tr>
                         @for (int j = 0; j < item.orderlines.Count; j++)
                         {
+                           
                             <tr>
-                                <td class="table_header orderline_header">Ordrelinje med id nr. @item.orderlines[j].id:</td>
-                            </tr>
-                            <tr>
-                                <td class="orderline_header">Ordre-Id:</td>
-                                <td>@item.orderlines[j].orderID</td>
-                            </tr>
-                            <tr>
-                                <td class="orderline_header">Produkt-Id:</td>
+                                <td>@item.orderlines[j].id</td>
                                 <td>@item.orderlines[j].productId</td>
-                            </tr>
-                            <tr>
-                                <td class="orderline_header">Antall:</td>
                                 <td>@item.orderlines[j].quantity</td>
+                                <td>@item.orderlines[j].orderID</td>
                             </tr>
                         }
                     </table>

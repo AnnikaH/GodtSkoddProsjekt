@@ -14,7 +14,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h2 class="header">Endre ordre</h2>
+            <h2 class="header">Endre ordrelinje</h2>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.id)
@@ -29,7 +29,7 @@
             {   
                 <div align="center">
                     <h4>Ordrelinje med id nr. @Html.DisplayFor(modelitem => orderline.id)</h4>
-                    @Html.ActionLink("Slett", "DeleteOrderline", "ADMINMain", new { id = orderline.id }, new { @class = "btn btn-danger Cancelbuttons" })<br />
+                  
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => orderline.productId, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -44,9 +44,9 @@
                         @Html.EditorFor(model => orderline.quantity, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => orderline.quantity, "", new { @class = "text-danger" })
                     </div>
-                </div>
+                </div>            @Html.ActionLink("Slett", "DeleteOrderline", "ADMINMain", new { id = orderline.id }, new { @class = "btn btn-danger Cancelbuttons" })<br />
             }
-
+            <br /><br /><br />
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     @Html.ActionLink("Avbryt", "CancelOrder", "ADMINMain", new { id = "" }, new { @class = "btn btn-danger Cancelbuttons" })
