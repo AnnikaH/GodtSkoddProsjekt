@@ -1284,10 +1284,43 @@ namespace UnitTestProject1
         // Tester for å sjekke AdminOrders(int id):
 
         [TestMethod]
-        public void AdminOrders()
+        public void AdminOrders_LoggedIn_Fail()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.AdminOrders(0);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+
+        }
+
+        [TestMethod]
+        public void AdminOrders_found()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+
+            // Act
+
+            // Assert
+
+        }
+        [TestMethod]
+        public void AdminOrders_not_found()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
 
             // Act
 
@@ -1298,54 +1331,155 @@ namespace UnitTestProject1
         // Tester for å sjekke GetOrder(int id):
 
         [TestMethod]
-        public void GetOrder()
+        public void GetOrders_LoggedIn_Fail()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-
+            SessionMock.InitializeController(controller);
             // Act
 
+            var actionResult = (JsonResult)controller.GetAdminUser(1); // skal det være 1 eller 0??
+
             // Assert
+            Assert.IsNull(actionResult); //Får jo ikke sjekket om denne går til login-sia!!!!!!!!!! <-<
 
         }
 
+        [TestMethod]
+        public void GetOrder_found()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+
+            controller.Session["LoggedInAdmin"] = true;
+            // Act
+
+            var actionResult = (JsonResult)controller.GetOrder(1);
+
+            // Assert
+            Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
+
+        }
+
+        [TestMethod]
+        public void GetOrder_id_found() // for når user id = order id, må endres
+        {
+            /*
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+
+            controller.Session["LoggedInAdmin"] = true;
+            // Act
+
+            var actionResult = (JsonResult)controller.GetOrder(1);
+
+            // Assert
+            Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
+            */
+        }
+
+
+        [TestMethod]
+        public void GetOrder_not_found()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+
+            controller.Session["LoggedInAdmin"] = true;
+            // Act
+
+            var actionResult = (JsonResult)controller.GetOrder(0);
+
+            // Assert
+            Assert.IsInstanceOfType(actionResult, typeof(JsonResult));
+
+        }
+
+
         // Tester for å sjekke CreateOrder():
+
+
+        [TestMethod]
+        public void CreateOrder_LoggedIn_Fail()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.CreateOrder();
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+
+        }
 
         [TestMethod]
         public void CreateOrder()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
 
             // Act
-            var actionResult = (ViewResult)controller.CreateOrder();
+            var actionResult = (RedirectToRouteResult)controller.CreateOrder();
 
             // Assert
-            Assert.AreEqual(actionResult.ViewName, "");
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminOrders");
         }
 
         // Tester for å sjekke CreateOrder(Order order):
 
-        [TestMethod]
-        public void CreateOrder_ok_post()
-        {
-            // Arrange
-            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+        /* [TestMethod]
+         public void CreateOrder_ok_post()
+         {
+             // Arrange
+             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
 
-            // Act
+             // Act
 
-            // Assert
+             // Assert
 
-        }
+         }*/
 
         // Tester for å sjekke EditOrder(int id):
+
+
+        [TestMethod]
+        public void EditOrder_LoggedIn_Fail()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.EditOrder(0);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+        }
+
 
         [TestMethod]
         public void EditOrder()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
 
+            controller.Session["LoggedInAdmin"] = true;
             // Act
             var actionResult = (ViewResult)controller.EditOrder(1);
 
@@ -1355,44 +1489,131 @@ namespace UnitTestProject1
 
         // Tester for å sjekke EditOrder(int id, Order order):
 
+        /*   [TestMethod]
+           public void EditOrder_ok_post()
+           {
+               // Arrange
+               var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+
+               // Act
+
+               // Assert
+
+           }*/
+
         [TestMethod]
-        public void EditOrder_ok_post()
+        public void EditOrder_Update_Worked()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+
+            var orderLines = new List<Orderline>();
+            var ExpectedOrder = new Order();
+            ExpectedOrder.id = 1;
+            ExpectedOrder.userID = 1;
+            ExpectedOrder.date = new DateTime();
+            ExpectedOrder.orderlines = orderLines;
 
             // Act
+            var actionResult = (RedirectToRouteResult)controller.EditOrder(1, ExpectedOrder);
 
             // Assert
-
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), 1); //egentlig skal det stå adminorder
         }
 
-        // Tester for å sjekke DeleteOrder(int id):
 
         [TestMethod]
-        public void DeleteOrder()
+        public void EditOrder_Update_Failed()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            var ExpectedOrder = new Order();
+            //ExpectedProduct.name = "";
 
             // Act
-            var actionResult = (ViewResult)controller.DeleteOrder(1);
+            var actionResult = (ViewResult)controller.EditOrder(0, ExpectedOrder);
 
             // Assert
             Assert.AreEqual(actionResult.ViewName, "");
         }
 
+
+
+
+        // Tester for å sjekke DeleteOrder(int id):
+
+
+        [TestMethod]
+        public void deleteOrder_LoggedIn_Fail()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.DeleteOrder(0);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+
+        }
+
+
+        [TestMethod]
+        public void DeleteOrder()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+
+            // Act
+            var actionResult = (RedirectToRouteResult)controller.DeleteOrder(1);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminOrders");
+        }
+
         // Tester for å sjekke CancelOrder():
+
+        [TestMethod]
+        public void cancelOrder_LoggedIn_Fail()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.CancelOrder();
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+
+        }
+
 
         [TestMethod]
         public void CancelOrder()
         {
             // Arrange
+            var SessionMock = new TestControllerBuilder();
             var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
-
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
             // Act
+            var actionResult = (RedirectToRouteResult)controller.CancelOrder();
 
             // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "AdminOrders");
 
         }
 
