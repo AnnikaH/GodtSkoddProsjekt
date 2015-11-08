@@ -1338,7 +1338,6 @@ namespace UnitTestProject1
 
             // Act
             var actionResult = (ViewResult)controller.DeleteOrder(1);
-            var result = (Order)actionResult.Model;
 
             // Assert
             Assert.AreEqual(actionResult.ViewName, "");
@@ -1356,6 +1355,218 @@ namespace UnitTestProject1
 
             // Assert
 
+        }
+
+        //---- Orderlines
+
+        [TestMethod]
+        public void CreateOrderline()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            // Act
+            var actionResult = (ViewResult)controller.CreateOrderline(1);
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
+        }
+
+        [TestMethod]
+        public void CreateOrderline_LoggedIn_Fail()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            var ExpectedOrderline = new Orderline();
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.CreateOrderline(ExpectedOrderline);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+
+        }
+
+        [TestMethod]
+        public void CreateOrderline_model_valid_with_session_with_order_with_null_product()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            var ExpectedOrderline = new Orderline();
+            var ExpectedOrder = new Order();
+            controller.Session["Order"] = ExpectedOrder;
+            controller.Session["UserIdForOrders"] = 1;
+            // Act
+
+            var actionResult = (ViewResult)controller.CreateOrderline(ExpectedOrderline);
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
+        }
+
+        [TestMethod]
+        public void CreateOrderline_model_valid_with_session_with_order()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            var ExpectedOrderline = new Orderline();
+            var ExpectedOrder = new Order();
+            controller.Session["Order"] = ExpectedOrder;
+            controller.Session["UserIdForOrders"] = 1;
+            // Act
+
+            var actionResult = (ViewResult)controller.CreateOrderline(ExpectedOrderline);
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
+        }
+
+        [TestMethod]
+        public void CreateOrderline_model_valid_with_session_NOT_with_order()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            var ExpectedOrderline = new Orderline();
+            controller.Session["UserIdForOrders"] = 1;
+            // Act
+
+            var actionResult = (ViewResult)controller.CreateOrderline(ExpectedOrderline);
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
+        }
+
+        [TestMethod]
+        public void CreateOrderline_model_valid_with_session_with_order_with_product()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            var ExpectedOrderline = new Orderline();
+            ExpectedOrderline.productId = 1;
+            var ExpectedOrder = new Order();
+            controller.Session["Order"] = ExpectedOrder;
+            controller.Session["UserIdForOrders"] = 1;
+            // Act
+
+            var actionResult = (ViewResult)controller.CreateOrderline(ExpectedOrderline);
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
+        }
+
+        [TestMethod]
+        public void CreateOrderline_model_valid()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            var ExpectedOrderline = new Orderline();
+            // Act
+
+            var actionResult = (ViewResult)controller.CreateOrderline(ExpectedOrderline);
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
+        }
+
+        [TestMethod]
+        public void CreateOrderline_model_valid_with_session()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            var ExpectedOrder = new Order();
+            controller.Session["Order"] = ExpectedOrder;
+            var ExpectedOrderline = new Orderline();
+            // Act
+
+            var actionResult = (ViewResult)controller.CreateOrderline(ExpectedOrderline);
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
+        }
+
+        [TestMethod]
+        public void CreateOrderline_model_valid_no_session()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            var ExpectedOrderline = new Orderline();
+            // Act
+
+            var actionResult = (ViewResult)controller.CreateOrderline(ExpectedOrderline);
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
+        }
+
+        [TestMethod]
+        public void CreateOrderline_model_NOT_valid()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            var ExpectedOrderline = new Orderline();
+            // Act
+
+            var actionResult = (ViewResult)controller.CreateOrderline(ExpectedOrderline);
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
+        }
+
+        [TestMethod]
+        public void DeleteOrderLine_LoggedIn_Fail()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            // Act
+
+            var actionResult = (RedirectToRouteResult)controller.DeleteOrderline(1);
+
+            // Assert
+            Assert.AreEqual(actionResult.RouteValues.Values.First(), "LogIn");
+        }
+        [TestMethod]
+        public void DeleteOrderline()
+        {
+            // Arrange
+            var SessionMock = new TestControllerBuilder();
+            var controller = new ADMINMainController(new BusinessLogic(new RepositoryStub()));
+            SessionMock.InitializeController(controller);
+            controller.Session["LoggedInAdmin"] = true;
+            // Act
+            var actionResult = (ViewResult)controller.DeleteOrderline(1);
+
+            // Assert
+            Assert.AreEqual(actionResult.ViewName, "");
         }
     }
 }
